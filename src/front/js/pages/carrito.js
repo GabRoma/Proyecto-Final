@@ -72,9 +72,11 @@ export const Carrito = (props) => {
             {/* <div className="card-header">Resumen del pedido</div> */}
             <div className="card-body">
               <p className="card-text">Productos:</p>
-              <p className="card-text">Descuentos:</p>
-              <h5 className="card-title">Total:</h5>
-              <a href="#" className="btn btn-dark">
+              <p className="card-text text-muted">Descuentos:</p>
+              <div className="mt-5 mb-5">
+                <h5 className="card-text">Total: $</h5>
+              </div>
+              <a href="#" className="btn btn-dark w-100">
                 Proceder al pago
               </a>
             </div>
