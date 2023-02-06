@@ -14,6 +14,22 @@ api = Blueprint('api', __name__)
 
 #JWT EMPEZAMOS PARTE BACK-END DEL LOGIN, EL REGISTRO ES APARTE
 
+# 1ERO metodo POST para crear usuario, 
+@api.route('/user/', methods=['POST'])
+def add_user():
+    request_body = request.data  #es la informacion que viene del postman la que viene del front end
+    decoded_object = json.loads(request_body)  # traduce la informacion, lo pasa a json 
+    print(decoded_object) # hace que podamos ver la informacion de manera que la necesitamos
+    get_email = User.query.filter_by(email=decoded_object["email"]).first()
+    if get_email is None:
+            new_user = User(email=decoded_object["email"], password=decoded_object["password"])
+            db.session.add(new_user)
+            db.session.commit()
+            return jsonify({"msg":"usuario creado exitosamente"}), 200
+    else: 
+        return jsonify({"msg":"el email ya existe"}), 400 
+
+
 # Create a route to authenticate your users and return JWTs. The
 # create_access_token() function is used to actually geneenvrate the JWT.
 @api.route("/login", methods=["POST"]) 
