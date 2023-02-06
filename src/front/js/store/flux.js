@@ -22,23 +22,27 @@ const getState = ({
                     name: "producto",
                     url: "https://shoptheoldemercantile.com/image/cache/catalog/placeholderproduct-500x500.png",
                     shipping: "3 semanas",
-                    price: "$10",
+                    price: 10,
+                    quantity: 1,
                 },
                 {
                     id: 2,
                     name: "producto II",
                     url: "https://shoptheoldemercantile.com/image/cache/catalog/placeholderproduct-500x500.png",
                     shipping: "3 semanas",
-                    price: "$10",
+                    price: 10,
+                    quantity: 1,
                 },
                 {
                     id: 3,
                     name: "producto III",
                     url: "https://shoptheoldemercantile.com/image/cache/catalog/placeholderproduct-500x500.png",
                     shipping: "3 semanas",
-                    price: "$10",
+                    price: 10,
+                    quantity: 3,
                 },
             ],
+            total: 0,
         },
         actions: {
             addCarrito: (item) => {
@@ -50,15 +54,24 @@ const getState = ({
                     });
                     console.log(`${item.name} se ha añadido al carrito de compras.`);
                 }
-                console.log(getStore().carrito);
+                getActions().sumCarrito();
             },
             quitCarrito: (item) => {
                 setStore({
                     carrito: getStore().carrito.filter((i) => i.name !== item.name),
                 });
                 console.log(`${item.name} se ha eliminado del carrito de compras.`);
+                getActions().sumCarrito();
             },
-
+            sumCarrito: () => {
+                const totalSum = getStore().carrito.reduce(
+                    (accumulator, currentValue) => accumulator + currentValue.price,
+                    0
+                );
+                setStore({
+                    total: totalSum,
+                });
+            },
             // Use getActions to call a function within a fuction
             exampleFunction: () => {
                 getActions().changeColor(0, "green");
