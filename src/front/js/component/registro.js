@@ -60,7 +60,6 @@ export const Registro = () => {
               </label> */}
                     <Field
                       type="text"
-                      // className="form-control my-3 border-secondary border-2 rounded-5 "
                       className={
                         "form-control my-3  rounded-5 " +
                         (errors.inputNombre && touched.inputNombre
@@ -81,7 +80,6 @@ export const Registro = () => {
               </label> */}
                     <Field
                       type="text"
-                      // className="form-control my-3 border-secondary border-2 rounded-5"
                       className={
                         "form-control my-3  rounded-5 " +
                         (errors.inputApellido && touched.inputApellido
@@ -102,7 +100,6 @@ export const Registro = () => {
               </label> */}
                     <Field
                       type="text"
-                      // className="form-control my-3 border-secondary border-2  rounded-5"
                       className={
                         "form-control my-3  rounded-5 " +
                         (errors.inputCelular && touched.inputCelular
@@ -123,7 +120,6 @@ export const Registro = () => {
               </label> */}
                     <Field
                       type="email"
-                      // className="form-control my-3 border-secondary border-2  rounded-5"
                       className={
                         "form-control my-3  rounded-5 " +
                         (errors.inputCorreo && touched.inputCorreo
@@ -144,7 +140,6 @@ export const Registro = () => {
               </label> */}
                     <Field
                       type="email"
-                      // className="form-control my-3 border-secondary border-2  rounded-5"
                       className={
                         "form-control my-3  rounded-5 " +
                         (errors.inputConfirmcorreo && touched.inputConfirmcorreo
@@ -165,7 +160,6 @@ export const Registro = () => {
               </label> */}
                     <Field
                       type="password"
-                      // className="form-control my-3 border-secondary border-2  rounded-5"
                       className={
                         "form-control my-3  rounded-5 " +
                         (errors.inputContrasena && touched.inputContrasena
@@ -186,7 +180,6 @@ export const Registro = () => {
               </label> */}
                     <Field
                       type="password"
-                      // className="form-control my-3 border-secondary border-2  rounded-5"
                       className={
                         "form-control my-3  rounded-5 " +
                         (errors.inputConfirmcontrasena &&
