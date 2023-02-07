@@ -27,7 +27,7 @@ export const Login = () => {
       >
         {({ errors, touched }) => (
           <div className="card mx-auto" style={{ width: 430, height: 480 }}>
-            <div class="card-header" style={{ height: 130 }}>
+            <div class="card-header container mx-auto" style={{ height: 130 }}>
               <div className=" fw-bold my-2 fs-3 mx-auto">Inicio de Sesión</div>
               <div
                 className="fs-6 my-2 fw-light mx-auto"
