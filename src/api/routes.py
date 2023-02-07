@@ -1,6 +1,6 @@
-"""
-This module takes care of starting the API Server, Loading the DB and Adding the endpoints
-"""
+# """
+# This module takes care of starting the API Server, Loading the DB and Adding the endpoints
+# """
 from flask import Flask, request, jsonify, url_for, Blueprint
 from api.models import db, User
 from api.utils import generate_sitemap, APIException
@@ -21,13 +21,14 @@ def add_user():
     decoded_object = json.loads(request_body)  # traduce la informacion, lo pasa a json 
     print(decoded_object) # hace que podamos ver la informacion de manera que la necesitamos
     get_email = User.query.filter_by(email=decoded_object["email"]).first()
-    if get_email is None:
-            new_user = User(email=decoded_object["email"], password=decoded_object["password"])
+    apellido = User.query.filter_by(apellido=decoded_object["email"]).first()
+    if get_apellido is None:
+            new_user = User(email=decoded_object["email"], password=decoded_object["password"], apellido=decoded_object["apellido"],),
             db.session.add(new_user)
             db.session.commit()
             return jsonify({"msg":"usuario creado exitosamente"}), 200
     else: 
-        return jsonify({"msg":"el email ya existe"}), 400 
+        return jsonify({"msg":"el email ya existe"}), 400
 
 
 # Create a route to authenticate your users and return JWTs. The
