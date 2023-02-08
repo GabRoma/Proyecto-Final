@@ -15,7 +15,7 @@ api = Blueprint('api', __name__)
 #JWT EMPEZAMOS PARTE BACK-END DEL LOGIN, EL REGISTRO ES APARTE
 
 # 1ERO metodo POST para crear usuario, 
-@api.route('/user/', methods=['POST'])
+@api.route('/signup', methods=['POST'])
 def add_user():
     request_body = request.data  #es la informacion que viene del postman la que viene del front end
     decoded_object = json.loads(request_body)  # traduce la informacion, lo pasa a json 
