@@ -26,7 +26,10 @@ export const Login = () => {
         }}
       >
         {({ errors, touched }) => (
-          <div className="card mx-auto" style={{ width: 430, height: 480 }}>
+          <div
+            className="card mx-auto border-secondary border-secondary border-2  rounded-5"
+            style={{ width: 430, height: 480 }}
+          >
             <div class="card-header container mx-auto" style={{ height: 130 }}>
               <div className=" fw-bold my-2 fs-3 mx-auto">Inicio de Sesión</div>
               <div
@@ -127,6 +130,8 @@ export const Login = () => {
                   </button>
                   <button
                     class="btn btn-outline-dark text-center"
+                    data-bs-target="#divpadre2"
+                    data-bs-toggle="modal"
                     style={{ width: 380 }}
                     type="button"
                   >
