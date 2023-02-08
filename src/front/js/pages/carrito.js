@@ -34,11 +34,17 @@ export const Carrito = (props) => {
           </div>{" "}
           <div className="card m-2">
             <div className="card-body">
-              <p className="card-text"> Productos: </p>{" "}
+              <p className="card-text"> Productos: $ {store.subtotal}</p>{" "}
               <p className="card-text text-muted"> Descuentos: </p>{" "}
-              <div className="mt-5 mb-5">
+              <div className="mt-5 mb-3">
                 <h5 className="card-text"> Total: $ {store.total} </h5>{" "}
               </div>{" "}
+              <p className="card-text">
+                <small className="text-muted">
+                  Los cargos extra por envío y los cupones son aplicados al
+                  momento de realizar el pago.
+                </small>
+              </p>
               <a href="/checkout" className="btn btn-dark w-100">
                 Proceder al pago{" "}
               </a>{" "}

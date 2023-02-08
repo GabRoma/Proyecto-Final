@@ -7,6 +7,7 @@ import { Demo } from "./pages/demo";
 import { Single } from "./pages/single";
 import { Carrito } from "./pages/carrito";
 import { Checkout } from "./pages/checkout";
+import { Favoritos } from "./pages/favoritos";
 import injectContext from "./store/appContext";
 
 import { Navbar } from "./component/navbar";
@@ -29,11 +30,12 @@ const Layout = () => {
             <Route element={<Single />} path="/single/:theid" />
             <Route element={<Carrito />} path="/carrito" />
             <Route element={<Checkout />} path="/checkout" />
-            <Route element={<h1>Not found!</h1>} />
-          </Routes>
+            <Route element={<Favoritos />} path="/favoritos" />
+            <Route element={<h1> Not found! </h1>} />
+          </Routes>{" "}
           <Footer />
-        </ScrollToTop>
-      </BrowserRouter>
+        </ScrollToTop>{" "}
+      </BrowserRouter>{" "}
     </div>
   );
 };

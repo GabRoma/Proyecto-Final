@@ -44,13 +44,37 @@ const getState = ({ getStore, getActions, setStore }) => {
           subtotal: 10,
         },
       ],
-      total: 0,
-      prices: [
+      favoritos: [
         {
-          id: 9,
-          theprice: 30,
+          id: 1,
+          name: "producto",
+          url: "https://shoptheoldemercantile.com/image/cache/catalog/placeholderproduct-500x500.png",
+          shipping: "3 semanas",
+          price: 10,
+          quantity: 1,
+          subtotal: 10,
+        },
+        {
+          id: 2,
+          name: "producto II",
+          url: "https://shoptheoldemercantile.com/image/cache/catalog/placeholderproduct-500x500.png",
+          shipping: "3 semanas",
+          price: 10,
+          quantity: 1,
+          subtotal: 10,
+        },
+        {
+          id: 3,
+          name: "producto III",
+          url: "https://shoptheoldemercantile.com/image/cache/catalog/placeholderproduct-500x500.png",
+          shipping: "3 semanas",
+          price: 10,
+          quantity: 3,
+          subtotal: 10,
         },
       ],
+      subtotal: 0,
+      total: 0,
     },
     actions: {
       addCarrito: (item) => {
@@ -77,6 +101,7 @@ const getState = ({ getStore, getActions, setStore }) => {
           0
         );
         setStore({
+          subtotal: totalSum,
           total: totalSum,
         });
         console.log(getStore().total);
@@ -96,6 +121,22 @@ const getState = ({ getStore, getActions, setStore }) => {
         });
         getActions().sumCarrito();
         console.log(getStore().carrito);
+      },
+      addFavorito: (item) => {
+        if (getStore().favoritos.some((elem) => elem.name === item.name)) {
+          getActions().quitFavorito(item);
+        } else {
+          setStore({
+            favoritos: getStore().favoritos.concat(item),
+          });
+          console.log(`${item.name} se ha añadido a tu lista de favoritos.`);
+        }
+      },
+      quitFavorito: (item) => {
+        setStore({
+          favoritos: getStore().favoritos.filter((i) => i.name !== item.name),
+        });
+        console.log(`${item.name} se ha eliminado de tu lista de favoritos.`);
       },
       // Use getActions to call a function within a fuction
       exampleFunction: () => {
