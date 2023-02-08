@@ -40,7 +40,7 @@ export const Navbar = () => {
         </div>
       </div>
       <a
-        className="btn btn-outline-secondary position-absolute top-0 end-0 my-2 mx-5 px-3"
+        className="btn position-absolute top-0 end-0 my-2 mx-5 px-3"
         data-bs-toggle="modal"
         href="#divpadre"
         role="button"
