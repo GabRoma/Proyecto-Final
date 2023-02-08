@@ -11,23 +11,24 @@ export const CartItem = (item) => {
   const params = useParams();
 
   const [amount, setAmount] = useState(1);
+  const [theprice, setPrice] = useState(item.price);
   const stock = 1000;
 
   const setDecrease = () => {
+    let amountAux = amount - 1;
+    let priceAux = item.price * amountAux;
     amount > 1 ? setAmount(amount - 1) : setAmount(1);
+    setPrice(priceAux);
+    actions.actualizarCarrito({ amountAux, priceAux, id: item.id });
   };
 
   const setIncrease = () => {
+    let amountAux = amount + 1;
+    let priceAux = item.price * amountAux;
     amount < stock ? setAmount(amount + 1) : setAmount(stock);
+    setPrice(priceAux);
+    actions.actualizarCarrito({ amountAux, priceAux, id: item.id });
   };
-
-  const [theprice, setPrice] = useState(item.price);
-  function pricing(price, amount) {
-    setPrice(price * amount);
-    console.log(price);
-    console.log(amount);
-    console.log(theprice);
-  }
 
   return (
     <div className="card" key={item.id}>
@@ -60,7 +61,7 @@ export const CartItem = (item) => {
                 setIncrease={setIncrease}
               />{" "}
               <p>
-                <strong> $ {item.price * amount} </strong>{" "}
+                <strong> $ {theprice} </strong>{" "}
               </p>{" "}
             </div>{" "}
           </div>{" "}

@@ -35,15 +35,6 @@ export const Carrito = (props) => {
           <div className="card m-2">
             <div className="card-body">
               <p className="card-text"> Productos: </p>{" "}
-              {/* <ul>
-                            {" "}
-                            {store.carrito.map((item, index) => (
-                              <li key={index}>
-                                Nombre: {item.name} - Cantidad: {item.amount} - Precio: ${" "}
-                                {item.price} - Subtotal: $ {item.price * item.quantity}{" "}
-                              </li>
-                            ))}{" "}
-                          </ul>{" "} */}{" "}
               <p className="card-text text-muted"> Descuentos: </p>{" "}
               <div className="mt-5 mb-5">
                 <h5 className="card-text"> Total: $ {store.total} </h5>{" "}

@@ -1,3 +1,4 @@
+//el coso para poner cuántos productos querés
 import React from "react";
 
 const CartAmountToggle = ({ amount, setDecrease, setIncrease }) => {
@@ -8,21 +9,23 @@ const CartAmountToggle = ({ amount, setDecrease, setIncrease }) => {
           className="decrease btn btn-outline-danger"
           onClick={() => setDecrease()}
         >
-          <i className="fa fa-minus"></i>
-        </button>
+          <i className="fa fa-minus"> </i>{" "}
+        </button>{" "}
         <div
           className="text-center border border-dark rounded"
-          style={{ width: 40 }}
+          style={{
+            width: 40,
+          }}
         >
-          <strong>{amount}</strong>
-        </div>
+          <strong> {amount} </strong>{" "}
+        </div>{" "}
         <button
           className="increase btn btn-outline-success"
           onClick={() => setIncrease()}
         >
-          <i className="fa fa-plus"></i>
-        </button>
-      </div>
+          <i className="fa fa-plus"> </i>{" "}
+        </button>{" "}
+      </div>{" "}
     </div>
   );
 };
