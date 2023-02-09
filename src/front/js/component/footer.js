@@ -13,8 +13,12 @@ export const Footer = () => {
                 <div className="m-auto d-flex justify-content-center terminos container">
                     <div className="m-auto">
                         <h5 className="mb-3">Necesitas ayuda?</h5>
-                        <button className="btn bg-dark bg-opacity-75 text-light fs-6 ps-4 pe-4 pt-2 pb-2" onClick={() => handleTogglePopup(true)}>Contact us</button>
-
+                        <button
+                            className="btn bg-dark bg-opacity-75 text-light fs-6 ps-4 pe-4 pt-2 pb-2"
+                            onClick={() => handleTogglePopup(true)}
+                        >
+                            Contact us
+                        </button>
                     </div>
                     <div className="m-auto">
                         <h4 className="fw-bolder">Devoluciones y garantía</h4>

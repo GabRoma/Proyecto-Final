@@ -19,9 +19,13 @@ body {
     display: none;
 }
 
+.modal-backdrop {
+    z-index: 500;
+}
+
 .notificacion {
     position: absolute;
-    top: -8px;
+    top: -2px;
     background-color: darkslategrey;
     color: white;
     border-radius: 50%;

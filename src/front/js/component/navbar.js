@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import logo from "../../img/logito.png";
 import logo2 from "../../img/logito2.png"
-
+import { AuthComponent } from "./authcomponent.js"
 
 export const Navbar = () => {
   return (
@@ -20,17 +20,17 @@ export const Navbar = () => {
           <input className="form-control rounded-end rounded-0 border border-start-0 border-dark ps-1" style={{ width: "600px" }} type="search" placeholder="Buscar un producto" aria-label="Search" />
         </form>
         <div className="ml-auto">
-          <div className="dropdown">
+          <div className="dropdown d-flex">
             <button className="btn p-0 dropdown-toggle me-3" type="button" data-bs-toggle="dropdown" aria-expanded="false">
               <i className="fas fa-heart" style={{ color: "rgb(224, 24, 24)" }}></i>
-              <span className="notificacion" style={{ right: '110px' }}>0</span>
+              <span className="notificacion" style={{ right: '140px' }}>0</span>
             </button>
             <ul className="dropdown-menu">
               <li><a className="dropdown-item" href="#"></a></li>
               <li><a className="dropdown-item" href="#"></a></li>
               <li><a className="dropdown-item" href="#"></a></li>
             </ul>
-            <button className="btn p-0"><i className="far fa-user"></i>Ingresar</button>
+            <AuthComponent />
             <button className="btn p-0 dropdown-toggle ms-3" type="button" data-bs-toggle="dropdown" aria-expanded="false">
               <i className="fas fa-shopping-cart"></i>
               <span className="notificacion" style={{ right: '-11px' }}>0</span>
