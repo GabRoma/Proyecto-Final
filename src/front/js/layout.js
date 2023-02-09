@@ -28,7 +28,6 @@ const Layout = () => {
             <Route element={<Home />} path="/" />
             <Route element={<Demo />} path="/demo" />
             <Route element={<Single />} path="/single/:theid" />
-<<<<<<< HEAD
             <Route element={<Carrito />} path="/carrito" />
             <Route element={<Checkout />} path="/checkout" />
             <Route element={<Favoritos />} path="/favoritos" />
@@ -37,13 +36,6 @@ const Layout = () => {
           <Footer />
         </ScrollToTop>{" "}
       </BrowserRouter>{" "}
-=======
-            <Route element={<h1>Not found!</h1>} />
-          </Routes>
-          <Footer />
-        </ScrollToTop>
-      </BrowserRouter>
->>>>>>> 43e6410e8551c222aadde3b8623ff66021b6d45f
     </div>
   );
 };
