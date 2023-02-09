@@ -62,7 +62,7 @@ export const Registro = () => {
           <div className=" mx-auto" style={{ width: 695 }}>
             <div className="card text-center border-secondary border-2  rounded-5">
               <div className="card-header fs-3 fw-bold">REGISTRO</div>
-              <div className="card-body">
+              <div className="card-body pb-1">
                 <Form className="row g-3" id="formulario">
                   <div className="col-md-3">
                     {/* <label for="inputCity" class="form-label">
@@ -193,7 +193,7 @@ export const Registro = () => {
                       className={
                         "form-control my-3  rounded-5 " +
                         (errors.inputConfirmcontrasena &&
-                        touched.inputConfirmcontrasena
+                          touched.inputConfirmcontrasena
                           ? "border border-danger border-2 "
                           : "border-secondary border-2")
                       }
@@ -215,9 +215,11 @@ export const Registro = () => {
                     >
                       Crear cuenta
                     </button>
-                    <div className="fs-6 fw-lighter">
+                    <div className="fs-6 fw-lighter d-flex justify-content-center">
                       Al hacer click en "Crear cuenta" el usuario acepta los
-                      términos y condiciones de uso
+                      <Link to="/tos">
+                        <p className="ps-1 pe-1"> términos y condiciones </p>
+                      </Link> de uso
                     </div>
                   </div>
                 </Form>
