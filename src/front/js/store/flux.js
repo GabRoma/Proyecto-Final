@@ -37,10 +37,18 @@ const getState = ({ getStore, getActions, setStore }) => {
         }
       },
 
+      // logout: () => {
+      // 	console.log("funciona");
+      //     // localStorage.removeItem('token');
+      //     // setStore({
+      //     //     estalogueado: false
+      //     // })
+      // },
+
       inicioLogin: (userEmail, userPassword) => {
         console.log("funciona");
         fetch(
-          " https://3001-gabroma-proyectofinal-4kpm00g58va.ws-us86.gitpod.io/api/login ",
+          "https://3001-gabroma-proyectofinal-4kpm00g58va.ws-us86.gitpod.io/api/login",
           {
             method: "POST",
             headers: {

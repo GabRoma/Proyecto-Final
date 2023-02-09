@@ -1,9 +1,16 @@
-import React from "react";
+import React, { useState, useContext } from "react";
+import { Context } from "../store/appContext.js";
 import { Link } from "react-router-dom";
 import { Login } from "../component/login";
 import { Registro } from "../component/registro";
 
 export const Navbar = () => {
+  const { store, actions } = useContext(Context);
+
+  // function handleLogout() {
+  // 	actions.logout()//cerrar la sesiono
+  // 	navigate("/")}//usamos navigate para redireccionar
+
   return (
     <nav className="navbar navbar-light bg-light">
       <div
@@ -27,15 +34,7 @@ export const Navbar = () => {
               <Login />
             </div>
             <div className="my-3 mx-1"></div>
-            <div className="">
-              {/* <button
-                class="btn btn-primary"
-                data-bs-target="#exampleModalToggle2"
-                data-bs-toggle="modal"
-              >
-                Open second modal
-              </button> */}
-            </div>
+            <div className=""></div>
           </div>
         </div>
       </div>
@@ -72,6 +71,9 @@ export const Navbar = () => {
           </div>
         </div>
       </div>
+      {/* <div className="ml-auto">
+				{store.estalogueado === true? <a className="btn position-absolute top-0 end-0 my-2 mx-1 px-3" onClick={handleLogout}><i class="fas fa-sign-out-alt"></i></a>  : null}
+			</div> */}
     </nav>
   );
 };
