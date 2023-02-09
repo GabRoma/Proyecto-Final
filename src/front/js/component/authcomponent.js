@@ -4,15 +4,18 @@ import { Link } from "react-router-dom";
 import { Login } from "../component/login";
 import { Registro } from "../component/registro";
 
-export const Navbar = () => {
+// import {useNavigate} from "react-router-dom"
+
+export const AuthComponent = () => {
   const { store, actions } = useContext(Context);
+  // const navigate = useNavigate()
 
   // function handleLogout() {
   // 	actions.logout()//cerrar la sesiono
   // 	navigate("/")}//usamos navigate para redireccionar
 
   return (
-    <nav className="navbar navbar-light bg-light">
+    <div>
       <div
         className="modal fade"
         id="divpadre"
@@ -74,6 +77,6 @@ export const Navbar = () => {
       {/* <div className="ml-auto">
 				{store.estalogueado === true? <a className="btn position-absolute top-0 end-0 my-2 mx-1 px-3" onClick={handleLogout}><i class="fas fa-sign-out-alt"></i></a>  : null}
 			</div> */}
-    </nav>
+    </div>
   );
 };

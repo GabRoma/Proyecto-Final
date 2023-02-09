@@ -1,11 +1,12 @@
 import React, { useState, useContext } from "react";
 import { Context } from "../store/appContext.js";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Formik, Field, Form, ErrorMessage } from "formik";
 import * as Yup from "yup";
 
 export const Login = () => {
   const { store, actions } = useContext(Context);
+  const navigate = useNavigate();
 
   return (
     <>
@@ -25,11 +26,11 @@ export const Login = () => {
           console.log(values);
           console.log(values.inputLogincorreo);
 
-
           actions.inicioLogin(
             values.inputLogincorreo,
             values.inputLogincontrasena
           );
+          navigate("/");
           setTimeout(() => {
             // alert(JSON.stringify(values, null, 2));
             setSubmitting(false);
@@ -56,7 +57,7 @@ export const Login = () => {
             <Form className="row row-cols-lg-auto g-3 align-items-center my-1">
               <ul
                 className="list-group list-group-flush mx-3"
-                style={{ height: 200, width:420 }}
+                style={{ height: 200, width: 420 }}
               >
                 <li className="list-group-item" style={{ height: 130 }}>
                   <div className="col-12">
@@ -80,8 +81,6 @@ export const Login = () => {
                         }
                         name="inputLogincorreo"
                         placeholder="email@address.com"
-                        // value={email}
-                        // onChange={(e) => setEmail(e.target.value)}
                       />
                       <span className="text-danger d-block mx-2 my-1 ">
                         <ErrorMessage name="inputLogincorreo" />
@@ -90,7 +89,6 @@ export const Login = () => {
                   </div>
                 </li>
                 <li className="list-group-item" style={{ height: 110 }}>
-                  {/* <form className="row row-cols-lg-auto g-3 align-items-center my-1" /> */}
                   <div className="col-12" />
                   <div
                     className="text-start fs-6 fw-light "
@@ -104,7 +102,6 @@ export const Login = () => {
                     </div>
                     <Field
                       type="password"
-                      // className="form-control fw-bold "
                       className={
                         "form-control rounded-5 " +
                         (errors.inputLogincontrasena &&
@@ -124,11 +121,9 @@ export const Login = () => {
                   </div>
                 </li>
                 <li className="list-group-item" style={{ height: 60 }}>
-                  {/* <form className="row row-cols-lg-auto g-3 align-items-center my-1" /> */}
                   <div className="col-12" />
                   <div className="container my-2 mx-auto">
                     <button
-                      // onClick={enviarDatos}
                       className="btn btn-dark text-center my-2"
                       style={{ width: 350 }}
                       type="submit"
