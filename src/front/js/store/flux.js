@@ -40,14 +40,17 @@ const getState = ({ getStore, getActions, setStore }) => {
       inicioLogin: (userEmail, userPassword) => {
         console.log("funciona");
         fetch(
-          "https://3001-gabroma-proyectofinal-4kpm00g58va.ws-us86.gitpod.io/api/login",
+          " https://3001-gabroma-proyectofinal-4kpm00g58va.ws-us86.gitpod.io/api/login ",
           {
             method: "POST",
             headers: {
               "Content-Type": "application/json",
               // 'Content-Type': 'application/x-www-form-urlencoded',
             },
-            body: JSON.stringify({ email: userEmail, password: userPassword }), //lo que tenga el recipiente reproducelo // body data type must match "Content-Type" header
+            body: JSON.stringify({
+              email: userEmail,
+              password: userPassword,
+            }), //lo que tenga el recipiente reproducelo // body data type must match "Content-Type" header
           }
         )
           .then((response) => {
