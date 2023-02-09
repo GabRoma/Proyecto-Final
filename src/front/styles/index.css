@@ -1,3 +1,129 @@
-/* 
-    General Styles used on every website (Don't Repeat Yourself)
-*/
+@import url("https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@300;400;700&display=swap");
+
+body {
+    font-family: "Source Sans Pro", sans-serif;
+    background-color: #f8f9fa;
+}
+
+.rounded-end {
+    border-top-right-radius: 3.25rem !important;
+    border-bottom-right-radius: 3.25rem !important;
+}
+
+.rounded-start {
+    border-top-left-radius: 3.25rem !important;
+    border-bottom-left-radius: 3.25rem !important;
+}
+
+.dropdown-toggle::after {
+    display: none;
+}
+
+.modal-backdrop {
+    z-index: 500;
+}
+
+.notificacion {
+    position: absolute;
+    top: -2px;
+    background-color: darkslategrey;
+    color: white;
+    border-radius: 50%;
+    width: 21px;
+    height: 21px;
+    display: flex;
+    border: 2px solid white;
+    justify-content: center;
+    align-items: center;
+    font-size: 14px;
+}
+
+.redondo {
+    border-radius: 30px;
+    filter: grayscale(100%);
+    object-fit: cover;
+    object-position: center center;
+    width: 250px;
+    height: 200px;
+    box-shadow: 1px 1px 5px 0.1px rgba(0, 0, 0, 0.8);
+}
+
+.brandsimg {
+    border-radius: 30px;
+    filter: grayscale(100%);
+    object-position: center center;
+    width: 120px;
+    height: 96px;
+    box-shadow: 1px 1px 5px 0.1px rgba(0, 0, 0, 0.8);
+}
+
+.centered {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.redondo:hover {
+    box-shadow: 4px 4px 8px 1.6px rgba(0, 0, 0, 0.8);
+    filter: grayscale(0%);
+}
+
+.brandsimg:hover {
+    box-shadow: 4px 4px 8px 1.6px rgba(0, 0, 0, 0.8);
+    filter: grayscale(0%);
+}
+
+.brandsimg:active {
+    box-shadow: 2.5px 2.5px 5px 1px rgba(0, 0, 0, 0.8);
+    filter: grayscale(0%);
+}
+
+.redondo:active {
+    box-shadow: 2.5px 2.5px 5px 1px rgba(0, 0, 0, 0.8);
+    filter: grayscale(0%);
+}
+
+.carousel-button:active {
+    color: rgb(216, 24, 24);
+    box-shadow: 1px 1px 2px 0.2px rgba(0, 0, 0, 0.8);
+}
+
+.terminos>div>h4 {
+    font-size: 15px;
+}
+
+.terminos>div>a>p {
+    font-size: 12px;
+}
+
+.terminos>div>a {
+    text-decoration: none;
+    color: black;
+}
+
+.navbarhome>div>a>h5 {
+    text-decoration: none;
+    color: darkgrey;
+    display: inline-block;
+    padding: 0;
+}
+
+.popup-overlay {
+    background-color: rgba(0, 0, 0, 0.5);
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.popup-content {
+    border-radius: 10px;
+    width: 500px;
+    display: flex;
+    flex-direction: column;
+}
