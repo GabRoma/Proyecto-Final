@@ -1,9 +1,12 @@
-import React from "react";
+import React, { useState, useContext } from "react";
+import { Context } from "../store/appContext.js";
 import { Link } from "react-router-dom";
 import { Formik, Field, Form, ErrorMessage } from "formik";
 import * as Yup from "yup";
 
 export const Registro = () => {
+  const { store, actions } = useContext(Context);
+
   return (
     <>
       <Formik
@@ -42,8 +45,15 @@ export const Registro = () => {
           inputConfirmcontrasena: Yup.string().required("Requerido"),
         })}
         onSubmit={(values, { setSubmitting }) => {
+          actions.registro(
+            values.inputNombre,
+            values.inputApellido,
+            values.inputCelular,
+            values.inputContrasena,
+            values.inputCorreo
+          );
           setTimeout(() => {
-            alert(JSON.stringify(values, null, 2));
+            // alert(JSON.stringify(values, null, 2));
             setSubmitting(false);
           }, 400);
         }}
@@ -196,21 +206,21 @@ export const Registro = () => {
                     </span>
                   </div>
                   <div className="col-12"></div>
+                  <div className="card-footer text-muted">
+                    <button
+                      type="submit"
+                      id="botoncrearcuenta"
+                      className="btn btn-dark btn-lg fw-bold mx-5 my-1"
+                      style={{ height: 50, width: 200 }}
+                    >
+                      Crear cuenta
+                    </button>
+                    <div className="fs-6 fw-lighter">
+                      Al hacer click en "Crear cuenta" el usuario acepta los
+                      términos y condiciones de uso
+                    </div>
+                  </div>
                 </Form>
-              </div>
-              <div className="card-footer text-muted">
-                <button
-                  type="submit"
-                  id="botoncrearcuenta"
-                  className="btn btn-dark btn-lg fw-bold mx-5 my-1"
-                  style={{ height: 50, width: 200 }}
-                >
-                  Crear cuenta
-                </button>
-                <div className="fs-6 fw-lighter">
-                  Al hacer click en "Crear cuenta" el usuario acepta los
-                  términos y condiciones de uso
-                </div>
               </div>
             </div>
           </div>
