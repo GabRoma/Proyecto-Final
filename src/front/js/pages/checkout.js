@@ -24,6 +24,7 @@ export const Checkout = (props) => {
             <table class="table">
               <thead>
                 <tr>
+                  <th scope="col"></th>
                   <th scope="col">Producto</th>
                   <th scope="col">Precio</th>
                   <th scope="col">Cantidad</th>
@@ -33,6 +34,9 @@ export const Checkout = (props) => {
               <tbody>
                 {store.carrito.map((item, index) => (
                   <tr key={item.id}>
+                    <td>
+                      <img src={item.url} className="img-fluid mw-10 mh-10" />
+                    </td>
                     <td>{item.name}</td>
                     <td>$ {item.price}</td>
                     <td>{item.quantity}</td>

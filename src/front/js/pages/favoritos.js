@@ -43,15 +43,18 @@ export const Favoritos = (props) => {
                           natural lead - in to additional content.This content
                           is a little bit longer.{" "}
                         </p>{" "}
+                        <p className="card-text">
+                          <small className="text-muted">
+                            Tiempo de envío estimado: {item.shipping}{" "}
+                          </small>{" "}
+                        </p>{" "}
                         <div className="d-flex justify-content-between">
-                          <p className="card-text">
-                            <small className="text-muted">
-                              Tiempo de envío estimado: {item.shipping}{" "}
-                            </small>{" "}
-                          </p>{" "}
                           <p>
-                            <strong> $ {item.price} </strong>{" "}
-                          </p>{" "}
+                            <u>ver más</u>
+                          </p>
+                          <h5>
+                            <strong> $ {item.price} </strong>
+                          </h5>
                         </div>{" "}
                       </div>{" "}
                     </div>{" "}
