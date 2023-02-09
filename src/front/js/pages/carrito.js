@@ -34,10 +34,17 @@ export const Carrito = (props) => {
           </div>{" "}
           <div className="card m-2">
             <div className="card-body">
-              <p className="card-text"> Productos: $ {store.subtotal}</p>{" "}
-              <p className="card-text text-muted"> Descuentos: </p>{" "}
-              <div className="mt-5 mb-3">
-                <h5 className="card-text"> Total: $ {store.total} </h5>{" "}
+              <div className="d-flex justify-content-between">
+                <p className="card-text">Productos:</p>{" "}
+                <p className="card-text">$ {store.subtotal}</p>
+              </div>
+              <div className="d-flex justify-content-between">
+                <p className="card-text text-muted">Descuentos:</p>{" "}
+                <p className="card-text text-muted">$ </p>
+              </div>
+              <div className="d-flex justify-content-between mt-5">
+                <h5 className="card-text"> Total:</h5>
+                <h5> $ {store.total} </h5>{" "}
               </div>{" "}
               <p className="card-text">
                 <small className="text-muted">
