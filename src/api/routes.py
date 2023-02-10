@@ -90,3 +90,31 @@ def handle_singleuser(user_id):
         return jsonify(one_user.serialize()), 200
 
 #terminamos de trabajar aca    
+
+#favorito
+@api.route("/user/<int:user_id>/favoritos", methods=["POST"])
+def addFavorito(sku):
+    product = Producto.query.get(sku)
+    if product is None:
+        return jsonify({"error": "Product with SKU '{}' not found.".format(sku)}), 404
+
+    # Add the product to the favorite list
+    favorite = Favoritos(producto=product)
+    db.session.add(favorite)
+    db.session.commit()
+
+    return jsonify({"message": "Product added to favorites successfully."}), 201
+
+#carrito
+@api.route("/user/<int:user_id>/carrito", methods=["POST"])
+def addCarrito(sku):
+    product = Producto.query.get(sku)
+    if product is None:
+        return jsonify({"error": "Product with SKU '{}' not found.".format(sku)}), 404
+
+    # Add the product to the favorite list
+    enCarrito = Carrito(producto=product)
+    db.session.add(carrito)
+    db.session.commit()
+
+    return jsonify({"message": "Product added to favorites successfully."}), 201
