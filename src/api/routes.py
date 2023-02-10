@@ -88,4 +88,5 @@ def handle_singleuser(user_id):
         return jsonify({"msg":"usuario no existente"}), 404
     else:
         return jsonify(one_user.serialize()), 200
+
 #terminamos de trabajar aca    

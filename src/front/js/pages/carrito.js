@@ -24,7 +24,7 @@ export const Carrito = (props) => {
           <div>
             {" "}
             {store.carrito.map((item, index) => {
-              return <CartItem key={item.id} {...item} />;
+              return <CartItem key={item.sku} {...item} />;
             })}{" "}
           </div>{" "}
         </div>{" "}

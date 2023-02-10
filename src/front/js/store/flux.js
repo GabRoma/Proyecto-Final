@@ -20,7 +20,7 @@ const getState = ({
                 },
             ],
             carrito: [{
-                    id: 1,
+                    sku: 1,
                     name: "producto",
                     url: "https://shoptheoldemercantile.com/image/cache/catalog/placeholderproduct-500x500.png",
                     shipping: "3 semanas",
@@ -29,7 +29,7 @@ const getState = ({
                     subtotal: 10,
                 },
                 {
-                    id: 2,
+                    sku: 2,
                     name: "producto II",
                     url: "https://shoptheoldemercantile.com/image/cache/catalog/placeholderproduct-500x500.png",
                     shipping: "3 semanas",
@@ -38,7 +38,7 @@ const getState = ({
                     subtotal: 10,
                 },
                 {
-                    id: 3,
+                    sku: 3,
                     name: "producto III",
                     url: "https://shoptheoldemercantile.com/image/cache/catalog/placeholderproduct-500x500.png",
                     shipping: "3 semanas",
@@ -48,7 +48,7 @@ const getState = ({
                 },
             ],
             favoritos: [{
-                    id: 1,
+                    sku: 1,
                     name: "producto",
                     url: "https://shoptheoldemercantile.com/image/cache/catalog/placeholderproduct-500x500.png",
                     shipping: "3 semanas",
@@ -57,7 +57,7 @@ const getState = ({
                     subtotal: 10,
                 },
                 {
-                    id: 2,
+                    sku: 2,
                     name: "producto II",
                     url: "https://shoptheoldemercantile.com/image/cache/catalog/placeholderproduct-500x500.png",
                     shipping: "3 semanas",
@@ -66,7 +66,7 @@ const getState = ({
                     subtotal: 10,
                 },
                 {
-                    id: 3,
+                    sku: 3,
                     name: "producto III",
                     url: "https://shoptheoldemercantile.com/image/cache/catalog/placeholderproduct-500x500.png",
                     shipping: "3 semanas",
@@ -110,7 +110,7 @@ const getState = ({
             },
             actualizarCarrito: (item) => {
                 const newArr = getStore().carrito.map((product) => {
-                    if (product.id === item.id) {
+                    if (product.sku === item.sku) {
                         product.subtotal = item.priceAux;
                         product.quantity = item.amountAux;
                         return product;
