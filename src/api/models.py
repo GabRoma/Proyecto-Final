@@ -37,8 +37,8 @@ class User(db.Model):
 # Tabla Favoritos
 class Favoritos (db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    id_usuario = db.Column(db.Integer, db.ForeignKey('user.id'),nullable=False)
-    sku = db.Column(db.String(120), db.ForeignKey('producto.sku'), nullable=True )
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'),nullable=False)
+    producto_sku = db.Column(db.String(120), db.ForeignKey('producto.sku'), nullable=True )
     
 
 
@@ -48,15 +48,15 @@ class Favoritos (db.Model):
     def serialize(self):
         return {
             "id": self.id,
-            "id_usuario": self.id_usuario,
-            "sku": self.sku,
+            "user_id": self.user_id,
+            "producto_sku": self.producto_sku,
             
         }
 
 #Tabla Metodos de Pago
 class MetodosDePagos (db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    id_usuario = db.Column(db.Integer, db.ForeignKey('user.id'),nullable=False)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'),nullable=False)
     
 
     def __repr__(self):
@@ -65,15 +65,15 @@ class MetodosDePagos (db.Model):
     def serialize(self):
         return {
         "id": self.id,
-        "id_usuario": self.id_usuario,
+        "user_id": self.user_id,
         
         }
 
 #Tabla de Carrito
 class Carrito(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    id_usuario = db.Column(db.Integer, db.ForeignKey('user.id'),nullable=False)
-    sku_product = db.Column(db.String(120), db.ForeignKey('producto.sku'),nullable=False )
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'),nullable=False)
+    producto_sku = db.Column(db.String(120), db.ForeignKey('producto.sku'),nullable=False )
 
     def __repr__(self):
         return '<Carrito %r' % self.id
@@ -81,11 +81,9 @@ class Carrito(db.Model):
     def serialize(self):
         return {
             "id": self.id,
-            "id_usuario": self.id_usuario,
-            "sku_product": self.sku_product,
-            
+            "user_id": self.user_id,
+            "producto_sku": self.producto_sku,
         }
-    
 
 
 #Tabla de Producto
@@ -132,7 +130,3 @@ class Producto(db.Model):
             "manufacturer": self.manufacturer,
             "dimensions": self.dimensions           
         }
-    
-    
-        
-

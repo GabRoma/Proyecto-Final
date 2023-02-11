@@ -2,7 +2,7 @@
 # This module takes care of starting the API Server, Loading the DB and Adding the endpoints
 # """
 from flask import Flask, request, jsonify, url_for, Blueprint
-from api.models import db, User
+from api.models import db, User, Carrito, Favoritos, Producto
 from api.utils import generate_sitemap, APIException
 from flask_jwt_extended import create_access_token
 from flask_jwt_extended import get_jwt_identity
@@ -91,30 +91,56 @@ def handle_singleuser(user_id):
 
 #terminamos de trabajar aca    
 
-#favorito
+#Favoritos
+
+#Agregar a Favoritos
 @api.route("/user/<int:user_id>/favoritos", methods=["POST"])
-def addFavorito(sku):
-    product = Producto.query.get(sku)
-    if product is None:
-        return jsonify({"error": "Product with SKU '{}' not found.".format(sku)}), 404
+def add_favorito(user_id):
+    request_body = request.get_json()
+    fav = Favoritos.query.filter_by(user_id=user_id, producto_sku=request_body["producto_sku"]).first()
+    if fav is None:
+        newFav = Favorites(
+            user_id=user_id, producto_sku=request_body["producto_sku"])
+        db.session.add(newFav)
+        db.session.commit()
+        return jsonify("Producto añadido a tu lista de favoritos"), 200
+    else:
+        return jsonify("Este producto ya se encuentra en tu lista de favoritos"), 400
 
-    # Add the product to the favorite list
-    favorite = Favoritos(producto=product)
-    db.session.add(favorite)
+#Eliminar de Favoritos
+@api.route("/user/<int:user_id>/favoritos", methods=["DELETE"])
+def del_favorito(user_id):
+    request_body = request.get_json()
+    unFav = Favoritos.query.filter_by(user_id=user_id, producto_sku=request_body["producto_sku"]).first()
+    if unFav is None:
+        raise APIException("No hemos podido encontrar este producto en tu lista de favoritos", status_code=404)
+    db.session.delete(unFav)
     db.session.commit()
+    return jsonify("El producto ha sido eliminado de tu lista de favoritos"), 200
 
-    return jsonify({"message": "Product added to favorites successfully."}), 201
+#Carrito
 
-#carrito
+#Agregar a Carrito
 @api.route("/user/<int:user_id>/carrito", methods=["POST"])
-def addCarrito(sku):
-    product = Producto.query.get(sku)
-    if product is None:
-        return jsonify({"error": "Product with SKU '{}' not found.".format(sku)}), 404
+def add_carrito(user_id):
+    request_body = request.get_json()
+    prod = Carrito.query.filter_by(user_id=user_id, producto_sku=request_body["producto_sku"]).first()
+    if prod is None:
+        newProd = Carrito(
+            user_id=user_id, producto_sku=request_body["producto_sku"])
+        db.session.add(newProd)
+        db.session.commit()
+        return jsonify("Producto añadido a tu carrito"), 200
+    else:
+        return jsonify("Este producto ya se encuentra en tu carrito"), 400
 
-    # Add the product to the favorite list
-    enCarrito = Carrito(producto=product)
-    db.session.add(carrito)
+#Eliminar de Carrito
+@api.route("/user/<int:user_id>/carrito", methods=["DELETE"])
+def del_carrito(user_id):
+    request_body = request.get_json()
+    unProd = Carrito.query.filter_by(user_id=user_id, producto_sku=request_body["producto_sku"]).first()
+    if unProd is None:
+        raise APIException("No hemos podido encontrar este producto en tu carrito", status_code=404)
+    db.session.delete(unProd)
     db.session.commit()
-
-    return jsonify({"message": "Product added to favorites successfully."}), 201
+    return jsonify("El producto ha sido eliminado de tu carrito"), 200
