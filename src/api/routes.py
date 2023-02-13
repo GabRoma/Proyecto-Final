@@ -9,6 +9,7 @@ from flask_jwt_extended import get_jwt_identity
 from flask_jwt_extended import jwt_required
 from flask_jwt_extended import JWTManager
 import json
+import requests 
 
 api = Blueprint('api', __name__)
 
@@ -176,3 +177,26 @@ def single_prod(user_id, carrito_id):
     if singleProd is None:
         raise APIException('Este producto no se encuentra en tu carrito', status_code=404)
     return jsonify(singleProd.serialize()), 200
+
+# @api.route('/producto/<string:asin>', methods=['GET'])
+# def handle_one_producto(asin):
+#         one_producto = Producto.query.filter_by(sku=asin).first()
+#         if one_producto is None:
+#             return jsonify({"msg":"producto no existente"}), 404
+#         else:
+#             return jsonify(one_producto.serialize()), 200   
+
+# #category en api
+# @api.route('/productos/api', methods=['GET'])
+# def handle_productos():
+#         api_key = "699D0A7132274B978BBF1E9E6DD054D4"
+#         api_url = f"https://api.rainforestapi.com/request?api_key=F594A7BAFF9A449B9C3B0F1413DB031A&type=category&url=https%3A%2F%2Fwww.amazon.com%2Fs%3Fbbn%3D16225009011%26rh%3Dn%253A%252116225009011%252Cn%253A502394%252Cn%253A281052"
+#         response = requests.get(api_url).json()
+#         print(response["category_results"])
+#         # for item in response["category_results"]:
+#         #     newProd = Producto(sku=item.asin, name=item.title, productype=item. )
+#         #     db.session.add(newProd)
+#         #     db.session.commit()
+#         return jsonify("ok"), 200
+
+
