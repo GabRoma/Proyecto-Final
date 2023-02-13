@@ -20,7 +20,7 @@ export const Favoritos = (props) => {
             {" "}
             {store.favoritos.map((item, index) => {
               return (
-                <div className="card w-50 m-auto" key={item.id}>
+                <div className="card w-50 m-auto" key={item.sku}>
                   <div className="row g-0">
                     <div className="col-md-4">
                       <img

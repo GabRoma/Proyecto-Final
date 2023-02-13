@@ -37,8 +37,8 @@ class User(db.Model):
 # Tabla Favoritos
 class Favoritos (db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    id_usuario = db.Column(db.Integer, db.ForeignKey('user.id'),nullable=False)
-    sku = db.Column(db.String(120), unique=True, nullable=True )
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'),nullable=False)
+    producto_sku = db.Column(db.String(120), db.ForeignKey('producto.sku'), nullable=True )
     
 
 
@@ -48,15 +48,15 @@ class Favoritos (db.Model):
     def serialize(self):
         return {
             "id": self.id,
-            "id_usuario": self.id_usuario,
-            "sku": self.sku,
+            "user_id": self.user_id,
+            "producto_sku": self.producto_sku,
             
         }
 
 #Tabla Metodos de Pago
 class MetodosDePagos (db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    id_usuario = db.Column(db.Integer, db.ForeignKey('user.id'),nullable=False)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'),nullable=False)
     
 
     def __repr__(self):
@@ -65,17 +65,15 @@ class MetodosDePagos (db.Model):
     def serialize(self):
         return {
         "id": self.id,
-        "id_usuario": self.id_usuario,
+        "user_id": self.user_id,
         
         }
 
 #Tabla de Carrito
 class Carrito(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    id_usuario = db.Column(db.Integer, db.ForeignKey('user.id'),nullable=False)
-    sku = db.Column(db.String(120), unique=True, nullable=True )
-    
-
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'),nullable=False)
+    producto_sku = db.Column(db.String(120), db.ForeignKey('producto.sku'),nullable=False )
 
     def __repr__(self):
         return '<Carrito %r' % self.id
@@ -83,13 +81,52 @@ class Carrito(db.Model):
     def serialize(self):
         return {
             "id": self.id,
-            "id_usuario": self.id_usuario,
-            "sku": self.sku,
-            
+            "user_id": self.user_id,
+            "producto_sku": self.producto_sku,
         }
-    
 
 
+#Tabla de Producto
+class Producto(db.Model):
+    sku = db.Column(db.String(120), primary_key=True)
+    name = db.Column(db.String(120), unique=False, nullable=False)
+    productype = db.Column(db.String(120), unique=False, nullable=False)
+    product_url = db.Column(db.String(240), unique=True, nullable=False)
+    keywords = db.Column(db.String(240), unique=False, nullable=False)
+    brand = db.Column(db.String(120), unique=False, nullable=False)
+    sell_on_amazon = db.Column(db.Boolean(), unique=False, nullable=False)
+    category = db.Column(db.String(120), unique=False, nullable=False)
+    price = db.Column(db.Integer, unique=False, nullable=False)
+    currency = db.Column(db.String(120), unique=False, nullable=False)
+    description = db.Column(db.String(500), unique=False, nullable=True)
+    rating = db.Column(db.Integer, unique=False, nullable=True)
+    main_image =  db.Column(db.String(500), unique=False, nullable=False)
+    color = db.Column(db.String(500), unique=False, nullable=True)
+    manufacturer = db.Column(db.String(120), unique=False, nullable=True)
+    dimensions = db.Column(db.String(120), unique=False, nullable=True)
+    carrito = db.relationship("Carrito", backref='producto')
+    favoritos = db.relationship("Favoritos", backref='producto')
 
-        
 
+    def __repr__(self):
+        return '<Producto %r' % self.sku
+
+    def serialize(self):
+        return {
+            "sku": self.sku,
+            "name": self.name,
+            "productype": self.productype,
+            "product_url": self. product_url,
+            "keywords": self. keywords,
+            "brand": self. brand,
+            "sell_on_amazon": self.sell_on_amazon,
+            "category": self.category,
+            "price": self.price,
+            "currency": self.price,
+            "description" : self.description,
+            "rating": self.rating,
+            "main_image": self.main_image,
+            "color": self.color,
+            "manufacturer": self.manufacturer,
+            "dimensions": self.dimensions           
+        }
