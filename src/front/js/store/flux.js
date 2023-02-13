@@ -166,7 +166,7 @@ const getState = ({ getStore, getActions, setStore }) => {
       inicioLogin: (userEmail, userPassword) => {
         console.log("funciona");
         fetch(
-          "https://3001-gabroma-proyectofinal-bn43db73nby.ws-us86.gitpod.io/api/login",
+          "https://3001-gabroma-proyectofinal-6d5mjkhivwg.ws-us86.gitpod.io/api/login",
           {
             method: "POST",
             headers: {
@@ -209,7 +209,7 @@ const getState = ({ getStore, getActions, setStore }) => {
         userEmail
       ) => {
         fetch(
-          "https://3001-gabroma-proyectofinal-bn43db73nby.ws-us86.gitpod.io/api/signup",
+          "https://3001-gabroma-proyectofinal-6d5mjkhivwg.ws-us86.gitpod.io/api/signup",
           {
             method: "POST",
             headers: {

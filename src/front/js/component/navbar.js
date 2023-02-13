@@ -20,21 +20,25 @@ export const Navbar = () => {
       </div>
       <div
         className="container-fluid pt-2 pb-2 d-flex justify-content-center"
-        style={{ backgroundColor: "rgb(243,244,245)" }}
+        // style={{ backgroundColor: "rgb(243, 245, 244)" }}
       >
-        <Link to="/" className="d-flex align-items-center me-4">
+        <Link
+          to="/"
+          className="d-flex align-items-center me-4 text-decoration-none"
+        >
           <img src={logo} height="70" />
-          <img className="ps-3" src={logo2} height="40" />
+          <h1 className="tituloprincipal ps-3">TiendaNuestra</h1>
+          {/* <img className="ps-3" src={logo2} height="40" /> */}
         </Link>
-        <form className="form-inline d-flex justify-content-center me-4">
+        <form className="search form-inline d-flex justify-content-center me-4">
           <button
-            className="btn bg-white rounded-start rounded-0 border-end-0 border border-dark pe-1"
+            className="searchbtn btn rounded-start rounded-0 border-end-0 border pe-1"
             type="submit"
           >
             <i className="fas fa-search"></i>
           </button>
           <input
-            className="form-control rounded-end rounded-0 border border-start-0 border-dark ps-1"
+            className="searchbar form-control rounded-end rounded-0 border border-start-0 ps-1"
             style={{ width: "600px" }}
             type="search"
             placeholder="Buscar un producto"
@@ -78,7 +82,7 @@ export const Navbar = () => {
             </ul>
             <AuthComponent />
             <button
-              className="btn p-0 dropdown-toggle ms-3"
+              className="cartbtn btn p-0 dropdown-toggle ms-3"
               type="button"
               data-bs-toggle="dropdown"
               aria-expanded="false"
@@ -88,7 +92,7 @@ export const Navbar = () => {
                 {store.carrito.length}
               </span>
             </button>
-            <ul className="dropdown-menu">
+            <ul className="listaCarrito dropdown-menu">
               {store.carrito.map((item, index) => {
                 return (
                   <li key={item.id} {...item}>
