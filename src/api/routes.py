@@ -118,6 +118,22 @@ def del_favorito(user_id):
     db.session.commit()
     return jsonify("El producto ha sido eliminado de tu lista de favoritos"), 200
 
+#Traer Todos los Favoritos
+@api.route('/user/<int:user_id>/favoritos', methods=['GET'])
+def handle_favoritos(user_id):
+    allFav = Favoritos.query.filter_by(user_id=user_id).all()
+    listaFav = list(map(lambda fav: fav.serialize(),allFav))
+
+    return jsonify(listaFav), 200
+
+#Traer un Favorito
+@api.route('/user/<int:user_id>/favoritos/<int:favoritos_id>', methods=['GET'])
+def single_fav(user_id, favoritos_id):
+    singleFav = Favoritos.query.filter_by(user_id=user_id, id=favoritos_id).first()
+    if singleFav is None:
+        raise APIException('No hemos podido encontrar este producto en tu lista de favoritos', status_code=404)
+    return jsonify(singleFav.serialize()), 200
+
 #Carrito
 
 #Agregar a Carrito
@@ -144,3 +160,19 @@ def del_carrito(user_id):
     db.session.delete(unProd)
     db.session.commit()
     return jsonify("El producto ha sido eliminado de tu carrito"), 200
+
+#Traer Todos los Productos del Carrito
+@api.route('/user/<int:user_id>/carrito', methods=['GET'])
+def handle_carrito(user_id):
+    allProd = Carrito.query.filter_by(user_id=user_id).all()
+    listaProd = list(map(lambda prod: prod.serialize(),allFav))
+
+    return jsonify(listaProd), 200
+
+#Traer un Producto del Carrito
+@api.route('/user/<int:user_id>/carrito/<int:carrito_id>', methods=['GET'])
+def single_prod(user_id, carrito_id):
+    singleProd = Carrito.query.filter_by(user_id=user_id, id=carrito_id).first()
+    if singleProd is None:
+        raise APIException('Este producto no se encuentra en tu carrito', status_code=404)
+    return jsonify(singleProd.serialize()), 200
