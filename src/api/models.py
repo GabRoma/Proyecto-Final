@@ -17,7 +17,7 @@ class User(db.Model):
     carrito = db.relationship("Carrito", backref='user')
 
     def __repr__(self):
-        return '<User %r' % self.id
+        return '<User %r>' % self.id
 
     def serialize(self):
         return {
@@ -43,7 +43,7 @@ class Favoritos (db.Model):
 
 
     def __repr__(self):
-        return '<Favoritos %r' % self.id
+        return '<Favoritos %r>' % self.id
 
     def serialize(self):
         return {
@@ -60,7 +60,7 @@ class MetodosDePagos (db.Model):
     
 
     def __repr__(self):
-        return '<MetodosDePagos %r' % self.id
+        return '<MetodosDePagos %r>' % self.id
 
     def serialize(self):
         return {
@@ -76,7 +76,7 @@ class Carrito(db.Model):
     producto_sku = db.Column(db.String(120), db.ForeignKey('producto.sku'),nullable=False )
 
     def __repr__(self):
-        return '<Carrito %r' % self.id
+        return '<Carrito %r>' % self.id
 
     def serialize(self):
         return {
@@ -88,7 +88,8 @@ class Carrito(db.Model):
 
 #Tabla de Producto
 class Producto(db.Model):
-    sku = db.Column(db.String(120), primary_key=True)
+    id = db.Column(db.Integer, primary_key=True)
+    sku = db.Column(db.String(120), unique=True, nullable=False)
     name = db.Column(db.String(120), unique=False, nullable=False)
     productype = db.Column(db.String(120), unique=False, nullable=False)
     product_url = db.Column(db.String(240), unique=True, nullable=False)
@@ -109,10 +110,11 @@ class Producto(db.Model):
 
 
     def __repr__(self):
-        return '<Producto %r' % self.sku
+        return '<Producto %r>' % self.id
 
     def serialize(self):
         return {
+            "id": self.id,
             "sku": self.sku,
             "name": self.name,
             "productype": self.productype,
