@@ -1,13 +1,29 @@
 //Botón para cambiar de tema claro a tema oscuro
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Navbar } from "./navbar";
 
 export const DarkModeToggle = () => {
   const [isDarkMode, setDarkMode] = useState(false);
 
+  useEffect(() => {
+    const darkMode = localStorage.getItem("darkMode") === "true";
+    setDarkMode(darkMode);
+  }, []);
+
   const toggleDarkMode = () => {
     setDarkMode(!isDarkMode);
+    localStorage.setItem("darkMode", !isDarkMode);
+    toDarkMode();
+  };
+
+  useEffect(() => {
+    if (!isDarkMode) {
+      toDarkMode();
+    }
+  }, []);
+
+  const toDarkMode = () => {
     document.body.style.backgroundColor = isDarkMode ? "white" : "#292929";
     document.body.style.color = isDarkMode ? "#212529" : "#babec2";
     document.querySelector(".navbar").style.backgroundColor = isDarkMode
@@ -64,19 +80,23 @@ export const DarkModeToggle = () => {
       : "white";
     document.querySelector(".dropdown-menu").style.backgroundColor = isDarkMode
       ? "white"
-      : "black";
+      : "#555555";
     document.querySelector(".listaCarrito").style.backgroundColor = isDarkMode
+      ? "white"
+      : "#555555";
+    document.querySelector(".modal").style.color = isDarkMode
       ? "white"
       : "black";
   };
 
   return (
     <button className={`toggle-button`} onClick={toggleDarkMode}>
+      {" "}
       {isDarkMode ? (
         <i className="fas fa-sun" />
       ) : (
         <i className="fas fa-moon" />
-      )}
+      )}{" "}
     </button>
   );
 };
