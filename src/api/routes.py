@@ -178,25 +178,37 @@ def single_prod(user_id, carrito_id):
         raise APIException('Este producto no se encuentra en tu carrito', status_code=404)
     return jsonify(singleProd.serialize()), 200
 
-# @api.route('/producto/<string:asin>', methods=['GET'])
-# def handle_one_producto(asin):
-#         one_producto = Producto.query.filter_by(sku=asin).first()
-#         if one_producto is None:
-#             return jsonify({"msg":"producto no existente"}), 404
-#         else:
-#             return jsonify(one_producto.serialize()), 200   
-
-# #category en api
-# @api.route('/productos/api', methods=['GET'])
-# def handle_productos():
-#         api_key = "699D0A7132274B978BBF1E9E6DD054D4"
-#         api_url = f"https://api.rainforestapi.com/request?api_key=F594A7BAFF9A449B9C3B0F1413DB031A&type=category&url=https%3A%2F%2Fwww.amazon.com%2Fs%3Fbbn%3D16225009011%26rh%3Dn%253A%252116225009011%252Cn%253A502394%252Cn%253A281052"
-#         response = requests.get(api_url).json()
-#         print(response["category_results"])
-#         # for item in response["category_results"]:
-#         #     newProd = Producto(sku=item.asin, name=item.title, productype=item. )
-#         #     db.session.add(newProd)
-#         #     db.session.commit()
-#         return jsonify("ok"), 200
+@api.route('/productos/api', methods=['GET'])
+def handle_productos():
+        api_key = "6EC7B3E59F5C4E2580F92F6C0B8F788D"
+        category_id = "16225009011"
+        api_url_category = f"https://api.rainforestapi.com/request?api_key={api_key}&type=category&amazon_domain=amazon.com&category_id={category_id}"
+        response_category = requests.get(api_url_category).json()
+        for item in response_category["category_results"]:
+            asin = item.get("asin")
+            api_url_id = f"https://api.rainforestapi.com/request?api_key={api_key}&type=product&amazon_domain=amazon.com&asin={asin}"
+            response_id = requests.get(api_url_id).json()
+            if "product" in response_id:
+                product = response_id["product"]
+                newProd = Producto(
+                    sku=product["asin"],
+                    name=product["title"],
+                    product_url=product["link"],
+                    keywords=product["keywords"],
+                    brand=product["brand"],
+                    sell_on_amazon=True,
+                    category=product["categories"][0]["name"],
+                    price=item["price"]["value"],
+                    currency=item["price"]["currency"],
+                    description = product["feature_bullets_flat"],
+                    rating=product["rating"],
+                    imagenes=product["images_flat"],
+                    peso=product["weight"] if "weight" in product else "59"
+                    # manufacturer=product["manufacturer"],
+                    # dimensions=product["dimensions"]
+                )
+                db.session.add(newProd)
+                db.session.commit()
+        return jsonify("ok"), 200
 
 
