@@ -19,20 +19,22 @@ export const Single = (item) => {
 
   return (
     <>
-      <div class="card  mx-auto" style={{ height: 600 }}>
-        <div class="row g-0 mx-auto">
-          <div class="col-md-4 mx-auto my-4">
-            <img
-              src="https://th.bing.com/th/id/R.19b8a5afcb2dcfde3fa4416ac9dac690?rik=WHZDE7e7q5nTQA&riu=http%3a%2f%2ffactorydirectcraft.com%2fimages%2fdimg.png&ehk=OZAn9gvkv%2bQFDnAtm7ApCzdKMY%2fXIfMbmHraB5s8i%2fI%3d&risl=&pid=ImgRaw&r=0"
-              class="img-fluid p-2 mx-1"
-              width="900"
-              height="1000"
-              alt="..."
-            />
+      <div class=" mb-3 mx-auto" style={{ width: 800, height: 500 }}>
+        <div class="row g-0">
+          <div class="col-md-6 mx-auto w-50">
+            <div class="text-center">
+              <img
+                src="https://th.bing.com/th/id/R.19b8a5afcb2dcfde3fa4416ac9dac690?rik=WHZDE7e7q5nTQA&riu=http%3a%2f%2ffactorydirectcraft.com%2fimages%2fdimg.png&ehk=OZAn9gvkv%2bQFDnAtm7ApCzdKMY%2fXIfMbmHraB5s8i%2fI%3d&risl=&pid=ImgRaw&r=0"
+                class="my-5 mx-3 float-center rounded"
+                alt="..."
+                width="350"
+                height="350"
+              />
+            </div>
           </div>
-          <div class="col-md-8">
-            <div class="card-body row d-block  ">
-              <h4 class="card-title fw-bold fs-3 text-start mx-5">
+          <div class="col-md-6">
+            <div class="card-body my-4">
+              <h5 class="card-title card-title fw-bold fs-4 text-start mx-1">
                 Nombre de producto{" "}
                 <button
                   onClick={() => actions.addFavorito(item)}
@@ -41,15 +43,13 @@ export const Single = (item) => {
                 >
                   <i class="fa fa-heart h-100 w-100"></i>
                 </button>
-              </h4>
-
-              <p class="card-text mx-5 text-secondary">Descripción mínima</p>
-
-              <h5 class="card-text mx-5 text-dark fw-bolder fs-2">
+              </h5>
+              <p class="card-text fw-light fs-5 text-start mx-1">Categoría</p>
+              <h5 class="card-text mx-1 text-dark fw-bolder fs-2">
                 $95 $119 -20%
               </h5>
 
-              <p class="card-text mx-5">
+              <p class="card-text mx-1">
                 <small class="text-muted">
                   <i class="fa fa-star mx-1"></i>
                   <i class="fa fa-star mx-1"></i>
@@ -59,72 +59,20 @@ export const Single = (item) => {
                 </small>
               </p>
 
-              <div className="card  mx-5" style={{ height: 80, width: 300 }}>
-                <div className="card-body">
-                  <small className=" text-dark">Color</small>
-
-                  <a
-                    class="text-dark float-end my-2 text-decoration-underline fw-bold"
-                    data-bs-toggle="collapse"
-                    href="#multiCollapseExample1"
-                    role="button"
-                    aria-expanded="false"
-                    aria-controls="multiCollapseExample1"
-                  >
-                    Cambiar
-                  </a>
-
-                  <small className="text-secondary fw-bold d-block fs-6">
-                    Negro
-                  </small>
-
-                  <div class="col">
-                    <div
-                      class="collapse multi-collapse "
-                      id="multiCollapseExample1"
-                      style={{ height: 90, width: 200 }}
-                    >
-                      <div class=" card-body mx-5 ">
-                        <div class="form-check">
-                          <input
-                            class="form-check-input position-absolute top-100 start-0 translate-middle mx-3 my-3"
-                            type="radio"
-                            name="flexRadioDefault"
-                            id="flexRadioDefault1"
-                          />
-                          <label
-                            class="form-check-label position-absolute top-100 start-0 translate-middle mx-5 my-3 "
-                            for="flexRadioDefault1"
-                          >
-                            Negro
-                          </label>
-                        </div>
-
-                        <div class="form-check">
-                          <input
-                            class="form-check-input position-absolute top-100 start-0 translate-middle mx-3 my-5"
-                            type="radio"
-                            name="flexRadioDefault"
-                            id="flexRadioDefault1"
-                          />
-                          <label
-                            class="form-check-label position-absolute top-100 start-0 translate-middle mx-5 my-5 "
-                            for="flexRadioDefault1"
-                          >
-                            Negro
-                          </label>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
+              <div
+                className="card rounded fs-6 fw-bold"
+                style={{ height: 80, width: 300 }}
+              >
+                <small className=" text-secondary mx-2 my-2 ">
+                  Descripción:{" "}
+                </small>
 
                 <button
                   onClick={() => {
                     toggleClick();
                   }}
-                  class="btn btn-dark my-3 fw-bold float-start"
-                  style={{ height: 100, width: 290 }}
+                  class="btn btn-dark my-5 fw-bold float-start"
+                  style={{ height: 90, width: 290 }}
                   type="button"
                 >
                   {" "}
@@ -137,7 +85,7 @@ export const Single = (item) => {
 
                 <small className="text-secondary">
                   {" "}
-                  <i class="fa fa-circle mx-1"></i>Disponible
+                  <i class="fa fa-circle mx-1 my-0"></i>Disponible
                 </small>
 
                 <small className="text-secondary ">
@@ -145,7 +93,7 @@ export const Single = (item) => {
                   Tiempo de envío estimado: 2-3 semanas
                 </small>
 
-                <small className="my-2">
+                <small className="my-0">
                   Lorem ipsum dolor sit amet consectetur adipisicing elit.
                 </small>
                 <small>
