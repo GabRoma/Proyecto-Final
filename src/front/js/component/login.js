@@ -127,6 +127,7 @@ export const Login = () => {
                       className="btn btn-dark text-center my-2"
                       style={{ width: 350 }}
                       type="submit"
+                      data-bs-dismiss="modal"
                     >
                       Inicio de Sesión
                     </button>
