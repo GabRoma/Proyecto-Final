@@ -193,7 +193,7 @@ export const Registro = () => {
                       className={
                         "form-control my-3  rounded-5 " +
                         (errors.inputConfirmcontrasena &&
-                          touched.inputConfirmcontrasena
+                        touched.inputConfirmcontrasena
                           ? "border border-danger border-2 "
                           : "border-secondary border-2")
                       }
@@ -210,6 +210,7 @@ export const Registro = () => {
                     <button
                       type="submit"
                       id="botoncrearcuenta"
+                      data-bs-dismiss="modal"
                       className="btn btn-dark btn-lg fw-bold mx-5 my-1"
                       style={{ height: 50, width: 200 }}
                     >
@@ -219,7 +220,8 @@ export const Registro = () => {
                       Al hacer click en "Crear cuenta" el usuario acepta los
                       <Link to="/tos">
                         <p className="ps-1 pe-1"> términos y condiciones </p>
-                      </Link> de uso
+                      </Link>{" "}
+                      de uso
                     </div>
                   </div>
                 </Form>

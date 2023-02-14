@@ -3,6 +3,7 @@ import { Context } from "../store/appContext";
 import rigoImageUrl from "../../img/rigo-baby.jpg";
 import "../../styles/home.css";
 import { Link } from "react-router-dom";
+import { Productos } from "../component/producto.js";
 
 // function getList() {
 //     try {
@@ -106,6 +107,7 @@ const Carousel = () => {
 };
 export const Home = () => {
   const { store, actions } = useContext(Context);
+  console.log(store.favoritos);
   return (
     <div>
       <nav className="navbar navbar-light pt-0 border-bottom">
@@ -203,6 +205,8 @@ export const Home = () => {
           </button>{" "}
         </div>{" "}
       </div>{" "}
+      <div className="d-flex justify content center mx-5 my-2 overflow-auto"></div>
+      <Productos />
     </div>
   );
 };
