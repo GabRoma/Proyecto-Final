@@ -23,11 +23,7 @@ export const Favoritos = (props) => {
                 <div className="card w-50 m-auto" key={item.sku}>
                   <div className="row g-0">
                     <div className="col-md-4">
-                      <img
-                        src={item.url}
-                        className="img-fluid rounded-start"
-                        alt=""
-                      />
+                      <img src={item.url} className="img-fluid" alt="" />
                     </div>{" "}
                     <div className="col-md-8">
                       <div className="card-body">

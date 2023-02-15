@@ -31,7 +31,7 @@ export const AuthComponent = () => {
                 className="btn-close m-3 d-flex ms-auto"
                 data-bs-dismiss="modal"
                 aria-label="Close"
-                style={{ width: '3.5px', height: '3.5px' }}
+                style={{ width: "3.5px", height: "3.5px" }}
               ></button>
             </div>
             <div>
@@ -41,13 +41,11 @@ export const AuthComponent = () => {
           </div>
         </div>
       </div>
-      <a
-        className="btn"
-        data-bs-toggle="modal"
-        href="#divpadre"
-        role="button"
-      >
-        <button className="btn p-0"><i className="far fa-user"></i>Ingresar</button>      </a>
+      <a className="btn" data-bs-toggle="modal" href="#divpadre" role="button">
+        <button className="log btn p-0">
+          <i className="far fa-user"></i>Ingresar
+        </button>{" "}
+      </a>
 
       <div
         className="modal fade"
@@ -63,7 +61,7 @@ export const AuthComponent = () => {
               className="btn-close m-3 me-4 d-flex ms-auto"
               data-bs-dismiss="modal"
               aria-label="Close"
-              style={{ width: '3.5px', height: '3.5px' }}
+              style={{ width: "3.5px", height: "3.5px" }}
             ></button>
             <div className="mx-auto">
               <Registro />

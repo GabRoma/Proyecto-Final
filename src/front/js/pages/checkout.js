@@ -73,7 +73,7 @@ export const Checkout = (props) => {
               </a>
             </div>{" "}
             <div className="card-body">
-              <table class="table">
+              <table class="table text-secondary">
                 <thead>
                   <tr>
                     <th scope="col"></th>
@@ -145,9 +145,10 @@ export const Checkout = (props) => {
                 <div className="d-flex">
                   <input
                     type="text"
-                    class="form-control"
+                    className="form-control"
                     id="inputDiscount"
                     placeholder="TUCÓDIGO"
+                    style={{ backgroundColor: "#14141414", color: "gray" }}
                   />
                   <button type="submit" class="btn btn-outline-danger">
                     OK
