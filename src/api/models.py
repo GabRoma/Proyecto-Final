@@ -17,7 +17,7 @@ class User(db.Model):
     carrito = db.relationship("Carrito", backref='user')
 
     def __repr__(self):
-        return '<User %r' % self.id
+        return '<User %r>' % self.id
 
     def serialize(self):
         return {
@@ -43,7 +43,7 @@ class Favoritos (db.Model):
 
 
     def __repr__(self):
-        return '<Favoritos %r' % self.id
+        return '<Favoritos %r>' % self.id
 
     def serialize(self):
         return {
@@ -60,7 +60,7 @@ class MetodosDePagos (db.Model):
     
 
     def __repr__(self):
-        return '<MetodosDePagos %r' % self.id
+        return '<MetodosDePagos %r>' % self.id
 
     def serialize(self):
         return {
@@ -76,7 +76,7 @@ class Carrito(db.Model):
     producto_sku = db.Column(db.String(120), db.ForeignKey('producto.sku'),nullable=False )
 
     def __repr__(self):
-        return '<Carrito %r' % self.id
+        return '<Carrito %r>' % self.id
 
     def serialize(self):
         return {
@@ -86,47 +86,46 @@ class Carrito(db.Model):
         }
 
 
-#Tabla de Producto
 class Producto(db.Model):
-    sku = db.Column(db.String(120), primary_key=True)
-    name = db.Column(db.String(120), unique=False, nullable=False)
-    productype = db.Column(db.String(120), unique=False, nullable=False)
-    product_url = db.Column(db.String(240), unique=True, nullable=False)
-    keywords = db.Column(db.String(240), unique=False, nullable=False)
-    brand = db.Column(db.String(120), unique=False, nullable=False)
+    id = db.Column(db.Integer, primary_key=True)
+    sku = db.Column(db.String(1200), unique=True, nullable=False)
+    name = db.Column(db.String(1200), unique=False, nullable=False)
+    product_url = db.Column(db.String(1200), unique=True, nullable=False)
+    keywords = db.Column(db.String(2400), unique=False, nullable=False)
+    brand = db.Column(db.String(1200), unique=False, nullable=False)
     sell_on_amazon = db.Column(db.Boolean(), unique=False, nullable=False)
-    category = db.Column(db.String(120), unique=False, nullable=False)
-    price = db.Column(db.Integer, unique=False, nullable=False)
-    currency = db.Column(db.String(120), unique=False, nullable=False)
-    description = db.Column(db.String(500), unique=False, nullable=True)
-    rating = db.Column(db.Integer, unique=False, nullable=True)
-    main_image =  db.Column(db.String(500), unique=False, nullable=False)
-    color = db.Column(db.String(500), unique=False, nullable=True)
-    manufacturer = db.Column(db.String(120), unique=False, nullable=True)
-    dimensions = db.Column(db.String(120), unique=False, nullable=True)
+    category = db.Column(db.String(1200), unique=False, nullable=False)
+    price = db.Column(db.String(1200), unique=False, nullable=False)
+    currency = db.Column(db.String(1200), unique=False, nullable=False)
+    description = db.Column(db.String(20000), unique=False, nullable=True)
+    rating = db.Column(db.String(2400), unique=False, nullable=True)
+    imagenes =  db.Column(db.String(1000), unique=False, nullable=True)
+    peso = db.Column(db.String(2400), unique=False, nullable=True)
+    manufacturer = db.Column(db.String(1200), unique=False, nullable=True)
+    dimensions = db.Column(db.String(1200), unique=False, nullable=True)
     carrito = db.relationship("Carrito", backref='producto')
     favoritos = db.relationship("Favoritos", backref='producto')
 
 
     def __repr__(self):
-        return '<Producto %r' % self.sku
+        return '<Producto %r>' % self.id
 
     def serialize(self):
         return {
+            "id": self.id,
             "sku": self.sku,
             "name": self.name,
-            "productype": self.productype,
             "product_url": self. product_url,
             "keywords": self. keywords,
             "brand": self. brand,
             "sell_on_amazon": self.sell_on_amazon,
             "category": self.category,
             "price": self.price,
-            "currency": self.price,
+            "currency": self.currency,
             "description" : self.description,
             "rating": self.rating,
-            "main_image": self.main_image,
-            "color": self.color,
+            "imagenes": self.imagenes,
+            "peso": self.peso,
             "manufacturer": self.manufacturer,
             "dimensions": self.dimensions           
         }

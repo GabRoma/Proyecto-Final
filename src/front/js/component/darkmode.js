@@ -18,10 +18,8 @@ export const DarkModeToggle = () => {
   };
 
   useEffect(() => {
-    if (!isDarkMode) {
-      toDarkMode();
-    }
-  }, []);
+    toDarkMode();
+  }, [isDarkMode]);
 
   const toDarkMode = () => {
     document.body.style.backgroundColor = isDarkMode ? "white" : "#292929";
@@ -93,9 +91,9 @@ export const DarkModeToggle = () => {
     <button className={`toggle-button`} onClick={toggleDarkMode}>
       {" "}
       {isDarkMode ? (
-        <i className="fas fa-sun" />
-      ) : (
         <i className="fas fa-moon" />
+      ) : (
+        <i className="fas fa-sun" />
       )}{" "}
     </button>
   );

@@ -9,6 +9,7 @@ from flask_jwt_extended import get_jwt_identity
 from flask_jwt_extended import jwt_required
 from flask_jwt_extended import JWTManager
 import json
+import requests 
 
 api = Blueprint('api', __name__)
 
@@ -118,6 +119,22 @@ def del_favorito(user_id):
     db.session.commit()
     return jsonify("El producto ha sido eliminado de tu lista de favoritos"), 200
 
+#Traer Todos los Favoritos
+@api.route('/user/<int:user_id>/favoritos', methods=['GET'])
+def handle_favoritos(user_id):
+    allFav = Favoritos.query.filter_by(user_id=user_id).all()
+    listaFav = list(map(lambda fav: fav.serialize(),allFav))
+
+    return jsonify(listaFav), 200
+
+#Traer un Favorito
+@api.route('/user/<int:user_id>/favoritos/<int:favoritos_id>', methods=['GET'])
+def single_fav(user_id, favoritos_id):
+    singleFav = Favoritos.query.filter_by(user_id=user_id, id=favoritos_id).first()
+    if singleFav is None:
+        raise APIException('No hemos podido encontrar este producto en tu lista de favoritos', status_code=404)
+    return jsonify(singleFav.serialize()), 200
+
 #Carrito
 
 #Agregar a Carrito
@@ -144,3 +161,54 @@ def del_carrito(user_id):
     db.session.delete(unProd)
     db.session.commit()
     return jsonify("El producto ha sido eliminado de tu carrito"), 200
+
+#Traer Todos los Productos del Carrito
+@api.route('/user/<int:user_id>/carrito', methods=['GET'])
+def handle_carrito(user_id):
+    allProd = Carrito.query.filter_by(user_id=user_id).all()
+    listaProd = list(map(lambda prod: prod.serialize(),allFav))
+
+    return jsonify(listaProd), 200
+
+#Traer un Producto del Carrito
+@api.route('/user/<int:user_id>/carrito/<int:carrito_id>', methods=['GET'])
+def single_prod(user_id, carrito_id):
+    singleProd = Carrito.query.filter_by(user_id=user_id, id=carrito_id).first()
+    if singleProd is None:
+        raise APIException('Este producto no se encuentra en tu carrito', status_code=404)
+    return jsonify(singleProd.serialize()), 200
+
+@api.route('/productos/api', methods=['GET'])
+def handle_productos():
+        api_key = "6EC7B3E59F5C4E2580F92F6C0B8F788D"
+        category_id = "16225009011"
+        api_url_category = f"https://api.rainforestapi.com/request?api_key={api_key}&type=category&amazon_domain=amazon.com&category_id={category_id}"
+        response_category = requests.get(api_url_category).json()
+        for item in response_category["category_results"]:
+            asin = item.get("asin")
+            api_url_id = f"https://api.rainforestapi.com/request?api_key={api_key}&type=product&amazon_domain=amazon.com&asin={asin}"
+            response_id = requests.get(api_url_id).json()
+            if "product" in response_id:
+                product = response_id["product"]
+                newProd = Producto(
+                    sku=product["asin"],
+                    name=product["title"],
+                    product_url=product["link"],
+                    keywords=product["keywords"],
+                    brand=product["brand"],
+                    sell_on_amazon=True,
+                    category=product["categories"][0]["name"],
+                    price=item["price"]["value"],
+                    currency=item["price"]["currency"],
+                    description = product["feature_bullets_flat"],
+                    rating=product["rating"],
+                    imagenes=product["images_flat"],
+                    peso=product["weight"] if "weight" in product else "59"
+                    # manufacturer=product["manufacturer"],
+                    # dimensions=product["dimensions"]
+                )
+                db.session.add(newProd)
+                db.session.commit()
+        return jsonify("ok"), 200
+
+
