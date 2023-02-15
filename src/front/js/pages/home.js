@@ -72,7 +72,7 @@ const Carousel = () => {
           </button>{" "}
         </div>{" "}
         <div className="carousel d-flex justify-content-center container mb-4">
-          <button className="border-0 bg-light me-3">
+          <button className="wrapRed border-0 me-3">
             <img src={images[currentIndex]} className="redondo" alt="ERROR" />
             <h4
               className="centered text-light"
@@ -84,7 +84,7 @@ const Carousel = () => {
               {images[currentIndex + 1]}{" "}
             </h4>{" "}
           </button>{" "}
-          <button className="border-0 bg-light">
+          <button className="wrapRed border-0">
             <img
               src={images[currentIndex + 2]}
               className="redondo"
@@ -199,7 +199,7 @@ export const Home = () => {
           </Link>{" "}
         </div>{" "}
         <div className="carousel d-flex justify-content-center container mb-4">
-          <button className="border-0 bg-light me-3">
+          <button className="border-0 me-3">
             {" "}
             {/* <img src= className="redondo" alt="ERROR" /> */}{" "}
           </button>{" "}

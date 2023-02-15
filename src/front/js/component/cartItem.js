@@ -19,7 +19,11 @@ export const CartItem = (item) => {
     let priceAux = item.price * amountAux;
     amount > 1 ? setAmount(amount - 1) : setAmount(1);
     setPrice(priceAux);
-    actions.actualizarCarrito({ amountAux, priceAux, id: item.sku });
+    actions.actualizarCarrito({
+      amountAux,
+      priceAux,
+      id: item.sku,
+    });
   };
 
   const setIncrease = () => {
@@ -27,14 +31,18 @@ export const CartItem = (item) => {
     let priceAux = item.price * amountAux;
     amount < stock ? setAmount(amount + 1) : setAmount(stock);
     setPrice(priceAux);
-    actions.actualizarCarrito({ amountAux, priceAux, id: item.sku });
+    actions.actualizarCarrito({
+      amountAux,
+      priceAux,
+      id: item.sku,
+    });
   };
 
   return (
-    <div className="card" key={item.sku}>
+    <div className="card border border-light" key={item.sku}>
       <div className="row g-0">
         <div className="col-md-4">
-          <img src={item.url} className="img-fluid rounded-start" alt="" />
+          <img src={item.url} className="img-fluid" alt="" />
         </div>{" "}
         <div className="col-md-8">
           <div className="card-body">

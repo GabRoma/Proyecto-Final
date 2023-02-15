@@ -22,9 +22,27 @@ export const Productos = () => {
 
             <div className="card-body">
               <h5 className="card-title">Nombre de producto</h5>
-              <p className="card-text">Descripcion</p>
-              <p className="card-text">$95 $119 -20%</p>
+              <p className="card-text">Descripción</p>
               {/* <Link to={"/single/"} className="btn btn-primary mx-5 " style={{ width: 80 }} > Learn </Link> */}
+            </div>
+            <div className="card-footer d-flex justify-content-between">
+              <div className="pricetag d-flex">
+                <strong>
+                  <p>$95</p>
+                </strong>
+                &nbsp;
+                <s>
+                  <p>$119</p>
+                </s>
+                &nbsp;
+                <p className="text-muted">-20%</p>
+              </div>
+              <div>
+                <i
+                  className="fas fa-shopping-cart mx-1"
+                  // onClick={() => actions.addCarrito(item)}
+                />
+              </div>
             </div>
           </div>
         </div>
