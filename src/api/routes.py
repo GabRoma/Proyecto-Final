@@ -211,4 +211,21 @@ def handle_productos():
                 db.session.commit()
         return jsonify("ok"), 200
 
+#aca traemos la informacion de un solo producto    
+@api.route('/products/<sku>', methods=['GET'])
+def handle_one_product(sku):
+    one_product = Producto.query.filter_by(sku=sku).first()
+    if one_product is None:
+        return jsonify({"msg":"producto no existente"}), 404
+    else:
+        return jsonify(one_product.serialize()), 200
 
+
+#aca traemos a todos los productos
+@api.route('/products', methods=['GET'])
+def handle_products():
+    all_products = Producto.query.all()
+    results = list(map(lambda item: item.serialize(),all_products))
+    return jsonify(results), 200    
+
+    
