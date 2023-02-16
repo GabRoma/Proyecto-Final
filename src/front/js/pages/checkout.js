@@ -4,6 +4,8 @@ import React, { useState, useEffect, useContext } from "react";
 import PropTypes, { number } from "prop-types";
 import { Link, useParams, NavLink } from "react-router-dom";
 import { Context } from "../store/appContext";
+import GooglePayButton from "@google-pay/button-react";
+import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
 
 export const Checkout = (props) => {
   const { store, actions } = useContext(Context);
@@ -158,33 +160,81 @@ export const Checkout = (props) => {
             </form>
           </div>
           <div className="card">
-            <div className="card-body">
+            <div className="card-header">
               <p>Seleccione un método de pago</p>
-              <div className="form-check">
-                <input
-                  className="form-check-input"
-                  type="radio"
-                  name="tipoPago"
-                  id="tipoPago1"
-                />
-                <label className="form-check-label" for="tipoPago1">
-                  <i className="fab fa-cc-paypal">PayPal</i>
-                </label>
-              </div>
-              <div className="form-check">
-                <input
-                  className="form-check-input"
-                  type="radio"
-                  name="tipoPago"
-                  id="tipoPago2"
-                />
-                <label className="form-check-label" for="tipoPago2">
-                  <i className="fas fa-handshake">MercadoPago</i>
-                </label>
-              </div>
             </div>
-            <div className="card-footer">
-              <button className="btn btn-dark w-100">Completar compra</button>
+            <div className="card-body text-center">
+              <div className="gp mb-3">
+                <GooglePayButton
+                  environment="TEST"
+                  buttonSizeMode="fill"
+                  paymentRequest={{
+                    apiVersion: 2,
+                    apiVersionMinor: 0,
+                    allowedPaymentMethods: [
+                      {
+                        type: "CARD",
+                        parameters: {
+                          allowedCardNetworks: ["VISA", "MASTERCARD"],
+                          allowedAuthMethods: ["PAN_ONLY", "CRYPTOGRAM_3DS"],
+                        },
+                        tokenizationSpecification: {
+                          type: "PAYMENT_GATEWAY",
+                          parameters: {
+                            gateway: "example",
+                            gatewayMerchantId: "exampleGatewayMerchantId",
+                          },
+                        },
+                      },
+                    ],
+                    merchantInfo: {
+                      merchantId: "12345",
+                      merchantName: "TiendaNuestra",
+                    },
+                    transactionInfo: {
+                      totalPriceStatus: "FINAL",
+                      totalPriceLabel: "Total",
+                      totalPrice: "100",
+                      currencyCode: "USD",
+                      countryCode: "US",
+                    },
+                  }}
+                  onLoadPaymentData={(paymentData) => {
+                    console.log(
+                      "TODO: send order to server",
+                      paymentData.paymentMethodData
+                    );
+                    history.push("/confirm");
+                  }}
+                />
+              </div>
+              <div className="pp">
+                <PayPalScriptProvider
+                  options={{
+                    "client-id":
+                      "AWPAObhvjPw_04n3sa25OckhtwDPdpB0LZBmVTz5e7tFD6gNJVLcCPz-je-FXk7gqlMfJ3v6plevoM-T",
+                  }}
+                >
+                  <PayPalButtons
+                    createOrder={(data, actions) => {
+                      return actions.order.create({
+                        purchase_units: [
+                          {
+                            amount: {
+                              value: "10",
+                            },
+                          },
+                        ],
+                      });
+                    }}
+                    onApprove={async (data, actions) => {
+                      const details = await actions.order.capture();
+                      const name = details.payer.name.given_name;
+                      alert("Transaction completed by " + name);
+                    }}
+                  />
+                </PayPalScriptProvider>
+              </div>
             </div>
           </div>
         </div>{" "}
