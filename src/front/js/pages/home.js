@@ -193,10 +193,10 @@ export const Home = () => {
           <Productos
             key={index}
             id={index + 1}
-            nombre={item.title}
-            imagen={item.image}
-            moneda={item.price?.currency}
-            precio={item.price?.name}
+            nombre={item.name}
+            imagen={item.imagenes}
+            moneda={item.currency}
+            precio={item.peso}
 
             // moneda={item.currency}
             // descripcion={item.description}

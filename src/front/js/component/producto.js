@@ -4,8 +4,10 @@ import { Context } from "../store/appContext.js";
 
 export const Productos = (props, nombre, imagen, precio, moneda) => {
   const { store, actions } = useContext(Context);
-  console.log(props);
+  console.log(props.nombre);
   // console.log(precio);
+
+  // if (props.id < 2) {
   return (
     <>
       <div className="row row-cols-1 row-cols-md-3 g-4">
@@ -51,6 +53,9 @@ export const Productos = (props, nombre, imagen, precio, moneda) => {
       </div>
     </>
   );
+  // } else {
+  //   <div></div>;
+  // }
 };
 
 //btn btn-primary btn-sm ms-2

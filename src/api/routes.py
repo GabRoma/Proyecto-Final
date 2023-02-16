@@ -184,14 +184,16 @@ def single_prod(user_id, carrito_id):
 
 @api.route('/productos/api', methods=['GET'])
 def handle_productos():
-        api_key = "C2F2227A0E2A431EA566520B4BFB9939"
+        api_key = "781F1C39B65D4219AD90A854825F840A"
         category_id = "281052"
         api_url_category = f"https://api.rainforestapi.com/request?api_key={api_key}&type=category&amazon_domain=amazon.com&category_id={category_id}"
         response_category = requests.get(api_url_category).json()
         for item in response_category["category_results"]:
             asin = item.get("asin")
             api_url_id = f"https://api.rainforestapi.com/request?api_key={api_key}&type=product&amazon_domain=amazon.com&asin={asin}"
+
             response_id = requests.get(api_url_id).json()
+            print(response_id)
             if "product" in response_id:
                 product = response_id["product"]
                 newProd = Producto(
@@ -202,8 +204,18 @@ def handle_productos():
                     brand=product["brand"],
                     sell_on_amazon=True,
                     category=product["categories"][0]["name"],
-                    price=item["price"]["value"],
-                    currency=item["price"]["currency"],
+                    
+# price = (item["price"]["value"]
+#             if "price" in item
+#             else (product["more_buying_choices"][0]["price"]["value"]
+#                   if ("more_buying_choices" in product
+#                       and len(product["more_buying_choices"]) > 0
+#                       and "price" in product["more_buying_choices"][0])
+#                   else (product["buybox_winner"]["price"]["value"]
+#                         if "buybox_winner" in product and "price" in product["buybox_winner"]
+#                         else "USD"))),
+                    
+                    currency = "USD",
                     description = product["feature_bullets_flat"],
                     rating=product["rating"],
                     imagenes=product["images_flat"],
