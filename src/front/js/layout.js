@@ -8,6 +8,7 @@ import { Single } from "./pages/single";
 import { Carrito } from "./pages/carrito";
 import { Checkout } from "./pages/checkout";
 import { Favoritos } from "./pages/favoritos";
+import { Perfil } from "./pages/perfil";
 import injectContext from "./store/appContext";
 
 import { Navbar } from "./component/navbar";
@@ -40,6 +41,7 @@ const Layout = () => {
             <Route element={<Carrito />} path="/carrito" />
             <Route element={<Checkout />} path="/checkout" />
             <Route element={<Favoritos />} path="/favoritos" />
+            <Route element={<Perfil />} path="/perfil" />
             <Route element={<h1> Not found! </h1>} />
           </Routes>{" "}
           <Footer />
