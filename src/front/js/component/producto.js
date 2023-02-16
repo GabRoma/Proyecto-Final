@@ -2,17 +2,18 @@ import React, { useContext } from "react"; // tenemos que importar lo del usecon
 import { Link } from "react-router-dom";
 import { Context } from "../store/appContext.js";
 
-export const Productos = () => {
-  const { actions } = useContext(Context);
-
+export const Productos = (props, nombre, imagen, precio, moneda) => {
+  const { store, actions } = useContext(Context);
+  console.log(props);
+  // console.log(precio);
   return (
     <>
       <div className="row row-cols-1 row-cols-md-3 g-4">
         <div className="col">
-          <div className="card mx-5 w-50">
+          <div className="card mx-5 " style={{ width: 250 }}>
             <Link to={"/single/"} className=" ">
               <img
-                src="https://th.bing.com/th/id/R.53ef7741e96c229809e26e09a64df0f6?rik=xQcRBT9x8pp6hA&pid=ImgRaw&r=0"
+                src={props.imagen}
                 className="card-img-top"
                 width="50"
                 height="200"
@@ -21,19 +22,20 @@ export const Productos = () => {
             </Link>
 
             <div className="card-body">
-              <h5 className="card-title">Nombre de producto</h5>
-              <p className="card-text">Descripción</p>
+              <h5 className="card-title">{props.nombre}</h5>
+
+              <p className="card-text"></p>
               {/* <Link to={"/single/"} className="btn btn-primary mx-5 " style={{ width: 80 }} > Learn </Link> */}
             </div>
             <div className="card-footer d-flex justify-content-between">
               <div className="pricetag d-flex">
                 <strong>
-                  <p>$95</p>
+                  <p>{props.moneda}</p>
                 </strong>
                 &nbsp;
-                <s>
-                  <p>$119</p>
-                </s>
+                <strong>
+                  <p>{props.precio}</p>
+                </strong>
                 &nbsp;
                 <p className="text-muted">-20%</p>
               </div>

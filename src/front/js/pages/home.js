@@ -5,26 +5,6 @@ import "../../styles/home.css";
 import { Link } from "react-router-dom";
 import { Productos } from "../component/producto.js";
 
-// function getList() {
-//     try {
-//         fetch(
-//                 "https://api.rainforestapi.com/request?api_key=699D0A7132274B978BBF1E9E6DD054D4&type=search&amazon_domain=amazon.com&search_term=celular", {
-//                     method: "GET",
-//                     headers: {
-//                         "Content-Type": "application/json",
-//                     },
-//                 }
-//             )
-//             .then((response) => response.json())
-//             .then((data) => {
-//                 console.log(data);
-//             });
-//         //
-//     } catch (e) {
-//         console.log(e);
-//     }
-// }
-// getList();
 const Carousel = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const images = [
@@ -108,6 +88,9 @@ const Carousel = () => {
 export const Home = () => {
   const { store, actions } = useContext(Context);
   console.log(store.favoritos);
+  console.log(store.productos);
+  // console.log(store.productos[0]?.title);
+
   return (
     <div>
       <nav className="navbar navbar-light pt-0 border-bottom">
@@ -205,8 +188,21 @@ export const Home = () => {
           </button>{" "}
         </div>{" "}
       </div>{" "}
-      <div className="d-flex justify content center mx-5 my-2 overflow-auto"></div>
-      <Productos />
+      <div className="d-flex" style={{ width: 500 }}>
+        {store.productos?.map((item, index) => (
+          <Productos
+            key={index}
+            id={index + 1}
+            nombre={item.title}
+            imagen={item.image}
+            moneda={item.price?.currency}
+            precio={item.price?.name}
+
+            // moneda={item.currency}
+            // descripcion={item.description}
+          />
+        ))}
+      </div>
     </div>
   );
 };

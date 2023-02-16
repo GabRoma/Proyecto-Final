@@ -178,10 +178,14 @@ def single_prod(user_id, carrito_id):
         raise APIException('Este producto no se encuentra en tu carrito', status_code=404)
     return jsonify(singleProd.serialize()), 200
 
+
+# https://api.rainforestapi.com/request?api_key=65BDAA07696E4ED79ADED9A3D6EB415C&type=category&url=https%3A%2F%2Fwww.amazon.com%2Fs%3Fbbn%3D16225009011%26rh%3Dn%253A%252116225009011%252Cn%253A502394%252Cn%253A281052
+
+
 @api.route('/productos/api', methods=['GET'])
 def handle_productos():
-        api_key = "6EC7B3E59F5C4E2580F92F6C0B8F788D"
-        category_id = "16225009011"
+        api_key = "C2F2227A0E2A431EA566520B4BFB9939"
+        category_id = "281052"
         api_url_category = f"https://api.rainforestapi.com/request?api_key={api_key}&type=category&amazon_domain=amazon.com&category_id={category_id}"
         response_category = requests.get(api_url_category).json()
         for item in response_category["category_results"]:
