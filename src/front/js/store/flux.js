@@ -2,6 +2,8 @@
 const getState = ({ getStore, getActions, setStore }) => {
   return {
     store: {
+      detalleProducto: {},
+      productos: [],
       estalogueado: false,
       message: null,
       demo: [
@@ -78,6 +80,60 @@ const getState = ({ getStore, getActions, setStore }) => {
       total: 0,
     },
     actions: {
+      todosLosProductos: () => {
+        fetch(
+          "https://3001-gabroma-proyectofinal-qhijtnlkz7j.ws-us87.gitpod.io/api/products"
+        )
+          .then((response) => response.json())
+          .then((data) => {
+            console.log(data);
+            setStore({
+              productos: data,
+            });
+            // process the data returned by the server
+          })
+          .catch((error) => {
+            console.error("Error:", error);
+          });
+      },
+
+      // // utilizar esta funcion para un producto
+      // obtenerInfoDeCadaProducto: (asin) => {
+      //     fetch(
+      //             "https://api.rainforestapi.com/request?" +
+      //             api_key +
+      //             "&type=product&amazon_domain=amazon.com&" +
+      //             asin
+      //         ) // buscar que quede de forma dinamica useParams,
+      //         .then((res) => res.json())
+      //         .then((data) =>
+      //             setStore({
+      //                 detalleProducto: data,
+      //             })
+      //         )
+      //         .catch((err) => console.error(err));
+      // },
+
+      // // https://api.rainforestapi.com/request?api_key={api_key}&type=category&amazon_domain=amazon.com&category_id={category_id}
+
+      // obtenerProductos: () => {
+      //     let apiKey = "C2F2227A0E2A431EA566520B4BFB9939";
+      //     let categoryId = "281052";
+      //     fetch(
+      //             "https://api.rainforestapi.com/request?api_key=" +
+      //             apiKey +
+      //             "&type=category&amazon_domain=amazon.com&category_id=" +
+      //             categoryId
+      //         )
+      //         .then((res) => res.json())
+      //         .then((data) =>
+      //             setStore({
+      //                 productos: data.category_results,
+      //             })
+      //         )
+      //         .catch((err) => console.error(err));
+      // },
+
       addCarrito: (item) => {
         if (getStore().carrito.some((elem) => elem.name === item.name)) {
           getActions().quitCarrito(item);
