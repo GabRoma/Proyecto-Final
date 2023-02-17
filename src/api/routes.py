@@ -184,7 +184,7 @@ def single_prod(user_id, carrito_id):
 
 @api.route('/productos/api', methods=['GET'])
 def handle_productos():
-        api_key = "1A1FBDCDC7974620A6717D7FC5290AFB"
+        api_key = "B7A4A39897D54BC78ABC33F8AFD11488"
         category_id = "281052"
         api_url_category = f"https://api.rainforestapi.com/request?api_key={api_key}&type=category&amazon_domain=amazon.com&category_id={category_id}"
         response_category = requests.get(api_url_category).json()
