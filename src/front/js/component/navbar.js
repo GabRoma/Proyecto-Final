@@ -18,17 +18,13 @@ export const Navbar = () => {
           Envío gratis a todas las órdenes mayores a $200 por tiempo limitado!{" "}
         </p>
       </div>
-      <div
-        className="container-fluid pt-2 pb-2 d-flex justify-content-center"
-        // style={{ backgroundColor: "rgb(243, 245, 244)" }}
-      >
+      <div className="container-fluid pt-2 pb-2 d-flex justify-content-center">
         <Link
           to="/"
           className="d-flex align-items-center me-4 text-decoration-none"
         >
           <img src={logo} height="70" />
           <h1 className="tituloprincipal ps-3">TiendaNuestra</h1>
-          {/* <img className="ps-3" src={logo2} height="40" /> */}
         </Link>
         <form className="search form-inline d-flex justify-content-center me-4">
           <button
@@ -64,14 +60,14 @@ export const Navbar = () => {
             <ul className="dropdown-menu">
               {store.favoritos.map((item, index) => {
                 return (
-                  <li key={item.id} {...item}>
+                  <li key={item.id}>
                     <a className="dropdown-item" href="#">
                       {item.name}
                     </a>
                   </li>
                 );
               })}
-              <li>
+              <li key={"f" + store.favoritos.length}>
                 <a
                   className="dropdown-item text-center text-muted"
                   href="/favoritos"
@@ -95,14 +91,14 @@ export const Navbar = () => {
             <ul className="listaCarrito dropdown-menu">
               {store.carrito.map((item, index) => {
                 return (
-                  <li key={item.id} {...item}>
+                  <li key={item.id}>
                     <a className="dropdown-item" href="#">
                       {item.name}
                     </a>
                   </li>
                 );
               })}
-              <li>
+              <li key={"c" + store.carrito.length}>
                 <a
                   className="dropdown-item text-center text-muted"
                   href="/carrito"

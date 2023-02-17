@@ -20,7 +20,7 @@ const getState = ({ getStore, getActions, setStore }) => {
       ],
       carrito: [
         {
-          sku: 1,
+          id: 1,
           name: "producto",
           url: "https://shoptheoldemercantile.com/image/cache/catalog/placeholderproduct-500x500.png",
           shipping: "3 semanas",
@@ -29,7 +29,7 @@ const getState = ({ getStore, getActions, setStore }) => {
           subtotal: 10,
         },
         {
-          sku: 2,
+          id: 2,
           name: "producto II",
           url: "https://shoptheoldemercantile.com/image/cache/catalog/placeholderproduct-500x500.png",
           shipping: "3 semanas",
@@ -38,7 +38,7 @@ const getState = ({ getStore, getActions, setStore }) => {
           subtotal: 10,
         },
         {
-          sku: 3,
+          id: 3,
           name: "producto III",
           url: "https://shoptheoldemercantile.com/image/cache/catalog/placeholderproduct-500x500.png",
           shipping: "3 semanas",
@@ -49,7 +49,7 @@ const getState = ({ getStore, getActions, setStore }) => {
       ],
       favoritos: [
         {
-          sku: 1,
+          id: 1,
           name: "producto",
           url: "https://shoptheoldemercantile.com/image/cache/catalog/placeholderproduct-500x500.png",
           shipping: "3 semanas",
@@ -58,7 +58,7 @@ const getState = ({ getStore, getActions, setStore }) => {
           subtotal: 10,
         },
         {
-          sku: 2,
+          id: 2,
           name: "producto II",
           url: "https://shoptheoldemercantile.com/image/cache/catalog/placeholderproduct-500x500.png",
           shipping: "3 semanas",
@@ -67,7 +67,7 @@ const getState = ({ getStore, getActions, setStore }) => {
           subtotal: 10,
         },
         {
-          sku: 3,
+          id: 3,
           name: "producto III",
           url: "https://shoptheoldemercantile.com/image/cache/catalog/placeholderproduct-500x500.png",
           shipping: "3 semanas",

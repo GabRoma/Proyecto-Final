@@ -21,7 +21,7 @@ export const AuthComponent = () => {
         id="divpadre"
         aria-hidden="true"
         aria-labelledby="exampleModalToggleLabel"
-        tabindex="-1"
+        tabIndex="-1"
       >
         <div className="modal-dialog modal-dialog-centered border-secondary">
           <div className="modal-content">
@@ -52,7 +52,7 @@ export const AuthComponent = () => {
         id="divpadre2"
         aria-hidden="true"
         aria-labelledby="exampleModalToggleLabel2"
-        tabindex="1"
+        tabIndex="1"
       >
         <div className="modal-dialog modal-dialog-centered modal-lg border-secondary">
           <div className="modal-content">
