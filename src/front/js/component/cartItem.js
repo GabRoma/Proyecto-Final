@@ -39,7 +39,7 @@ export const CartItem = (item) => {
   };
 
   return (
-    <div className="card border border-light" key={item.sku}>
+    <div className="card border border-light" key={item.id}>
       <div className="row g-0">
         <div className="col-md-4">
           <img src={item.url} className="img-fluid" alt="" />
