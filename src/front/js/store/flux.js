@@ -20,7 +20,7 @@ const getState = ({ getStore, getActions, setStore }) => {
       ],
       carrito: [
         {
-          sku: 1,
+          id: 1,
           name: "producto",
           url: "https://shoptheoldemercantile.com/image/cache/catalog/placeholderproduct-500x500.png",
           shipping: "3 semanas",
@@ -29,7 +29,7 @@ const getState = ({ getStore, getActions, setStore }) => {
           subtotal: 10,
         },
         {
-          sku: 2,
+          id: 2,
           name: "producto II",
           url: "https://shoptheoldemercantile.com/image/cache/catalog/placeholderproduct-500x500.png",
           shipping: "3 semanas",
@@ -38,7 +38,7 @@ const getState = ({ getStore, getActions, setStore }) => {
           subtotal: 10,
         },
         {
-          sku: 3,
+          id: 3,
           name: "producto III",
           url: "https://shoptheoldemercantile.com/image/cache/catalog/placeholderproduct-500x500.png",
           shipping: "3 semanas",
@@ -49,7 +49,7 @@ const getState = ({ getStore, getActions, setStore }) => {
       ],
       favoritos: [
         {
-          sku: 1,
+          id: 1,
           name: "producto",
           url: "https://shoptheoldemercantile.com/image/cache/catalog/placeholderproduct-500x500.png",
           shipping: "3 semanas",
@@ -58,7 +58,7 @@ const getState = ({ getStore, getActions, setStore }) => {
           subtotal: 10,
         },
         {
-          sku: 2,
+          id: 2,
           name: "producto II",
           url: "https://shoptheoldemercantile.com/image/cache/catalog/placeholderproduct-500x500.png",
           shipping: "3 semanas",
@@ -67,7 +67,7 @@ const getState = ({ getStore, getActions, setStore }) => {
           subtotal: 10,
         },
         {
-          sku: 3,
+          id: 3,
           name: "producto III",
           url: "https://shoptheoldemercantile.com/image/cache/catalog/placeholderproduct-500x500.png",
           shipping: "3 semanas",
@@ -211,18 +211,18 @@ const getState = ({ getStore, getActions, setStore }) => {
         }
       },
 
-      // logout: () => {
-      // 	console.log("funciona");
-      //     // localStorage.removeItem('token');
-      //     // setStore({
-      //     //     estalogueado: false
-      //     // })
-      // },
+      logout: () => {
+        console.log("funciona");
+        // localStorage.removeItem('token');
+        // setStore({
+        //     estalogueado: false
+        // })
+      },
 
       inicioLogin: (userEmail, userPassword) => {
         console.log("funciona");
         fetch(
-          "https://3001-gabroma-proyectofinal-7oux03gk7aj.ws-us86.gitpod.io/api/login",
+          "https://3001-gabroma-proyectofinal-6p98yyg6lb9.ws-us87.gitpod.io/api/login",
           {
             method: "POST",
             headers: {
@@ -265,7 +265,7 @@ const getState = ({ getStore, getActions, setStore }) => {
         userEmail
       ) => {
         fetch(
-          "https://3001-gabroma-proyectofinal-7oux03gk7aj.ws-us86.gitpod.io/api/signup",
+          "https://3001-gabroma-proyectofinal-6p98yyg6lb9.ws-us87.gitpod.io/api/signup",
           {
             method: "POST",
             headers: {

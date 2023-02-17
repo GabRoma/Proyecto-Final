@@ -87,9 +87,6 @@ const Carousel = () => {
 };
 export const Home = () => {
   const { store, actions } = useContext(Context);
-  console.log(store.favoritos);
-  console.log(store.productos);
-  // console.log(store.productos[0]?.title);
 
   return (
     <div>

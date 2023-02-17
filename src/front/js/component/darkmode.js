@@ -82,9 +82,9 @@ export const DarkModeToggle = () => {
     document.querySelector(".listaCarrito").style.backgroundColor = isDarkMode
       ? "white"
       : "#555555";
-    document.querySelector(".modal").style.color = isDarkMode
-      ? "white"
-      : "black";
+    // document.querySelector(".modal").style.color = isDarkMode
+    //   ? "white"
+    //   : "black";
   };
 
   return (
