@@ -225,7 +225,7 @@ const getState = ({
             inicioLogin: (userEmail, userPassword) => {
                 console.log("funciona");
                 fetch(
-                        "https://3001-gabroma-proyectofinal-ijp8i6hhosm.ws-us87.gitpod.io/api/login", {
+                        "https://3001-gabroma-proyectofinal-9u525lreo6c.ws-us87.gitpod.io/api/login", {
                             method: "POST",
                             headers: {
                                 "Content-Type": "application/json",
@@ -274,7 +274,7 @@ const getState = ({
                 userEmail
             ) => {
                 fetch(
-                        "https://3001-gabroma-proyectofinal-ijp8i6hhosm.ws-us87.gitpod.io/api/signup", {
+                        "https://3001-gabroma-proyectofinal-9u525lreo6c.ws-us87.gitpod.io/api/signup", {
                             method: "POST",
                             headers: {
                                 "Content-Type": "application/json",
