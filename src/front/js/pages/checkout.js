@@ -42,25 +42,25 @@ export const Checkout = (props) => {
             <div>
               <p>Seleccione una forma de envío</p>
             </div>
-            <div class="form-check">
+            <div className="form-check">
               <input
-                class="form-check-input"
+                className="form-check-input"
                 type="radio"
                 name="tipoEnvio"
                 id="tipoEnvio1"
               />
-              <label class="form-check-label" for="tipoEnvio1">
+              <label className="form-check-label" htmlFor="tipoEnvio1">
                 Retiro en local
               </label>
             </div>
-            <div class="form-check">
+            <div className="form-check">
               <input
-                class="form-check-input"
+                className="form-check-input"
                 type="radio"
                 name="tipoEnvio"
                 id="tipoEnvio2"
               />
-              <label class="form-check-label" for="tipoEnvio2">
+              <label className="form-check-label" htmlFor="tipoEnvio2">
                 Envío a domicilio
               </label>
             </div>
@@ -75,7 +75,7 @@ export const Checkout = (props) => {
               </a>
             </div>{" "}
             <div className="card-body">
-              <table class="table text-secondary">
+              <table className="table text-secondary">
                 <thead>
                   <tr>
                     <th scope="col"></th>
@@ -139,9 +139,9 @@ export const Checkout = (props) => {
             </div>{" "}
           </div>{" "}
           <div className="card p-4 mb-3">
-            <form class="d-block">
-              <div class="col-auto">
-                <label for="inputDiscount" className="mb-2">
+            <form className="d-block">
+              <div className="col-auto">
+                <label htmlFor="inputDiscount" className="mb-2">
                   Código de Descuento/Giftcard
                 </label>
                 <div className="d-flex">
@@ -152,7 +152,7 @@ export const Checkout = (props) => {
                     placeholder="TUCÓDIGO"
                     style={{ backgroundColor: "#14141414", color: "gray" }}
                   />
-                  <button type="submit" class="btn btn-outline-danger">
+                  <button type="submit" className="btn btn-outline-danger">
                     OK
                   </button>
                 </div>
