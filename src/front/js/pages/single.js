@@ -62,16 +62,6 @@ export const Single = (item) => {
                 &nbsp; &nbsp;
                 <h5 className="text-muted">-20%</h5>
               </div>
-              {/* <p class="card-text mx-1">
-                <small class="text-muted">
-                  <i class="fa fa-star mx-1"></i>
-                  <i class="fa fa-star mx-1"></i>
-                  <i class="fa fa-star mx-1"></i>
-                  <i class="fa fa-star mx-1"></i>
-                  <i class="fa fa-star mx-1"></i>
-                </small>
-              </p> */}
-
               <div
                 className="conteiner fs-6 fw-bold"
                 style={{ height: 80, width: 300 }}
@@ -142,7 +132,3 @@ export const Single = (item) => {
     </>
   );
 };
-
-// Single.propTypes = {
-//   match: PropTypes.object,
-// };
