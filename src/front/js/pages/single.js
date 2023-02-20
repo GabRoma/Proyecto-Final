@@ -7,6 +7,12 @@ import rigoImageUrl from "../../img/rigo-baby.jpg";
 export const Single = (item) => {
   const { actions } = useContext(Context);
   const [added, setAdded] = useState(false);
+  const params = useParams();
+  console.log(params);
+
+  useEffect(() => {
+    actions.todosLosProductos(params.theid);
+  }, []);
 
   const toggleTexto = () => {
     setAdded(!added);
@@ -24,7 +30,7 @@ export const Single = (item) => {
           <div class="col-md-6 mx-auto w-50">
             <div class="text-center">
               <img
-                src="https://th.bing.com/th/id/R.19b8a5afcb2dcfde3fa4416ac9dac690?rik=WHZDE7e7q5nTQA&riu=http%3a%2f%2ffactorydirectcraft.com%2fimages%2fdimg.png&ehk=OZAn9gvkv%2bQFDnAtm7ApCzdKMY%2fXIfMbmHraB5s8i%2fI%3d&risl=&pid=ImgRaw&r=0"
+                src={props.imagen}
                 class="my-5 mx-3 float-center rounded"
                 alt="..."
                 width="350"
@@ -35,7 +41,7 @@ export const Single = (item) => {
           <div class="col-md-6">
             <div class="card-body my-4">
               <h5 class="card-title card-title fw-bold fs-4 text-start my-0">
-                Nombre de producto{" "}
+                {props.nombre}{" "}
                 <button
                   onClick={() => actions.addFavorito(item)}
                   type="button"
@@ -47,25 +53,15 @@ export const Single = (item) => {
               <p class="card-text fw-light fs-5 text-start my-0">Categoría</p>
               <div className="pricetag d-flex">
                 <h5>
-                  <strong>$95</strong>
+                  <strong>{props.moneda}</strong>
                 </h5>
                 &nbsp; &nbsp;
                 <s>
-                  <h5>$119</h5>
+                  <h5>{props.peso}</h5>
                 </s>
                 &nbsp; &nbsp;
                 <h5 className="text-muted">-20%</h5>
               </div>
-              {/* <p class="card-text mx-1">
-                <small class="text-muted">
-                  <i class="fa fa-star mx-1"></i>
-                  <i class="fa fa-star mx-1"></i>
-                  <i class="fa fa-star mx-1"></i>
-                  <i class="fa fa-star mx-1"></i>
-                  <i class="fa fa-star mx-1"></i>
-                </small>
-              </p> */}
-
               <div
                 className="conteiner fs-6 fw-bold"
                 style={{ height: 80, width: 300 }}
@@ -136,7 +132,3 @@ export const Single = (item) => {
     </>
   );
 };
-
-// Single.propTypes = {
-//   match: PropTypes.object,
-// };

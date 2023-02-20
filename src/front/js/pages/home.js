@@ -4,27 +4,8 @@ import rigoImageUrl from "../../img/rigo-baby.jpg";
 import "../../styles/home.css";
 import { Link } from "react-router-dom";
 import { Productos } from "../component/producto.js";
+import Contact from "../component/contact";
 
-// function getList() {
-//     try {
-//         fetch(
-//                 "https://api.rainforestapi.com/request?api_key=699D0A7132274B978BBF1E9E6DD054D4&type=search&amazon_domain=amazon.com&search_term=celular", {
-//                     method: "GET",
-//                     headers: {
-//                         "Content-Type": "application/json",
-//                     },
-//                 }
-//             )
-//             .then((response) => response.json())
-//             .then((data) => {
-//                 console.log(data);
-//             });
-//         //
-//     } catch (e) {
-//         console.log(e);
-//     }
-// }
-// getList();
 const Carousel = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const images = [
@@ -62,17 +43,17 @@ const Carousel = () => {
             className="carousel-button rounded-circle border-0 me-3"
             onClick={previousSlide}
           >
-            <i className="fa fa-arrow-left"> </i>{" "}
-          </button>{" "}
+            <i className="fa fa-arrow-left"> </i>
+          </button>
           <button
             className="carousel-button rounded-circle border-0"
             onClick={nextSlide}
           >
-            <i className="fa fa-arrow-right"> </i>{" "}
-          </button>{" "}
-        </div>{" "}
+            <i className="fa fa-arrow-right"> </i>
+          </button>
+        </div>
         <div className="carousel d-flex justify-content-center container mb-4">
-          <button className="wrapRed border-0 me-3">
+          <Link to={"/categoria/" + images[currentIndex + 1]} className="wrapRed border-0 mx-3">
             <img src={images[currentIndex]} className="redondo" alt="ERROR" />
             <h4
               className="centered text-light"
@@ -80,11 +61,11 @@ const Carousel = () => {
                 left: 518,
               }}
             >
-              {" "}
-              {images[currentIndex + 1]}{" "}
-            </h4>{" "}
-          </button>{" "}
-          <button className="wrapRed border-0">
+
+              {images[currentIndex + 1]}
+            </h4>
+          </Link>
+          <Link to={"/categoria/" + images[currentIndex + 3]} className="wrapRed border-0 mx-3">
             <img
               src={images[currentIndex + 2]}
               className="redondo"
@@ -96,63 +77,194 @@ const Carousel = () => {
                 left: 780,
               }}
             >
-              {" "}
-              {images[currentIndex + 3]}{" "}
-            </h4>{" "}
-          </button>{" "}
-        </div>{" "}
-      </div>{" "}
+
+              {images[currentIndex + 3]}
+            </h4>
+          </Link>
+        </div>
+      </div>
     </div>
   );
 };
 export const Home = () => {
   const { store, actions } = useContext(Context);
+  const [showPopup, setShowPopup] = useState(false);
+  const handleTogglePopup = (value) => {
+    setShowPopup(value);
+  };
+
   console.log(store.favoritos);
+  console.log(store.productos);
+  // console.log(store.productos[0]?.title);
+
   return (
     <div>
       <nav className="navbar navbar-light pt-0 border-bottom">
         <div className="container row m-auto navbarhome">
           <div className="d-flex justify-content-center col">
-            <Link to="/">
-              <h5 className="m-0 p-0 fs-6"> Producto </h5>{" "}
-            </Link>{" "}
-          </div>{" "}
+            <div class="dropdown">
+              <Link
+                to="/"
+                className="btn dropdown-toggle d-flex"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              >
+                <h5 className="m-auto fs-6 " style={{ color: "darkgray" }}> Categorias </h5>
+                <i class="far fa-caret-square-down mx-2 my-1" style={{ color: "darkgray" }}></i>
+              </Link>
+              <ul class="dropdown-menu">
+                <li>
+                  <Link
+                    to={"/categoriacelularesvista"}
+                    class="dropdown-item"
+                    type="button"
+                  >
+                    Celulares
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    to={"/categoriacalzadosvista"}
+                    class="dropdown-item"
+                    type="button"
+                  >
+                    Calzados
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    to={"/categoriaconsolasvista"}
+                    class="dropdown-item"
+                    type="button"
+                  >
+                    Consolas
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    to={"/categoriacamarasvista"}
+                    class="dropdown-item"
+                    type="button"
+                  >
+                    Cámaras
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    to={"/categorialaptopsvista"}
+                    class="dropdown-item"
+                    type="button"
+                  >
+                    Laptops
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    to={"/categorialentesvista"}
+                    class="dropdown-item"
+                    type="button"
+                  >
+                    Lentes
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    to={"/categoriaropavista"}
+                    class="dropdown-item"
+                    type="button"
+                  >
+                    Ropa
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    to={"/categoriarelojesvista"}
+                    class="dropdown-item"
+                    type="button"
+                  >
+                    Relojes
+                  </Link>
+                </li>
+              </ul>
+            </div>
+            {/* Termina Dropdown ----------------------------------------------------------- */}
+          </div>
           <div className="d-flex justify-content-center col">
-            <Link to="/">
-              <h5 className="m-0 p-0 fs-6"> Categorias </h5>{" "}
-            </Link>{" "}
-          </div>{" "}
+            <Link to={"/espaciooferta"}>
+              <h5 className="m-0 p-0 fs-6 "> OFERTAS </h5>
+            </Link>
+          </div>
           <div className="d-flex justify-content-center col">
-            <Link to="/">
-              <h5 className="m-0 p-0 fs-6"> OFERTAS </h5>{" "}
-            </Link>{" "}
-          </div>{" "}
+            <Link to="/espaciocostoytarif">
+              <h5 className="m-0 p-0 fs-6 "> Costos y tarifas </h5>
+            </Link>
+          </div>
+          {/* Modal ---------------------------------------------------------- */}
           <div className="d-flex justify-content-center col">
+            <Link to="/" data-bs-toggle="modal" data-bs-target="#exampleModal">
+              <h5 className="m-0 p-0 fs-6 ">
+
+                Garantía y devoluciones
+              </h5>
+            </Link>
+            <div
+              class="modal fade"
+              id="exampleModal"
+              tabindex="-1"
+              aria-labelledby="exampleModalLabel"
+              aria-hidden="true"
+            >
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">
+                      Garantía de Entrega
+                    </h1>
+                  </div>
+                  <div class="modal-body">
+                    <small className="fs-5 fw-bold">
+                      Aseguramos la entrega de tu orden:
+                    </small>
+                    <small className="fs-5 d-block ">
+                      Si tu pedido no llega luego de 60 días de realizada la
+                      orden, te devolvemos tu dinero.
+                    </small>
+                    <small className="fs-5">
+                      *La garantía de entrega no aplica en caso de que el
+                      producto quede retenido en Aduana por razones ajenas a
+                      TiendaNuestra
+                    </small>
+                  </div>
+                  <div class="modal-footer justify-content-center">
+                    <button
+                      type="button"
+                      class="btn btn-secondary"
+                      data-bs-dismiss="modal"
+                    >
+                      Cerrar
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          {/* Termina Modal ------------------------------------------------------------- */}
+          {/* <div className="d-flex justify-content-center col">
             <Link to="/">
-              <h5 className="m-0 p-0 fs-6"> Costos y tarifas </h5>{" "}
-            </Link>{" "}
-          </div>{" "}
+              <h5 className="m-0 p-0 fs-6"> Garantía y devoluciones </h5>
+            </Link>
+          </div> */}
           <div className="d-flex justify-content-center col">
-            <Link to="/">
-              <h5 className="m-0 p-0 fs-6"> Outlet </h5>{" "}
-            </Link>{" "}
-          </div>{" "}
-          <div className="d-flex justify-content-center col">
-            <Link to="/">
-              <h5 className="m-0 p-0 fs-6"> Garantía y devoluciones </h5>{" "}
-            </Link>{" "}
-          </div>{" "}
-          <div className="d-flex justify-content-center col">
-            <Link to="/">
-              <h5 className="m-0 p-0 fs-6"> Contáctanos </h5>{" "}
-            </Link>{" "}
-          </div>{" "}
-        </div>{" "}
-      </nav>{" "}
+            <Link to="/" onClick={() => handleTogglePopup(true)}>
+              <h5 className="m-0 p-0 fs-6 "> Contáctanos </h5>
+            </Link>
+          </div>
+        </div>
+      </nav>
       <div className="container">
         <div className="p-5 pt-3 rounded-3 d-flex justify-content-center text-center">
           <div className="container-fluid py-5">
-            <h1 className="display-5 fw-bold"> TiendaNuestra </h1>{" "}
+            <h1 className="display-5 fw-bold"> TiendaNuestra </h1>
             <p
               className="fs-6 m-auto"
               style={{
@@ -160,27 +272,29 @@ export const Home = () => {
               }}
             >
               Lorem ipsum dolor sit amet, consectetur adipiscing elit.Nulla quam
-              velit, vulputate eu pharetra nec, mattis ac neque.{" "}
-            </p>{" "}
-            <button
+              velit, vulputate eu pharetra nec, mattis ac neque.
+            </p>
+            <Link
+              to={"/espaciodescuento"}
               className="btn bg-dark bg-opacity-75 text-light fs-6 ps-4 pe-4 pt-2 pb-2"
               type="button"
             >
-              DESCUENTOS{" "}
-            </button>{" "}
-            <button
+              DESCUENTOS
+            </Link>
+            <Link
+              to={"/espacioproductos"}
               className="m-3 btn btn-light border-2 border-dark fw-bolder text-muted fs-6 ps-4 pe-4 pt-2 pb-2"
               type="button"
             >
-              PRODUCTOS{" "}
-            </button>{" "}
-          </div>{" "}
-        </div>{" "}
-      </div>{" "}
+              PRODUCTOS
+            </Link>
+          </div>
+        </div>
+      </div>
       <Carousel />
       <div className="container">
         <div className="container my-5 d-flex">
-          <h5 className="fw-bolder ms-5"> Productos destacados! </h5>{" "}
+          <h5 className="fw-bolder ms-5"> Productos destacados! </h5>
           <Link
             className="ms-auto"
             style={{
@@ -193,20 +307,34 @@ export const Home = () => {
                 fontSize: 14,
               }}
             >
-              {" "}
-              Ver todos{" "}
-            </p>{" "}
-          </Link>{" "}
-        </div>{" "}
+
+              Ver todos
+            </p>
+          </Link>
+        </div>
         <div className="carousel d-flex justify-content-center container mb-4">
           <button className="border-0 me-3">
-            {" "}
-            {/* <img src= className="redondo" alt="ERROR" /> */}{" "}
-          </button>{" "}
-        </div>{" "}
-      </div>{" "}
-      <div className="d-flex justify content center mx-5 my-2 overflow-auto"></div>
-      <Productos />
+
+            {/* <img src= className="redondo" alt="ERROR" /> */}
+          </button>
+        </div>
+      </div>
+      <div className="d-flex" style={{ width: 500 }}>
+        {store.productos?.map((item, index) => (
+          <Productos
+            key={index}
+            id={index + 1}
+            nombre={item.name}
+            imagen={item.imagenes}
+            moneda={item.currency}
+            precio={item.peso}
+
+          // moneda={item.currency}
+          // descripcion={item.description}
+          />
+        ))}
+      </div>
+      <Contact showPopup={showPopup} handleTogglePopup={handleTogglePopup} />
     </div>
   );
 };

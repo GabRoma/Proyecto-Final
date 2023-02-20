@@ -178,16 +178,22 @@ def single_prod(user_id, carrito_id):
         raise APIException('Este producto no se encuentra en tu carrito', status_code=404)
     return jsonify(singleProd.serialize()), 200
 
+
+# https://api.rainforestapi.com/request?api_key=65BDAA07696E4ED79ADED9A3D6EB415C&type=category&url=https%3A%2F%2Fwww.amazon.com%2Fs%3Fbbn%3D16225009011%26rh%3Dn%253A%252116225009011%252Cn%253A502394%252Cn%253A281052
+
+
 @api.route('/productos/api', methods=['GET'])
 def handle_productos():
-        api_key = "6EC7B3E59F5C4E2580F92F6C0B8F788D"
-        category_id = "16225009011"
+        api_key = "B7A4A39897D54BC78ABC33F8AFD11488"
+        category_id = "281052"
         api_url_category = f"https://api.rainforestapi.com/request?api_key={api_key}&type=category&amazon_domain=amazon.com&category_id={category_id}"
         response_category = requests.get(api_url_category).json()
         for item in response_category["category_results"]:
             asin = item.get("asin")
             api_url_id = f"https://api.rainforestapi.com/request?api_key={api_key}&type=product&amazon_domain=amazon.com&asin={asin}"
+
             response_id = requests.get(api_url_id).json()
+            print(response_id)
             if "product" in response_id:
                 product = response_id["product"]
                 newProd = Producto(
@@ -198,8 +204,18 @@ def handle_productos():
                     brand=product["brand"],
                     sell_on_amazon=True,
                     category=product["categories"][0]["name"],
-                    price=item["price"]["value"],
-                    currency=item["price"]["currency"],
+                    
+price = (item["price"]["value"]
+            if "price" in item
+            else (product["more_buying_choices"][0]["price"]["value"]
+                  if ("more_buying_choices" in product
+                      and len(product["more_buying_choices"]) > 0
+                      and "price" in product["more_buying_choices"][0])
+                  else (product["buybox_winner"]["price"]["value"]
+                        if "buybox_winner" in product and "price" in product["buybox_winner"]
+                        else "USD"))),
+                    
+                    currency = "USD",
                     description = product["feature_bullets_flat"],
                     rating=product["rating"],
                     imagenes=product["images_flat"],

@@ -73,7 +73,7 @@ const Contact = ({ showPopup, handleTogglePopup }) => {
                     type="submit"
                     disabled={isSubmitting}
                   >
-                    Submit
+                    Enviar
                   </button>
                 </div>
               </Form>
