@@ -4,9 +4,11 @@ import rigoImageUrl from "../../img/rigo-baby.jpg";
 import "../../styles/home.css";
 import { Link } from "react-router-dom";
 import { Productos } from "../component/producto.js";
+import Contact from "../component/contact";
 
-const Carousel = () => {
+const Carousel = (props) => {
   const [currentIndex, setCurrentIndex] = useState(0);
+
   const images = [
     "https://www.apple.com/newsroom/images/product/iphone/standard/apple_iphone-12-spring21_purple_04202021_big.jpg.large.jpg",
     "Celulares",
@@ -16,20 +18,28 @@ const Carousel = () => {
     "Laptops",
     "https://www.apple.com/newsroom/images/product/watch/standard/applewatch_series_3_two_loop_full.jpg.og.jpg?202302031731",
     "Relojes",
+    "https://live.staticflickr.com/4762/39251746975_7082be7abe.jpg",
+    "Camaras",
+    // "https://img-17.ccm2.net/SOVdTBLhQSXom5PVf51FNM1Ybe4=/1508x/24f32474a24048eaabc724efdaa4691e/ccm-faq/e_pantalla_2020-06-26_a_las_18.29.38.png",
+    // "Consolas",
+    // "https://media.istockphoto.com/photos/dresses-picture-id500395950?k=6&m=500395950&s=612x612&w=0&h=qfakQnB32SxOZgeBMMEmSJm3XwDNBeEVI8Ojp-xVriQ=",
+    // "Ropa",
+    // "https://www.luxurytopics.com/storage/posts/gallery/2014/Apr/12215/burberry-trench-coat-inspired-glasses.jpg",
+    // "Lentes",
   ];
 
   const previousSlide = () => {
-    const lastIndex = images.length - 4;
+    const lastIndex = images.length - 10;
     const shouldResetIndex = currentIndex === 0;
-    const index = shouldResetIndex ? lastIndex : currentIndex - 4;
+    const index = shouldResetIndex ? lastIndex : currentIndex - 10;
 
     setCurrentIndex(index);
   };
 
   const nextSlide = () => {
-    const lastIndex = images.length - 4;
+    const lastIndex = images.length - 10;
     const shouldResetIndex = currentIndex === lastIndex;
-    const index = shouldResetIndex ? 0 : currentIndex + 4;
+    const index = shouldResetIndex ? 0 : currentIndex + 10;
 
     setCurrentIndex(index);
   };
@@ -52,7 +62,10 @@ const Carousel = () => {
           </button>{" "}
         </div>{" "}
         <div className="carousel d-flex justify-content-center container mb-4">
-          <button className="wrapRed border-0 me-3">
+          <Link
+            to={"/categoriacelularesvista"}
+            className="wrapRed border-0 me-3"
+          >
             <img src={images[currentIndex]} className="redondo" alt="ERROR" />
             <h4
               className="centered text-light"
@@ -63,8 +76,8 @@ const Carousel = () => {
               {" "}
               {images[currentIndex + 1]}{" "}
             </h4>{" "}
-          </button>{" "}
-          <button className="wrapRed border-0">
+          </Link>{" "}
+          <Link to={"/categoriacalzadosvista"} className="wrapRed border-0">
             <img
               src={images[currentIndex + 2]}
               className="redondo"
@@ -79,7 +92,106 @@ const Carousel = () => {
               {" "}
               {images[currentIndex + 3]}{" "}
             </h4>{" "}
-          </button>{" "}
+          </Link>{" "}
+          <Link to={"/categorialaptopsvista"} className="wrapRed border-0 mx-3">
+            <img
+              src={images[currentIndex + 4]}
+              className="redondo"
+              alt="ERROR"
+            />
+            <h4
+              className="centered text-light "
+              style={{
+                left: 780,
+              }}
+            >
+              {" "}
+              {images[currentIndex + 5]}{" "}
+            </h4>{" "}
+          </Link>{" "}
+          <Link to={"/categoriarelojesvista"} className="wrapRed border-0 mx-3">
+            <img
+              src={images[currentIndex + 6]}
+              className="redondo"
+              alt="ERROR"
+            />
+            <h4
+              className="centered text-light "
+              style={{
+                left: 780,
+              }}
+            >
+              {" "}
+              {images[currentIndex + 7]}{" "}
+            </h4>{" "}
+          </Link>{" "}
+          <Link to={"/categoriacamarasvista"} className="wrapRed border-0 mx-3">
+            <img
+              src={images[currentIndex + 8]}
+              className="redondo"
+              alt="ERROR"
+            />
+            <h4
+              className="centered text-light "
+              style={{
+                left: 780,
+              }}
+            >
+              {" "}
+              {images[currentIndex + 9]}{" "}
+            </h4>{" "}
+          </Link>{" "}
+          {/* <Link
+            to={"/categoriaconsolasvista"}
+            className="wrapRed border-0 mx-3"
+          >
+            <img
+              src={images[currentIndex + 10]}
+              className="redondo"
+              alt="ERROR"
+            />
+            <h4
+              className="centered text-light "
+              style={{
+                left: 780,
+              }}
+            >
+              {" "}
+              {images[currentIndex + 11]}{" "}
+            </h4>{" "}
+          </Link>{" "} */}
+          {/* <Link to={"/categoriaropavista"} className="wrapRed border-0 mx-3">
+            <img
+              src={images[currentIndex + 10]}
+              className="redondo"
+              alt="ERROR"
+            />
+            <h4
+              className="centered text-light "
+              style={{
+                left: 780,
+              }}
+            >
+              {" "}
+              {images[currentIndex + 11]}{" "}
+            </h4>{" "}
+          </Link>{" "} */}
+          {/* <Link to={"/categorialentesvista"} className="wrapRed border-0 mx-3">
+            <img
+              src={images[currentIndex + 10]}
+              className="redondo"
+              alt="ERROR"
+            />
+            <h4
+              className="centered text-light "
+              style={{
+                left: 780,
+              }}
+            >
+              {" "}
+              {images[currentIndex + 11]}{" "}
+            </h4>{" "}
+          </Link>{" "} */}
         </div>{" "}
       </div>{" "}
     </div>
@@ -87,6 +199,11 @@ const Carousel = () => {
 };
 export const Home = () => {
   const { store, actions } = useContext(Context);
+  const [showPopup, setShowPopup] = useState(false);
+  const handleTogglePopup = (value) => {
+    setShowPopup(value);
+  };
+
   console.log(store.favoritos);
   console.log(store.productos);
   // console.log(store.productos[0]?.title);
@@ -95,39 +212,168 @@ export const Home = () => {
     <div>
       <nav className="navbar navbar-light pt-0 border-bottom">
         <div className="container row m-auto navbarhome">
-          <div className="d-flex justify-content-center col">
+          {/* <div className="d-flex justify-content-center col">
             <Link to="/">
               <h5 className="m-0 p-0 fs-6"> Producto </h5>{" "}
             </Link>{" "}
+          </div>{" "} */}
+          {/* Dropdown ------------------------------------------------------*/}
+          <div className="d-flex justify-content-center col">
+            <div class="dropdown">
+              <Link
+                to="/"
+                className="btn dropdown-toggle d-flex"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              >
+                <h5 className="m-0 p-0 fs-6 text-dark"> Categorias </h5>{" "}
+                <i class="far fa-caret-square-down mx-2 my-1"></i>
+              </Link>{" "}
+              <ul class="dropdown-menu">
+                <li>
+                  <Link
+                    to={"/categoriacelularesvista"}
+                    class="dropdown-item"
+                    type="button"
+                  >
+                    Celulares
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    to={"/categoriacalzadosvista"}
+                    class="dropdown-item"
+                    type="button"
+                  >
+                    Calzados
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    to={"/categoriaconsolasvista"}
+                    class="dropdown-item"
+                    type="button"
+                  >
+                    Consolas
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    to={"/categoriacamarasvista"}
+                    class="dropdown-item"
+                    type="button"
+                  >
+                    Cámaras
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    to={"/categorialaptopsvista"}
+                    class="dropdown-item"
+                    type="button"
+                  >
+                    Laptops
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    to={"/categorialentesvista"}
+                    class="dropdown-item"
+                    type="button"
+                  >
+                    Lentes
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    to={"/categoriaropavista"}
+                    class="dropdown-item"
+                    type="button"
+                  >
+                    Ropa
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    to={"/categoriarelojesvista"}
+                    class="dropdown-item"
+                    type="button"
+                  >
+                    Relojes
+                  </Link>
+                </li>
+              </ul>
+            </div>
+            {/* Termina Dropdown ----------------------------------------------------------- */}
           </div>{" "}
           <div className="d-flex justify-content-center col">
-            <Link to="/">
-              <h5 className="m-0 p-0 fs-6"> Categorias </h5>{" "}
+            <Link to={"/espaciooferta"}>
+              <h5 className="m-0 p-0 fs-6 text-dark"> OFERTAS </h5>{" "}
             </Link>{" "}
           </div>{" "}
           <div className="d-flex justify-content-center col">
-            <Link to="/">
-              <h5 className="m-0 p-0 fs-6"> OFERTAS </h5>{" "}
+            <Link to="/espaciocostoytarif">
+              <h5 className="m-0 p-0 fs-6 text-dark"> Costos y tarifas </h5>{" "}
             </Link>{" "}
           </div>{" "}
+          {/* Modal ---------------------------------------------------------- */}
           <div className="d-flex justify-content-center col">
-            <Link to="/">
-              <h5 className="m-0 p-0 fs-6"> Costos y tarifas </h5>{" "}
+            <Link to="/" data-bs-toggle="modal" data-bs-target="#exampleModal">
+              <h5 className="m-0 p-0 fs-6 text-dark">
+                {" "}
+                Garantía y devoluciones
+              </h5>{" "}
             </Link>{" "}
+            <div
+              class="modal fade"
+              id="exampleModal"
+              tabindex="-1"
+              aria-labelledby="exampleModalLabel"
+              aria-hidden="true"
+            >
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">
+                      Garantía de Entrega
+                    </h1>
+                  </div>
+                  <div class="modal-body">
+                    <small className="fs-5 fw-bold">
+                      Aseguramos la entrega de tu orden:
+                    </small>
+                    <small className="fs-5 d-block ">
+                      Si tu pedido no llega luego de 60 días de realizada la
+                      orden, te devolvemos tu dinero.
+                    </small>
+                    <small className="fs-5">
+                      *La garantía de entrega no aplica en caso de que el
+                      producto quede retenido en Aduana por razones ajenas a
+                      TiendaNuestra
+                    </small>
+                  </div>
+                  <div class="modal-footer justify-content-center">
+                    <button
+                      type="button"
+                      class="btn btn-secondary"
+                      data-bs-dismiss="modal"
+                    >
+                      Cerrar
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>{" "}
-          <div className="d-flex justify-content-center col">
-            <Link to="/">
-              <h5 className="m-0 p-0 fs-6"> Outlet </h5>{" "}
-            </Link>{" "}
-          </div>{" "}
-          <div className="d-flex justify-content-center col">
+          {/* Termina Modal ------------------------------------------------------------- */}
+          {/* <div className="d-flex justify-content-center col">
             <Link to="/">
               <h5 className="m-0 p-0 fs-6"> Garantía y devoluciones </h5>{" "}
             </Link>{" "}
-          </div>{" "}
+          </div>{" "} */}
           <div className="d-flex justify-content-center col">
-            <Link to="/">
-              <h5 className="m-0 p-0 fs-6"> Contáctanos </h5>{" "}
+            <Link to="/" onClick={() => handleTogglePopup(true)}>
+              <h5 className="m-0 p-0 fs-6 text-dark"> Contáctanos </h5>{" "}
             </Link>{" "}
           </div>{" "}
         </div>{" "}
@@ -145,18 +391,20 @@ export const Home = () => {
               Lorem ipsum dolor sit amet, consectetur adipiscing elit.Nulla quam
               velit, vulputate eu pharetra nec, mattis ac neque.{" "}
             </p>{" "}
-            <button
+            <Link
+              to={"/espaciodescuento"}
               className="btn bg-dark bg-opacity-75 text-light fs-6 ps-4 pe-4 pt-2 pb-2"
               type="button"
             >
               DESCUENTOS{" "}
-            </button>{" "}
-            <button
+            </Link>{" "}
+            <Link
+              to={"/espacioproductos"}
               className="m-3 btn btn-light border-2 border-dark fw-bolder text-muted fs-6 ps-4 pe-4 pt-2 pb-2"
               type="button"
             >
               PRODUCTOS{" "}
-            </button>{" "}
+            </Link>{" "}
           </div>{" "}
         </div>{" "}
       </div>{" "}
@@ -203,6 +451,7 @@ export const Home = () => {
           />
         ))}
       </div>
+      <Contact showPopup={showPopup} handleTogglePopup={handleTogglePopup} />{" "}
     </div>
   );
 };

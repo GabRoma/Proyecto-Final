@@ -13,7 +13,7 @@ export const Productos = (props, nombre, imagen, precio, moneda) => {
       <div className="row row-cols-1 row-cols-md-3 g-4">
         <div className="col">
           <div className="card mx-5 " style={{ width: 250 }}>
-            <Link to={"/single/"} className=" ">
+            <Link to={"/single/" + props.theid} className=" ">
               <img
                 src={props.imagen}
                 className="card-img-top"
