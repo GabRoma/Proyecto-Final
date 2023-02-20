@@ -4,7 +4,7 @@ import { Link, useParams } from "react-router-dom";
 import { Context } from "../store/appContext";
 import rigoImageUrl from "../../img/rigo-baby.jpg";
 
-export const VistaCatLaptops = (props) => {
+export const Categoria = (props) => {
   const { actions } = useContext(Context);
   console.log(props);
   //   const params = useParams();
@@ -16,17 +16,17 @@ export const VistaCatLaptops = (props) => {
 
   return (
     <>
-      <p className="fst-italic fw-bold fs-1 text-center ">Laptops</p>
+      <p className="fst-italic fw-bold fs-1 text-center ">Calzados</p>
       <hr />
       <small className=" fs-5 mx-3 ">
-        Laptops. En TiendaNuestra.com encuentras los mejores celulares al mejor
+        Calzados. En TiendaNuestra.com encuentras los mejores celulares al mejor
         precio, directo desde USA hasta la puerta de tu casa.
       </small>
       <hr />
       <div className="row row-cols-1 row-cols-md-3 g-4">
         <div className="col">
           <div className="card mx-5 " style={{ width: 250 }}>
-            <Link to={"/singlelaptops/" + props.theid} className=" ">
+            <Link to={"/single/" + props.theid} className=" ">
               <img
                 src="https://cdn.wallpapersafari.com/32/39/4K3ctN.jpg"
                 className="card-img-top"
@@ -40,7 +40,6 @@ export const VistaCatLaptops = (props) => {
               <h5 className="card-title">Producto</h5>
 
               <p className="card-text"></p>
-              {/* <Link to={"/single/"} className="btn btn-primary mx-5 " style={{ width: 80 }} > Learn </Link> */}
             </div>
             <div className="card-footer d-flex justify-content-between">
               <div className="pricetag d-flex">
@@ -57,7 +56,7 @@ export const VistaCatLaptops = (props) => {
               <div>
                 <i
                   className="fas fa-shopping-cart mx-1"
-                  // onClick={() => actions.addCarrito(item)}
+                // onClick={() => actions.addCarrito(item)}
                 />
               </div>
             </div>
@@ -65,7 +64,7 @@ export const VistaCatLaptops = (props) => {
         </div>
       </div>
       <p className="fs-4 text-center text-secondary">
-        Más información sobre Laptops
+        Más información sobre Calzados
       </p>
       <div className="container justify-content-center ">
         <div
@@ -83,7 +82,7 @@ export const VistaCatLaptops = (props) => {
                 aria-controls="flush-collapseOne"
               >
                 ¿Cuál es el precio promedio de los productos de la categoría
-                Laptops ?
+                Calzados ?
               </button>
             </h2>
             <div
@@ -95,7 +94,7 @@ export const VistaCatLaptops = (props) => {
               <div class="accordion-body">
                 El precio promedio de los productos puede variar en base a su
                 calidad, tipo y otras características. El precio promedio de
-                estos productos es de U$S 200.
+                estos productos es de U$S 76.
               </div>
             </div>
           </div>
@@ -109,7 +108,7 @@ export const VistaCatLaptops = (props) => {
                 aria-expanded="false"
                 aria-controls="flush-collapseTwo"
               >
-                ¿Qué marcas puedo encontrar en Laptops en TiendaNuestra?
+                ¿Qué marcas puedo encontrar en Calzado en TiendaNuestra?
               </button>
             </h2>
             <div
@@ -120,9 +119,9 @@ export const VistaCatLaptops = (props) => {
             >
               <div class="accordion-body lh-1">
                 En TiendaNuestra encontrarás ofertas en las mejores marcas de
-                Laptops, tales como: <ul className="my-1">● Lenovo</ul>{" "}
-                <ul className="my-1">● HP</ul> <ul className="my-1">● ASUS</ul>{" "}
-                <ul className="my-1 mx-0">● Samsung</ul>
+                Calzado, tales como: <ul className="my-1">● Nike</ul>{" "}
+                <ul className="my-1">● Adidas</ul>{" "}
+                <ul className="my-1">● Puma</ul>
               </div>
             </div>
           </div>
@@ -136,7 +135,7 @@ export const VistaCatLaptops = (props) => {
                 aria-expanded="false"
                 aria-controls="flush-collapseThree"
               >
-                ¿Cómo comprar Laptops en TiendaNuestra desde Uruguay?
+                ¿Cómo comprar Calzado en TiendaNuestra desde Uruguay?
               </button>
             </h2>
             <div
@@ -146,10 +145,10 @@ export const VistaCatLaptops = (props) => {
               data-bs-parent="#accordionFlushExample"
             >
               <div class="accordion-body">
-                Comprar Laptops en TiendaNuestra es muy fácil! Solo debes seguir
+                Comprar Calzado en TiendaNuestra es muy fácil! Solo debes seguir
                 4 simples pasos:
                 <ul className="my-1">
-                  1- Selecciona la oferta de Laptop que deseas comprar.
+                  1- Selecciona la oferta de Calzado que deseas comprar.
                 </ul>
                 <ul className="my-1">
                   2- Agregala al carrito y finaliza la compra.

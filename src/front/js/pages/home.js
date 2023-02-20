@@ -6,9 +6,8 @@ import { Link } from "react-router-dom";
 import { Productos } from "../component/producto.js";
 import Contact from "../component/contact";
 
-const Carousel = (props) => {
+const Carousel = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
-
   const images = [
     "https://www.apple.com/newsroom/images/product/iphone/standard/apple_iphone-12-spring21_purple_04202021_big.jpg.large.jpg",
     "Celulares",
@@ -18,28 +17,20 @@ const Carousel = (props) => {
     "Laptops",
     "https://www.apple.com/newsroom/images/product/watch/standard/applewatch_series_3_two_loop_full.jpg.og.jpg?202302031731",
     "Relojes",
-    "https://live.staticflickr.com/4762/39251746975_7082be7abe.jpg",
-    "Camaras",
-    // "https://img-17.ccm2.net/SOVdTBLhQSXom5PVf51FNM1Ybe4=/1508x/24f32474a24048eaabc724efdaa4691e/ccm-faq/e_pantalla_2020-06-26_a_las_18.29.38.png",
-    // "Consolas",
-    // "https://media.istockphoto.com/photos/dresses-picture-id500395950?k=6&m=500395950&s=612x612&w=0&h=qfakQnB32SxOZgeBMMEmSJm3XwDNBeEVI8Ojp-xVriQ=",
-    // "Ropa",
-    // "https://www.luxurytopics.com/storage/posts/gallery/2014/Apr/12215/burberry-trench-coat-inspired-glasses.jpg",
-    // "Lentes",
   ];
 
   const previousSlide = () => {
-    const lastIndex = images.length - 10;
+    const lastIndex = images.length - 4;
     const shouldResetIndex = currentIndex === 0;
-    const index = shouldResetIndex ? lastIndex : currentIndex - 10;
+    const index = shouldResetIndex ? lastIndex : currentIndex - 4;
 
     setCurrentIndex(index);
   };
 
   const nextSlide = () => {
-    const lastIndex = images.length - 10;
+    const lastIndex = images.length - 4;
     const shouldResetIndex = currentIndex === lastIndex;
-    const index = shouldResetIndex ? 0 : currentIndex + 10;
+    const index = shouldResetIndex ? 0 : currentIndex + 4;
 
     setCurrentIndex(index);
   };
@@ -52,20 +43,17 @@ const Carousel = (props) => {
             className="carousel-button rounded-circle border-0 me-3"
             onClick={previousSlide}
           >
-            <i className="fa fa-arrow-left"> </i>{" "}
-          </button>{" "}
+            <i className="fa fa-arrow-left"> </i>
+          </button>
           <button
             className="carousel-button rounded-circle border-0"
             onClick={nextSlide}
           >
-            <i className="fa fa-arrow-right"> </i>{" "}
-          </button>{" "}
-        </div>{" "}
+            <i className="fa fa-arrow-right"> </i>
+          </button>
+        </div>
         <div className="carousel d-flex justify-content-center container mb-4">
-          <Link
-            to={"/categoriacelularesvista"}
-            className="wrapRed border-0 me-3"
-          >
+          <Link to={"/categoria/" + images[currentIndex + 1]} className="wrapRed border-0 mx-3">
             <img src={images[currentIndex]} className="redondo" alt="ERROR" />
             <h4
               className="centered text-light"
@@ -73,11 +61,11 @@ const Carousel = (props) => {
                 left: 518,
               }}
             >
-              {" "}
-              {images[currentIndex + 1]}{" "}
-            </h4>{" "}
-          </Link>{" "}
-          <Link to={"/categoriacalzadosvista"} className="wrapRed border-0">
+
+              {images[currentIndex + 1]}
+            </h4>
+          </Link>
+          <Link to={"/categoria/" + images[currentIndex + 3]} className="wrapRed border-0 mx-3">
             <img
               src={images[currentIndex + 2]}
               className="redondo"
@@ -89,111 +77,12 @@ const Carousel = (props) => {
                 left: 780,
               }}
             >
-              {" "}
-              {images[currentIndex + 3]}{" "}
-            </h4>{" "}
-          </Link>{" "}
-          <Link to={"/categorialaptopsvista"} className="wrapRed border-0 mx-3">
-            <img
-              src={images[currentIndex + 4]}
-              className="redondo"
-              alt="ERROR"
-            />
-            <h4
-              className="centered text-light "
-              style={{
-                left: 780,
-              }}
-            >
-              {" "}
-              {images[currentIndex + 5]}{" "}
-            </h4>{" "}
-          </Link>{" "}
-          <Link to={"/categoriarelojesvista"} className="wrapRed border-0 mx-3">
-            <img
-              src={images[currentIndex + 6]}
-              className="redondo"
-              alt="ERROR"
-            />
-            <h4
-              className="centered text-light "
-              style={{
-                left: 780,
-              }}
-            >
-              {" "}
-              {images[currentIndex + 7]}{" "}
-            </h4>{" "}
-          </Link>{" "}
-          <Link to={"/categoriacamarasvista"} className="wrapRed border-0 mx-3">
-            <img
-              src={images[currentIndex + 8]}
-              className="redondo"
-              alt="ERROR"
-            />
-            <h4
-              className="centered text-light "
-              style={{
-                left: 780,
-              }}
-            >
-              {" "}
-              {images[currentIndex + 9]}{" "}
-            </h4>{" "}
-          </Link>{" "}
-          {/* <Link
-            to={"/categoriaconsolasvista"}
-            className="wrapRed border-0 mx-3"
-          >
-            <img
-              src={images[currentIndex + 10]}
-              className="redondo"
-              alt="ERROR"
-            />
-            <h4
-              className="centered text-light "
-              style={{
-                left: 780,
-              }}
-            >
-              {" "}
-              {images[currentIndex + 11]}{" "}
-            </h4>{" "}
-          </Link>{" "} */}
-          {/* <Link to={"/categoriaropavista"} className="wrapRed border-0 mx-3">
-            <img
-              src={images[currentIndex + 10]}
-              className="redondo"
-              alt="ERROR"
-            />
-            <h4
-              className="centered text-light "
-              style={{
-                left: 780,
-              }}
-            >
-              {" "}
-              {images[currentIndex + 11]}{" "}
-            </h4>{" "}
-          </Link>{" "} */}
-          {/* <Link to={"/categorialentesvista"} className="wrapRed border-0 mx-3">
-            <img
-              src={images[currentIndex + 10]}
-              className="redondo"
-              alt="ERROR"
-            />
-            <h4
-              className="centered text-light "
-              style={{
-                left: 780,
-              }}
-            >
-              {" "}
-              {images[currentIndex + 11]}{" "}
-            </h4>{" "}
-          </Link>{" "} */}
-        </div>{" "}
-      </div>{" "}
+
+              {images[currentIndex + 3]}
+            </h4>
+          </Link>
+        </div>
+      </div>
     </div>
   );
 };
@@ -212,12 +101,6 @@ export const Home = () => {
     <div>
       <nav className="navbar navbar-light pt-0 border-bottom">
         <div className="container row m-auto navbarhome">
-          {/* <div className="d-flex justify-content-center col">
-            <Link to="/">
-              <h5 className="m-0 p-0 fs-6"> Producto </h5>{" "}
-            </Link>{" "}
-          </div>{" "} */}
-          {/* Dropdown ------------------------------------------------------*/}
           <div className="d-flex justify-content-center col">
             <div class="dropdown">
               <Link
@@ -226,9 +109,9 @@ export const Home = () => {
                 data-bs-toggle="dropdown"
                 aria-expanded="false"
               >
-                <h5 className="m-0 p-0 fs-6 text-dark"> Categorias </h5>{" "}
-                <i class="far fa-caret-square-down mx-2 my-1"></i>
-              </Link>{" "}
+                <h5 className="m-auto fs-6 " style={{ color: "darkgray" }}> Categorias </h5>
+                <i class="far fa-caret-square-down mx-2 my-1" style={{ color: "darkgray" }}></i>
+              </Link>
               <ul class="dropdown-menu">
                 <li>
                   <Link
@@ -305,25 +188,25 @@ export const Home = () => {
               </ul>
             </div>
             {/* Termina Dropdown ----------------------------------------------------------- */}
-          </div>{" "}
+          </div>
           <div className="d-flex justify-content-center col">
             <Link to={"/espaciooferta"}>
-              <h5 className="m-0 p-0 fs-6 text-dark"> OFERTAS </h5>{" "}
-            </Link>{" "}
-          </div>{" "}
+              <h5 className="m-0 p-0 fs-6 "> OFERTAS </h5>
+            </Link>
+          </div>
           <div className="d-flex justify-content-center col">
             <Link to="/espaciocostoytarif">
-              <h5 className="m-0 p-0 fs-6 text-dark"> Costos y tarifas </h5>{" "}
-            </Link>{" "}
-          </div>{" "}
+              <h5 className="m-0 p-0 fs-6 "> Costos y tarifas </h5>
+            </Link>
+          </div>
           {/* Modal ---------------------------------------------------------- */}
           <div className="d-flex justify-content-center col">
             <Link to="/" data-bs-toggle="modal" data-bs-target="#exampleModal">
-              <h5 className="m-0 p-0 fs-6 text-dark">
-                {" "}
+              <h5 className="m-0 p-0 fs-6 ">
+
                 Garantía y devoluciones
-              </h5>{" "}
-            </Link>{" "}
+              </h5>
+            </Link>
             <div
               class="modal fade"
               id="exampleModal"
@@ -364,24 +247,24 @@ export const Home = () => {
                 </div>
               </div>
             </div>
-          </div>{" "}
+          </div>
           {/* Termina Modal ------------------------------------------------------------- */}
           {/* <div className="d-flex justify-content-center col">
             <Link to="/">
-              <h5 className="m-0 p-0 fs-6"> Garantía y devoluciones </h5>{" "}
-            </Link>{" "}
-          </div>{" "} */}
+              <h5 className="m-0 p-0 fs-6"> Garantía y devoluciones </h5>
+            </Link>
+          </div> */}
           <div className="d-flex justify-content-center col">
             <Link to="/" onClick={() => handleTogglePopup(true)}>
-              <h5 className="m-0 p-0 fs-6 text-dark"> Contáctanos </h5>{" "}
-            </Link>{" "}
-          </div>{" "}
-        </div>{" "}
-      </nav>{" "}
+              <h5 className="m-0 p-0 fs-6 "> Contáctanos </h5>
+            </Link>
+          </div>
+        </div>
+      </nav>
       <div className="container">
         <div className="p-5 pt-3 rounded-3 d-flex justify-content-center text-center">
           <div className="container-fluid py-5">
-            <h1 className="display-5 fw-bold"> TiendaNuestra </h1>{" "}
+            <h1 className="display-5 fw-bold"> TiendaNuestra </h1>
             <p
               className="fs-6 m-auto"
               style={{
@@ -389,29 +272,29 @@ export const Home = () => {
               }}
             >
               Lorem ipsum dolor sit amet, consectetur adipiscing elit.Nulla quam
-              velit, vulputate eu pharetra nec, mattis ac neque.{" "}
-            </p>{" "}
+              velit, vulputate eu pharetra nec, mattis ac neque.
+            </p>
             <Link
               to={"/espaciodescuento"}
               className="btn bg-dark bg-opacity-75 text-light fs-6 ps-4 pe-4 pt-2 pb-2"
               type="button"
             >
-              DESCUENTOS{" "}
-            </Link>{" "}
+              DESCUENTOS
+            </Link>
             <Link
               to={"/espacioproductos"}
               className="m-3 btn btn-light border-2 border-dark fw-bolder text-muted fs-6 ps-4 pe-4 pt-2 pb-2"
               type="button"
             >
-              PRODUCTOS{" "}
-            </Link>{" "}
-          </div>{" "}
-        </div>{" "}
-      </div>{" "}
+              PRODUCTOS
+            </Link>
+          </div>
+        </div>
+      </div>
       <Carousel />
       <div className="container">
         <div className="container my-5 d-flex">
-          <h5 className="fw-bolder ms-5"> Productos destacados! </h5>{" "}
+          <h5 className="fw-bolder ms-5"> Productos destacados! </h5>
           <Link
             className="ms-auto"
             style={{
@@ -424,18 +307,18 @@ export const Home = () => {
                 fontSize: 14,
               }}
             >
-              {" "}
-              Ver todos{" "}
-            </p>{" "}
-          </Link>{" "}
-        </div>{" "}
+
+              Ver todos
+            </p>
+          </Link>
+        </div>
         <div className="carousel d-flex justify-content-center container mb-4">
           <button className="border-0 me-3">
-            {" "}
-            {/* <img src= className="redondo" alt="ERROR" /> */}{" "}
-          </button>{" "}
-        </div>{" "}
-      </div>{" "}
+
+            {/* <img src= className="redondo" alt="ERROR" /> */}
+          </button>
+        </div>
+      </div>
       <div className="d-flex" style={{ width: 500 }}>
         {store.productos?.map((item, index) => (
           <Productos
@@ -446,12 +329,12 @@ export const Home = () => {
             moneda={item.currency}
             precio={item.peso}
 
-            // moneda={item.currency}
-            // descripcion={item.description}
+          // moneda={item.currency}
+          // descripcion={item.description}
           />
         ))}
       </div>
-      <Contact showPopup={showPopup} handleTogglePopup={handleTogglePopup} />{" "}
+      <Contact showPopup={showPopup} handleTogglePopup={handleTogglePopup} />
     </div>
   );
 };
