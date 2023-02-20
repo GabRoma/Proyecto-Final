@@ -1,4 +1,6 @@
 //flux
+import Swal from "sweetalert2";
+
 const getState = ({ getStore, getActions, setStore }) => {
   return {
     store: {
@@ -20,7 +22,7 @@ const getState = ({ getStore, getActions, setStore }) => {
       ],
       carrito: [
         {
-          id: 1,
+          sku: 1,
           name: "producto",
           url: "https://shoptheoldemercantile.com/image/cache/catalog/placeholderproduct-500x500.png",
           shipping: "3 semanas",
@@ -29,7 +31,7 @@ const getState = ({ getStore, getActions, setStore }) => {
           subtotal: 10,
         },
         {
-          id: 2,
+          sku: 2,
           name: "producto II",
           url: "https://shoptheoldemercantile.com/image/cache/catalog/placeholderproduct-500x500.png",
           shipping: "3 semanas",
@@ -38,7 +40,7 @@ const getState = ({ getStore, getActions, setStore }) => {
           subtotal: 10,
         },
         {
-          id: 3,
+          sku: 3,
           name: "producto III",
           url: "https://shoptheoldemercantile.com/image/cache/catalog/placeholderproduct-500x500.png",
           shipping: "3 semanas",
@@ -49,7 +51,7 @@ const getState = ({ getStore, getActions, setStore }) => {
       ],
       favoritos: [
         {
-          id: 1,
+          sku: 1,
           name: "producto",
           url: "https://shoptheoldemercantile.com/image/cache/catalog/placeholderproduct-500x500.png",
           shipping: "3 semanas",
@@ -58,7 +60,7 @@ const getState = ({ getStore, getActions, setStore }) => {
           subtotal: 10,
         },
         {
-          id: 2,
+          sku: 2,
           name: "producto II",
           url: "https://shoptheoldemercantile.com/image/cache/catalog/placeholderproduct-500x500.png",
           shipping: "3 semanas",
@@ -67,7 +69,7 @@ const getState = ({ getStore, getActions, setStore }) => {
           subtotal: 10,
         },
         {
-          id: 3,
+          sku: 3,
           name: "producto III",
           url: "https://shoptheoldemercantile.com/image/cache/catalog/placeholderproduct-500x500.png",
           shipping: "3 semanas",
@@ -222,7 +224,7 @@ const getState = ({ getStore, getActions, setStore }) => {
       inicioLogin: (userEmail, userPassword) => {
         console.log("funciona");
         fetch(
-          "https://3001-gabroma-proyectofinal-7oux03gk7aj.ws-us86.gitpod.io/api/login",
+          "https://3001-gabroma-proyectofinal-9u525lreo6c.ws-us87.gitpod.io/api/login",
           {
             method: "POST",
             headers: {
@@ -240,6 +242,10 @@ const getState = ({ getStore, getActions, setStore }) => {
               setStore({
                 estalogueado: true,
               });
+              Swal.fire({
+                icon: "success",
+                title: "Inicio de sesión exitoso",
+              });
             }
             return response.json();
           })
@@ -249,7 +255,10 @@ const getState = ({ getStore, getActions, setStore }) => {
             console.log(data);
 
             if (data.msg === "Bad email or password") {
-              alert("data.msg");
+              Swal.fire({
+                icon: "error",
+                title: data.msg,
+              });
             }
 
             localStorage.setItem("token", data.access_token);
@@ -265,7 +274,7 @@ const getState = ({ getStore, getActions, setStore }) => {
         userEmail
       ) => {
         fetch(
-          "https://3001-gabroma-proyectofinal-7oux03gk7aj.ws-us86.gitpod.io/api/signup",
+          "https://3001-gabroma-proyectofinal-9u525lreo6c.ws-us87.gitpod.io/api/signup",
           {
             method: "POST",
             headers: {
@@ -287,13 +296,20 @@ const getState = ({ getStore, getActions, setStore }) => {
               setStore({
                 estalogueado: true,
               });
+              Swal.fire({
+                icon: "success",
+                title: "Usuario creado con exito",
+              });
             }
             return response.json();
           })
           .then((data) => {
             console.log(data);
-            if (data.msg === "Bad email or password") {
-              alert(" Bad email or password");
+            if (data.msg === "el email ya existe") {
+              Swal.fire({
+                icon: "error",
+                title: data.msg,
+              });
             }
             localStorage.setItem("token", data.access_token);
           })
