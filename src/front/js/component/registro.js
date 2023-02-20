@@ -3,9 +3,13 @@ import { Context } from "../store/appContext.js";
 import { Link } from "react-router-dom";
 import { Formik, Field, Form, ErrorMessage } from "formik";
 import * as Yup from "yup";
+// import Swal from "sweetalert2";
 
 export const Registro = () => {
   const { store, actions } = useContext(Context);
+  // const Swal = require("sweetalert2");
+
+  // function onSubmit() {}
 
   return (
     <>
@@ -208,6 +212,7 @@ export const Registro = () => {
                   <div className="col-12"></div>
                   <div className="card-footer text-muted">
                     <button
+                      // onClick={onSubmit}
                       type="submit"
                       id="botoncrearcuenta"
                       data-bs-dismiss="modal"
