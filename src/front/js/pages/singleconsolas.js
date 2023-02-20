@@ -4,7 +4,7 @@ import { Link, useParams } from "react-router-dom";
 import { Context } from "../store/appContext";
 import rigoImageUrl from "../../img/rigo-baby.jpg";
 
-export const Single = (item) => {
+export const Singleconsolas = (item) => {
   const { actions } = useContext(Context);
   const [added, setAdded] = useState(false);
   const params = useParams();
@@ -30,7 +30,7 @@ export const Single = (item) => {
           <div class="col-md-6 mx-auto w-50">
             <div class="text-center">
               <img
-                src={props.imagen}
+                src="https://th.bing.com/th/id/R.19b8a5afcb2dcfde3fa4416ac9dac690?rik=WHZDE7e7q5nTQA&riu=http%3a%2f%2ffactorydirectcraft.com%2fimages%2fdimg.png&ehk=OZAn9gvkv%2bQFDnAtm7ApCzdKMY%2fXIfMbmHraB5s8i%2fI%3d&risl=&pid=ImgRaw&r=0"
                 class="my-5 mx-3 float-center rounded"
                 alt="..."
                 width="350"
@@ -41,7 +41,7 @@ export const Single = (item) => {
           <div class="col-md-6">
             <div class="card-body my-4">
               <h5 class="card-title card-title fw-bold fs-4 text-start my-0">
-                {props.nombre}{" "}
+                Nombre de producto{" "}
                 <button
                   onClick={() => actions.addFavorito(item)}
                   type="button"
@@ -53,11 +53,11 @@ export const Single = (item) => {
               <p class="card-text fw-light fs-5 text-start my-0">Categoría</p>
               <div className="pricetag d-flex">
                 <h5>
-                  <strong>{props.moneda}</strong>
+                  <strong>$95</strong>
                 </h5>
                 &nbsp; &nbsp;
                 <s>
-                  <h5>{props.peso}</h5>
+                  <h5>$119</h5>
                 </s>
                 &nbsp; &nbsp;
                 <h5 className="text-muted">-20%</h5>
