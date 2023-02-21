@@ -57,6 +57,7 @@ class Favoritos (db.Model):
 class MetodosDePagos (db.Model):
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'),nullable=False)
+
     
 
     def __repr__(self):

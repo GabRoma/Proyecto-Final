@@ -31,24 +31,24 @@ const getState = ({
                     quantity: 1,
                     subtotal: 10,
                 },
-                {
-                    sku: 2,
-                    name: "producto II",
-                    url: "https://shoptheoldemercantile.com/image/cache/catalog/placeholderproduct-500x500.png",
-                    shipping: "3 semanas",
-                    price: 10,
-                    quantity: 1,
-                    subtotal: 10,
-                },
-                {
-                    sku: 3,
-                    name: "producto III",
-                    url: "https://shoptheoldemercantile.com/image/cache/catalog/placeholderproduct-500x500.png",
-                    shipping: "3 semanas",
-                    price: 10,
-                    quantity: 1,
-                    subtotal: 10,
-                },
+                // {
+                //   sku: 2,
+                //   name: "producto II",
+                //   url: "https://shoptheoldemercantile.com/image/cache/catalog/placeholderproduct-500x500.png",
+                //   shipping: "3 semanas",
+                //   price: 10,
+                //   quantity: 1,
+                //   subtotal: 10,
+                // },
+                // {
+                //   sku: 3,
+                //   name: "producto III",
+                //   url: "https://shoptheoldemercantile.com/image/cache/catalog/placeholderproduct-500x500.png",
+                //   shipping: "3 semanas",
+                //   price: 10,
+                //   quantity: 1,
+                //   subtotal: 10,
+                // },
             ],
             favoritos: [{
                     sku: 1,
@@ -59,24 +59,24 @@ const getState = ({
                     quantity: 1,
                     subtotal: 10,
                 },
-                {
-                    sku: 2,
-                    name: "producto II",
-                    url: "https://shoptheoldemercantile.com/image/cache/catalog/placeholderproduct-500x500.png",
-                    shipping: "3 semanas",
-                    price: 10,
-                    quantity: 1,
-                    subtotal: 10,
-                },
-                {
-                    sku: 3,
-                    name: "producto III",
-                    url: "https://shoptheoldemercantile.com/image/cache/catalog/placeholderproduct-500x500.png",
-                    shipping: "3 semanas",
-                    price: 10,
-                    quantity: 1,
-                    subtotal: 10,
-                },
+                // {
+                //   sku: 2,
+                //   name: "producto II",
+                //   url: "https://shoptheoldemercantile.com/image/cache/catalog/placeholderproduct-500x500.png",
+                //   shipping: "3 semanas",
+                //   price: 10,
+                //   quantity: 1,
+                //   subtotal: 10,
+                // },
+                // {
+                //   sku: 3,
+                //   name: "producto III",
+                //   url: "https://shoptheoldemercantile.com/image/cache/catalog/placeholderproduct-500x500.png",
+                //   shipping: "3 semanas",
+                //   price: 10,
+                //   quantity: 1,
+                //   subtotal: 10,
+                // },
             ],
             subtotal: 0,
             total: 0,
@@ -99,61 +99,25 @@ const getState = ({
                     });
             },
 
-            // // utilizar esta funcion para un producto
-            // obtenerInfoDeCadaProducto: (asin) => {
-            //     fetch(
-            //             "https://api.rainforestapi.com/request?" +
-            //             api_key +
-            //             "&type=product&amazon_domain=amazon.com&" +
-            //             asin
-            //         ) // buscar que quede de forma dinamica useParams,
-            //         .then((res) => res.json())
-            //         .then((data) =>
-            //             setStore({
-            //                 detalleProducto: data,
-            //             })
-            //         )
-            //         .catch((err) => console.error(err));
-            // },
-
-            // // https://api.rainforestapi.com/request?api_key={api_key}&type=category&amazon_domain=amazon.com&category_id={category_id}
-
-            // obtenerProductos: () => {
-            //     let apiKey = "C2F2227A0E2A431EA566520B4BFB9939";
-            //     let categoryId = "281052";
-            //     fetch(
-            //             "https://api.rainforestapi.com/request?api_key=" +
-            //             apiKey +
-            //             "&type=category&amazon_domain=amazon.com&category_id=" +
-            //             categoryId
-            //         )
-            //         .then((res) => res.json())
-            //         .then((data) =>
-            //             setStore({
-            //                 productos: data.category_results,
-            //             })
-            //         )
-            //         .catch((err) => console.error(err));
-            // },
-
-            addCarrito: (item) => {
-                if (getStore().carrito.some((elem) => elem.name === item.name)) {
-                    getActions().quitCarrito(item);
-                } else {
-                    setStore({
-                        carrito: getStore().carrito.concat(item),
-                    });
-                    console.log(`${item.name} se ha añadido al carrito de compras.`);
-                }
-                getActions().sumCarrito();
-            },
-            quitCarrito: (item) => {
+            agregarACarrito: (props, nombre, id) => {
+                let store = getStore(); //tenemos que traer el array favoritos
+                let contenedordeelemento = {}; //necesitamos recorrer el array favorito guardarlo en  contenedordeelemento
+                contenedordeelemento.nombresdecadaproducto = props.nombre;
+                contenedordeelemento.id = props.id;
                 setStore({
-                    carrito: getStore().carrito.filter((i) => i.name !== item.name),
+                    carrito: [...store.carrito, contenedordeelemento],
                 });
-                console.log(`${item.name} se ha eliminado del carrito de compras.`);
-                getActions().sumCarrito();
             },
+            eliminarDeCarrito: (id) => {
+                let arr = [];
+
+                let store = getStore();
+                arr = store.carrito.filter((elemento) => elemento !== id);
+                setStore({
+                    carrito: arr,
+                });
+            },
+
             sumCarrito: () => {
                 const totalSum = getStore().carrito.reduce(
                     (accumulator, currentValue) => accumulator + currentValue.subtotal,
@@ -181,21 +145,24 @@ const getState = ({
                 getActions().sumCarrito();
                 console.log(getStore().carrito);
             },
-            addFavorito: (item) => {
-                if (getStore().favoritos.some((elem) => elem.name === item.name)) {
-                    getActions().quitFavorito(item);
-                } else {
-                    setStore({
-                        favoritos: getStore().favoritos.concat(item),
-                    });
-                    console.log(`${item.name} se ha añadido a tu lista de favoritos.`);
-                }
-            },
-            quitFavorito: (item) => {
+
+            agregarFavorito: (props, nombre, id) => {
+                let store = getStore(); //tenemos que traer el array favoritos
+                let contenedordeelemento = {}; //necesitamos recorrer el array favorito guardarlo en  contenedordeelemento
+                contenedordeelemento.nombresdecadaproducto = props.nombre;
+                contenedordeelemento.id = props.id;
                 setStore({
-                    favoritos: getStore().favoritos.filter((i) => i.name !== item.name),
+                    favoritos: [...store.favoritos, contenedordeelemento],
                 });
-                console.log(`${item.name} se ha eliminado de tu lista de favoritos.`);
+            },
+            eliminarFavorito: (id) => {
+                let arr = [];
+
+                let store = getStore();
+                arr = store.favoritos.filter((elemento) => elemento !== id);
+                setStore({
+                    favoritos: arr,
+                });
             },
 
             getMessage: async () => {
@@ -335,3 +302,74 @@ const getState = ({
 };
 
 export default getState;
+
+//   addCarrito: (item) => {
+//     if (getStore().carrito.some((elem) => elem.name === item.name)) {
+//       getActions().quitCarrito(item);
+//     } else {
+//       setStore({
+//         carrito: getStore().carrito.concat(item),
+//       });
+//       console.log(`${item.name} se ha añadido al carrito de compras.`);
+//     }
+//     getActions().sumCarrito();
+//   },
+//   quitCarrito: (item) => {
+//     setStore({
+//       carrito: getStore().carrito.filter((i) => i.name !== item.name),
+//     });
+//     console.log(`${item.name} se ha eliminado del carrito de compras.`);
+//     getActions().sumCarrito();
+//   },
+// addFavorito: (item) => {
+//     if (getStore().favoritos.some((elem) => elem.name === item.name)) {
+//         getActions().quitFavorito(item);
+//     } else {
+//         setStore({
+//             favoritos: getStore().favoritos.concat(item),
+//         });
+//         console.log(`${item.name} se ha añadido a tu lista de favoritos.`);
+//     }
+// },
+// quitFavorito: (item) => {
+//     setStore({
+//         favoritos: getStore().favoritos.filter((i) => i.name !== item.name),
+//     });
+//     console.log(`${item.name} se ha eliminado de tu lista de favoritos.`);
+// },
+// // utilizar esta funcion para un producto
+// obtenerInfoDeCadaProducto: (asin) => {
+//     fetch(
+//             "https://api.rainforestapi.com/request?" +
+//             api_key +
+//             "&type=product&amazon_domain=amazon.com&" +
+//             asin
+//         ) // buscar que quede de forma dinamica useParams,
+//         .then((res) => res.json())
+//         .then((data) =>
+//             setStore({
+//                 detalleProducto: data,
+//             })
+//         )
+//         .catch((err) => console.error(err));
+// },
+
+// // https://api.rainforestapi.com/request?api_key={api_key}&type=category&amazon_domain=amazon.com&category_id={category_id}
+
+// obtenerProductos: () => {
+//     let apiKey = "C2F2227A0E2A431EA566520B4BFB9939";
+//     let categoryId = "281052";
+//     fetch(
+//             "https://api.rainforestapi.com/request?api_key=" +
+//             apiKey +
+//             "&type=category&amazon_domain=amazon.com&category_id=" +
+//             categoryId
+//         )
+//         .then((res) => res.json())
+//         .then((data) =>
+//             setStore({
+//                 productos: data.category_results,
+//             })
+//         )
+//         .catch((err) => console.error(err));
+// },

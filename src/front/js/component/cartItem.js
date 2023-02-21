@@ -50,7 +50,7 @@ export const CartItem = (item) => {
               <h5 className="card-title"> {item.name} </h5>{" "}
               <i
                 className="fa fa-solid fa-trash"
-                onClick={() => actions.quitCarrito(item)}
+                onClick={() => actions.eliminarDeCarrito(item)}
               ></i>{" "}
             </div>{" "}
             <p className="card-text">

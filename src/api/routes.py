@@ -93,93 +93,161 @@ def handle_singleuser(user_id):
 #terminamos de trabajar aca    
 
 #Favoritos
-
-#Agregar a Favoritos
-@api.route("/user/<int:user_id>/favoritos", methods=["POST"])
-def add_favorito(user_id):
-    request_body = request.get_json()
-    fav = Favoritos.query.filter_by(user_id=user_id, producto_sku=request_body["producto_sku"]).first()
-    if fav is None:
-        newFav = Favorites(
-            user_id=user_id, producto_sku=request_body["producto_sku"])
-        db.session.add(newFav)
-        db.session.commit()
-        return jsonify("Producto añadido a tu lista de favoritos"), 200
-    else:
-        return jsonify("Este producto ya se encuentra en tu lista de favoritos"), 400
-
-#Eliminar de Favoritos
-@api.route("/user/<int:user_id>/favoritos", methods=["DELETE"])
-def del_favorito(user_id):
-    request_body = request.get_json()
-    unFav = Favoritos.query.filter_by(user_id=user_id, producto_sku=request_body["producto_sku"]).first()
-    if unFav is None:
-        raise APIException("No hemos podido encontrar este producto en tu lista de favoritos", status_code=404)
-    db.session.delete(unFav)
-    db.session.commit()
-    return jsonify("El producto ha sido eliminado de tu lista de favoritos"), 200
-
-#Traer Todos los Favoritos
+#Traer Todos los Favoritos 
 @api.route('/user/<int:user_id>/favoritos', methods=['GET'])
 def handle_favoritos(user_id):
-    allFav = Favoritos.query.filter_by(user_id=user_id).all()
-    listaFav = list(map(lambda fav: fav.serialize(),allFav))
+    all_favoritos = Favoritos.query.filter_by(user_id=user_id).all()
+    results = list(map(lambda item: item.serialize(),all_favoritos))
 
-    return jsonify(listaFav), 200
+    return jsonify(results), 200
 
 #Traer un Favorito
-@api.route('/user/<int:user_id>/favoritos/<int:favoritos_id>', methods=['GET'])
-def single_fav(user_id, favoritos_id):
-    singleFav = Favoritos.query.filter_by(user_id=user_id, id=favoritos_id).first()
-    if singleFav is None:
-        raise APIException('No hemos podido encontrar este producto en tu lista de favoritos', status_code=404)
-    return jsonify(singleFav.serialize()), 200
+@api.route('/user/<int:user_id>/favoritos/<int:favorito_id>', methods=['GET'])
+def handle_one_favorito(user_id, favorito_id):
+    one_favorito = Favoritos.query.filter_by(user_id=user_id, id=favorito_id).first()
+    if one_favorito is None:
+        return jsonify({"msg":"No hemos podido encontrar este producto en tu lista de favoritos"}), 404
+    return jsonify(one_favorito.serialize()), 200
+
+#Agregar a favoritos 
+@api.route("/user/<int:user_id>/favoritos/products/<string:producto_sku>", methods=['POST'])
+def add_favourite_product(user_id, producto_sku):
+    producto = Favoritos.query.filter_by(producto_sku=producto_sku, user_id=user_id).first()
+    if producto is None:
+        existe = Producto.query.filter_by(sku=producto_sku).first()
+        if existe is None:
+            response_body = {"msg":"no existe el producto"}
+            return jsonify(response_body), 404
+        else:
+            user = User.query.filter_by(id=user_id).first()
+            if user is None:
+                response_body = {"msg":"el usuario no existe"}
+                return jsonify(response_body),404
+            else:
+                favorito = Favoritos(producto_sku=producto_sku, user_id=user_id)
+                db.session.add(favorito)
+                db.session.commit()
+                response_body = {"msg":"Se ha agregado el producto a Favoritos"}
+                return jsonify(response_body), 200
+    else:     
+        response_body = {"msg":"El producto ya esta agregado"}
+        return jsonify(response_body), 404        
+
+#Eliminar de favoritos
+@api.route('user/<int:user_id>/favoritos/products/<string:producto_sku>', methods=['DELETE'])
+def borrar_producto_fav(user_id, producto_sku):
+    usuario = User.query.filter_by(id=user_id).first()
+    if usuario is None:
+        response_body = {"msg": "El usuario ingresado no existe"}
+        return jsonify(response_body), 404
+    productoexiste = Producto.query.filter_by(sku=producto_sku).first()
+    if productoexiste is None:
+        response_body = {"msg": "El producto ingresado no existe dentro de favoritos"}
+        return jsonify(response_body), 404
+
+    borrar_producto = Favoritos.query.filter_by(user_id=user_id).filter_by(producto_sku=producto_sku).first()
+    if borrar_producto is None: 
+        response_body = {"msg": "El producto ingresado no existe dentro de favoritos"}
+        return jsonify(response_body), 404
+        
+    db.session.delete(borrar_producto)
+    db.session.commit()
+    response_body = {"msg": "El producto seleccionado fue borrado con exito"}
+    return jsonify(response_body), 200
 
 #Carrito
-
-#Agregar a Carrito
-@api.route("/user/<int:user_id>/carrito", methods=["POST"])
-def add_carrito(user_id):
-    request_body = request.get_json()
-    prod = Carrito.query.filter_by(user_id=user_id, producto_sku=request_body["producto_sku"]).first()
-    if prod is None:
-        newProd = Carrito(
-            user_id=user_id, producto_sku=request_body["producto_sku"])
-        db.session.add(newProd)
-        db.session.commit()
-        return jsonify("Producto añadido a tu carrito"), 200
-    else:
-        return jsonify("Este producto ya se encuentra en tu carrito"), 400
-
-#Eliminar de Carrito
-@api.route("/user/<int:user_id>/carrito", methods=["DELETE"])
-def del_carrito(user_id):
-    request_body = request.get_json()
-    unProd = Carrito.query.filter_by(user_id=user_id, producto_sku=request_body["producto_sku"]).first()
-    if unProd is None:
-        raise APIException("No hemos podido encontrar este producto en tu carrito", status_code=404)
-    db.session.delete(unProd)
-    db.session.commit()
-    return jsonify("El producto ha sido eliminado de tu carrito"), 200
-
 #Traer Todos los Productos del Carrito
 @api.route('/user/<int:user_id>/carrito', methods=['GET'])
 def handle_carrito(user_id):
-    allProd = Carrito.query.filter_by(user_id=user_id).all()
-    listaProd = list(map(lambda prod: prod.serialize(),allFav))
+    all_carrito = Carrito.query.filter_by(user_id=user_id).all()
+    results = list(map(lambda item: item.serialize(),all_carrito))
 
-    return jsonify(listaProd), 200
+    return jsonify(results), 200
 
 #Traer un Producto del Carrito
 @api.route('/user/<int:user_id>/carrito/<int:carrito_id>', methods=['GET'])
-def single_prod(user_id, carrito_id):
-    singleProd = Carrito.query.filter_by(user_id=user_id, id=carrito_id).first()
-    if singleProd is None:
-        raise APIException('Este producto no se encuentra en tu carrito', status_code=404)
-    return jsonify(singleProd.serialize()), 200
+def handle_one_producto(user_id, carrito_id):
+    one_producto = Carrito.query.filter_by(user_id=user_id, id=carrito_id).first()
+    if one_producto is None:
+        return jsonify({"msg":"No hemos podido encontrar este producto en tu lista de favoritos"}), 404
+    return jsonify(one_producto.serialize()), 200
+
+#Agregar a Carrito
+@api.route("/user/<int:user_id>/carrito/products/<string:producto_sku>", methods=['POST'])
+def add_carrito_product(user_id, producto_sku):
+    producto = Carrito.query.filter_by(producto_sku=producto_sku, user_id=user_id).first()
+    if producto is None:
+        existe = Producto.query.filter_by(sku=producto_sku).first()
+        if existe is None:
+            response_body = {"msg":"no existe el producto"}
+            return jsonify(response_body), 404
+        else:
+            user = User.query.filter_by(id=user_id).first()
+            if user is None:
+                response_body = {"msg":"el usuario no existe"}
+                return jsonify(response_body),404
+            else:
+                carrito = Carrito(producto_sku=producto_sku, user_id=user_id)
+                db.session.add(carrito)
+                db.session.commit()
+                response_body = {"msg":"Se ha agregado el producto a Carrito"}
+                return jsonify(response_body), 200
+    else:        
+        response_body = {"msg":"El producto ya esta agregado"}
+        return jsonify(response_body), 404        
+
+#Eliminar de carrito
+@api.route('user/<int:user_id>/carrito/products/<string:producto_sku>', methods=['DELETE'])
+def borrar_producto_carrito(user_id, producto_sku):
+    usuario = User.query.filter_by(id=user_id).first()
+    if usuario is None:
+        response_body = {"msg": "El usuario ingresado no existe"}
+        return jsonify(response_body), 404
+  
+    productoexiste = Producto.query.filter_by(sku=producto_sku).first()
+    if productoexiste is None:
+        response_body = {"msg": "El producto ingresado no existe dentro de carrito"}
+        return jsonify(response_body), 404
+
+    borrar_producto = Carrito.query.filter_by(user_id=user_id).filter_by(producto_sku=producto_sku).first()
+    if borrar_producto is None: 
+        response_body = {"msg": "El producto ingresado no existe dentro de carrito"}
+        return jsonify(response_body), 404
+        
+    db.session.delete(borrar_producto)
+    db.session.commit()
+    response_body = {"msg": "El producto seleccionado fue borrado con exito"}
+    return jsonify(response_body), 200
 
 
-# https://api.rainforestapi.com/request?api_key=65BDAA07696E4ED79ADED9A3D6EB415C&type=category&url=https%3A%2F%2Fwww.amazon.com%2Fs%3Fbbn%3D16225009011%26rh%3Dn%253A%252116225009011%252Cn%253A502394%252Cn%253A281052
+#Checkout
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 @api.route('/productos/api', methods=['GET'])

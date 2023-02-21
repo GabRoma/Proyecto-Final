@@ -5,8 +5,10 @@ import logo2 from "../../img/logito2.png";
 import { AuthComponent } from "./authcomponent.js";
 import { Context } from "../store/appContext";
 
-export const Navbar = () => {
-  const { store } = useContext(Context);
+export const Navbar = (props) => {
+  const { store, actions } = useContext(Context);
+  console.log(store.favoritos);
+  console.log(props);
 
   return (
     <nav className="navbar sticky-top pt-0">
@@ -58,15 +60,22 @@ export const Navbar = () => {
               </span>
             </button>
             <ul className="dropdown-menu">
-              {store.favoritos.map((item, index) => {
-                return (
-                  <li key={item.id}>
-                    <a className="dropdown-item" href="#">
-                      {item.name}
-                    </a>
-                  </li>
-                );
-              })}
+              {store.favoritos.map((item, index) => (
+                <div className="row" key={index}>
+                  <button className="list-group-item btn btn-outline-primary w-75 mx-auto">
+                    {item.nombresdecadaproducto} {index.id}{" "}
+                    <button
+                      className="btn btn-secondary rounded opacity-10 mx-0 "
+                      type="button"
+                      id="eliminar"
+                      onClick={() => actions.eliminarFavorito(item)}
+                    >
+                      Borrar
+                    </button>{" "}
+                  </button>
+                </div>
+              ))}
+
               <li key={"f" + store.favoritos.length}>
                 <a
                   className="dropdown-item text-center text-muted"
@@ -89,15 +98,21 @@ export const Navbar = () => {
               </span>
             </button>
             <ul className="listaCarrito dropdown-menu">
-              {store.carrito.map((item, index) => {
-                return (
-                  <li key={item.id}>
-                    <a className="dropdown-item" href="#">
-                      {item.name}
-                    </a>
-                  </li>
-                );
-              })}
+              {store.carrito.map((item, index) => (
+                <div className="row" key={index}>
+                  <button className="list-group-item btn btn-outline-primary w-75 mx-auto">
+                    {item.nombresdecadaproducto} {index.id}{" "}
+                    <button
+                      className="btn btn-secondary rounded opacity-10 mx-0 "
+                      type="button"
+                      id="eliminar"
+                      onClick={() => actions.eliminarDeCarrito(item)}
+                    >
+                      Borrar
+                    </button>{" "}
+                  </button>
+                </div>
+              ))}
               <li key={"c" + store.carrito.length}>
                 <a
                   className="dropdown-item text-center text-muted"
