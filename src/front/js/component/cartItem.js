@@ -6,9 +6,11 @@ import { Context } from "../store/appContext";
 import { Link, useParams } from "react-router-dom";
 import CartAmountToggle from "../component/amount";
 
-export const CartItem = (item) => {
+export const CartItem = (item, props) => {
   const { store, actions, setStore } = useContext(Context);
   const params = useParams();
+  console.log(store.carrito);
+  console.log(props);
 
   const [amount, setAmount] = useState(1);
   const [theprice, setPrice] = useState(item.price);
@@ -46,13 +48,19 @@ export const CartItem = (item) => {
         </div>{" "}
         <div className="col-md-8">
           <div className="card-body">
-            <div className="d-flex justify-content-between">
-              <h5 className="card-title"> {item.name} </h5>{" "}
-              <i
-                className="fa fa-solid fa-trash"
-                onClick={() => actions.eliminarDeCarrito(item)}
-              ></i>{" "}
-            </div>{" "}
+            {store.carrito.map((item, index) => (
+              <div className="row" key={index}>
+                <h5 className="card-title ">
+                  {item.nombresdecadaproducto} {index.id}{" "}
+                  <i
+                    className=" fa fa-solid fa-trash opacity-10"
+                    type="button"
+                    id="eliminar"
+                    onClick={() => actions.eliminarDeCarrito(item)}
+                  ></i>{" "}
+                </h5>
+              </div>
+            ))}
             <p className="card-text">
               This is a wider card with supporting text below as a natural lead
               - in to additional content.This content is a little bit longer.{" "}
