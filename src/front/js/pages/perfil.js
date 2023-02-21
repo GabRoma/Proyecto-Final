@@ -1,13 +1,31 @@
-//Perfil de Usuario
+// Perfil de Usuario
 
-import React, { useContext } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import PropTypes from "prop-types";
 import { Link, useParams, NavLink } from "react-router-dom";
 import { Context } from "../store/appContext";
 
-export const Perfil = (props) => {
+export const Perfil = (user) => {
   const { store, actions } = useContext(Context);
-  const params = useParams();
+  const [editing, setEditing] = useState(false);
+  const [updateUserData, setUpdateUserData] = useState({});
+
+  const handleEditClick = () => {
+    setEditing(true);
+    // setUpdateUserData(userData);
+  };
+
+  const handleSaveClick = () => {
+    setEditing(false);
+    // setUpdateUserData(userData);
+  };
+
+  const handleInputChange = (event) => {
+    const { name, value } = event.target;
+    setUpdateUserData({ ...updateUserData, [name]: value });
+  };
+
+  useEffect(() => actions.getUserData(localStorage.userId), []);
 
   return (
     <>
@@ -21,19 +39,97 @@ export const Perfil = (props) => {
               className="fa fa-user-circle my-2"
               style={{ fontSize: "xx-large" }}
             >
-              Usuario
+              {store.userData.name}
             </i>
-            <a href="/">
-              <i className="fa fa-pen text-muted">
+            {editing ? (
+              <i className="fa fa-save" onClick={handleSaveClick}>
+                Guardar
+              </i>
+            ) : (
+              <i className="fa fa-pen text-muted" onClick={handleEditClick}>
                 <u>editar información</u>
               </i>
-            </a>
+            )}
           </div>
-          <div className="card-body my-2 p-2">
-            <p>Email:</p>
-            <p>Celular:</p>
-            <p>Dirección:</p>
-          </div>
+          {editing ? (
+            <div className="card-body my-2 p-2 d-block">
+              <>
+                <label htmlFor="name">Nombre:</label>
+                <input
+                  type="text"
+                  name="name"
+                  value={updateUserData.name}
+                  onChange={handleInputChange}
+                  style={{
+                    backgroundColor: "transparent",
+                    borderTop: "none",
+                    borderRight: "none",
+                    borderLeft: "none",
+                    borderBottom: "1",
+                    borderColor: "gray",
+                  }}
+                />
+                <br></br>
+                <label htmlFor="email">Email:</label>
+                <input
+                  type="email"
+                  name="email"
+                  value={updateUserData.email}
+                  onChange={handleInputChange}
+                  style={{
+                    backgroundColor: "transparent",
+                    borderTop: "none",
+                    borderRight: "none",
+                    borderLeft: "none",
+                    borderBottom: "1",
+                    borderColor: "gray",
+                  }}
+                />
+                <br></br>
+                <label htmlFor="direccion_de_entrega">Address:</label>
+                <input
+                  type="text"
+                  name="direccion_de_entrega"
+                  value={updateUserData.direccion_de_entrega}
+                  onChange={handleInputChange}
+                  style={{
+                    backgroundColor: "transparent",
+                    borderTop: "none",
+                    borderRight: "none",
+                    borderLeft: "none",
+                    borderBottom: "1",
+                    borderColor: "gray",
+                  }}
+                />
+                <br></br>
+                <label htmlFor="celular">Teléfono:</label>
+                <input
+                  type="tel"
+                  name="celular"
+                  value={updateUserData.celular}
+                  onChange={handleInputChange}
+                  style={{
+                    backgroundColor: "transparent",
+                    borderTop: "none",
+                    borderRight: "none",
+                    borderLeft: "none",
+                    borderBottom: "1",
+                    borderColor: "gray",
+                  }}
+                />
+              </>
+            </div>
+          ) : (
+            <div className="card-body my-2 p-2">
+              <p>
+                Nombre completo:{" "}
+                {store.userData.name + " " + store.userData.apellido}
+              </p>
+              <p>Correo: {store.userData.email}</p>
+              <p>Teléfono: {store.userData.celular}</p>
+              <p>Dirección: {store.userData.direccion_de_entrega}</p>
+            </div>
+          )}
         </div>
       </div>
       <div className="card-table border border-light rounded w-75 m-auto">
