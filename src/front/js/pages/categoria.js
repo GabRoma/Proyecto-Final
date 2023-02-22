@@ -53,12 +53,12 @@ export const Categoria = (props) => {
                 &nbsp;
                 <p className="text-muted">-20%</p>
               </div>
-              <div>
-                <i
-                  className="fas fa-shopping-cart mx-1"
-                // onClick={() => actions.addCarrito(item)}
-                />
-              </div>
+              <button
+                onClick={() => actions.agregarACarrito(item)}
+                type="button"
+              >
+                <i className="fas fa-shopping-cart mx-1" />
+              </button>
             </div>
           </div>
         </div>

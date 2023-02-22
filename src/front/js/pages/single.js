@@ -10,6 +10,10 @@ export const Single = (item) => {
   const params = useParams();
   console.log(params);
 
+  const agregarItemCarrito = () => {
+    actions.agregarACarrito(params.theid, storage.getItem("userId"));
+  };
+
   useEffect(() => {
     actions.todosLosProductos(params.theid);
   }, []);
@@ -79,6 +83,7 @@ export const Single = (item) => {
                   <button
                     onClick={() => {
                       toggleClick();
+                      agregarItemCarrito();
                     }}
                     className="btn btn-dark w-100 my-1 fw-bold float-start"
                     type="button"

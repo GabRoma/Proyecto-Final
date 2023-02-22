@@ -99,7 +99,44 @@ const getState = ({
                     });
             },
 
-            agregarACarrito: (props, nombre, id) => {
+            checkout: () => {
+                // Function 1 Agregar/generar Orden
+                // fetch(
+                //     "https://3001-gabroma-proyectofinal-5zn559e2lki.ws-us87.gitpod.io/api/user/<int:user_id>/carrito/orden"
+                // )
+                // Function 2 Agregar/generar Orden_detail
+                // fetch(
+                //     "https://3001-gabroma-proyectofinal-5zn559e2lki.ws-us87.gitpod.io/api/user/<int:user_id>/carrito/orden_detail"
+                // )
+                // Function 3 Actualizar carrito
+                // fetch(
+                //     "https://3001-gabroma-proyectofinal-5zn559e2lki.ws-us87.gitpod.io/api/user/<int:user_id>/carrito"
+                // )
+            },
+            // ejectuarpago ={
+            //     funcion1(),
+            //     funcion2(),
+            //     funcion3()
+            // }
+
+            agregarACarrito: (sku, userid) => {
+                fetch(
+                    "https://gabroma-proyectofinal-5zn559e2lki.ws-us87.gitpod.io/api/user/<int:user_id>/carrito/products/<string:producto_sku>", {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json",
+                            // 'Content-Type': 'application/x-www-form-urlencoded',
+                        },
+                        body: JSON.stringify({
+                            // user_id: userEmail,
+                            // password: userPassword,
+
+                            // "id": 3,
+                            producto_sku: sku,
+                            user_id: userid,
+                        }), //lo que tenga el recipiente reproducelo // body data type must match "Content-Type" header
+                    }
+                );
                 let store = getStore(); //tenemos que traer el array favoritos
                 let contenedordeelemento = {}; //necesitamos recorrer el array favorito guardarlo en  contenedordeelemento
                 contenedordeelemento.nombresdecadaproducto = props.nombre;
@@ -109,6 +146,23 @@ const getState = ({
                 });
             },
             eliminarDeCarrito: (id) => {
+                // fetch(
+                //     "https://gabroma-proyectofinal-5zn559e2lki.ws-us87.gitpod.io/api/user/<int:user_id>/carrito/products/<string:producto_sku>", {
+                //         method: "DELETE",
+                //         headers: {
+                //             "Content-Type": "application/json",
+                //             // 'Content-Type': 'application/x-www-form-urlencoded',
+                //         },
+                //         body: JSON.stringify({
+                //             // user_id: userEmail,
+                //             // password: userPassword,
+
+                //             // "id": 3,
+                //             producto_sku: sku,
+                //             user_id: userid,
+                //         }), //lo que tenga el recipiente reproducelo // body data type must match "Content-Type" header
+                //     }
+                // );
                 let arr = [];
 
                 let store = getStore();
@@ -228,6 +282,7 @@ const getState = ({
                         }
 
                         localStorage.setItem("token", data.access_token);
+                        localStorage.setItem("userId", data.user.id);
                     }) // nos llega un objeto llaamado data y tiene una propiedad access_token
                     .catch((err) => console.log(err));
             },
