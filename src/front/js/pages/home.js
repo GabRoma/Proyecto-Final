@@ -115,7 +115,7 @@ export const Home = () => {
               <ul class="dropdown-menu">
                 <li>
                   <Link
-                    to={"/categoriacelularesvista"}
+                    to={"/categoria/celulares"}
                     class="dropdown-item"
                     type="button"
                   >
@@ -124,7 +124,7 @@ export const Home = () => {
                 </li>
                 <li>
                   <Link
-                    to={"/categoriacalzadosvista"}
+                    to={"/categoria/calzados"}
                     class="dropdown-item"
                     type="button"
                   >
@@ -133,7 +133,7 @@ export const Home = () => {
                 </li>
                 <li>
                   <Link
-                    to={"/categoriaconsolasvista"}
+                    to={"/categoria/consola"}
                     class="dropdown-item"
                     type="button"
                   >
@@ -142,7 +142,7 @@ export const Home = () => {
                 </li>
                 <li>
                   <Link
-                    to={"/categoriacamarasvista"}
+                    to={"/categoria/Camera"}
                     class="dropdown-item"
                     type="button"
                   >
@@ -151,7 +151,7 @@ export const Home = () => {
                 </li>
                 <li>
                   <Link
-                    to={"/categorialaptopsvista"}
+                    to={"/categoria/laptop"}
                     class="dropdown-item"
                     type="button"
                   >
@@ -160,7 +160,7 @@ export const Home = () => {
                 </li>
                 <li>
                   <Link
-                    to={"/categorialentesvista"}
+                    to={"/categoria/lentes"}
                     class="dropdown-item"
                     type="button"
                   >
@@ -169,7 +169,7 @@ export const Home = () => {
                 </li>
                 <li>
                   <Link
-                    to={"/categoriaropavista"}
+                    to={"/categoria/ropa"}
                     class="dropdown-item"
                     type="button"
                   >
@@ -178,7 +178,7 @@ export const Home = () => {
                 </li>
                 <li>
                   <Link
-                    to={"/categoriarelojesvista"}
+                    to={"/categoria/reloj"}
                     class="dropdown-item"
                     type="button"
                   >
@@ -293,44 +293,38 @@ export const Home = () => {
       </div>
       <Carousel />
       <div className="container">
-        <div className="container my-5 d-flex">
-          <h5 className="fw-bolder ms-5"> Productos destacados! </h5>
-          <Link
-            className="ms-auto"
-            style={{
-              color: "black",
-            }}
-            to="/"
-          >
-            <p
-              style={{
-                fontSize: 14,
-              }}
-            >
-
-              Ver todos
-            </p>
-          </Link>
-        </div>
-        <div className="carousel d-flex justify-content-center container mb-4">
-          <button className="border-0 me-3">
-
-            {/* <img src= className="redondo" alt="ERROR" /> */}
-          </button>
+        <div className="container mt-5 d-flex justify-content-center">
+          <h5 className="fw-bolder display-5 mb-5"> Productos destacados! </h5>
         </div>
       </div>
-      <div className="d-flex" style={{ width: 500 }}>
-        {store.productos?.map((item, index) => (
+      <div className="container d-flex">
+        <h5 className="fw-bolder ms-3"> Camaras </h5> <Link className="ms-auto" style={{ color: "black" }} to="/categoria/camera">
+          <p style={{ fontSize: 14 }}>Ver todos</p>
+        </Link>
+      </div>
+      <div className="d-flex container">
+        {store.productos?.filter(item => item.keywords.toLowerCase().split(",").includes("camera")).slice(0, 5).map((item, index) => (
           <Productos
             key={index}
             id={index + 1}
             nombre={item.name}
             imagen={item.imagenes}
             moneda={item.currency}
-            precio={item.peso}
-
-          // moneda={item.currency}
-          // descripcion={item.description}
+            price={item.price}
+            sku={item.sku}
+          />
+        ))}
+      </div>
+      <div className="d-flex container">
+        {store.productos?.slice(6, 11).map((item, index) => (
+          <Productos
+            key={index}
+            id={index + 1}
+            nombre={item.name}
+            imagen={item.imagenes}
+            moneda={item.currency}
+            price={item.price}
+            sku={item.sku}
           />
         ))}
       </div>

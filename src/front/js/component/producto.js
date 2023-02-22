@@ -3,59 +3,34 @@ import { Link } from "react-router-dom";
 import { Context } from "../store/appContext.js";
 
 export const Productos = (props, nombre, imagen, precio, moneda) => {
-  const { store, actions } = useContext(Context);
   console.log(props.nombre);
   // console.log(precio);
 
   // if (props.id < 2) {
   return (
     <>
-      <div className="row row-cols-1 row-cols-md-3 g-4">
-        <div className="col">
-          <div className="card mx-5 " style={{ width: 250 }}>
-            <Link to={"/single/" + props.theid} className=" ">
-              <img
-                src={props.imagen}
-                className="card-img-top"
-                width="50"
-                height="200"
-                alt="..."
-              />
-            </Link>
+      <Link to={"/single/" + props.sku} style={{ textDecoration: "none", color: "darkgrey" }}>
+        <div className="card ms-3 mb-5" style={{ width: 250, height: 440 }}>
+          <img src={props.imagen} className="my-auto" style={{ maxWidth: "300px", maxHeight: "300px" }} alt="product image" />
+          <div className="px-2">
+            <h5 className="mb-4"> {props.nombre.slice(0, 50)} </h5>
+            <div className="d-flex justify-content-between card-text">
+              <strong className="fs-5 mb-2">
 
-            <div className="card-body">
-              <h5 className="card-title">{props.nombre}</h5>
-
-              <p className="card-text"></p>
-              {/* <Link to={"/single/"} className="btn btn-primary mx-5 " style={{ width: 80 }} > Learn </Link> */}
-            </div>
-            <div className="card-footer d-flex justify-content-between">
-              <div className="pricetag d-flex">
-                <strong>
-                  <p>{props.moneda}</p>
-                </strong>
-                &nbsp;
-                <strong>
-                  <p>{props.precio}</p>
-                </strong>
-                &nbsp;
-                <p className="text-muted">-20%</p>
-              </div>
+                {props.moneda} {props.price}
+              </strong>
               <div>
                 <i
                   className="fas fa-shopping-cart mx-1"
-                  // onClick={() => actions.addCarrito(item)}
+                // onClick={() => actions.addCarrito(item)}
                 />
               </div>
             </div>
           </div>
         </div>
-      </div>
+      </Link>
     </>
   );
-  // } else {
-  //   <div></div>;
-  // }
 };
 
 //btn btn-primary btn-sm ms-2
