@@ -3,7 +3,6 @@ import Swal from "sweetalert2";
 const getState = ({ getStore, getActions, setStore }) => {
   return {
     store: {
-      detalleProducto: {},
       productos: [],
       estalogueado: false,
       message: null,

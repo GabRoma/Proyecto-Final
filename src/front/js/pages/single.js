@@ -19,6 +19,7 @@ export const Single = () => {
               alt={product.name}
               style={{ maxWidth: "50%", maxHeight: "100%" }}
             />
+            div
             <h5>{product.name}</h5>
             <p>{product.description}</p>
             <p>
