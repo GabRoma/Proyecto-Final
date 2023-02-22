@@ -75,6 +75,7 @@ class Carrito(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'),nullable=False)
     producto_sku = db.Column(db.String(120), db.ForeignKey('producto.sku'),nullable=False )
+    cantidad = db.Column(db.Integer, unique=False, nullable=False)
 
     def __repr__(self):
         return '<Carrito %r>' % self.id
@@ -84,6 +85,7 @@ class Carrito(db.Model):
             "id": self.id,
             "user_id": self.user_id,
             "producto_sku": self.producto_sku,
+            "cantidad": self.cantidad,
         }
 
 
@@ -130,3 +132,41 @@ class Producto(db.Model):
             "manufacturer": self.manufacturer,
             "dimensions": self.dimensions           
         }
+
+class Orden(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'),nullable=False)
+    orden_number = db.Column(db.String(12000),unique=True,nullable=False )
+    total_amount = db.Column(db.Integer,unique=False,nullable=False )
+    fecha = db.Column(db.Integer,unique=False,nullable=False )
+    estado = db.Column(db.String(12000),unique=False,nullable=False )
+
+    def __repr__(self):
+        return '<Orden %r>' % self.id
+
+    def serialize(self):
+        return {
+            "id": self.id,
+            "user_id": self.user_id,
+            "orden_number": self.orden_number,
+            "total_amount": self.total_amount,
+            "fecha": self.fecha,
+            "estado": self.estado,
+        }        
+
+class Orden_detail(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'),nullable=False) 
+    carrito_id = db.Column(db.Integer, db.ForeignKey('carrito.id'),nullable=False) 
+    order_id = db.Column(db.Integer, db.ForeignKey('orden.id'),nullable=False) 
+
+    def __repr__(self):
+        return '< Orden_detail %r>' % self.id
+
+    def serialize(self):
+        return {
+            "id": self.id,
+            "user_id": self.user_id,
+        }            
+
+        

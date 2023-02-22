@@ -220,7 +220,46 @@ def borrar_producto_carrito(user_id, producto_sku):
     return jsonify(response_body), 200
 
 
-#Checkout
+# #Checkout
+#Traer Orden es en plural? traer ordenes
+@api.route('/user/<int:user_id>/orden', methods=['GET'])
+def handle_orden(user_id):
+    all_orden = Orden.query.filter_by(user_id=user_id).all()
+    results = list(map(lambda item: item.serialize(),all_orden))
+
+    return jsonify(results), 200
+
+
+
+
+
+
+
+
+
+# @api.route("/user/<int:user_id>/carrito/<int:user_id>/orden", methods=['POST'])
+# def add_aorden_product(user_id,sku=producto_sku):
+#     datosenlaorden = Orden.query.filter_by(user_id=user_id).first()
+
+#     if datosenlaorden is None:
+#         existe = Carrito.query.filter_by(sku=producto_sku).first()
+#         if datosenlaorden is None:
+#             response_body = {"msg":"no existe la orden"}
+#             return jsonify(response_body), 404
+#         else:
+#             user = User.query.filter_by(id=user_id).first()
+#             if user is None:
+#                 response_body = {"msg":"el usuario no existe"}
+#                 return jsonify(response_body),404
+#             else:
+#                 orden = Orden(user_id=user_id)
+#                 db.session.add(orden)
+#                 db.session.commit()
+#                 response_body = {"msg":"Se ha agregado el los productos a la orden"}
+#                 return jsonify(response_body), 200
+#     else:     
+#         response_body = {"msg":"Los productos ya estan agregados a la orden"}
+#         return jsonify(response_body), 404        
 
 
 
@@ -252,7 +291,7 @@ def borrar_producto_carrito(user_id, producto_sku):
 
 @api.route('/productos/api', methods=['GET'])
 def handle_productos():
-        api_key = "B7A4A39897D54BC78ABC33F8AFD11488"
+        api_key = "C30FEE1EDCE14C02909155347C015021"
         category_id = "281052"
         api_url_category = f"https://api.rainforestapi.com/request?api_key={api_key}&type=category&amazon_domain=amazon.com&category_id={category_id}"
         response_category = requests.get(api_url_category).json()
@@ -313,3 +352,4 @@ def handle_products():
     return jsonify(results), 200    
 
     
+
