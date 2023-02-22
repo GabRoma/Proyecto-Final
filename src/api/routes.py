@@ -2,7 +2,7 @@
 # This module takes care of starting the API Server, Loading the DB and Adding the endpoints
 # """
 from flask import Flask, request, jsonify, url_for, Blueprint
-from api.models import db, User, Carrito, Favoritos, Producto
+from api.models import db, User, Carrito, Favoritos, Producto, Orden, Orden_detail
 from api.utils import generate_sitemap, APIException
 from flask_jwt_extended import create_access_token
 from flask_jwt_extended import get_jwt_identity
@@ -229,65 +229,65 @@ def handle_orden(user_id):
 
     return jsonify(results), 200
 
+@api.route('/user/<int:user_id>/orden_detail', methods=['GET'])
+def handle_orden_detail(user_id):
+    all_orden_detail = Orden_detail.query.filter_by(user_id=user_id).all()
+    results = list(map(lambda item: item.serialize(),all_orden_detail))
+
+    return jsonify(results), 200
+
+#Agregar orden
+@api.route("/user/<int:user_id>/carrito/orden", methods=['POST'])
+def add_orden(user_id):
+    request_body = request.data  
+    decoded_object = json.loads(request_body)  
+    print(decoded_object) 
+    user = User.query.filter_by(id=user_id).first()
+    if user is None:
+            response_body = {"msg":"el usuario no existe"}
+            return jsonify(response_body),404
+    else:
+            orden = Orden(user_id=user_id, orden_number= decoded_object["orden_number"],total_amount= decoded_object["total_amount"],fecha= decoded_object["fecha"],estado= decoded_object["estado"])
+            db.session.add(orden)
+            db.session.commit()
+            # response_body = {"msg":"Se ha agregado los datos a la orden"}
+            print(orden.serialize())
+            return jsonify(orden.serialize()), 200     
 
 
+@api.route("/user/<int:user_id>/carrito/orden_detail", methods=['POST'])
+def add_orden_detail(user_id):
+    request_body = request.data  
+    decoded_object = json.loads(request_body)
+    print(decoded_object)  
+    elementos_orden =  Orden_detail(user_id=user_id, carrito_id=decoded_object["carrito_id"], order_id=decoded_object["order_id"])
+    print(elementos_orden.serialize())
+    db.session.add(elementos_orden)
+    db.session.commit()
+    elementosdelaorden = Orden_detail.query.filter_by(user_id=user_id).all()
+    print(elementosdelaorden)
+    results = list(map(lambda item: item.serialize(),elementosdelaorden))
+    print(results)
+    # user = Orden_detail.query.filter_by(id=user_id).first()
+    # if user is None:
+    #     response_body = {"msg":"el usuario ya existe"}
+    #     return jsonify(response_body),404
+    return jsonify(results), 200 
 
 
+#borrar todos los elementos del carrito
+@api.route('user/<int:user_id>/carrito', methods=['PUT'])
+def editar_estado_carrito(user_id ):
 
-
-
-
-# @api.route("/user/<int:user_id>/carrito/<int:user_id>/orden", methods=['POST'])
-# def add_aorden_product(user_id,sku=producto_sku):
-#     datosenlaorden = Orden.query.filter_by(user_id=user_id).first()
-
-#     if datosenlaorden is None:
-#         existe = Carrito.query.filter_by(sku=producto_sku).first()
-#         if datosenlaorden is None:
-#             response_body = {"msg":"no existe la orden"}
-#             return jsonify(response_body), 404
-#         else:
-#             user = User.query.filter_by(id=user_id).first()
-#             if user is None:
-#                 response_body = {"msg":"el usuario no existe"}
-#                 return jsonify(response_body),404
-#             else:
-#                 orden = Orden(user_id=user_id)
-#                 db.session.add(orden)
-#                 db.session.commit()
-#                 response_body = {"msg":"Se ha agregado el los productos a la orden"}
-#                 return jsonify(response_body), 200
-#     else:     
-#         response_body = {"msg":"Los productos ya estan agregados a la orden"}
-#         return jsonify(response_body), 404        
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    editar_estado = Carrito.query.filter_by(user_id=user_id).all()
+    print(editar_estado)
+    request_body = request.data  
+    decoded_object = json.loads(request_body)
+    print(decoded_object) 
+    for producto in editar_estado:
+        producto.estado = decoded_object["estado"]
+        db.session.commit()  
+    return jsonify("funciona"), 200 
 
 @api.route('/productos/api', methods=['GET'])
 def handle_productos():
