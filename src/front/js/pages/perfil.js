@@ -12,12 +12,11 @@ export const Perfil = (user) => {
 
   const handleEditClick = () => {
     setEditing(true);
-    // setUpdateUserData(userData);
   };
 
   const handleSaveClick = () => {
     setEditing(false);
-    // setUpdateUserData(userData);
+    actions.updateUserData(localStorage.userId, updateUserData);
   };
 
   const handleInputChange = (event) => {

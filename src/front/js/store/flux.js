@@ -84,7 +84,7 @@ const getState = ({ getStore, getActions, setStore }) => {
     actions: {
       todosLosProductos: () => {
         fetch(
-          "https://3001-gabroma-proyectofinal-lttqka64t3b.ws-us87.gitpod.io/api/products"
+          "https://3001-gabroma-proyectofinal-uke38u9xe63.ws-us87.gitpod.io/api/products"
         )
           .then((response) => response.json())
           .then((data) => {
@@ -100,7 +100,7 @@ const getState = ({ getStore, getActions, setStore }) => {
       },
       getUserData: (user_id) => {
         fetch(
-          "https://3001-gabroma-proyectofinal-lttqka64t3b.ws-us87.gitpod.io/api/user/" +
+          "https://3001-gabroma-proyectofinal-uke38u9xe63.ws-us87.gitpod.io/api/user/" +
             user_id
         )
           .then((response) => response.json())
@@ -116,7 +116,7 @@ const getState = ({ getStore, getActions, setStore }) => {
       },
       updateUserData: (user_id, updatedData) => {
         fetch(
-          "https://3001-gabroma-proyectofinal-lttqka64t3b.ws-us87.gitpod.io/api/user/" +
+          "https://3001-gabroma-proyectofinal-uke38u9xe63.ws-us87.gitpod.io/api/user/" +
             user_id,
           {
             method: "PUT",
@@ -263,7 +263,7 @@ const getState = ({ getStore, getActions, setStore }) => {
       inicioLogin: (userEmail, userPassword) => {
         console.log("funciona");
         fetch(
-          "https://3001-gabroma-proyectofinal-lttqka64t3b.ws-us87.gitpod.io/api/login",
+          "https://3001-gabroma-proyectofinal-uke38u9xe63.ws-us87.gitpod.io/api/login",
           {
             method: "POST",
             headers: {
@@ -314,7 +314,7 @@ const getState = ({ getStore, getActions, setStore }) => {
         userEmail
       ) => {
         fetch(
-          "https://3001-gabroma-proyectofinal-lttqka64t3b.ws-us87.gitpod.io/api/signup",
+          "https://3001-gabroma-proyectofinal-uke38u9xe63.ws-us87.gitpod.io/api/signup",
           {
             method: "POST",
             headers: {
