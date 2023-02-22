@@ -9,133 +9,116 @@ export const Categoria = (props) => {
   console.log(cat);
   return (
     <>
+      <small className=" fs-6 d-flex justify-content-center mt-3">
+        En TiendaNuestra encuentras l@s mejores {cat}s al mejor
+        precio, directo desde USA hasta la puerta de tu casa.
+      </small>
+      <hr />
+      <div className="d-flex container row m-auto">
+        {store.productos?.filter(item => item.keywords.toLowerCase().split(",").includes(cat)).slice(0, 20).map((item, index) => (
+          <div style={{ width: "20%" }}>
+            <Productos
+              nombre={item.name}
+              imagen={item.imagenes}
+              moneda={item.currency}
+              price={item.price}
+              sku={item.sku}
+            />
+          </div>
+        ))}
+      </div>
       <div className="container">
-        <h1 className="display-5 fw-bold text-center"> {cat} </h1>
-        <hr />
-        <small className=" fs-5 mx-3 d-flex justify-content-center">
-          En TiendaNuestra encuentras l@s mejores {cat} al mejor
-          precio, directo desde USA hasta la puerta de tu casa.
-        </small>
-        <hr />
-        <div className="d-flex container">
-          {store.productos?.filter(item => item.keywords.toLowerCase().split(",").includes(cat)).slice(0, 5).map((item, index) => (
-            <Productos
-              key={index}
-              id={index + 1}
-              nombre={item.name}
-              imagen={item.imagenes}
-              moneda={item.currency}
-              price={item.price}
-              sku={item.sku}
-            />
-          ))}
-        </div>
-        <div className="d-flex container">
-          {store.productos?.filter(item => item.keywords.toLowerCase().split(",").includes(cat)).slice(6, 11).map((item, index) => (
-            <Productos
-              key={index}
-              id={index + 1}
-              nombre={item.name}
-              imagen={item.imagenes}
-              moneda={item.currency}
-              price={item.price}
-              sku={item.sku}
-            />
-          ))}
-        </div>
-        Más información sobre Calzados
-        <div className="container justify-content-center ">
-          <div
-            class="accordion accordion-flush border-secondary border border-3 rounded opacity-75"
-            id="accordionFlushExample"
-          >
-            <div class="accordion-item">
-              <h2 class="accordion-header" id="flush-headingOne">
-                <button
-                  class="accordion-button collapsed fw-bold"
-                  type="button"
-                  data-bs-toggle="collapse"
-                  data-bs-target="#flush-collapseOne"
-                  aria-expanded="false"
-                  aria-controls="flush-collapseOne"
-                >
-                  ¿Cuál es el precio promedio de los productos de la categoría
-                  {cat} ?
-                </button>
-              </h2>
-              <div
-                id="flush-collapseOne"
-                class="accordion-collapse collapse"
-                aria-labelledby="flush-headingOne"
-                data-bs-parent="#accordionFlushExample"
+        Más información sobre {cat}s
+        <div
+          class="accordion accordion-flush border-secondary border border-3 rounded opacity-75"
+          id="accordionFlushExample"
+        >
+          <div class="accordion-item">
+            <h2 class="accordion-header" id="flush-headingOne">
+              <button
+                class="accordion-button collapsed fw-bold"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#flush-collapseOne"
+                aria-expanded="false"
+                aria-controls="flush-collapseOne"
               >
-                <div class="accordion-body">
-                  El precio promedio de los productos puede variar en base a su
-                  calidad, tipo y otras características. El precio promedio de
-                  estos productos es de U$S 76.
-                </div>
+                ¿Cuál es el precio promedio de los productos de la categoría
+                {cat} ?
+              </button>
+            </h2>
+            <div
+              id="flush-collapseOne"
+              class="accordion-collapse collapse"
+              aria-labelledby="flush-headingOne"
+              data-bs-parent="#accordionFlushExample"
+            >
+              <div class="accordion-body">
+                El precio promedio de los productos puede variar en base a su
+                calidad, tipo y otras características. El precio promedio de
+                estos productos es de U$S 76.
               </div>
             </div>
-            <div class="accordion-item">
-              <h2 class="accordion-header" id="flush-headingTwo">
-                <button
-                  class="accordion-button collapsed fw-bold"
-                  type="button"
-                  data-bs-toggle="collapse"
-                  data-bs-target="#flush-collapseTwo"
-                  aria-expanded="false"
-                  aria-controls="flush-collapseTwo"
-                >
-                  ¿Qué marcas puedo encontrar en {cat} en TiendaNuestra?
-                </button>
-              </h2>
-              <div
-                id="flush-collapseTwo"
-                class="accordion-collapse collapse"
-                aria-labelledby="flush-headingTwo"
-                data-bs-parent="#accordionFlushExample"
+          </div>
+          <div class="accordion-item">
+            <h2 class="accordion-header" id="flush-headingTwo">
+              <button
+                class="accordion-button collapsed fw-bold"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#flush-collapseTwo"
+                aria-expanded="false"
+                aria-controls="flush-collapseTwo"
               >
-                <div class="accordion-body lh-1">
-                  En TiendaNuestra encontrarás ofertas en las mejores marcas de
-                  {cat}, tales como: <ul className="my-1">● Sony</ul>{" "}
-                  <ul className="my-1">● Kodak</ul>{" "}
-                  <ul className="my-1">● Canon</ul>
-                </div>
+                ¿Qué marcas puedo encontrar en {cat} en TiendaNuestra?
+              </button>
+            </h2>
+            <div
+              id="flush-collapseTwo"
+              class="accordion-collapse collapse"
+              aria-labelledby="flush-headingTwo"
+              data-bs-parent="#accordionFlushExample"
+            >
+              <div class="accordion-body lh-1">
+                En TiendaNuestra encontrarás ofertas en las mejores marcas de
+                {cat}, tales como: <ul className="my-1">● Sony</ul>{" "}
+                <ul className="my-1">● Kodak</ul>{" "}
+                <ul className="my-1">● Canon</ul>
               </div>
             </div>
-            <div class="accordion-item">
-              <h2 class="accordion-header" id="flush-headingThree">
-                <button
-                  class="accordion-button collapsed fw-bold"
-                  type="button"
-                  data-bs-toggle="collapse"
-                  data-bs-target="#flush-collapseThree"
-                  aria-expanded="false"
-                  aria-controls="flush-collapseThree"
-                >
-                  ¿Cómo comprar {cat}s en TiendaNuestra desde Uruguay?
-                </button>
-              </h2>
-              <div
-                id="flush-collapseThree"
-                class="accordion-collapse collapse"
-                aria-labelledby="flush-headingThree"
-                data-bs-parent="#accordionFlushExample"
+          </div>
+          <div class="accordion-item">
+            <h2 class="accordion-header" id="flush-headingThree">
+              <button
+                class="accordion-button collapsed fw-bold"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#flush-collapseThree"
+                aria-expanded="false"
+                aria-controls="flush-collapseThree"
               >
-                <div class="accordion-body">
-                  Comprar productos en TiendaNuestra es muy fácil! Solo debes seguir
-                  4 simples pasos:
-                  <ul className="my-1">
-                    1- Selecciona la oferta de Calzado que deseas comprar.
-                  </ul>
-                  <ul className="my-1">
-                    2- Agregala al carrito y finaliza la compra.
-                  </ul>
-                  <ul className="my-1">3- Ingresa tus datos.</ul>
-                  <ul className="my-1">
-                    4- Selecciona el método de envío y pago.
-                  </ul>
-                </div>
+                ¿Cómo comprar {cat}s en TiendaNuestra desde Uruguay?
+              </button>
+            </h2>
+            <div
+              id="flush-collapseThree"
+              class="accordion-collapse collapse"
+              aria-labelledby="flush-headingThree"
+              data-bs-parent="#accordionFlushExample"
+            >
+              <div class="accordion-body">
+                Comprar productos en TiendaNuestra es muy fácil! Solo debes seguir
+                4 simples pasos:
+                <ul className="my-1">
+                  1- Selecciona la oferta de Calzado que deseas comprar.
+                </ul>
+                <ul className="my-1">
+                  2- Agregala al carrito y finaliza la compra.
+                </ul>
+                <ul className="my-1">3- Ingresa tus datos.</ul>
+                <ul className="my-1">
+                  4- Selecciona el método de envío y pago.
+                </ul>
               </div>
             </div>
           </div>
