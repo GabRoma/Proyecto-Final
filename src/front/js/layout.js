@@ -46,7 +46,7 @@ const Layout = () => {
             <Route element={<Espaciodescuento />} path="/espaciodescuento" />
             <Route element={<Espaciooferta />} path="/espaciooferta" />
             <Route element={<Espaciocostoytarif />} path="/espaciocostoytarif" />
-            <Route element={<Categoria />} path="/categoria/:theid" />
+            <Route element={<Categoria />} path="/categoria/:cat" />
             <Route element={<Carrito />} path="/carrito" />
             <Route element={<Checkout />} path="/checkout" />
             <Route element={<Favoritos />} path="/favoritos" />

@@ -179,42 +179,36 @@ def single_prod(user_id, carrito_id):
     return jsonify(singleProd.serialize()), 200
 
 
-# https://api.rainforestapi.com/request?api_key=65BDAA07696E4ED79ADED9A3D6EB415C&type=category&url=https%3A%2F%2Fwww.amazon.com%2Fs%3Fbbn%3D16225009011%26rh%3Dn%253A%252116225009011%252Cn%253A502394%252Cn%253A281052
-
-
 @api.route('/productos/api', methods=['GET'])
 def handle_productos():
-        api_key = "B7A4A39897D54BC78ABC33F8AFD11488"
+        api_key = "1A87A69BE7F14B488C0FDA75E548593D"
         category_id = "281052"
         api_url_category = f"https://api.rainforestapi.com/request?api_key={api_key}&type=category&amazon_domain=amazon.com&category_id={category_id}"
         response_category = requests.get(api_url_category).json()
         for item in response_category["category_results"]:
             asin = item.get("asin")
             api_url_id = f"https://api.rainforestapi.com/request?api_key={api_key}&type=product&amazon_domain=amazon.com&asin={asin}"
-
             response_id = requests.get(api_url_id).json()
-            print(response_id)
             if "product" in response_id:
                 product = response_id["product"]
-                newProd = Producto(
+                if Producto.query.filter_by(sku=product["asin"]).first() is None:
+                    newProd = Producto(
                     sku=product["asin"],
                     name=product["title"],
                     product_url=product["link"],
-                    keywords=product["keywords"],
+                    keywords = product["keywords"].lower(),
                     brand=product["brand"],
                     sell_on_amazon=True,
                     category=product["categories"][0]["name"],
-                    
-price = (item["price"]["value"]
-            if "price" in item
-            else (product["more_buying_choices"][0]["price"]["value"]
-                  if ("more_buying_choices" in product
-                      and len(product["more_buying_choices"]) > 0
-                      and "price" in product["more_buying_choices"][0])
-                  else (product["buybox_winner"]["price"]["value"]
-                        if "buybox_winner" in product and "price" in product["buybox_winner"]
-                        else "USD"))),
-                    
+                    price = (item["price"]["value"]
+                    if "price" in item
+                     else (product["more_buying_choices"][0]["price"]["value"]
+                    if ("more_buying_choices" in product
+                    and len(product["more_buying_choices"]) > 0
+                    and "price" in product["more_buying_choices"][0])
+                    else (product["buybox_winner"]["price"]["value"]
+                    if "buybox_winner" in product and "price" in product["buybox_winner"]
+                    else "No disponible"))),
                     currency = "USD",
                     description = product["feature_bullets_flat"],
                     rating=product["rating"],
@@ -222,9 +216,9 @@ price = (item["price"]["value"]
                     peso=product["weight"] if "weight" in product else "59"
                     # manufacturer=product["manufacturer"],
                     # dimensions=product["dimensions"]
-                )
-                db.session.add(newProd)
-                db.session.commit()
+                    )
+                    db.session.add(newProd)
+                    db.session.commit()
         return jsonify("ok"), 200
 
 #aca traemos la informacion de un solo producto    

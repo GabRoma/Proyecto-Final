@@ -2,16 +2,15 @@ import React, { useState, useEffect, useContext } from "react";
 import PropTypes from "prop-types";
 import { Link, useParams } from "react-router-dom";
 import { Context } from "../store/appContext";
-import rigoImageUrl from "../../img/rigo-baby.jpg";
 
-export const Single = (item) => {
+export const Single = (item, props) => {
   const { actions } = useContext(Context);
   const [added, setAdded] = useState(false);
   const params = useParams();
   console.log(params);
 
   useEffect(() => {
-    actions.todosLosProductos(params.theid);
+    actions.detalleProducto(params.theid);
   }, []);
 
   const toggleTexto = () => {
@@ -30,7 +29,7 @@ export const Single = (item) => {
           <div class="col-md-6 mx-auto w-50">
             <div class="text-center">
               <img
-                src={props.imagen}
+                src={props.imagenes}
                 class="my-5 mx-3 float-center rounded"
                 alt="..."
                 width="350"

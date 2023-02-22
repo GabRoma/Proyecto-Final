@@ -2,161 +2,140 @@ import React, { useState, useEffect, useContext } from "react";
 import PropTypes from "prop-types";
 import { Link, useParams } from "react-router-dom";
 import { Context } from "../store/appContext";
-import rigoImageUrl from "../../img/rigo-baby.jpg";
-
+import { Productos } from "../component/producto.js";
 export const Categoria = (props) => {
-  const { actions } = useContext(Context);
-  console.log(props);
-  //   const params = useParams();
-  //   console.log(params);
-
-  //   useEffect(() => {
-  //     actions.todosLosProductos(params.theid);
-  //   }, []);
-
+  const { store, actions } = useContext(Context)
+  const { cat } = useParams();
+  console.log(cat);
   return (
     <>
-      <p className="fst-italic fw-bold fs-1 text-center ">Calzados</p>
-      <hr />
-      <small className=" fs-5 mx-3 ">
-        Calzados. En TiendaNuestra.com encuentras los mejores celulares al mejor
-        precio, directo desde USA hasta la puerta de tu casa.
-      </small>
-      <hr />
-      <div className="row row-cols-1 row-cols-md-3 g-4">
-        <div className="col">
-          <div className="card mx-5 " style={{ width: 250 }}>
-            <Link to={"/single/" + props.theid} className=" ">
-              <img
-                src="https://cdn.wallpapersafari.com/32/39/4K3ctN.jpg"
-                className="card-img-top"
-                width="50"
-                height="200"
-                alt="..."
-              />
-            </Link>
-
-            <div className="card-body">
-              <h5 className="card-title">Producto</h5>
-
-              <p className="card-text"></p>
-            </div>
-            <div className="card-footer d-flex justify-content-between">
-              <div className="pricetag d-flex">
-                <strong>
-                  <p>MONEDA</p>
-                </strong>
-                &nbsp;
-                <strong>
-                  <p>PRECIO</p>
-                </strong>
-                &nbsp;
-                <p className="text-muted">-20%</p>
-              </div>
-              <div>
-                <i
-                  className="fas fa-shopping-cart mx-1"
-                // onClick={() => actions.addCarrito(item)}
-                />
-              </div>
-            </div>
-          </div>
+      <div className="container">
+        <h1 className="display-5 fw-bold text-center"> {cat} </h1>
+        <hr />
+        <small className=" fs-5 mx-3 d-flex justify-content-center">
+          En TiendaNuestra encuentras l@s mejores {cat} al mejor
+          precio, directo desde USA hasta la puerta de tu casa.
+        </small>
+        <hr />
+        <div className="d-flex container">
+          {store.productos?.filter(item => item.keywords.toLowerCase().split(",").includes(cat)).slice(0, 5).map((item, index) => (
+            <Productos
+              key={index}
+              id={index + 1}
+              nombre={item.name}
+              imagen={item.imagenes}
+              moneda={item.currency}
+              price={item.price}
+              sku={item.sku}
+            />
+          ))}
         </div>
-      </div>
-      <p className="fs-4 text-center text-secondary">
+        <div className="d-flex container">
+          {store.productos?.filter(item => item.keywords.toLowerCase().split(",").includes(cat)).slice(6, 11).map((item, index) => (
+            <Productos
+              key={index}
+              id={index + 1}
+              nombre={item.name}
+              imagen={item.imagenes}
+              moneda={item.currency}
+              price={item.price}
+              sku={item.sku}
+            />
+          ))}
+        </div>
         Más información sobre Calzados
-      </p>
-      <div className="container justify-content-center ">
-        <div
-          class="accordion accordion-flush border-secondary border border-3 rounded opacity-75"
-          id="accordionFlushExample"
-        >
-          <div class="accordion-item">
-            <h2 class="accordion-header" id="flush-headingOne">
-              <button
-                class="accordion-button collapsed fw-bold"
-                type="button"
-                data-bs-toggle="collapse"
-                data-bs-target="#flush-collapseOne"
-                aria-expanded="false"
-                aria-controls="flush-collapseOne"
+        <div className="container justify-content-center ">
+          <div
+            class="accordion accordion-flush border-secondary border border-3 rounded opacity-75"
+            id="accordionFlushExample"
+          >
+            <div class="accordion-item">
+              <h2 class="accordion-header" id="flush-headingOne">
+                <button
+                  class="accordion-button collapsed fw-bold"
+                  type="button"
+                  data-bs-toggle="collapse"
+                  data-bs-target="#flush-collapseOne"
+                  aria-expanded="false"
+                  aria-controls="flush-collapseOne"
+                >
+                  ¿Cuál es el precio promedio de los productos de la categoría
+                  {cat} ?
+                </button>
+              </h2>
+              <div
+                id="flush-collapseOne"
+                class="accordion-collapse collapse"
+                aria-labelledby="flush-headingOne"
+                data-bs-parent="#accordionFlushExample"
               >
-                ¿Cuál es el precio promedio de los productos de la categoría
-                Calzados ?
-              </button>
-            </h2>
-            <div
-              id="flush-collapseOne"
-              class="accordion-collapse collapse"
-              aria-labelledby="flush-headingOne"
-              data-bs-parent="#accordionFlushExample"
-            >
-              <div class="accordion-body">
-                El precio promedio de los productos puede variar en base a su
-                calidad, tipo y otras características. El precio promedio de
-                estos productos es de U$S 76.
+                <div class="accordion-body">
+                  El precio promedio de los productos puede variar en base a su
+                  calidad, tipo y otras características. El precio promedio de
+                  estos productos es de U$S 76.
+                </div>
               </div>
             </div>
-          </div>
-          <div class="accordion-item">
-            <h2 class="accordion-header" id="flush-headingTwo">
-              <button
-                class="accordion-button collapsed fw-bold"
-                type="button"
-                data-bs-toggle="collapse"
-                data-bs-target="#flush-collapseTwo"
-                aria-expanded="false"
-                aria-controls="flush-collapseTwo"
+            <div class="accordion-item">
+              <h2 class="accordion-header" id="flush-headingTwo">
+                <button
+                  class="accordion-button collapsed fw-bold"
+                  type="button"
+                  data-bs-toggle="collapse"
+                  data-bs-target="#flush-collapseTwo"
+                  aria-expanded="false"
+                  aria-controls="flush-collapseTwo"
+                >
+                  ¿Qué marcas puedo encontrar en {cat} en TiendaNuestra?
+                </button>
+              </h2>
+              <div
+                id="flush-collapseTwo"
+                class="accordion-collapse collapse"
+                aria-labelledby="flush-headingTwo"
+                data-bs-parent="#accordionFlushExample"
               >
-                ¿Qué marcas puedo encontrar en Calzado en TiendaNuestra?
-              </button>
-            </h2>
-            <div
-              id="flush-collapseTwo"
-              class="accordion-collapse collapse"
-              aria-labelledby="flush-headingTwo"
-              data-bs-parent="#accordionFlushExample"
-            >
-              <div class="accordion-body lh-1">
-                En TiendaNuestra encontrarás ofertas en las mejores marcas de
-                Calzado, tales como: <ul className="my-1">● Nike</ul>{" "}
-                <ul className="my-1">● Adidas</ul>{" "}
-                <ul className="my-1">● Puma</ul>
+                <div class="accordion-body lh-1">
+                  En TiendaNuestra encontrarás ofertas en las mejores marcas de
+                  {cat}, tales como: <ul className="my-1">● Sony</ul>{" "}
+                  <ul className="my-1">● Kodak</ul>{" "}
+                  <ul className="my-1">● Canon</ul>
+                </div>
               </div>
             </div>
-          </div>
-          <div class="accordion-item">
-            <h2 class="accordion-header" id="flush-headingThree">
-              <button
-                class="accordion-button collapsed fw-bold"
-                type="button"
-                data-bs-toggle="collapse"
-                data-bs-target="#flush-collapseThree"
-                aria-expanded="false"
-                aria-controls="flush-collapseThree"
+            <div class="accordion-item">
+              <h2 class="accordion-header" id="flush-headingThree">
+                <button
+                  class="accordion-button collapsed fw-bold"
+                  type="button"
+                  data-bs-toggle="collapse"
+                  data-bs-target="#flush-collapseThree"
+                  aria-expanded="false"
+                  aria-controls="flush-collapseThree"
+                >
+                  ¿Cómo comprar {cat}s en TiendaNuestra desde Uruguay?
+                </button>
+              </h2>
+              <div
+                id="flush-collapseThree"
+                class="accordion-collapse collapse"
+                aria-labelledby="flush-headingThree"
+                data-bs-parent="#accordionFlushExample"
               >
-                ¿Cómo comprar Calzado en TiendaNuestra desde Uruguay?
-              </button>
-            </h2>
-            <div
-              id="flush-collapseThree"
-              class="accordion-collapse collapse"
-              aria-labelledby="flush-headingThree"
-              data-bs-parent="#accordionFlushExample"
-            >
-              <div class="accordion-body">
-                Comprar Calzado en TiendaNuestra es muy fácil! Solo debes seguir
-                4 simples pasos:
-                <ul className="my-1">
-                  1- Selecciona la oferta de Calzado que deseas comprar.
-                </ul>
-                <ul className="my-1">
-                  2- Agregala al carrito y finaliza la compra.
-                </ul>
-                <ul className="my-1">3- Ingresa tus datos.</ul>
-                <ul className="my-1">
-                  4- Selecciona el método de envío y pago.
-                </ul>
+                <div class="accordion-body">
+                  Comprar productos en TiendaNuestra es muy fácil! Solo debes seguir
+                  4 simples pasos:
+                  <ul className="my-1">
+                    1- Selecciona la oferta de Calzado que deseas comprar.
+                  </ul>
+                  <ul className="my-1">
+                    2- Agregala al carrito y finaliza la compra.
+                  </ul>
+                  <ul className="my-1">3- Ingresa tus datos.</ul>
+                  <ul className="my-1">
+                    4- Selecciona el método de envío y pago.
+                  </ul>
+                </div>
               </div>
             </div>
           </div>
@@ -165,7 +144,3 @@ export const Categoria = (props) => {
     </>
   );
 };
-
-// Single.propTypes = {
-//   match: PropTypes.object,
-// };
