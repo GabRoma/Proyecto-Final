@@ -11,6 +11,11 @@ export const CartItem = (item, props) => {
   const params = useParams();
   console.log(store.carrito);
   console.log(props);
+  console.log(params);
+
+  // const eliminarItemCarrito = () => {
+  //   actions.eliminarDeCarrito(params.theid, storage.getItem("userId"));
+  // };
 
   const [amount, setAmount] = useState(1);
   const [theprice, setPrice] = useState(item.price);

@@ -121,29 +121,49 @@ const getState = ({
 
             agregarACarrito: (sku, userid) => {
                 fetch(
-                    "https://gabroma-proyectofinal-5zn559e2lki.ws-us87.gitpod.io/api/user/<int:user_id>/carrito/products/<string:producto_sku>", {
-                        method: "POST",
-                        headers: {
-                            "Content-Type": "application/json",
-                            // 'Content-Type': 'application/x-www-form-urlencoded',
-                        },
-                        body: JSON.stringify({
-                            // user_id: userEmail,
-                            // password: userPassword,
+                        "https://gabroma-proyectofinal-5zn559e2lki.ws-us87.gitpod.io/api/user/" +
+                        userid +
+                        "/carrito/products/" +
+                        sku, {
+                            method: "POST",
+                            headers: {
+                                "Content-Type": "application/json",
+                                // 'Content-Type': 'application/x-www-form-urlencoded',
+                            },
+                            body: JSON.stringify({
+                                // user_id: userEmail,
+                                // password: userPassword,
 
-                            // "id": 3,
-                            producto_sku: sku,
-                            user_id: userid,
-                        }), //lo que tenga el recipiente reproducelo // body data type must match "Content-Type" header
-                    }
-                );
+                                // "id": 3,
+                                producto_sku: sku,
+                                user_id: userid,
+                            }), //lo que tenga el recipiente reproducelo // body data type must match "Content-Type" header
+                        }
+                    )
+                    .then((response) => {
+                        return response.json();
+                    })
+
+                    .then((data) => {
+                        console.log(data);
+
+                        // if (data.msg === "Bad email or password") {
+                        //     Swal.fire({
+                        //         icon: "error",
+                        //         title: data.msg,
+                        //     });
+                        // }
+
+                        // localStorage.setItem("token", data.access_token);
+                        // localStorage.setItem("userId", data.user.id);
+                    });
                 let store = getStore(); //tenemos que traer el array favoritos
-                let contenedordeelemento = {}; //necesitamos recorrer el array favorito guardarlo en  contenedordeelemento
-                contenedordeelemento.nombresdecadaproducto = props.nombre;
-                contenedordeelemento.id = props.id;
-                setStore({
-                    carrito: [...store.carrito, contenedordeelemento],
-                });
+                // let contenedordeelemento = {}; //necesitamos recorrer el array favorito guardarlo en  contenedordeelemento
+                // contenedordeelemento.nombresdecadaproducto = props.nombre;
+                // contenedordeelemento.id = props.id;
+                // setStore({
+                //     carrito: [...store.carrito, contenedordeelemento],
+                // });
             },
             eliminarDeCarrito: (id) => {
                 // fetch(

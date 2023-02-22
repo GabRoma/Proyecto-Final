@@ -2,71 +2,38 @@ import React, { useState, useEffect, useContext } from "react";
 import PropTypes from "prop-types";
 import { Link, useParams } from "react-router-dom";
 import { Context } from "../store/appContext";
-import rigoImageUrl from "../../img/rigo-baby.jpg";
-
+import { Productos } from "../component/producto.js";
 export const Categoria = (props) => {
-  const { actions } = useContext(Context);
-  console.log(props);
-  //   const params = useParams();
-  //   console.log(params);
-
-  //   useEffect(() => {
-  //     actions.todosLosProductos(params.theid);
-  //   }, []);
-
+  const { store, actions } = useContext(Context);
+  const { cat } = useParams();
+  console.log(cat);
   return (
     <>
-      <p className="fst-italic fw-bold fs-1 text-center ">Calzados</p>
-      <hr />
-      <small className=" fs-5 mx-3 ">
-        Calzados. En TiendaNuestra.com encuentras los mejores celulares al mejor
-        precio, directo desde USA hasta la puerta de tu casa.
+      <small className=" fs-6 d-flex justify-content-center mt-3">
+        En TiendaNuestra encuentras l@s mejores {cat}s al mejor precio, directo
+        desde USA hasta la puerta de tu casa.
       </small>
       <hr />
-      <div className="row row-cols-1 row-cols-md-3 g-4">
-        <div className="col">
-          <div className="card mx-5 " style={{ width: 250 }}>
-            <Link to={"/single/" + props.theid} className=" ">
-              <img
-                src="https://cdn.wallpapersafari.com/32/39/4K3ctN.jpg"
-                className="card-img-top"
-                width="50"
-                height="200"
-                alt="..."
+      <div className="d-flex container row m-auto">
+        {store.productos
+          ?.filter((item) =>
+            item.keywords.toLowerCase().split(",").includes(cat)
+          )
+          .slice(0, 20)
+          .map((item, index) => (
+            <div style={{ width: "20%" }}>
+              <Productos
+                nombre={item.name}
+                imagen={item.imagenes}
+                moneda={item.currency}
+                price={item.price}
+                sku={item.sku}
               />
-            </Link>
-
-            <div className="card-body">
-              <h5 className="card-title">Producto</h5>
-
-              <p className="card-text"></p>
             </div>
-            <div className="card-footer d-flex justify-content-between">
-              <div className="pricetag d-flex">
-                <strong>
-                  <p>MONEDA</p>
-                </strong>
-                &nbsp;
-                <strong>
-                  <p>PRECIO</p>
-                </strong>
-                &nbsp;
-                <p className="text-muted">-20%</p>
-              </div>
-              <button
-                onClick={() => actions.agregarACarrito(item)}
-                type="button"
-              >
-                <i className="fas fa-shopping-cart mx-1" />
-              </button>
-            </div>
-          </div>
-        </div>
+          ))}
       </div>
-      <p className="fs-4 text-center text-secondary">
-        Más información sobre Calzados
-      </p>
-      <div className="container justify-content-center ">
+      <div className="container">
+        Más información sobre {cat}s
         <div
           class="accordion accordion-flush border-secondary border border-3 rounded opacity-75"
           id="accordionFlushExample"
@@ -82,7 +49,7 @@ export const Categoria = (props) => {
                 aria-controls="flush-collapseOne"
               >
                 ¿Cuál es el precio promedio de los productos de la categoría
-                Calzados ?
+                {cat} ?
               </button>
             </h2>
             <div
@@ -108,7 +75,7 @@ export const Categoria = (props) => {
                 aria-expanded="false"
                 aria-controls="flush-collapseTwo"
               >
-                ¿Qué marcas puedo encontrar en Calzado en TiendaNuestra?
+                ¿Qué marcas puedo encontrar en {cat} en TiendaNuestra?
               </button>
             </h2>
             <div
@@ -119,9 +86,9 @@ export const Categoria = (props) => {
             >
               <div class="accordion-body lh-1">
                 En TiendaNuestra encontrarás ofertas en las mejores marcas de
-                Calzado, tales como: <ul className="my-1">● Nike</ul>{" "}
-                <ul className="my-1">● Adidas</ul>{" "}
-                <ul className="my-1">● Puma</ul>
+                {cat}, tales como: <ul className="my-1">● Sony</ul>{" "}
+                <ul className="my-1">● Kodak</ul>{" "}
+                <ul className="my-1">● Canon</ul>
               </div>
             </div>
           </div>
@@ -135,7 +102,7 @@ export const Categoria = (props) => {
                 aria-expanded="false"
                 aria-controls="flush-collapseThree"
               >
-                ¿Cómo comprar Calzado en TiendaNuestra desde Uruguay?
+                ¿Cómo comprar {cat}s en TiendaNuestra desde Uruguay?
               </button>
             </h2>
             <div
@@ -145,8 +112,8 @@ export const Categoria = (props) => {
               data-bs-parent="#accordionFlushExample"
             >
               <div class="accordion-body">
-                Comprar Calzado en TiendaNuestra es muy fácil! Solo debes seguir
-                4 simples pasos:
+                Comprar productos en TiendaNuestra es muy fácil! Solo debes
+                seguir 4 simples pasos:
                 <ul className="my-1">
                   1- Selecciona la oferta de Calzado que deseas comprar.
                 </ul>
@@ -165,7 +132,3 @@ export const Categoria = (props) => {
     </>
   );
 };
-
-// Single.propTypes = {
-//   match: PropTypes.object,
-// };
