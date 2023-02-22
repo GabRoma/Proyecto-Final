@@ -1,12 +1,16 @@
 import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import logo from "../../img/logito.png";
-import logo2 from "../../img/logito2.png";
-import { AuthComponent } from "./authcomponent.js";
 import { Context } from "../store/appContext";
+import { AuthComponent } from "./authcomponent";
 
 export const Navbar = () => {
-  const { store } = useContext(Context);
+  const { store, actions } = useContext(Context);
+
+  function handleLogout() {
+    actions.logout();
+    window.location.reload(false);
+  }
 
   return (
     <nav className="navbar sticky-top pt-0">
@@ -41,74 +45,86 @@ export const Navbar = () => {
             aria-label="Search"
           />
         </form>
-        <div className="ml-auto">
-          <div className="dropdown d-flex">
-            <button
-              className="btn p-0 dropdown-toggle me-3"
-              type="button"
-              data-bs-toggle="dropdown"
-              aria-expanded="false"
-            >
-              <i
-                className="fas fa-heart"
-                style={{ color: "rgb(224, 24, 24)" }}
-              ></i>
-              <span className="notificacion" style={{ right: "135px" }}>
-                {store.favoritos.length}
-              </span>
-            </button>
-            <ul className="dropdown-menu">
-              {store.favoritos.map((item, index) => {
-                return (
-                  <li key={item.id}>
-                    <a className="dropdown-item" href="#">
-                      {item.name}
-                    </a>
-                  </li>
-                );
-              })}
-              <li key={"f" + store.favoritos.length}>
-                <a
-                  className="dropdown-item text-center text-muted"
-                  href="/favoritos"
-                >
-                  <u>ver todos</u>
-                </a>
-              </li>
-            </ul>
-            <AuthComponent />
-            <button
-              className="cartbtn btn p-0 dropdown-toggle ms-3"
-              type="button"
-              data-bs-toggle="dropdown"
-              aria-expanded="false"
-            >
-              <i className="fas fa-shopping-cart"></i>
-              <span className="notificacion" style={{ right: "-11px" }}>
-                {store.carrito.length}
-              </span>
-            </button>
-            <ul className="listaCarrito dropdown-menu">
-              {store.carrito.map((item, index) => {
-                return (
-                  <li key={item.id}>
-                    <a className="dropdown-item" href="#">
-                      {item.name}
-                    </a>
-                  </li>
-                );
-              })}
-              <li key={"c" + store.carrito.length}>
-                <a
-                  className="dropdown-item text-center text-muted"
-                  href="/carrito"
-                >
-                  <u>ver carrito</u>
-                </a>
-              </li>
-            </ul>
+        {store.estalogueado === true ? (
+          <div className="ml-auto">
+            <div className="dropdown d-flex">
+              <button
+                className="btn p-0 dropdown-toggle me-3"
+                type="button"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              >
+                <i
+                  className="fas fa-heart"
+                  style={{ color: "rgb(224, 24, 24)" }}
+                ></i>
+                <span className="notificacion" style={{ right: "135px" }}>
+                  {store.favoritos.length}
+                </span>
+              </button>
+              <ul className="dropdown-menu">
+                {store.favoritos.map((item, index) => {
+                  return (
+                    <li key={item.id}>
+                      <a className="dropdown-item" href="#">
+                        {item.name}
+                      </a>
+                    </li>
+                  );
+                })}
+                <li key={"f" + store.favoritos.length}>
+                  <a
+                    className="dropdown-item text-center text-muted"
+                    href="/favoritos"
+                  >
+                    <u>ver todos</u>
+                  </a>
+                </li>
+              </ul>
+              <div>
+                <button className="log btn p-0 mx-4">
+                  <i className="fas fa-sign-out-alt" onClick={handleLogout}></i>
+                  Salir
+                </button>{" "}
+              </div>
+              <button
+                className="cartbtn btn p-0 dropdown-toggle ms-3"
+                type="button"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              >
+                <i className="fas fa-shopping-cart"></i>
+                <span className="notificacion" style={{ right: "-11px" }}>
+                  {store.carrito.length}
+                </span>
+              </button>
+              <ul className="listaCarrito dropdown-menu">
+                {store.carrito.map((item, index) => {
+                  return (
+                    <li key={item.id}>
+                      <a className="dropdown-item" href="#">
+                        {item.name}
+                      </a>
+                    </li>
+                  );
+                })}
+                <li key={"c" + store.carrito.length}>
+                  <a
+                    className="dropdown-item text-center text-muted"
+                    href="/carrito"
+                  >
+                    <u>ver carrito</u>
+                  </a>
+                </li>
+              </ul>
+            </div>
           </div>
-        </div>
+        ) : (
+          <div>
+            <AuthComponent />
+          </div>
+        )}
+        ;
       </div>
     </nav>
   );

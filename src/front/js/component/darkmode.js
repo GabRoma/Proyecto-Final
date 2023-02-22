@@ -45,13 +45,13 @@ export const DarkModeToggle = () => {
     document.querySelector(".searchbar").style.border = isDarkMode
       ? "#000000"
       : "#babec2";
-    document.querySelector(".log").style.color = isDarkMode ? "black" : "white";
-    document.querySelector(".cartbtn").style.color = isDarkMode
-      ? "black"
-      : "white";
-    document.querySelector(".toggle-button").style.color = isDarkMode
-      ? "black"
-      : "white";
+    // document.querySelector(".log").style.color = isDarkMode ? "black" : "white";
+    // document.querySelector(".cartbtn").style.color = isDarkMode
+    //   ? "black"
+    //   : "white";
+    // document.querySelector(".toggle-button").style.color = isDarkMode
+    //   ? "black"
+    //   : "white";
     document.querySelector(".footer").style.color = isDarkMode
       ? "black"
       : "white";
@@ -76,12 +76,12 @@ export const DarkModeToggle = () => {
     document.querySelector(".tituloprincipal").style.color = isDarkMode
       ? "black"
       : "white";
-    document.querySelector(".dropdown-menu").style.backgroundColor = isDarkMode
-      ? "white"
-      : "#555555";
-    document.querySelector(".listaCarrito").style.backgroundColor = isDarkMode
-      ? "white"
-      : "#555555";
+    // document.querySelector(".dropdown-menu").style.backgroundColor = isDarkMode
+    //   ? "white"
+    //   : "#555555";
+    // document.querySelector(".listaCarrito").style.backgroundColor = isDarkMode
+    //   ? "white"
+    //   : "#555555";
     // document.querySelector(".modal").style.color = isDarkMode
     //   ? "white"
     //   : "black";

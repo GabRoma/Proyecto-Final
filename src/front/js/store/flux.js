@@ -82,7 +82,7 @@ const getState = ({ getStore, getActions, setStore }) => {
     actions: {
       todosLosProductos: () => {
         fetch(
-          "https://3001-gabroma-proyectofinal-qhijtnlkz7j.ws-us87.gitpod.io/api/products"
+          "https://3001-gabroma-proyectofinal-qh3l4gx3yyf.ws-us87.gitpod.io/api/products"
         )
           .then((response) => response.json())
           .then((data) => {
@@ -213,16 +213,16 @@ const getState = ({ getStore, getActions, setStore }) => {
 
       logout: () => {
         console.log("funciona");
-        // localStorage.removeItem('token');
-        // setStore({
-        //     estalogueado: false
-        // })
+        localStorage.removeItem("token");
+        setStore({
+          estalogueado: false,
+        });
       },
 
       inicioLogin: (userEmail, userPassword) => {
         console.log("funciona");
         fetch(
-          "https://3001-gabroma-proyectofinal-6p98yyg6lb9.ws-us87.gitpod.io/api/login",
+          "https://3001-gabroma-proyectofinal-qh3l4gx3yyf.ws-us87.gitpod.io/api/login",
           {
             method: "POST",
             headers: {
@@ -265,7 +265,7 @@ const getState = ({ getStore, getActions, setStore }) => {
         userEmail
       ) => {
         fetch(
-          "https://3001-gabroma-proyectofinal-6p98yyg6lb9.ws-us87.gitpod.io/api/signup",
+          "https://3001-gabroma-proyectofinal-qh3l4gx3yyf.ws-us87.gitpod.io/api/signup",
           {
             method: "POST",
             headers: {
@@ -300,6 +300,35 @@ const getState = ({ getStore, getActions, setStore }) => {
           .catch((err) => console.log(err));
       },
 
+      validToken: async () => {
+        let accessToken = localStorage.getItem("token");
+        try {
+          const response = await fetch(
+            "https://3001-gabroma-proyectofinal-qh3l4gx3yyf.ws-us87.gitpod.io/api/valid-token",
+            {
+              headers: {
+                Authorization: "Bearer " + accessToken,
+              },
+            }
+          );
+          if (response.data.status) {
+            setStore({
+              estalogueado: true,
+            });
+            return;
+          } else {
+            setStore({
+              estalogueado: false,
+            });
+            return false;
+          }
+        } catch (error) {
+          setStore({
+            estalogueado: false,
+          });
+          return false;
+        }
+      },
       changeColor: (index, color) => {
         //get the store
         const store = getStore();

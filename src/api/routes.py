@@ -54,15 +54,22 @@ def login():
 
 # Protect a route with jwt_required, which will kick out requests
 # without a valid JWT present.
-@api.route("/perfil", methods=["GET"])
+@api.route("/valid-token", methods=["GET"])
 @jwt_required()
-def get_perfildatospersonales():
+def valid_token():
     # Access the identity of the current user with get_jwt_identity
     current_user = get_jwt_identity()
     user = User.query.filter_by(email=current_user).first()
 
+    if current_user is None:
+        return jsonify({"User not logged yet"}), 422
+
+    elif user is None:
+        return jsonify({"status": False}), 404
+
     response_body = {
         "msg":"ok",
+        "status": True,
         "user":user.serialize()
         }
     return jsonify(response_body), 200
