@@ -9,7 +9,7 @@ import { Carrito } from "./pages/carrito";
 import { Checkout } from "./pages/checkout";
 import { Favoritos } from "./pages/favoritos";
 import injectContext from "./store/appContext";
-
+import { Politica } from "./pages/politica";
 import { Navbar } from "./component/navbar";
 import { Footer } from "./component/footer";
 import { Aboutus } from "./pages/aboutus";
@@ -39,6 +39,7 @@ const Layout = () => {
             <Route element={<Home />} path="/" />
             <Route element={<Aboutus />} path="/aboutus" />
             <Route element={<Tos />} path="/tos" />
+            <Route element={<Politica />} path="/politica" />
             <Route element={<Brands />} path="/brands" />
             <Route element={<Demo />} path="/demo" />
             <Route element={<Single />} path="/single/:theid" />

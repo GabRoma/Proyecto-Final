@@ -99,168 +99,6 @@ export const Home = () => {
 
   return (
     <div>
-      <nav className="navbar navbar-light pt-0 border-bottom">
-        <div className="container row m-auto navbarhome">
-          <div className="d-flex justify-content-center col">
-            <div class="dropdown">
-              <Link
-                to="/"
-                className="btn dropdown-toggle d-flex"
-                data-bs-toggle="dropdown"
-                aria-expanded="false"
-              >
-                <h5 className="m-auto fs-6 " style={{ color: "darkgray" }}> Categorias </h5>
-                <i class="far fa-caret-square-down mx-2 my-1" style={{ color: "darkgray" }}></i>
-              </Link>
-              <ul class="dropdown-menu">
-                <li>
-                  <Link
-                    to={"/categoria/celulares"}
-                    class="dropdown-item"
-                    type="button"
-                  >
-                    Celulares
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    to={"/categoria/calzados"}
-                    class="dropdown-item"
-                    type="button"
-                  >
-                    Calzados
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    to={"/categoria/consola"}
-                    class="dropdown-item"
-                    type="button"
-                  >
-                    Consolas
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    to={"/categoria/Camera"}
-                    class="dropdown-item"
-                    type="button"
-                  >
-                    Cámaras
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    to={"/categoria/laptop"}
-                    class="dropdown-item"
-                    type="button"
-                  >
-                    Laptops
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    to={"/categoria/lentes"}
-                    class="dropdown-item"
-                    type="button"
-                  >
-                    Lentes
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    to={"/categoria/ropa"}
-                    class="dropdown-item"
-                    type="button"
-                  >
-                    Ropa
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    to={"/categoria/reloj"}
-                    class="dropdown-item"
-                    type="button"
-                  >
-                    Relojes
-                  </Link>
-                </li>
-              </ul>
-            </div>
-            {/* Termina Dropdown ----------------------------------------------------------- */}
-          </div>
-          <div className="d-flex justify-content-center col">
-            <Link to={"/espaciooferta"}>
-              <h5 className="m-0 p-0 fs-6 "> OFERTAS </h5>
-            </Link>
-          </div>
-          <div className="d-flex justify-content-center col">
-            <Link to="/espaciocostoytarif">
-              <h5 className="m-0 p-0 fs-6 "> Costos y tarifas </h5>
-            </Link>
-          </div>
-          {/* Modal ---------------------------------------------------------- */}
-          <div className="d-flex justify-content-center col">
-            <Link to="/" data-bs-toggle="modal" data-bs-target="#exampleModal">
-              <h5 className="m-0 p-0 fs-6 ">
-
-                Garantía y devoluciones
-              </h5>
-            </Link>
-            <div
-              class="modal fade"
-              id="exampleModal"
-              tabindex="-1"
-              aria-labelledby="exampleModalLabel"
-              aria-hidden="true"
-            >
-              <div class="modal-dialog">
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="exampleModalLabel">
-                      Garantía de Entrega
-                    </h1>
-                  </div>
-                  <div class="modal-body">
-                    <small className="fs-5 fw-bold">
-                      Aseguramos la entrega de tu orden:
-                    </small>
-                    <small className="fs-5 d-block ">
-                      Si tu pedido no llega luego de 60 días de realizada la
-                      orden, te devolvemos tu dinero.
-                    </small>
-                    <small className="fs-5">
-                      *La garantía de entrega no aplica en caso de que el
-                      producto quede retenido en Aduana por razones ajenas a
-                      TiendaNuestra
-                    </small>
-                  </div>
-                  <div class="modal-footer justify-content-center">
-                    <button
-                      type="button"
-                      class="btn btn-secondary"
-                      data-bs-dismiss="modal"
-                    >
-                      Cerrar
-                    </button>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          {/* Termina Modal ------------------------------------------------------------- */}
-          {/* <div className="d-flex justify-content-center col">
-            <Link to="/">
-              <h5 className="m-0 p-0 fs-6"> Garantía y devoluciones </h5>
-            </Link>
-          </div> */}
-          <div className="d-flex justify-content-center col">
-            <Link to="/" onClick={() => handleTogglePopup(true)}>
-              <h5 className="m-0 p-0 fs-6 "> Contáctanos </h5>
-            </Link>
-          </div>
-        </div>
-      </nav>
       <div className="container">
         <div className="p-5 pt-3 rounded-3 d-flex justify-content-center text-center">
           <div className="container-fluid py-5">
@@ -271,8 +109,8 @@ export const Home = () => {
                 width: "450px",
               }}
             >
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit.Nulla quam
-              velit, vulputate eu pharetra nec, mattis ac neque.
+              En TiendaNuestra encontraras los productos que buscas, al mejor
+              precio, directo desde USA hasta la puerta de tu casa.
             </p>
             <Link
               to={"/espaciodescuento"}
@@ -302,30 +140,17 @@ export const Home = () => {
           <p style={{ fontSize: 14 }}>Ver todos</p>
         </Link>
       </div>
-      <div className="d-flex container">
+      <div className="d-flex container row m-auto">
         {store.productos?.filter(item => item.keywords.toLowerCase().split(",").includes("camera")).slice(0, 5).map((item, index) => (
-          <Productos
-            key={index}
-            id={index + 1}
-            nombre={item.name}
-            imagen={item.imagenes}
-            moneda={item.currency}
-            price={item.price}
-            sku={item.sku}
-          />
-        ))}
-      </div>
-      <div className="d-flex container">
-        {store.productos?.slice(6, 11).map((item, index) => (
-          <Productos
-            key={index}
-            id={index + 1}
-            nombre={item.name}
-            imagen={item.imagenes}
-            moneda={item.currency}
-            price={item.price}
-            sku={item.sku}
-          />
+          <div className="d-flex container " style={{ width: "20%" }}>
+            <Productos
+              nombre={item.name}
+              imagen={item.imagenes}
+              moneda={item.currency}
+              price={item.price}
+              sku={item.sku}
+            />
+          </div>
         ))}
       </div>
       <Contact showPopup={showPopup} handleTogglePopup={handleTogglePopup} />

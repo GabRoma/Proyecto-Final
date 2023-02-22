@@ -2,35 +2,49 @@ import React, { useContext } from "react"; // tenemos que importar lo del usecon
 import { Link } from "react-router-dom";
 import { Context } from "../store/appContext.js";
 
-export const Productos = (props, nombre, imagen, precio, moneda) => {
-  console.log(props.nombre);
-  // console.log(precio);
-
-  // if (props.id < 2) {
+export const Productos = (props) => {
+  const { actions } = useContext(Context);
   return (
     <>
-      <Link to={"/single/" + props.sku} style={{ textDecoration: "none", color: "darkgrey" }}>
-        <div className="card ms-3 mb-5" style={{ width: 250, height: 440 }}>
-          <img src={props.imagen} className="my-auto" style={{ maxWidth: "300px", maxHeight: "300px" }} alt="product image" />
+      <div className="card mb-3 p-1" style={{ width: 250, height: 440 }}>
+        <Link
+          to={"/single/" + props.sku}
+          style={{ textDecoration: "none", color: "darkgrey" }}
+        >
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              height: "330px",
+            }}
+          >
+            <img
+              src={props.imagen}
+              className=""
+              style={{
+                maxWidth: "100%",
+                maxHeight: "100%",
+              }}
+              alt="product image"
+            />
+          </div>
           <div className="px-2">
-            <h5 className="mb-4"> {props.nombre.slice(0, 50)} </h5>
-            <div className="d-flex justify-content-between card-text">
-              <strong className="fs-5 mb-2">
+            <h5 className="mb-4">{props.nombre.slice(0, 50)}</h5>
+          </div>
+        </Link>
+        <div style={{ position: "absolute", bottom: "0", width: "100%" }}>
+          <div className="d-flex justify-content-between card-text mb-2">
+            <strong className="px-2 fs-5">
+              {props.moneda} {props.price}
+            </strong>
+            <div>
+              <i className="fas fa-shopping-cart me-3" onClick={() => actions.addCarrito(props)}></i>
 
-                {props.moneda} {props.price}
-              </strong>
-              <div>
-                <i
-                  className="fas fa-shopping-cart mx-1"
-                // onClick={() => actions.addCarrito(item)}
-                />
-              </div>
             </div>
           </div>
         </div>
-      </Link>
+      </div>
     </>
   );
 };
-
-//btn btn-primary btn-sm ms-2
