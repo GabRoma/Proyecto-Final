@@ -251,16 +251,14 @@ const getState = ({ getStore, getActions, setStore }) => {
         }
       },
 
-      // logout: () => {
-      // 	console.log("funciona");
-      //     // localStorage.removeItem('token');
-      //     // setStore({
-      //     //     estalogueado: false
-      //     // })
-      // },
+      logout: () => {
+        localStorage.removeItem("token");
+        setStore({
+          estalogueado: false,
+        });
+      },
 
       inicioLogin: (userEmail, userPassword) => {
-        console.log("funciona");
         fetch(process.env.BACKEND_URL + "/api/login", {
           method: "POST",
           headers: {
@@ -347,6 +345,71 @@ const getState = ({ getStore, getActions, setStore }) => {
             localStorage.setItem("token", data.access_token);
           })
           .catch((err) => console.log(err));
+      },
+
+      validToken: async () => {
+        let store = getStore();
+        let accessToken = localStorage.getItem("token");
+        try {
+          const response = await fetch(
+            process.env.BACKEND_URL + "/api/valid-token",
+            {
+              headers: {
+                Authorization: "Bearer " + accessToken,
+              },
+            }
+          );
+          if (response.data.status) {
+            setStore({
+              estalogueado: true,
+            });
+            console.log(store.estalogueado);
+            return;
+          } else {
+            setStore({
+              estalogueado: false,
+            });
+            return false;
+          }
+        } catch (error) {
+          setStore({
+            estalogueado: false,
+          });
+          return false;
+        }
+      },
+
+      getUserData: (user_id) => {
+        fetch(process.env.BACKEND_URL + "/api/user/" + user_id)
+          .then((response) => response.json())
+          .then((data) => {
+            console.log(data);
+            setStore({
+              userData: data,
+            });
+          })
+          .catch((error) => {
+            console.error("Error:", error);
+          });
+      },
+      updateUserData: (user_id, updatedData) => {
+        fetch(process.env.BACKEND_URL + "/api/user/" + user_id, {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(updatedData),
+        })
+          .then((response) => response.json())
+          .then((data) => {
+            console.log(data);
+            setStore({
+              userData: data,
+            });
+          })
+          .catch((error) => {
+            console.error("Error:", error);
+          });
       },
 
       changeColor: (index, color) => {

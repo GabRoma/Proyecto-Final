@@ -1,13 +1,17 @@
 import React, { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import logo from "../../img/logito.png";
-import logo2 from "../../img/logito2.png";
 import { AuthComponent } from "./authcomponent.js";
 import { Context } from "../store/appContext";
 
 export const Navbar = () => {
-  const { store } = useContext(Context);
+  const { store, actions } = useContext(Context);
   const [searchTerm, setSearchTerm] = useState("");
+
+  function handleLogout() {
+    actions.logout();
+    window.location.reload(false);
+  }
 
   function handleSubmit(event) {
     event.preventDefault();
@@ -39,7 +43,10 @@ export const Navbar = () => {
             <img src={logo} height="70" />
             <h1 className="tituloprincipal ps-3">TiendaNuestra</h1>
           </Link>
-          <form className="search form-inline d-flex justify-content-center me-4" onSubmit={handleSubmit}>
+          <form
+            className="search form-inline d-flex justify-content-center me-4"
+            onSubmit={handleSubmit}
+          >
             <button
               className="searchbtn btn rounded-start rounded-0 border-end-0 border pe-1"
               type="submit"
@@ -56,94 +63,109 @@ export const Navbar = () => {
               onChange={handleChange}
             />
           </form>
-
-          <div className="ml-auto">
-            <div className="dropdown d-flex">
-              <button
-                className="btn p-0 dropdown-toggle me-3"
-                type="button"
-                data-bs-toggle="dropdown"
-                aria-expanded="false"
-              >
-                <i
-                  className="fas fa-heart"
-                  style={{ color: "rgb(224, 24, 24)" }}
-                ></i>
-                <span className="notificacion" style={{ right: "140px" }}>
-                  {store.favoritos.length}
-                </span>
-              </button>
-              <ul className="dropdown-menu">
-                {store.favoritos.map((item, index) => (
-                  <div className="row" key={index}>
-                    <button className="list-group-item btn btn-outline-primary w-75 mx-auto">
-                      {item.nombresdecadaproducto} {index.id}{" "}
-                      <button
-                        className="btn btn-secondary rounded opacity-10 mx-0 "
-                        type="button"
-                        id="eliminar"
-                        onClick={() => actions.eliminarFavorito(item)}
-                      >
-                        Borrar
-                      </button>{" "}
-                    </button>
-                  </div>
-                ))}
-
-                <li key={"f" + store.favoritos.length}>
-                  <a
-                    className="dropdown-item text-center text-muted"
-                    href="/favoritos"
+          {store.estalogueado === true ? (
+            <div className="ml-auto">
+              <div className="dropdown d-flex">
+                <button
+                  className="btn p-0 dropdown-toggle me-3"
+                  type="button"
+                  data-bs-toggle="dropdown"
+                  aria-expanded="false"
+                >
+                  <i
+                    className="fas fa-heart"
+                    style={{ color: "rgb(224, 24, 24)" }}
+                  ></i>
+                  <span
+                    className="notificacion"
+                    style={{ right: "135px", top: "-10px" }}
                   >
-                    <u>ver todos</u>
-                  </a>
-                </li>
-              </ul>
-              <AuthComponent />
-              <button
-                className="cartbtn btn p-0 dropdown-toggle ms-3"
-                type="button"
-                data-bs-toggle="dropdown"
-                aria-expanded="false"
-              >
-                <i className="fas fa-shopping-cart"></i>
-                <span className="notificacion" style={{ right: "-11px" }}>
-                  {store.carrito.length}
-                </span>
-              </button>
-              <ul className="listaCarrito dropdown-menu">
-                {store.carrito.map((item, index) => (
-                  <div className="row" key={index}>
-                    <button className="list-group-item btn btn-outline-primary w-75 mx-auto">
-                      {item.nombresdecadaproducto} {index.id}{" "}
-                      <button
-                        className="btn btn-secondary rounded opacity-10 mx-0 "
-                        type="button"
-                        id="eliminar"
-                        onClick={() => actions.eliminarDeCarrito(item)}
-                      >
-                        Borrar
-                      </button>{" "}
-                    </button>
-                  </div>
-                ))}
-                <li key={"c" + store.carrito.length}>
-                  <a
-                    className="dropdown-item text-center text-muted"
-                    href="/carrito"
+                    {store.favoritos.length}
+                  </span>
+                </button>
+                <ul className="dropdown-menu">
+                  {store.favoritos.map((item, index) => (
+                    <div className="row" key={index}>
+                      <button className="list-group-item btn btn-outline-primary w-75 mx-auto">
+                        {item.nombresdecadaproducto} {index.id}{" "}
+                        <button
+                          className="btn btn-secondary rounded opacity-10 mx-0 "
+                          type="button"
+                          id="eliminar"
+                          onClick={() => actions.eliminarFavorito(item)}
+                        >
+                          Borrar
+                        </button>{" "}
+                      </button>
+                    </div>
+                  ))}
+
+                  <li key={"f" + store.favoritos.length}>
+                    <a
+                      className="dropdown-item text-center text-muted"
+                      href="/favoritos"
+                    >
+                      <u>ver todos</u>
+                    </a>
+                  </li>
+                </ul>
+                <button className="log btn p-0 mx-4">
+                  <i className="fas fa-sign-out-alt" onClick={handleLogout}></i>
+                  Salir
+                </button>{" "}
+                <button
+                  className="cartbtn btn p-0 dropdown-toggle ms-3"
+                  type="button"
+                  data-bs-toggle="dropdown"
+                  aria-expanded="false"
+                >
+                  <i className="fas fa-shopping-cart"></i>
+                  <span
+                    className="notificacion"
+                    style={{ right: "-16px", top: "-10px" }}
                   >
-                    <u>ver carrito</u>
-                  </a>
-                </li>
-              </ul>
+                    {store.carrito.length}
+                  </span>
+                </button>
+                <ul className="listaCarrito dropdown-menu">
+                  {store.carrito.map((item, index) => (
+                    <div className="row" key={index}>
+                      <button className="list-group-item btn btn-outline-primary w-75 mx-auto">
+                        {item.nombresdecadaproducto} {index.id}{" "}
+                        <button
+                          className="btn btn-secondary rounded opacity-10 mx-0 "
+                          type="button"
+                          id="eliminar"
+                          onClick={() => actions.eliminarDeCarrito(item)}
+                        >
+                          Borrar
+                        </button>{" "}
+                      </button>
+                    </div>
+                  ))}
+                  <li key={"c" + store.carrito.length}>
+                    <a
+                      className="dropdown-item text-center text-muted"
+                      href="/carrito"
+                    >
+                      <u>ver carrito</u>
+                    </a>
+                  </li>
+                </ul>
+              </div>
             </div>
-          </div>
+          ) : (
+            <div>
+              <AuthComponent />
+            </div>
+          )}
+          ;
         </div>
       </nav>
       <nav className="navbar navbar-light pt-0 border-bottom">
         <div className="container row m-auto navbarhome">
           <div className="d-flex justify-content-center col">
-            <div class="dropdown">
+            <div className="dropdown">
               <Link
                 to="/"
                 className="btn dropdown-toggle d-flex"
@@ -155,15 +177,15 @@ export const Navbar = () => {
                   Categorias{" "}
                 </h5>
                 <i
-                  class="far fa-caret-square-down mx-2 my-1"
+                  className="far fa-caret-square-down mx-2 my-1"
                   style={{ color: "darkgray" }}
                 ></i>
               </Link>
-              <ul class="dropdown-menu">
+              <ul className="dropdown-menu">
                 <li>
                   <Link
                     to={"/resultado/celulares"}
-                    class="dropdown-item"
+                    className="dropdown-item"
                     type="button"
                   >
                     Celulares
@@ -172,7 +194,7 @@ export const Navbar = () => {
                 <li>
                   <Link
                     to={"/resultado/calzados"}
-                    class="dropdown-item"
+                    className="dropdown-item"
                     type="button"
                   >
                     Calzados
@@ -181,7 +203,7 @@ export const Navbar = () => {
                 <li>
                   <Link
                     to={"/resultado/consola"}
-                    class="dropdown-item"
+                    className="dropdown-item"
                     type="button"
                   >
                     Consolas
@@ -190,7 +212,7 @@ export const Navbar = () => {
                 <li>
                   <Link
                     to={"/resultado/camera"}
-                    class="dropdown-item"
+                    className="dropdown-item"
                     type="button"
                   >
                     Cámaras
@@ -199,7 +221,7 @@ export const Navbar = () => {
                 <li>
                   <Link
                     to={"/resultado/laptop"}
-                    class="dropdown-item"
+                    className="dropdown-item"
                     type="button"
                   >
                     Laptops
@@ -208,7 +230,7 @@ export const Navbar = () => {
                 <li>
                   <Link
                     to={"/resultado/lentes"}
-                    class="dropdown-item"
+                    className="dropdown-item"
                     type="button"
                   >
                     Lentes
@@ -217,7 +239,7 @@ export const Navbar = () => {
                 <li>
                   <Link
                     to={"/resultado/ropa"}
-                    class="dropdown-item"
+                    className="dropdown-item"
                     type="button"
                   >
                     Ropa
@@ -226,7 +248,7 @@ export const Navbar = () => {
                 <li>
                   <Link
                     to={"/resultado/reloj"}
-                    class="dropdown-item"
+                    className="dropdown-item"
                     type="button"
                   >
                     Relojes
@@ -252,20 +274,20 @@ export const Navbar = () => {
               <h5 className="m-0 p-0 fs-6 ">Garantía y devoluciones</h5>
             </Link>
             <div
-              class="modal fade"
+              className="modal fade"
               id="exampleModal"
-              tabindex="-1"
+              tabIndex="-1"
               aria-labelledby="exampleModalLabel"
               aria-hidden="true"
             >
-              <div class="modal-dialog">
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="exampleModalLabel">
+              <div className="modal-dialog">
+                <div className="modal-content">
+                  <div className="modal-header">
+                    <h1 className="modal-title fs-5" id="exampleModalLabel">
                       Garantía de Entrega
                     </h1>
                   </div>
-                  <div class="modal-body">
+                  <div className="modal-body">
                     <small className="fs-5 fw-bold">
                       Aseguramos la entrega de tu orden:
                     </small>
@@ -279,10 +301,10 @@ export const Navbar = () => {
                       TiendaNuestra
                     </small>
                   </div>
-                  <div class="modal-footer justify-content-center">
+                  <div className="modal-footer justify-content-center">
                     <button
                       type="button"
-                      class="btn btn-secondary"
+                      className="btn btn-secondary"
                       data-bs-dismiss="modal"
                     >
                       Cerrar

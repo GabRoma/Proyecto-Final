@@ -20,6 +20,7 @@ import { Espacioproductos } from "./pages/espacioproductos";
 import { Espaciodescuento } from "./pages/espaciodescuento";
 import { Espaciocostoytarif } from "./pages/espaciocostoytarif";
 import { Espaciooferta } from "./pages/espaciooferta";
+import { Perfil } from "./pages/perfil";
 //create your first component
 const Layout = () => {
   //the basename is used when your project is published in a subdirectory and not in the root of the domain
@@ -50,6 +51,7 @@ const Layout = () => {
               element={<Espaciocostoytarif />}
               path="/espaciocostoytarif"
             />
+            <Route element={<Perfil />} path="/perfil" />
             <Route element={<Categoria />} path="/resultado/:cat" />
             <Route element={<Carrito />} path="/carrito" />
             <Route element={<Checkout />} path="/checkout" />
