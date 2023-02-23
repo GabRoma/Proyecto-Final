@@ -8,6 +8,8 @@ import { Context } from "../store/appContext";
 export const Favoritos = (props) => {
   const { store, actions, setStore } = useContext(Context);
   const params = useParams();
+  console.log(store.favoritos);
+  console.log(props);
 
   return (
     <div className="jumbotron m-2">
@@ -20,7 +22,7 @@ export const Favoritos = (props) => {
             {" "}
             {store.favoritos.map((item, index) => {
               return (
-                <div className="card w-50 m-auto" key={item.id}>
+                <div className="card w-50 m-auto" key={index}>
                   <div className="row g-0">
                     <div className="col-md-4">
                       <img src={item.url} className="img-fluid" alt="" />
@@ -28,11 +30,16 @@ export const Favoritos = (props) => {
                     <div className="col-md-8">
                       <div className="card-body">
                         <div className="d-flex justify-content-between">
-                          <h5 className="card-title"> {item.name} </h5>{" "}
-                          <i
-                            className="fa fa-solid fa-trash"
-                            onClick={() => actions.quitFavorito(item)}
-                          ></i>{" "}
+                          <h5 className="card-title">
+                            {" "}
+                            {item.nombresdecadaproducto} {index.id}{" "}
+                          </h5>{" "}
+                          <button>
+                            <i
+                              className="fa fa-solid fa-trash"
+                              onClick={() => actions.eliminarFavorito(item)}
+                            ></i>{" "}
+                          </button>
                         </div>{" "}
                         <p className="card-text">
                           This is a wider card with supporting text below as a
@@ -46,11 +53,11 @@ export const Favoritos = (props) => {
                         </p>{" "}
                         <div className="d-flex justify-content-between">
                           <p>
-                            <u>ver más</u>
-                          </p>
+                            <u> ver más </u>{" "}
+                          </p>{" "}
                           <h5>
-                            <strong> $ {item.price} </strong>
-                          </h5>
+                            <strong> $ {item.price} </strong>{" "}
+                          </h5>{" "}
                         </div>{" "}
                       </div>{" "}
                     </div>{" "}
