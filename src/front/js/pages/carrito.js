@@ -10,6 +10,8 @@ import { CartItem } from "../component/cartItem";
 export const Carrito = (props) => {
   const { store, actions, setStore } = useContext(Context);
   const params = useParams();
+  console.log(store.carrito);
+  console.log(props);
 
   return (
     <div className="jumbotron m-2">
@@ -24,7 +26,7 @@ export const Carrito = (props) => {
           <div>
             {" "}
             {store.carrito.map((item, index) => {
-              return <CartItem key={item.id} {...item} />;
+              return <CartItem key={index} {...item} />;
             })}{" "}
           </div>{" "}
         </div>{" "}

@@ -6,7 +6,7 @@ import { AuthComponent } from "./authcomponent.js";
 import { Context } from "../store/appContext";
 
 export const Navbar = () => {
-  const { store } = useContext(Context);
+  const { store, actions } = useContext(Context);
   const [searchTerm, setSearchTerm] = useState("");
 
   function handleSubmit(event) {
@@ -74,15 +74,22 @@ export const Navbar = () => {
                 </span>
               </button>
               <ul className="dropdown-menu">
-                {store.favoritos.map((item, index) => {
-                  return (
-                    <li key={item.id}>
-                      <a className="dropdown-item" href="#">
-                        {item.name}
-                      </a>
-                    </li>
-                  );
-                })}
+                {store.favoritos.map((item, index) => (
+                  <div className="row" key={index}>
+                    <button className="list-group-item btn btn-outline-primary w-75 mx-auto">
+                      {item.nombresdecadaproducto} {index.id}{" "}
+                      <button
+                        className="btn btn-secondary rounded opacity-10 mx-0 "
+                        type="button"
+                        id="eliminar"
+                        onClick={() => actions.eliminarFavorito(item)}
+                      >
+                        Borrar
+                      </button>{" "}
+                    </button>
+                  </div>
+                ))}
+
                 <li key={"f" + store.favoritos.length}>
                   <a
                     className="dropdown-item text-center text-muted"
@@ -105,15 +112,21 @@ export const Navbar = () => {
                 </span>
               </button>
               <ul className="listaCarrito dropdown-menu">
-                {store.carrito.map((item, index) => {
-                  return (
-                    <li key={item.id}>
-                      <a className="dropdown-item" href="#">
-                        {item.name}
-                      </a>
-                    </li>
-                  );
-                })}
+                {store.carrito.map((item, index) => (
+                  <div className="row" key={index}>
+                    <button className="list-group-item btn btn-outline-primary w-75 mx-auto">
+                      {item.nombresdecadaproducto} {index.id}{" "}
+                      <button
+                        className="btn btn-secondary rounded opacity-10 mx-0 "
+                        type="button"
+                        id="eliminar"
+                        onClick={() => actions.eliminarDeCarrito(item)}
+                      >
+                        Borrar
+                      </button>{" "}
+                    </button>
+                  </div>
+                ))}
                 <li key={"c" + store.carrito.length}>
                   <a
                     className="dropdown-item text-center text-muted"
@@ -137,8 +150,14 @@ export const Navbar = () => {
                 data-bs-toggle="dropdown"
                 aria-expanded="false"
               >
-                <h5 className="m-auto fs-6 " style={{ color: "darkgray" }}> Categorias </h5>
-                <i class="far fa-caret-square-down mx-2 my-1" style={{ color: "darkgray" }}></i>
+                <h5 className="m-auto fs-6 " style={{ color: "darkgray" }}>
+                  {" "}
+                  Categorias{" "}
+                </h5>
+                <i
+                  class="far fa-caret-square-down mx-2 my-1"
+                  style={{ color: "darkgray" }}
+                ></i>
               </Link>
               <ul class="dropdown-menu">
                 <li>
@@ -230,10 +249,7 @@ export const Navbar = () => {
           {/* Modal ---------------------------------------------------------- */}
           <div className="d-flex justify-content-center col">
             <Link to="/" data-bs-toggle="modal" data-bs-target="#exampleModal">
-              <h5 className="m-0 p-0 fs-6 ">
-
-                Garantía y devoluciones
-              </h5>
+              <h5 className="m-0 p-0 fs-6 ">Garantía y devoluciones</h5>
             </Link>
             <div
               class="modal fade"
