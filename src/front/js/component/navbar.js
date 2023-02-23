@@ -84,21 +84,20 @@ export const Navbar = () => {
                   </span>
                 </button>
                 <ul className="dropdown-menu">
-                  {store.favoritos.map((item, index) => (
-                    <div className="row" key={index}>
-                      <button className="list-group-item btn btn-outline-primary w-75 mx-auto">
-                        {item.nombresdecadaproducto} {index.id}{" "}
-                        <button
-                          className="btn btn-secondary rounded opacity-10 mx-0 "
-                          type="button"
-                          id="eliminar"
+                  {store.favoritos.map((item) => {
+                    return (
+                      <li
+                        className="dropdown-menu-item d-flex justify-content-between p-2"
+                        key={"fav" + item.id}
+                      >
+                        {item.name}
+                        <i
+                          className="far fa-times-circle"
                           onClick={() => actions.eliminarFavorito(item)}
-                        >
-                          Borrar
-                        </button>{" "}
-                      </button>
-                    </div>
-                  ))}
+                        />
+                      </li>
+                    );
+                  })}
 
                   <li key={"f" + store.favoritos.length}>
                     <a
@@ -109,7 +108,7 @@ export const Navbar = () => {
                     </a>
                   </li>
                 </ul>
-                <button className="log btn p-0 mx-4">
+                <button className="log btn p-0 mx-4" style={{ color: "gray" }}>
                   <i className="fas fa-sign-out-alt" onClick={handleLogout}></i>
                   Salir
                 </button>{" "}
@@ -128,21 +127,20 @@ export const Navbar = () => {
                   </span>
                 </button>
                 <ul className="listaCarrito dropdown-menu">
-                  {store.carrito.map((item, index) => (
-                    <div className="row" key={index}>
-                      <button className="list-group-item btn btn-outline-primary w-75 mx-auto">
-                        {item.nombresdecadaproducto} {index.id}{" "}
-                        <button
-                          className="btn btn-secondary rounded opacity-10 mx-0 "
-                          type="button"
-                          id="eliminar"
+                  {store.carrito.map((item) => {
+                    return (
+                      <li
+                        className="dropdown-menu-item d-flex justify-content-between p-2"
+                        key={"prod" + item.id}
+                      >
+                        {item.name}
+                        <i
+                          className="far fa-times-circle"
                           onClick={() => actions.eliminarDeCarrito(item)}
-                        >
-                          Borrar
-                        </button>{" "}
-                      </button>
-                    </div>
-                  ))}
+                        />
+                      </li>
+                    );
+                  })}
                   <li key={"c" + store.carrito.length}>
                     <a
                       className="dropdown-item text-center text-muted"

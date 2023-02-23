@@ -37,7 +37,7 @@ export const AuthComponent = () => {
           href="#divpadre"
           role="button"
         >
-          <button className="log btn p-0">
+          <button className="log btn p-0" style={{ color: "gray" }}>
             <i className="far fa-user"></i>Ingresar
           </button>{" "}
         </a>
