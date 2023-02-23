@@ -2,60 +2,49 @@ import React, { useContext } from "react"; // tenemos que importar lo del usecon
 import { Link } from "react-router-dom";
 import { Context } from "../store/appContext.js";
 
-export const Productos = (props, nombre, imagen, precio, moneda) => {
-  const { store, actions } = useContext(Context);
-  console.log(props.nombre);
-  // console.log(precio);
-
-  // if (props.id < 2) {
+export const Productos = (props) => {
+  const { actions } = useContext(Context);
   return (
     <>
-      <div className="row row-cols-1 row-cols-md-3 g-4">
-        <div className="col">
-          <div className="card mx-5 " style={{ width: 250 }}>
-            <Link to={"/single/" + props.theid} className=" ">
-              <img
-                src={props.imagen}
-                className="card-img-top"
-                width="50"
-                height="200"
-                alt="..."
-              />
-            </Link>
+      <div className="card mb-3 p-1" style={{ width: 250, height: 440 }}>
+        <Link
+          to={"/single/" + props.sku}
+          style={{ textDecoration: "none", color: "darkgrey" }}
+        >
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              height: "330px",
+            }}
+          >
+            <img
+              src={props.imagen}
+              className=""
+              style={{
+                maxWidth: "100%",
+                maxHeight: "100%",
+              }}
+              alt="product image"
+            />
+          </div>
+          <div className="px-2">
+            <h5 className="mb-4">{props.nombre.slice(0, 50)}</h5>
+          </div>
+        </Link>
+        <div style={{ position: "absolute", bottom: "0", width: "100%" }}>
+          <div className="d-flex justify-content-between card-text mb-2">
+            <strong className="px-2 fs-5">
+              {props.moneda} {props.price}
+            </strong>
+            <div>
+              <i className="fas fa-shopping-cart me-3" onClick={() => actions.addCarrito(props)}></i>
 
-            <div className="card-body">
-              <h5 className="card-title">{props.nombre}</h5>
-
-              <p className="card-text"></p>
-              {/* <Link to={"/single/"} className="btn btn-primary mx-5 " style={{ width: 80 }} > Learn </Link> */}
-            </div>
-            <div className="card-footer d-flex justify-content-between">
-              <div className="pricetag d-flex">
-                <strong>
-                  <p>{props.moneda}</p>
-                </strong>
-                &nbsp;
-                <strong>
-                  <p>{props.precio}</p>
-                </strong>
-                &nbsp;
-                <p className="text-muted">-20%</p>
-              </div>
-              <div>
-                <i
-                  className="fas fa-shopping-cart mx-1"
-                  // onClick={() => actions.addCarrito(item)}
-                />
-              </div>
             </div>
           </div>
         </div>
       </div>
     </>
   );
-  // } else {
-  //   <div></div>;
-  // }
 };
-
-//btn btn-primary btn-sm ms-2

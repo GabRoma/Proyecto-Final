@@ -39,6 +39,9 @@ export const DarkModeToggle = () => {
     document.querySelector(".searchbtn").style.color = isDarkMode
       ? "#212529"
       : "#babec2";
+    document.querySelector(".card").style.color = isDarkMode
+      ? "transparent"
+      : "black"
     document.querySelector(".searchbar").style.backgroundColor = isDarkMode
       ? "rgb(243, 245, 244)"
       : "black";
