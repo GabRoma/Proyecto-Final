@@ -82,11 +82,10 @@ const getState = ({ getStore, getActions, setStore }) => {
     actions: {
       todosLosProductos: () => {
         fetch(
-          "https://3001-gabroma-proyectofinal-qh3l4gx3yyf.ws-us87.gitpod.io/api/products"
+          "https://3001-gabroma-proyectofinal-ozhwt25y9nb.ws-us87.gitpod.io/api/products"
         )
           .then((response) => response.json())
           .then((data) => {
-            console.log(data);
             setStore({
               productos: data,
             });
@@ -222,7 +221,7 @@ const getState = ({ getStore, getActions, setStore }) => {
       inicioLogin: (userEmail, userPassword) => {
         console.log("funciona");
         fetch(
-          "https://3001-gabroma-proyectofinal-qh3l4gx3yyf.ws-us87.gitpod.io/api/login",
+          "https://3001-gabroma-proyectofinal-ozhwt25y9nb.ws-us87.gitpod.io/api/login",
           {
             method: "POST",
             headers: {
@@ -265,7 +264,7 @@ const getState = ({ getStore, getActions, setStore }) => {
         userEmail
       ) => {
         fetch(
-          "https://3001-gabroma-proyectofinal-qh3l4gx3yyf.ws-us87.gitpod.io/api/signup",
+          "https://3001-gabroma-proyectofinal-ozhwt25y9nb.ws-us87.gitpod.io/api/signup",
           {
             method: "POST",
             headers: {
@@ -301,10 +300,11 @@ const getState = ({ getStore, getActions, setStore }) => {
       },
 
       validToken: async () => {
+        let store = getStore();
         let accessToken = localStorage.getItem("token");
         try {
           const response = await fetch(
-            "https://3001-gabroma-proyectofinal-qh3l4gx3yyf.ws-us87.gitpod.io/api/valid-token",
+            "https://3001-gabroma-proyectofinal-ozhwt25y9nb.ws-us87.gitpod.io/api/valid-token",
             {
               headers: {
                 Authorization: "Bearer " + accessToken,
@@ -315,6 +315,7 @@ const getState = ({ getStore, getActions, setStore }) => {
             setStore({
               estalogueado: true,
             });
+            console.log(store.estalogueado);
             return;
           } else {
             setStore({

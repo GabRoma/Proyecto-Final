@@ -63,7 +63,7 @@ export const Navbar = () => {
                 </span>
               </button>
               <ul className="dropdown-menu">
-                {store.favoritos.map((item, index) => {
+                {store.favoritos.map((item) => {
                   return (
                     <li key={item.id}>
                       <a className="dropdown-item" href="#">
@@ -99,7 +99,7 @@ export const Navbar = () => {
                 </span>
               </button>
               <ul className="listaCarrito dropdown-menu">
-                {store.carrito.map((item, index) => {
+                {store.carrito.map((item) => {
                   return (
                     <li key={item.id}>
                       <a className="dropdown-item" href="#">

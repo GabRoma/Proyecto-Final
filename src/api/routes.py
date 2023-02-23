@@ -67,12 +67,12 @@ def valid_token():
     elif user is None:
         return jsonify({"status": False}), 404
 
-    response_body = {
+    response = {
         "msg":"ok",
         "status": True,
         "user":user.serialize()
         }
-    return jsonify(response_body), 200
+    return jsonify(response), 200
 
 
 #JWT TERMINAMOS 
