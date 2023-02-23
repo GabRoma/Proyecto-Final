@@ -292,7 +292,7 @@ def editar_estado_carrito(user_id ):
 
 @api.route('/productos/api', methods=['GET'])
 def handle_productos():
-        api_key = "AF185FB4D85E400BB2F13A90317BE45B"
+        api_key = "67229083677942669F18CCBE03F90B9D"
         category_id = "281052"
         api_url_category = f"https://api.rainforestapi.com/request?api_key={api_key}&type=category&amazon_domain=amazon.com&category_id={category_id}"
         response_category = requests.get(api_url_category).json()
