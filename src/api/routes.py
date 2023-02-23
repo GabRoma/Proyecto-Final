@@ -250,7 +250,7 @@ def borrar_producto_carrito(user_id, producto_sku):
 
 @api.route('/productos/api', methods=['GET'])
 def handle_productos():
-        api_key = "20A008C72C5543CC90005903CB49824E"
+        api_key = "F76EAD13D91049E2A8084C91F07FEFD0"
         category_id = "281052"
         api_url_category = f"https://api.rainforestapi.com/request?api_key={api_key}&type=category&amazon_domain=amazon.com&category_id={category_id}"
         response_category = requests.get(api_url_category).json()
@@ -265,8 +265,8 @@ def handle_productos():
                     sku=product["asin"],
                     name=product["title"],
                     product_url=product["link"],
-                    keywords = product["keywords"].lower(),
-                    brand=product["brand"],
+                    keywords = product["keywords"].lower() + product["categories"][0]["name"],
+                    brand=product["brand"] if "brand" in item else "Generico",
                     sell_on_amazon=True,
                     category=product["categories"][0]["name"],
                     price = (item["price"]["value"]
@@ -279,9 +279,9 @@ def handle_productos():
                     if "buybox_winner" in product and "price" in product["buybox_winner"]
                     else "No disponible"))),
                     currency = "USD",
-                    description = product["feature_bullets_flat"],
-                    rating=product["rating"],
-                    imagenes=product["images_flat"],
+                    description = product["feature_bullets_flat"] if "feature_bullets_flat" in product else "Información no disponible",
+                    rating=product["rating"] if "rating" in product else 3.5,
+                    imagenes=product["images_flat"] if "images_flat" in product else "https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/No-Image-Placeholder.svg/800px-No-Image-Placeholder.svg.png",
                     peso=product["weight"] if "weight" in product else "59"
                     # manufacturer=product["manufacturer"],
                     # dimensions=product["dimensions"]
