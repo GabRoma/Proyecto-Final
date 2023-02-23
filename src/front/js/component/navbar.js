@@ -6,7 +6,7 @@ import { AuthComponent } from "./authcomponent.js";
 import { Context } from "../store/appContext";
 
 export const Navbar = () => {
-  const { store, actions } = useContext(Context);
+  const { store } = useContext(Context);
   const [searchTerm, setSearchTerm] = useState("");
 
   function handleSubmit(event) {

@@ -82,9 +82,7 @@ const getState = ({ getStore, getActions, setStore }) => {
     },
     actions: {
       todosLosProductos: () => {
-        fetch(
-          "https://3001-gabroma-proyectofinal-sh2xb4y61nw.ws-us87.gitpod.io/api/products"
-        )
+        fetch(process.env.BACKEND_URL + "/api/products")
           .then((response) => response.json())
           .then((data) => {
             console.log(data);
@@ -263,20 +261,17 @@ const getState = ({ getStore, getActions, setStore }) => {
 
       inicioLogin: (userEmail, userPassword) => {
         console.log("funciona");
-        fetch(
-          "https://gabroma-proyectofinal-5zn559e2lki.ws-us87.gitpod.io/api/login",
-          {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-              // 'Content-Type': 'application/x-www-form-urlencoded',
-            },
-            body: JSON.stringify({
-              email: userEmail,
-              password: userPassword,
-            }), //lo que tenga el recipiente reproducelo // body data type must match "Content-Type" header
-          }
-        )
+        fetch(process.env.BACKEND_URL + "/api/login", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            // 'Content-Type': 'application/x-www-form-urlencoded',
+          },
+          body: JSON.stringify({
+            email: userEmail,
+            password: userPassword,
+          }), //lo que tenga el recipiente reproducelo // body data type must match "Content-Type" header
+        })
           .then((response) => {
             if (response.status === 200) {
               setStore({
@@ -314,23 +309,20 @@ const getState = ({ getStore, getActions, setStore }) => {
         userPassword,
         userEmail
       ) => {
-        fetch(
-          "https://gabroma-proyectofinal-5zn559e2lki.ws-us87.gitpod.io/api/signup",
-          {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-              // 'Content-Type': 'application/x-www-form-urlencoded',
-            },
-            body: JSON.stringify({
-              name: userName,
-              apellido: userApellido,
-              celular: userCellphone,
-              password: userPassword,
-              email: userEmail,
-            }), // body data type must match "Content-Type" header
-          }
-        )
+        fetch(process.env.BACKEND_URL + "/api/signup", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            // 'Content-Type': 'application/x-www-form-urlencoded',
+          },
+          body: JSON.stringify({
+            name: userName,
+            apellido: userApellido,
+            celular: userCellphone,
+            password: userPassword,
+            email: userEmail,
+          }), // body data type must match "Content-Type" header
+        })
           .then((response) => {
             console.log(response.status);
             if (response.status === 200) {
