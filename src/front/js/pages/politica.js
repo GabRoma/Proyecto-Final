@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 export const Politica = () => {
     return (
         <div className="container w-50">
-            <h1 >Política de Privacidad</h1>
+            <h1 className="text-center">Política de Privacidad</h1>
             <p >En TiendaNuestra, nos comprometemos a proteger su privacidad. Esta Política de Privacidad describe cómo recopilamos, usamos y protegemos su información personal cuando utiliza nuestro sitio web.</p>
             <p className="fw-bolder text-center">Información que recopilamos</p>
             <p >Cuando utiliza nuestro sitio web, podemos recopilar información personal que usted nos proporciona directamente, como su nombre, dirección, número de teléfono y dirección de correo electrónico. También podemos recopilar información automáticamente a través de cookies u otras tecnologías de seguimiento cuando visita nuestro sitio web, como información sobre su dirección IP, su tipo de navegador, su sistema operativo y su actividad en nuestro sitio web.</p>

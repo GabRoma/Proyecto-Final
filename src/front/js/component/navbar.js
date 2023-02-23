@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import logo from "../../img/logito.png";
 import logo2 from "../../img/logito2.png";
@@ -7,6 +7,18 @@ import { Context } from "../store/appContext";
 
 export const Navbar = () => {
   const { store } = useContext(Context);
+  const [searchTerm, setSearchTerm] = useState("");
+
+  function handleSubmit(event) {
+    event.preventDefault();
+
+    const encodedSearchTerm = encodeURIComponent(searchTerm.toLowerCase());
+    window.location.href = `/resultado/${encodedSearchTerm}`;
+  }
+
+  function handleChange(event) {
+    setSearchTerm(event.target.value);
+  }
 
   return (
     <div>
@@ -27,7 +39,7 @@ export const Navbar = () => {
             <img src={logo} height="70" />
             <h1 className="tituloprincipal ps-3">TiendaNuestra</h1>
           </Link>
-          <form className="search form-inline d-flex justify-content-center me-4">
+          <form className="search form-inline d-flex justify-content-center me-4" onSubmit={handleSubmit}>
             <button
               className="searchbtn btn rounded-start rounded-0 border-end-0 border pe-1"
               type="submit"
@@ -40,8 +52,11 @@ export const Navbar = () => {
               type="search"
               placeholder="Buscar un producto"
               aria-label="Search"
+              value={searchTerm}
+              onChange={handleChange}
             />
           </form>
+
           <div className="ml-auto">
             <div className="dropdown d-flex">
               <button
@@ -128,7 +143,7 @@ export const Navbar = () => {
               <ul class="dropdown-menu">
                 <li>
                   <Link
-                    to={"/categoria/celulares"}
+                    to={"/resultado/celulares"}
                     class="dropdown-item"
                     type="button"
                   >
@@ -137,7 +152,7 @@ export const Navbar = () => {
                 </li>
                 <li>
                   <Link
-                    to={"/categoria/calzados"}
+                    to={"/resultado/calzados"}
                     class="dropdown-item"
                     type="button"
                   >
@@ -146,7 +161,7 @@ export const Navbar = () => {
                 </li>
                 <li>
                   <Link
-                    to={"/categoria/consola"}
+                    to={"/resultado/consola"}
                     class="dropdown-item"
                     type="button"
                   >
@@ -155,7 +170,7 @@ export const Navbar = () => {
                 </li>
                 <li>
                   <Link
-                    to={"/categoria/camera"}
+                    to={"/resultado/camera"}
                     class="dropdown-item"
                     type="button"
                   >
@@ -164,7 +179,7 @@ export const Navbar = () => {
                 </li>
                 <li>
                   <Link
-                    to={"/categoria/laptop"}
+                    to={"/resultado/laptop"}
                     class="dropdown-item"
                     type="button"
                   >
@@ -173,7 +188,7 @@ export const Navbar = () => {
                 </li>
                 <li>
                   <Link
-                    to={"/categoria/lentes"}
+                    to={"/resultado/lentes"}
                     class="dropdown-item"
                     type="button"
                   >
@@ -182,7 +197,7 @@ export const Navbar = () => {
                 </li>
                 <li>
                   <Link
-                    to={"/categoria/ropa"}
+                    to={"/resultado/ropa"}
                     class="dropdown-item"
                     type="button"
                   >
@@ -191,7 +206,7 @@ export const Navbar = () => {
                 </li>
                 <li>
                   <Link
-                    to={"/categoria/reloj"}
+                    to={"/resultado/reloj"}
                     class="dropdown-item"
                     type="button"
                   >

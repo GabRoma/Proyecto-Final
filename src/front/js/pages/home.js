@@ -10,7 +10,7 @@ const Carousel = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const images = [
     "https://www.apple.com/newsroom/images/product/iphone/standard/apple_iphone-12-spring21_purple_04202021_big.jpg.large.jpg",
-    "Celulares",
+    "phone",
     "https://static.nike.com/a/images/f_auto,cs_srgb/w_1920,c_limit/e5853518-be79-4fcc-afe4-6d2df175de53/el-mejor-calzado-informal-de-nike-para-usar-todos-los-días.jpg",
     "Calzados",
     "https://media.gq.com.mx/photos/61e70ca25def32c5619cef06/4:3/w_712,h_534,c_limit/Lenovo%20Yoga%20Slim%207%20Pro.jpg",
@@ -53,7 +53,7 @@ const Carousel = () => {
           </button>
         </div>
         <div className="carousel d-flex justify-content-center container mb-4">
-          <Link to={"/categoria/" + images[currentIndex + 1]} className="wrapRed border-0 mx-3">
+          <Link to={"/resultado/" + images[currentIndex + 1]} className="wrapRed border-0 mx-3">
             <img src={images[currentIndex]} className="redondo" alt="ERROR" />
             <h4
               className="centered text-light"
@@ -65,7 +65,7 @@ const Carousel = () => {
               {images[currentIndex + 1]}
             </h4>
           </Link>
-          <Link to={"/categoria/" + images[currentIndex + 3]} className="wrapRed border-0 mx-3">
+          <Link to={"/resultado/" + images[currentIndex + 3]} className="wrapRed border-0 mx-3">
             <img
               src={images[currentIndex + 2]}
               className="redondo"
@@ -136,12 +136,48 @@ export const Home = () => {
         </div>
       </div>
       <div className="container d-flex">
-        <h5 className="fw-bolder ms-3"> Camaras </h5> <Link className="ms-auto" style={{ color: "black" }} to="/categoria/camera">
+        <h5 className="fw-bolder ms-3"> Camaras </h5> <Link className="ms-auto" style={{ color: "black" }} to="/resultado/camera">
           <p style={{ fontSize: 14 }}>Ver todos</p>
         </Link>
       </div>
       <div className="d-flex container row m-auto">
-        {store.productos?.filter(item => item.keywords.toLowerCase().split(",").includes("camera")).slice(0, 5).map((item, index) => (
+        {store.productos?.filter(item => item.keywords.toLowerCase().split(",").includes("camera")).slice(0, 5).map((item) => (
+          <div className="d-flex container " style={{ width: "20%" }}>
+            <Productos
+              nombre={item.name}
+              imagen={item.imagenes}
+              moneda={item.currency}
+              price={item.price}
+              sku={item.sku}
+            />
+          </div>
+        ))}
+      </div>
+      <div className="container d-flex">
+        <h5 className="fw-bolder ms-3 mt-5"> Celulares & accesorios</h5> <Link className="ms-auto" style={{ color: "black" }} to="/resultado/apple">
+          <p style={{ fontSize: 14 }}>Ver todos</p>
+        </Link>
+      </div>
+      <div className="d-flex container row m-auto">
+        {store.productos?.filter(item => item.keywords.toLowerCase().split(",").includes("phone") || item.keywords.toLowerCase().split(",").includes("apple") || item.keywords.toLowerCase().split(",").includes("tablet")).slice(0, 5).map((item) => (
+          <div className="d-flex container " style={{ width: "20%" }}>
+            <Productos
+              nombre={item.name}
+              imagen={item.imagenes}
+              moneda={item.currency}
+              price={item.price}
+              sku={item.sku}
+            />
+          </div>
+        ))}
+      </div>
+      <div className="container d-flex">
+        <h5 className="fw-bolder ms-3 mt-5">Libros</h5> <Link className="ms-auto" style={{ color: "black" }} to="/resultado/books">
+          <p style={{ fontSize: 14 }}>Ver todos</p>
+        </Link>
+      </div>
+      <div className="d-flex container row m-auto">
+        {store.productos?.filter(item => item.category.toLowerCase().split(",").includes("books")).slice(0, 5).map((item) => (
           <div className="d-flex container " style={{ width: "20%" }}>
             <Productos
               nombre={item.name}

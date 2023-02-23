@@ -7,25 +7,24 @@ export const Single = () => {
   const { theid } = useParams();
 
   const product = store.productos?.find((item) => item.sku.includes(theid));
-  console.log("XD")
-  console.log(store.productos);
   return (
     <>
-      <div className="d-flex container">
+      <div className="d-flex container mt-4">
         {product && (
           <div className="d-flex">
             <img
               src={product.imagenes}
               alt={product.name}
-              style={{ maxWidth: "50%", maxHeight: "100%" }}
+              style={{ maxWidth: "40%", maxHeight: "100%" }}
             />
-            div
-            <h5>{product.name}</h5>
-            <p>{product.description}</p>
-            <p>
-              <strong>USD {product.price}</strong>
-            </p>
-            <button onClick={() => actions.addCarrito(product)}>Add to Cart</button>
+            <div className="mt-3 ms-3">
+              <h5 style={{ fontSize: 25 }}>{product.name.slice(0, 69)}...</h5>
+              <p>{product.description.slice(0, 900)}...</p>
+              <p>
+                <strong>USD {product.price}</strong>
+              </p>
+              <button onClick={() => actions.addCarrito(product)}>Add to Cart</button>
+            </div>
           </div>
         )}
       </div>
