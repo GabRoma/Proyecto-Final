@@ -250,7 +250,7 @@ def borrar_producto_carrito(user_id, producto_sku):
 
 @api.route('/productos/api', methods=['GET'])
 def handle_productos():
-        api_key = "838C9E01F7B04D3EAE0F7C830109F3E3"
+        api_key = "A6066884537B490E9D9CC38F6F671D02"
         category_id = "281052"
         api_url_category = f"https://api.rainforestapi.com/request?api_key={api_key}&type=category&amazon_domain=amazon.com&category_id={category_id}"
         response_category = requests.get(api_url_category).json()
