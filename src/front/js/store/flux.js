@@ -125,10 +125,13 @@ const getState = ({ getStore, getActions, setStore }) => {
             localStorage.setItem("userId", data.user.id);
           });
       },
-      agregarACarrito: (sku, userid) => {
-        console.log(sku, userid);
+      agregarACarrito: (sku) => {
+        let userid = localStorage.getItem("userId");
+        console.log(sku);
+
         fetch(
-          "https://3001-gabroma-proyectofinal-tf3n1voo1zo.ws-us87.gitpod.io/api/user/" +
+          process.env.BACKEND_URL +
+            "/api/user/" +
             userid +
             "/carrito/products/" +
             sku,
@@ -218,7 +221,7 @@ const getState = ({ getStore, getActions, setStore }) => {
       obtenerCarrito: () => {
         let userid = localStorage.getItem("userId");
         fetch(
-          "https://3001-gabroma-proyectofinal-tf3n1voo1zo.ws-us87.gitpod.io/api/cart/" +
+          "https://3001-gabroma-proyectofinal-jtr5a64c2jr.ws-us88.gitpod.io/api/cart/" +
             userid
         )
           .then((response) => response.json())
