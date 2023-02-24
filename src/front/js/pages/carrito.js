@@ -11,9 +11,10 @@ export const Carrito = () => {
   const { store, actions, setStore } = useContext(Context);
   const params = useParams();
   console.log(store.carrito);
+  console.log(store.total);
 
   useEffect(() => {
-    actions.obtenerCarrito();
+    actions.obtenerCarrito(), actions.sumCarrito();
   }, []);
 
   return (

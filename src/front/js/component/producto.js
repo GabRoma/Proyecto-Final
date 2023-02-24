@@ -38,10 +38,9 @@ export const Productos = (props) => {
             <strong className="px-2 fs-5">
               {props.moneda} {props.price}
             </strong>
-            <div>
-              <i className="fas fa-shopping-cart me-3" onClick={() => actions.addCarrito(props)}></i>
-
-            </div>
+            <button onClick={() => actions.agregarACarrito(props.sku)}>
+              <i className="fas fa-shopping-cart me-3"></i>
+            </button>
           </div>
         </div>
       </div>

@@ -9,7 +9,7 @@ export const Single = (item, props) => {
   console.log(params);
 
   const agregarItemCarrito = () => {
-    actions.agregarACarrito(params.theid, localStorage.getItem("userId"));
+    actions.agregarACarrito(params.theid);
   };
 
   // const añadirCarrito = () => {
