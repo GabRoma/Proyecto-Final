@@ -12,10 +12,10 @@ export const Checkout = (props) => {
   const params = useParams();
 
   return (
-    <div className="jumbotron m-2 container m-auto my-4">
-      <div className="title text-center mb-2">
-        <h1> Checkout </h1>
-      </div>
+    <div className="jumbotron m-2">
+      <div className="title text-center">
+        <h1> Checkout </h1>{" "}
+      </div>{" "}
       <div className="d-flex">
         <div className="d-block w-75 p-1">
           <div className="card mb-3">
@@ -26,22 +26,22 @@ export const Checkout = (props) => {
                   fontSize: "xx-large",
                 }}
               >
-                Usuario
-              </i>
+                Usuario{" "}
+              </i>{" "}
               <a href="/">
                 <i className="fa fa-pen text-muted">
-                  <u> editar información </u>
-                </i>
-              </a>
-            </div>
+                  <u> editar información </u>{" "}
+                </i>{" "}
+              </a>{" "}
+            </div>{" "}
             <div className="card-body my-2 p-2">
-              <p> Email: </p> <p> Celular: </p> <p> Dirección: </p>
-            </div>
-          </div>
+              <p> Email: </p> <p> Celular: </p> <p> Dirección: </p>{" "}
+            </div>{" "}
+          </div>{" "}
           <div className="card p-4 mb-3">
             <div>
-              <p> Seleccione una forma de envío </p>
-            </div>
+              <p> Seleccione una forma de envío </p>{" "}
+            </div>{" "}
             <div className="form-check">
               <input
                 className="form-check-input"
@@ -50,9 +50,9 @@ export const Checkout = (props) => {
                 id="tipoEnvio1"
               />
               <label className="form-check-label" htmlFor="tipoEnvio1">
-                Retiro en local
-              </label>
-            </div>
+                Retiro en local{" "}
+              </label>{" "}
+            </div>{" "}
             <div className="form-check">
               <input
                 className="form-check-input"
@@ -61,31 +61,31 @@ export const Checkout = (props) => {
                 id="tipoEnvio2"
               />
               <label className="form-check-label" htmlFor="tipoEnvio2">
-                Envío a domicilio
-              </label>
-            </div>
-          </div>
+                Envío a domicilio{" "}
+              </label>{" "}
+            </div>{" "}
+          </div>{" "}
           <div className="card mb-3">
             <div className="card-header d-flex justify-content-between">
-              <h5> Detalles del pedido </h5>
+              <h5> Detalles del pedido </h5>{" "}
               <a href="/carrito">
                 <i className="fa fa-shopping-cart text-muted">
-                  <u> ver carrito </u>
-                </i>
-              </a>
-            </div>
+                  <u> ver carrito </u>{" "}
+                </i>{" "}
+              </a>{" "}
+            </div>{" "}
             <div className="card-body">
               <table className="table text-secondary">
                 <thead>
                   <tr>
-                    <th scope="col"> </th> <th scope="col"> Producto </th>
-                    <th scope="col"> Precio </th>
-                    <th scope="col"> Cantidad </th>
-                    <th scope="col"> Subtotal </th> <th scope="col"> </th>
-                  </tr>
-                </thead>
+                    <th scope="col"> </th> <th scope="col"> Producto </th>{" "}
+                    <th scope="col"> Precio </th>{" "}
+                    <th scope="col"> Cantidad </th>{" "}
+                    <th scope="col"> Subtotal </th> <th scope="col"> </th>{" "}
+                  </tr>{" "}
+                </thead>{" "}
                 <tbody>
-
+                  {" "}
                   {store.carrito.map((item, index) => (
                     <tr key={item.id}>
                       <td>
@@ -96,53 +96,53 @@ export const Checkout = (props) => {
                             maxWidth: 70,
                             maxHeight: 70,
                           }}
-                        />
-                      </td>
-                      <td> {item.name} </td> <td> $ {item.price} </td>
-                      <td> {item.quantity} </td> <td> $ {item.subtotal} </td>
+                        />{" "}
+                      </td>{" "}
+                      <td> {item.name} </td> <td> $ {item.price} </td>{" "}
+                      <td> {item.quantity} </td> <td> $ {item.subtotal} </td>{" "}
                       <td>
-
+                        {" "}
                         <i
                           className="fa fa-solid fa-trash"
                           onClick={() => actions.quitCarrito(item)}
-                        ></i>
-                      </td>
+                        ></i>{" "}
+                      </td>{" "}
                     </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-          </div>
-        </div>
+                  ))}{" "}
+                </tbody>{" "}
+              </table>{" "}
+            </div>{" "}
+          </div>{" "}
+        </div>{" "}
         <div className="d-block w-25 p-1">
           <div className="card mb-3">
             <div className="card-header">
-              <h5> Resumen </h5>
-            </div>
+              <h5> Resumen </h5>{" "}
+            </div>{" "}
             <div className="card-body">
               <div className="d-flex justify-content-between">
-                <p className="card-text"> Productos: </p>
-                <p className="card-text"> $ {store.subtotal} </p>
-              </div>
+                <p className="card-text"> Productos: </p>{" "}
+                <p className="card-text"> $ {store.subtotal} </p>{" "}
+              </div>{" "}
               <div className="d-flex justify-content-between">
-                <p className="card-text"> Envío: </p>
-                <p className="card-text"> $ </p>
-              </div>
+                <p className="card-text"> Envío: </p>{" "}
+                <p className="card-text"> $ </p>{" "}
+              </div>{" "}
               <div className="d-flex justify-content-between">
-                <p className="card-text text-muted"> Descuentos: </p>
-                <p className="card-text text-muted"> $ </p>
-              </div>
-            </div>
+                <p className="card-text text-muted"> Descuentos: </p>{" "}
+                <p className="card-text text-muted"> $ </p>{" "}
+              </div>{" "}
+            </div>{" "}
             <div className="card-footer d-flex justify-content-between">
-              <h5 className="card-text"> Total: </h5> <h5> $ {store.total} </h5>
-            </div>
-          </div>
+              <h5 className="card-text"> Total: </h5> <h5> $ {store.total} </h5>{" "}
+            </div>{" "}
+          </div>{" "}
           <div className="card p-4 mb-3">
             <form className="d-block">
               <div className="col-auto">
                 <label htmlFor="inputDiscount" className="mb-2">
-                  Código de Descuento / Giftcard
-                </label>
+                  Código de Descuento / Giftcard{" "}
+                </label>{" "}
                 <div className="d-flex">
                   <input
                     type="text"
@@ -153,18 +153,18 @@ export const Checkout = (props) => {
                       backgroundColor: "#14141414",
                       color: "gray",
                     }}
-                  />
+                  />{" "}
                   <button type="submit" className="btn btn-outline-danger">
-                    OK
-                  </button>
-                </div>
-              </div>
-            </form>
-          </div>
+                    OK{" "}
+                  </button>{" "}
+                </div>{" "}
+              </div>{" "}
+            </form>{" "}
+          </div>{" "}
           <div className="card">
             <div className="card-header">
-              <p> Seleccione un método de pago </p>
-            </div>
+              <p> Seleccione un método de pago </p>{" "}
+            </div>{" "}
             <div className="card-body text-center">
               <div className="gp mb-3">
                 <GooglePayButton
@@ -208,8 +208,8 @@ export const Checkout = (props) => {
                     );
                     history.push("/confirm");
                   }}
-                />
-              </div>
+                />{" "}
+              </div>{" "}
               <div className="pp">
                 <PayPalScriptProvider
                   options={{
@@ -234,13 +234,13 @@ export const Checkout = (props) => {
                       const name = details.payer.name.given_name;
                       alert("Transaction completed by " + name);
                     }}
-                  />
-                </PayPalScriptProvider>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+                  />{" "}
+                </PayPalScriptProvider>{" "}
+              </div>{" "}
+            </div>{" "}
+          </div>{" "}
+        </div>{" "}
+      </div>{" "}
     </div>
   );
 };

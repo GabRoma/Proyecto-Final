@@ -7,11 +7,14 @@ import { Context } from "../store/appContext";
 import CartAmountToggle from "../component/amount";
 import { CartItem } from "../component/cartItem";
 
-export const Carrito = (props) => {
+export const Carrito = () => {
   const { store, actions, setStore } = useContext(Context);
   const params = useParams();
   console.log(store.carrito);
-  console.log(props);
+
+  useEffect(() => {
+    actions.obtenerCarrito();
+  }, []);
 
   return (
     <div className="jumbotron m-2">

@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useState, useContext } from "react";
 import { Link } from "react-router-dom";
 import logo from "../../img/logito.png";
 import { AuthComponent } from "./authcomponent.js";
@@ -59,8 +59,6 @@ export const Navbar = () => {
               type="search"
               placeholder="Buscar un producto"
               aria-label="Search"
-              value={searchTerm}
-              onChange={handleChange}
             />
           </form>
           {store.estalogueado === true ? (

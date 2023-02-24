@@ -2,7 +2,7 @@
 # This module takes care of starting the API Server, Loading the DB and Adding the endpoints
 # """
 from flask import Flask, request, jsonify, url_for, Blueprint
-from api.models import db, User, Carrito, Favoritos, Producto
+from api.models import db, User, Carrito, Favoritos, Producto, Orden, Orden_detail
 from api.utils import generate_sitemap, APIException
 from flask_jwt_extended import create_access_token
 from flask_jwt_extended import get_jwt_identity
@@ -215,7 +215,9 @@ def add_carrito_product(user_id, producto_sku):
                 response_body = {"msg":"el usuario no existe"}
                 return jsonify(response_body),404
             else:
-                carrito = Carrito(producto_sku=producto_sku, user_id=user_id)
+                product = existe.serialize()
+                print(product["name"])
+                carrito = Carrito(estado=True, name=product["name"][:50], price=product["price"],imagenes=product["imagenes"], cantidad=1, producto_sku=producto_sku, user_id=user_id)
                 db.session.add(carrito)
                 db.session.commit()
                 response_body = {"msg":"Se ha agregado el producto a Carrito"}
@@ -248,7 +250,7 @@ def borrar_producto_carrito(user_id, producto_sku):
     return jsonify(response_body), 200
 
 
-#Checkout
+# #Checkout
 #Traer Orden es en plural? traer ordenes
 @api.route('/user/<int:user_id>/orden', methods=['GET'])
 def handle_orden(user_id):
@@ -317,10 +319,9 @@ def editar_estado_carrito(user_id ):
         db.session.commit()  
     return jsonify("funciona"), 200 
 
-
 @api.route('/productos/api', methods=['GET'])
 def handle_productos():
-        api_key = "67229083677942669F18CCBE03F90B9D"
+        api_key = "C30FEE1EDCE14C02909155347C015021"
         category_id = "281052"
         api_url_category = f"https://api.rainforestapi.com/request?api_key={api_key}&type=category&amazon_domain=amazon.com&category_id={category_id}"
         response_category = requests.get(api_url_category).json()
@@ -375,6 +376,18 @@ def handle_one_product(sku):
 def handle_products():
     all_products = Producto.query.all()
     results = list(map(lambda item: item.serialize(),all_products))
-    return jsonify(results), 200    
+    return jsonify(results), 200
 
+@api.route('/cart/<int:user_id>', methods=['GET'])
+def get_carrito(user_id):
+    mostrar_carrito = Carrito.query.filter_by(user_id=user_id,estado=True).all()
+    results = list(map(lambda item: item.serialize(),mostrar_carrito))
+    return jsonify(results), 200    
+ 
+
+
+  # busqueda tabla carrito opr user id filterby(estado true, userid=userid) .all 
+#   linea 356
+#   reutn response linea 356
     
+
