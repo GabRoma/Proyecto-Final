@@ -4,34 +4,37 @@ import { Link, useParams } from "react-router-dom";
 import { Context } from "../store/appContext";
 import { Productos } from "../component/producto.js";
 export const Categoria = (props) => {
-  const { store, actions } = useContext(Context)
+  const { store, actions } = useContext(Context);
   const { cat } = useParams();
   console.log(cat);
   return (
     <>
       <small className=" fs-6 d-flex justify-content-center mt-3">
-        En TiendaNuestra encuentras l@s mejores {cat}s al mejor
-        precio, directo desde USA hasta la puerta de tu casa.
+        En TiendaNuestra encuentras l@s mejores {cat}s al mejor precio, directo
+        desde USA hasta la puerta de tu casa.
       </small>
       <hr />
       <div className="d-flex container row m-auto">
-        {store.productos?.filter(item => {
-          if (cat === "books") {
-            return item.category.toLowerCase().includes(cat)
-          } else {
-            return item.keywords.toLowerCase().split(",").includes(cat)
-          }
-        }).slice(0, 20).map((item, index) => (
-          <div style={{ width: "20%" }}>
-            <Productos
-              nombre={item.name}
-              imagen={item.imagenes}
-              moneda={item.currency}
-              price={item.price}
-              sku={item.sku}
-            />
-          </div>
-        ))}
+        {store.productos
+          ?.filter((item) => {
+            if (cat === "books") {
+              return item.category.toLowerCase().includes(cat);
+            } else {
+              return item.keywords.toLowerCase().split(",").includes(cat);
+            }
+          })
+          .slice(0, 20)
+          .map((item, index) => (
+            <div style={{ width: "20%" }}>
+              <Productos
+                nombre={item.name}
+                imagen={item.imagenes}
+                moneda={item.currency}
+                price={item.price}
+                sku={item.sku}
+              />
+            </div>
+          ))}
       </div>
       <div className="container">
         Más información sobre {cat}s
@@ -113,8 +116,8 @@ export const Categoria = (props) => {
               data-bs-parent="#accordionFlushExample"
             >
               <div class="accordion-body">
-                Comprar productos en TiendaNuestra es muy fácil! Solo debes seguir
-                4 simples pasos:
+                Comprar productos en TiendaNuestra es muy fácil! Solo debes
+                seguir 4 simples pasos:
                 <ul className="my-1">
                   1- Selecciona la oferta de Calzado que deseas comprar.
                 </ul>

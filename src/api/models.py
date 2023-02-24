@@ -15,7 +15,9 @@ class User(db.Model):
     favoritos = db.relationship("Favoritos", backref='user' )
     metodosDePagos = db.relationship("MetodosDePagos", backref='user')
     carrito = db.relationship("Carrito", backref='user')
-
+    orden = db.relationship("Orden", backref='user')
+    orden_detail = db.relationship("Orden_detail", backref='user')
+    
     def __repr__(self):
         return '<User %r>' % self.id
 
@@ -69,12 +71,16 @@ class MetodosDePagos (db.Model):
         "user_id": self.user_id,
         
         }
-
-#Tabla de Carrito
 class Carrito(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'),nullable=False)
     producto_sku = db.Column(db.String(120), db.ForeignKey('producto.sku'),nullable=False )
+    orden_detail = db.relationship("Orden_detail", backref='carrito')
+    estado = db.Column(db.Boolean(True),  unique=False, nullable=False )
+    name = db.Column(db.String(12000), unique=False, nullable=False) 
+    price = db.Column(db.String(12000), unique=False, nullable=False)
+    imagenes =  db.Column(db.String(10000), unique=False, nullable=True)
+    cantidad = db.Column(db.Integer, unique=False, nullable=True)
 
     def __repr__(self):
         return '<Carrito %r>' % self.id
@@ -84,7 +90,13 @@ class Carrito(db.Model):
             "id": self.id,
             "user_id": self.user_id,
             "producto_sku": self.producto_sku,
+            "name": self.name,
+            "price": self.price,
+            "imagenes": self.imagenes,
+            "cantidad": self.cantidad,
         }
+        
+
 
 
 class Producto(db.Model):
@@ -130,3 +142,45 @@ class Producto(db.Model):
             "manufacturer": self.manufacturer,
             "dimensions": self.dimensions           
         }
+
+class Orden(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'),nullable=False)
+    orden_number = db.Column(db.String(12000),unique=True,nullable=False )
+    total_amount = db.Column(db.Integer,unique=False,nullable=False )
+    fecha = db.Column(db.Integer,unique=False,nullable=False )
+    estado = db.Column(db.String(12000),unique=False,nullable=False )
+    orden_detail = db.relationship("Orden_detail", backref='orden')
+
+
+    def __repr__(self):
+        return '<Orden %r>' % self.id
+
+    def serialize(self):
+        return {
+            "id": self.id,
+            "user_id": self.user_id,
+            "orden_number": self.orden_number,
+            "total_amount": self.total_amount,
+            "fecha": self.fecha,
+            "estado": self.estado,
+        }        
+
+class Orden_detail(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'),nullable=False) 
+    carrito_id = db.Column(db.Integer, db.ForeignKey('carrito.id'),nullable=False) 
+    order_id = db.Column(db.Integer, db.ForeignKey('orden.id'),nullable=False) 
+
+    def __repr__(self):
+        return '< Orden_detail %r>' % self.id
+
+    def serialize(self):
+        return {
+            "id": self.id,
+            "user_id": self.user_id,
+            "carrito_id": self.carrito_id,
+            "order_id": self.order_id,
+        }            
+
+        
