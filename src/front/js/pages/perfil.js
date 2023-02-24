@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 import { Context } from "../store/appContext";
 import { useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
 
 export const Perfil = (user) => {
   const { store, actions } = useContext(Context);
@@ -23,18 +24,17 @@ export const Perfil = (user) => {
     setUpdateUserData({ ...updateUserData, [name]: value });
   };
 
-  // useEffect(() => {
-  //   let profileAux = true;
-  //   if (profileAux) {
-  //     if (store.estalogueado === false) {
-  //       navigate("/");
-  //       alert("Debes iniciar sesión para poder acceder a tu perfil");
-  //       window.location.reload(false);
-  //     } else {
-  //       console.log("Bienvenido a tu perfil");
-  //     }
-  //   }
-  // }, []);
+  useEffect(() => {
+    if (!localStorage.token) {
+      navigate("/");
+      Swal.fire({
+        icon: "error",
+        title: "Debes iniciar sesión para poder acceder a tu perfil",
+      });
+    } else {
+      console.log("Bienvenido a tu perfil");
+    }
+  }, []);
 
   useEffect(() => actions.getUserData(localStorage.userId), []);
 

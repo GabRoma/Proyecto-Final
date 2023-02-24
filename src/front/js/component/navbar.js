@@ -114,7 +114,10 @@ export const Navbar = () => {
                   data-bs-toggle="dropdown"
                   aria-expanded="false"
                 >
-                  <i className="fas fa-shopping-cart"></i>
+                  <i
+                    className="fas fa-shopping-cart"
+                    style={{ color: "darkgoldenrod" }}
+                  ></i>
                   <span
                     className="notificacion"
                     style={{ right: "130px", top: "-10px" }}
@@ -164,7 +167,6 @@ export const Navbar = () => {
               <AuthComponent />
             </div>
           )}
-          ;
         </div>
       </nav>
       <nav className="navbar navbar-light pt-0 border-bottom">
