@@ -3,9 +3,11 @@ import Swal from "sweetalert2";
 const getState = ({ getStore, getActions, setStore }) => {
   return {
     store: {
+      userData: {},
       detalleProducto: {},
       productos: [],
       estalogueado: false,
+      logaux: true,
       message: null,
       demo: [
         {
@@ -359,22 +361,20 @@ const getState = ({ getStore, getActions, setStore }) => {
               },
             }
           );
-          if (response.data.status) {
+          const data = await response.json();
+          if (store.logaux) {
             setStore({
-              estalogueado: true,
+              estalogueado: data.status,
             });
-            console.log(store.estalogueado);
-            return;
-          } else {
+          }
+          return;
+        } catch (error) {
+          console.log(error);
+          if (store.logaux && error.code === "ERR_BAD_REQUEST") {
             setStore({
               estalogueado: false,
             });
-            return false;
           }
-        } catch (error) {
-          setStore({
-            estalogueado: false,
-          });
           return false;
         }
       },
@@ -383,7 +383,6 @@ const getState = ({ getStore, getActions, setStore }) => {
         fetch(process.env.BACKEND_URL + "/api/user/" + user_id)
           .then((response) => response.json())
           .then((data) => {
-            console.log(data);
             setStore({
               userData: data,
             });
@@ -400,17 +399,26 @@ const getState = ({ getStore, getActions, setStore }) => {
           },
           body: JSON.stringify(updatedData),
         })
-          .then((response) => response.json())
-          .then((data) => {
-            console.log(data);
-            setStore({
-              userData: data,
-            });
+          .then(() => {
+            actions.getUserData(localStorage.userId);
           })
           .catch((error) => {
             console.error("Error:", error);
           });
       },
+
+      //viejo
+      //     .then((response) => response.json())
+      //     .then((data) => {
+      //       console.log(data);
+      //       setStore({
+      //         userData: data,
+      //       });
+      //     })
+      //     .catch((error) => {
+      //       console.error("Error:", error);
+      //     });
+      // },
 
       changeColor: (index, color) => {
         //get the store

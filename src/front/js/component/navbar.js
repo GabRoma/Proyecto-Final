@@ -78,7 +78,7 @@ export const Navbar = () => {
                   ></i>
                   <span
                     className="notificacion"
-                    style={{ right: "135px", top: "-10px" }}
+                    style={{ right: "183px", top: "-10px" }}
                   >
                     {store.favoritos.length}
                   </span>
@@ -108,12 +108,8 @@ export const Navbar = () => {
                     </a>
                   </li>
                 </ul>
-                <button className="log btn p-0 mx-4" style={{ color: "gray" }}>
-                  <i className="fas fa-sign-out-alt" onClick={handleLogout}></i>
-                  Salir
-                </button>{" "}
                 <button
-                  className="cartbtn btn p-0 dropdown-toggle ms-3"
+                  className="cartbtn btn p-0 dropdown-toggle mx-3"
                   type="button"
                   data-bs-toggle="dropdown"
                   aria-expanded="false"
@@ -121,7 +117,7 @@ export const Navbar = () => {
                   <i className="fas fa-shopping-cart"></i>
                   <span
                     className="notificacion"
-                    style={{ right: "-16px", top: "-10px" }}
+                    style={{ right: "130px", top: "-10px" }}
                   >
                     {store.carrito.length}
                   </span>
@@ -150,6 +146,17 @@ export const Navbar = () => {
                     </a>
                   </li>
                 </ul>
+                <button
+                  className="btn p-0 ms-3"
+                  style={{ color: "gray" }}
+                  onClick={() => (window.location.href = "/perfil")}
+                >
+                  <i className="fa fa-user-circle"></i>
+                </button>
+                <button className="log btn p-0 mx-4" style={{ color: "gray" }}>
+                  <i className="fas fa-sign-out-alt" onClick={handleLogout}></i>
+                  Salir
+                </button>{" "}
               </div>
             </div>
           ) : (

@@ -105,13 +105,15 @@ def update_user(user_id):
     if theUser is None:
         raise APIException('User not found', status_code=404)
     if "name" in request_body:
-        theUser.name = body["name"]
+        theUser.name = request_body["name"]
     if "email" in request_body:
-        theUser.email = body["email"]
+        theUser.email = request_body["email"]
+    if "celular" in request_body:
+        theUser.celular = request_body["celular"]
     if "direccion_de_entrega" in request_body:
-        theUser.direccion_de_entrega = body["direccion_de_entrega"]
+        theUser.direccion_de_entrega = request_body["direccion_de_entrega"]
     if "password" in request_body:
-        theUser.password = body["password"]
+        theUser.password = request_body["password"]
     db.session.commit()
 
     return jsonify("User data updated"), 200

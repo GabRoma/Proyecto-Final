@@ -1,10 +1,12 @@
 import React, { useState, useEffect, useContext } from "react";
 import { Context } from "../store/appContext";
+import { useNavigate } from "react-router-dom";
 
 export const Perfil = (user) => {
   const { store, actions } = useContext(Context);
   const [editing, setEditing] = useState(false);
-  const [updateUserData, setUpdateUserData] = useState({});
+  const [updateUserData, setUpdateUserData] = useState(store.userData);
+  const navigate = useNavigate();
 
   const handleEditClick = () => {
     setEditing(true);
@@ -13,12 +15,26 @@ export const Perfil = (user) => {
   const handleSaveClick = () => {
     setEditing(false);
     actions.updateUserData(localStorage.userId, updateUserData);
+    window.location.reload(false);
   };
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
     setUpdateUserData({ ...updateUserData, [name]: value });
   };
+
+  // useEffect(() => {
+  //   let profileAux = true;
+  //   if (profileAux) {
+  //     if (store.estalogueado === false) {
+  //       navigate("/");
+  //       alert("Debes iniciar sesión para poder acceder a tu perfil");
+  //       window.location.reload(false);
+  //     } else {
+  //       console.log("Bienvenido a tu perfil");
+  //     }
+  //   }
+  // }, []);
 
   useEffect(() => actions.getUserData(localStorage.userId), []);
 
