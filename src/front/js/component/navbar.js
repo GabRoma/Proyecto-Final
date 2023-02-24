@@ -1,24 +1,14 @@
-import React, { useContext, useState } from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import logo from "../../img/logito.png";
 import logo2 from "../../img/logito2.png";
 import { AuthComponent } from "./authcomponent.js";
 import { Context } from "../store/appContext";
 
-export const Navbar = () => {
-  const { store } = useContext(Context);
-  const [searchTerm, setSearchTerm] = useState("");
-
-  function handleSubmit(event) {
-    event.preventDefault();
-
-    const encodedSearchTerm = encodeURIComponent(searchTerm.toLowerCase());
-    window.location.href = `/resultado/${encodedSearchTerm}`;
-  }
-
-  function handleChange(event) {
-    setSearchTerm(event.target.value);
-  }
+export const Navbar = (props) => {
+  const { store, actions } = useContext(Context);
+  console.log(store.favoritos);
+  console.log(props);
 
   return (
     <div>
@@ -39,7 +29,7 @@ export const Navbar = () => {
             <img src={logo} height="70" />
             <h1 className="tituloprincipal ps-3">TiendaNuestra</h1>
           </Link>
-          <form className="search form-inline d-flex justify-content-center me-4" onSubmit={handleSubmit}>
+          <form className="search form-inline d-flex justify-content-center me-4">
             <button
               className="searchbtn btn rounded-start rounded-0 border-end-0 border pe-1"
               type="submit"
@@ -52,11 +42,8 @@ export const Navbar = () => {
               type="search"
               placeholder="Buscar un producto"
               aria-label="Search"
-              value={searchTerm}
-              onChange={handleChange}
             />
           </form>
-
           <div className="ml-auto">
             <div className="dropdown d-flex">
               <button
@@ -74,22 +61,15 @@ export const Navbar = () => {
                 </span>
               </button>
               <ul className="dropdown-menu">
-                {store.favoritos.map((item, index) => (
-                  <div className="row" key={index}>
-                    <button className="list-group-item btn btn-outline-primary w-75 mx-auto">
-                      {item.nombresdecadaproducto} {index.id}{" "}
-                      <button
-                        className="btn btn-secondary rounded opacity-10 mx-0 "
-                        type="button"
-                        id="eliminar"
-                        onClick={() => actions.eliminarFavorito(item)}
-                      >
-                        Borrar
-                      </button>{" "}
-                    </button>
-                  </div>
-                ))}
-
+                {store.favoritos.map((item, index) => {
+                  return (
+                    <li key={item.id}>
+                      <a className="dropdown-item" href="#">
+                        {item.name}
+                      </a>
+                    </li>
+                  );
+                })}
                 <li key={"f" + store.favoritos.length}>
                   <a
                     className="dropdown-item text-center text-muted"
@@ -112,21 +92,15 @@ export const Navbar = () => {
                 </span>
               </button>
               <ul className="listaCarrito dropdown-menu">
-                {store.carrito.map((item, index) => (
-                  <div className="row" key={index}>
-                    <button className="list-group-item btn btn-outline-primary w-75 mx-auto">
-                      {item.nombresdecadaproducto} {index.id}{" "}
-                      <button
-                        className="btn btn-secondary rounded opacity-10 mx-0 "
-                        type="button"
-                        id="eliminar"
-                        onClick={() => actions.eliminarDeCarrito(item)}
-                      >
-                        Borrar
-                      </button>{" "}
-                    </button>
-                  </div>
-                ))}
+                {store.carrito.map((item, index) => {
+                  return (
+                    <li key={item.id}>
+                      <a className="dropdown-item" href="#">
+                        {item.name}
+                      </a>
+                    </li>
+                  );
+                })}
                 <li key={"c" + store.carrito.length}>
                   <a
                     className="dropdown-item text-center text-muted"
@@ -162,7 +136,7 @@ export const Navbar = () => {
               <ul class="dropdown-menu">
                 <li>
                   <Link
-                    to={"/resultado/celulares"}
+                    to={"/categoria/celulares"}
                     class="dropdown-item"
                     type="button"
                   >
@@ -171,7 +145,7 @@ export const Navbar = () => {
                 </li>
                 <li>
                   <Link
-                    to={"/resultado/calzados"}
+                    to={"/categoria/calzados"}
                     class="dropdown-item"
                     type="button"
                   >
@@ -180,7 +154,7 @@ export const Navbar = () => {
                 </li>
                 <li>
                   <Link
-                    to={"/resultado/consola"}
+                    to={"/categoria/consola"}
                     class="dropdown-item"
                     type="button"
                   >
@@ -189,7 +163,7 @@ export const Navbar = () => {
                 </li>
                 <li>
                   <Link
-                    to={"/resultado/camera"}
+                    to={"/categoria/camera"}
                     class="dropdown-item"
                     type="button"
                   >
@@ -198,7 +172,7 @@ export const Navbar = () => {
                 </li>
                 <li>
                   <Link
-                    to={"/resultado/laptop"}
+                    to={"/categoria/laptop"}
                     class="dropdown-item"
                     type="button"
                   >
@@ -207,7 +181,7 @@ export const Navbar = () => {
                 </li>
                 <li>
                   <Link
-                    to={"/resultado/lentes"}
+                    to={"/categoria/lentes"}
                     class="dropdown-item"
                     type="button"
                   >
@@ -216,7 +190,7 @@ export const Navbar = () => {
                 </li>
                 <li>
                   <Link
-                    to={"/resultado/ropa"}
+                    to={"/categoria/ropa"}
                     class="dropdown-item"
                     type="button"
                   >
@@ -225,7 +199,7 @@ export const Navbar = () => {
                 </li>
                 <li>
                   <Link
-                    to={"/resultado/reloj"}
+                    to={"/categoria/reloj"}
                     class="dropdown-item"
                     type="button"
                   >
