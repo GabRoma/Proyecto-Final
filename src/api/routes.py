@@ -187,7 +187,9 @@ def add_carrito_product(user_id, producto_sku):
                 response_body = {"msg":"el usuario no existe"}
                 return jsonify(response_body),404
             else:
-                carrito = Carrito(producto_sku=producto_sku, user_id=user_id)
+                product = existe.serialize()
+                print(product["name"])
+                carrito = Carrito(estado=True, name=product["name"][:50], price=product["price"],imagenes=product["imagenes"], cantidad=1, producto_sku=producto_sku, user_id=user_id)
                 db.session.add(carrito)
                 db.session.commit()
                 response_body = {"msg":"Se ha agregado el producto a Carrito"}

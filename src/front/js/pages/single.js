@@ -1,16 +1,27 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 import { Context } from "../store/appContext.js";
 
-export const Single = (item) => {
-  const { actions } = useContext(Context);
+export const Single = (item, props) => {
+  const { actions, store } = useContext(Context);
   const [added, setAdded] = useState(false);
   const params = useParams();
   console.log(params);
 
   const agregarItemCarrito = () => {
-    actions.agregarACarrito(params.theid, storage.getItem("userId"));
+    actions.agregarACarrito(params.theid, localStorage.getItem("userId"));
   };
+
+  // const añadirCarrito = () => {
+  //   // let store = getStore();
+  //   agregarItemCarrito();
+  //   //tenemos que traer el array favoritos
+  //   let contenedordeelemento = {}; //necesitamos recorrer el array favorito guardarlo en  contenedordeelemento
+  //   contenedordeelemento.nombresdecadaproducto = props.nombre;
+  //   contenedordeelemento.id = props.id;
+
+  //   store.carrito = [...store.carrito, contenedordeelemento];
+  // };
 
   useEffect(() => {
     actions.todosLosProductos(params.theid);
@@ -21,11 +32,13 @@ export const Single = (item) => {
   };
 
   function toggleClick() {
-    actions.addCarrito(item);
+    actions.agregarACarrito(item);
     toggleTexto();
   }
 
-  const product = store.productos?.find((item) => item.sku.includes(theid));
+  const product = store.productos?.find((item) =>
+    item.sku.includes(params.theid)
+  );
   console.log("XD");
   console.log(store.productos);
   return (

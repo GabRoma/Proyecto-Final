@@ -77,7 +77,10 @@ class Carrito(db.Model):
     producto_sku = db.Column(db.String(120), db.ForeignKey('producto.sku'),nullable=False )
     orden_detail = db.relationship("Orden_detail", backref='carrito')
     estado = db.Column(db.Boolean(True),  unique=False, nullable=False )
-
+    name = db.Column(db.String(12000), unique=False, nullable=False) 
+    price = db.Column(db.String(12000), unique=False, nullable=False)
+    imagenes =  db.Column(db.String(10000), unique=False, nullable=True)
+    cantidad = db.Column(db.Integer, unique=False, nullable=True)
 
     def __repr__(self):
         return '<Carrito %r>' % self.id
@@ -87,6 +90,10 @@ class Carrito(db.Model):
             "id": self.id,
             "user_id": self.user_id,
             "producto_sku": self.producto_sku,
+            "name": self.name,
+            "price": self.price,
+            "imagenes": self.imagenes,
+            "cantidad": self.cantidad,
         }
         
 
