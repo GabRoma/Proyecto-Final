@@ -1,17 +1,15 @@
 //Item de carrito
 
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import PropTypes from "prop-types";
 import { Context } from "../store/appContext";
 import { Link, useParams } from "react-router-dom";
 import CartAmountToggle from "../component/amount";
 
 export const CartItem = (item, props) => {
-  const { store, actions, setStore } = useContext(Context);
+  const { store, actions } = useContext(Context);
   const params = useParams();
   console.log(store.carrito);
-  console.log(props);
-  console.log(params);
 
   // const eliminarItemCarrito = () => {
   //   actions.eliminarDeCarrito(params.theid, storage.getItem("userId"));
@@ -49,14 +47,15 @@ export const CartItem = (item, props) => {
     <div className="card border border-light" key={item.id}>
       <div className="row g-0">
         <div className="col-md-4">
-          <img src={item.url} className="img-fluid" alt="" />
+          <img src={item.imagenes} className="img-fluid" alt="" />
         </div>{" "}
         <div className="col-md-8">
           <div className="card-body">
-            {store.carrito.map((item, index) => (
+            {item.name}
+            {/* {store.carrito.map((item, index) => (
               <div className="row" key={index}>
                 <h5 className="card-title ">
-                  {item.nombresdecadaproducto} {index.id}{" "}
+                  {item.name} {index.id}{" "}
                   <i
                     className=" fa fa-solid fa-trash opacity-10"
                     type="button"
@@ -65,14 +64,14 @@ export const CartItem = (item, props) => {
                   ></i>{" "}
                 </h5>
               </div>
-            ))}
+            ))} */}
             <p className="card-text">
               This is a wider card with supporting text below as a natural lead
               - in to additional content.This content is a little bit longer.{" "}
             </p>{" "}
             <p className="card-text">
               <small className="text-muted">
-                Tiempo de envío estimado: {item.shipping}{" "}
+                Tiempo de envío estimado:15 a 20 dias{" "}
               </small>{" "}
             </p>{" "}
             <div className="d-flex justify-content-between">
@@ -82,7 +81,7 @@ export const CartItem = (item, props) => {
                 setIncrease={setIncrease}
               />{" "}
               <p>
-                <strong> $ {theprice} </strong>{" "}
+                <strong> $ {item.price} </strong>{" "}
               </p>{" "}
             </div>{" "}
           </div>{" "}

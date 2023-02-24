@@ -19,35 +19,7 @@ const getState = ({ getStore, getActions, setStore }) => {
           initial: "white",
         },
       ],
-      carrito: [
-        {
-          sku: 1,
-          name: "producto",
-          url: "https://shoptheoldemercantile.com/image/cache/catalog/placeholderproduct-500x500.png",
-          shipping: "3 semanas",
-          price: 10,
-          quantity: 1,
-          subtotal: 10,
-        },
-        // {
-        //   sku: 2,
-        //   name: "producto II",
-        //   url: "https://shoptheoldemercantile.com/image/cache/catalog/placeholderproduct-500x500.png",
-        //   shipping: "3 semanas",
-        //   price: 10,
-        //   quantity: 1,
-        //   subtotal: 10,
-        // },
-        // {
-        //   sku: 3,
-        //   name: "producto III",
-        //   url: "https://shoptheoldemercantile.com/image/cache/catalog/placeholderproduct-500x500.png",
-        //   shipping: "3 semanas",
-        //   price: 10,
-        //   quantity: 1,
-        //   subtotal: 10,
-        // },
-      ],
+      carrito: [],
       favoritos: [
         {
           sku: 1,
@@ -160,6 +132,9 @@ const getState = ({ getStore, getActions, setStore }) => {
           }
         )
           .then((response) => {
+            if (response.status === 200) {
+              getActions().obtenerCarrito();
+            }
             return response.json();
           })
           .then((data) => {
@@ -378,6 +353,23 @@ const getState = ({ getStore, getActions, setStore }) => {
         setStore({
           demo: demo,
         });
+      },
+      obtenerCarrito: () => {
+        let userid = localStorage.getItem("userId");
+        fetch(
+          "https://3001-gabroma-proyectofinal-tf3n1voo1zo.ws-us87.gitpod.io/api/cart/" +
+            userid
+        )
+          .then((response) => response.json())
+          .then((data) => {
+            console.log(data);
+            setStore({
+              carrito: data,
+            });
+          })
+          .catch((error) => {
+            console.error("Error:", error);
+          });
       },
     },
   };

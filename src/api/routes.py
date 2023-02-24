@@ -348,7 +348,18 @@ def handle_one_product(sku):
 def handle_products():
     all_products = Producto.query.all()
     results = list(map(lambda item: item.serialize(),all_products))
-    return jsonify(results), 200    
+    return jsonify(results), 200
 
+@api.route('/cart/<int:user_id>', methods=['GET'])
+def get_carrito(user_id):
+    mostrar_carrito = Carrito.query.filter_by(user_id=user_id,estado=True).all()
+    results = list(map(lambda item: item.serialize(),mostrar_carrito))
+    return jsonify(results), 200    
+ 
+
+
+  # busqueda tabla carrito opr user id filterby(estado true, userid=userid) .all 
+#   linea 356
+#   reutn response linea 356
     
 
