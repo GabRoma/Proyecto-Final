@@ -44,9 +44,9 @@ export const Login = () => {
           >
             <div
               className="card-header container mx-auto"
-              style={{ height: 130 }}
+              style={{ height: 130, color: "gray" }}
             >
-              <div className=" fw-bold my-2 fs-3 mx-auto">Inicio de Sesión</div>
+              <div className="fw-bold my-2 fs-3 mx-auto">Inicio de Sesión</div>
               <div
                 className="fs-6 my-2 fw-light mx-auto"
                 style={{ height: 10 }}

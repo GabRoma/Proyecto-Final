@@ -65,7 +65,12 @@ export const Registro = () => {
         {({ errors, touched }) => (
           <div className=" mx-auto" style={{ width: 695 }}>
             <div className="card text-center border-secondary border-2  rounded-5">
-              <div className="card-header fs-3 fw-bold">REGISTRO</div>
+              <div
+                className="card-header fs-3 fw-bold"
+                style={{ color: "gray" }}
+              >
+                REGISTRO
+              </div>
               <div className="card-body pb-1">
                 <Form className="row g-3" id="formulario">
                   <div className="col-md-3">
