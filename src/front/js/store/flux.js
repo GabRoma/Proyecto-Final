@@ -3,9 +3,11 @@ import Swal from "sweetalert2";
 const getState = ({ getStore, getActions, setStore }) => {
   return {
     store: {
+      userData: {},
       detalleProducto: {},
       productos: [],
       estalogueado: false,
+      logaux: true,
       message: null,
       demo: [
         {
@@ -19,7 +21,35 @@ const getState = ({ getStore, getActions, setStore }) => {
           initial: "white",
         },
       ],
-      carrito: [],
+      carrito: [
+        {
+          sku: 1,
+          name: "producto",
+          url: "https://shoptheoldemercantile.com/image/cache/catalog/placeholderproduct-500x500.png",
+          shipping: "3 semanas",
+          price: 10,
+          quantity: 1,
+          subtotal: 10,
+        },
+        // {
+        //   sku: 2,
+        //   name: "producto II",
+        //   url: "https://shoptheoldemercantile.com/image/cache/catalog/placeholderproduct-500x500.png",
+        //   shipping: "3 semanas",
+        //   price: 10,
+        //   quantity: 1,
+        //   subtotal: 10,
+        // },
+        // {
+        //   sku: 3,
+        //   name: "producto III",
+        //   url: "https://shoptheoldemercantile.com/image/cache/catalog/placeholderproduct-500x500.png",
+        //   shipping: "3 semanas",
+        //   price: 10,
+        //   quantity: 1,
+        //   subtotal: 10,
+        // },
+      ],
       favoritos: [
         {
           sku: 1,
@@ -54,9 +84,7 @@ const getState = ({ getStore, getActions, setStore }) => {
     },
     actions: {
       todosLosProductos: () => {
-        fetch(
-          "https://3001-gabroma-proyectofinal-tf3n1voo1zo.ws-us87.gitpod.io/api/products"
-        )
+        fetch(process.env.BACKEND_URL + "/api/products")
           .then((response) => response.json())
           .then((data) => {
             console.log(data);
@@ -73,9 +101,7 @@ const getState = ({ getStore, getActions, setStore }) => {
       checkout: (userid, ordenumero, total, date, state) => {
         // Function 1 Agregar/generar Orden
         fetch(
-          "https://gabroma-proyectofinal-5zn559e2lki.ws-us87.gitpod.io/api/user/" +
-            userid +
-            "/carrito/orden",
+          process.env.BACKEND_URL + "/api/user/" + userid + "/carrito/orden",
           {
             method: "POST",
             headers: {
@@ -98,23 +124,7 @@ const getState = ({ getStore, getActions, setStore }) => {
             localStorage.setItem("token", data.access_token);
             localStorage.setItem("userId", data.user.id);
           });
-
-        // Function 2 Agregar/generar Orden_detail
-        fetch(
-          "https://3001-gabroma-proyectofinal-5zn559e2lki.ws-us87.gitpod.io/api/user/<int:user_id>/carrito/orden_detail"
-        );
-
-        // Function 3 Actualizar carrito
-        // fetch(
-        //     "https://3001-gabroma-proyectofinal-5zn559e2lki.ws-us87.gitpod.io/api/user/<int:user_id>/carrito"
-        // )
       },
-      // ejectuarpago ={
-      //     funcion1(),
-      //     funcion2(),
-      //     funcion3()
-      // }
-
       agregarACarrito: (sku, userid) => {
         console.log(sku, userid);
         fetch(
@@ -205,7 +215,23 @@ const getState = ({ getStore, getActions, setStore }) => {
         getActions().sumCarrito();
         console.log(getStore().carrito);
       },
-
+      obtenerCarrito: () => {
+        let userid = localStorage.getItem("userId");
+        fetch(
+          "https://3001-gabroma-proyectofinal-tf3n1voo1zo.ws-us87.gitpod.io/api/cart/" +
+            userid
+        )
+          .then((response) => response.json())
+          .then((data) => {
+            console.log(data);
+            setStore({
+              carrito: data,
+            });
+          })
+          .catch((error) => {
+            console.error("Error:", error);
+          });
+      },
       agregarFavorito: (props, nombre, id) => {
         let store = getStore(); //tenemos que traer el array favoritos
         let contenedordeelemento = {}; //necesitamos recorrer el array favorito guardarlo en  contenedordeelemento
@@ -240,16 +266,14 @@ const getState = ({ getStore, getActions, setStore }) => {
         }
       },
 
-      // logout: () => {
-      // 	console.log("funciona");
-      //     // localStorage.removeItem('token');
-      //     // setStore({
-      //     //     estalogueado: false
-      //     // })
-      // },
+      logout: () => {
+        localStorage.removeItem("token");
+        setStore({
+          estalogueado: false,
+        });
+      },
 
       inicioLogin: (userEmail, userPassword) => {
-        console.log("funciona");
         fetch(process.env.BACKEND_URL + "/api/login", {
           method: "POST",
           headers: {
@@ -262,7 +286,12 @@ const getState = ({ getStore, getActions, setStore }) => {
           }), //lo que tenga el recipiente reproducelo // body data type must match "Content-Type" header
         })
           .then((response) => {
-            if (response.status === 200) {
+            if (response.status === 401) {
+              Swal.fire({
+                icon: "error",
+                title: "Error: usuario y/o contraseña incorrectos",
+              });
+            } else if (response.status === 200) {
               setStore({
                 estalogueado: true,
               });
@@ -277,18 +306,16 @@ const getState = ({ getStore, getActions, setStore }) => {
           // nombre de donde se guard ,  el valor access_token se guarda en token
           .then((data) => {
             console.log(data);
-
-            if (data.msg === "Bad email or password") {
-              Swal.fire({
-                icon: "error",
-                title: data.msg,
-              });
-            }
-
             localStorage.setItem("token", data.access_token);
             localStorage.setItem("userId", data.user.id);
           }) // nos llega un objeto llaamado data y tiene una propiedad access_token
-          .catch((err) => console.log(err));
+          .catch((err) => {
+            console.log(err);
+            Swal.fire({
+              icon: "error",
+              title: "Algo ha salido mal :(",
+            });
+          });
       },
 
       registro: (
@@ -315,9 +342,6 @@ const getState = ({ getStore, getActions, setStore }) => {
           .then((response) => {
             console.log(response.status);
             if (response.status === 200) {
-              setStore({
-                estalogueado: true,
-              });
               Swal.fire({
                 icon: "success",
                 title: "Usuario creado con exito",
@@ -333,9 +357,66 @@ const getState = ({ getStore, getActions, setStore }) => {
                 title: data.msg,
               });
             }
-            localStorage.setItem("token", data.access_token);
           })
           .catch((err) => console.log(err));
+      },
+
+      validToken: async () => {
+        let store = getStore();
+        let accessToken = localStorage.getItem("token");
+        try {
+          const response = await fetch(
+            process.env.BACKEND_URL + "/api/valid-token",
+            {
+              headers: {
+                Authorization: "Bearer " + accessToken,
+              },
+            }
+          );
+          const data = await response.json();
+          if (store.logaux) {
+            setStore({
+              estalogueado: data.status,
+            });
+          }
+          return;
+        } catch (error) {
+          console.log(error);
+          if (store.logaux && error.code === "ERR_BAD_REQUEST") {
+            setStore({
+              estalogueado: false,
+            });
+          }
+          return false;
+        }
+      },
+
+      getUserData: (user_id) => {
+        fetch(process.env.BACKEND_URL + "/api/user/" + user_id)
+          .then((response) => response.json())
+          .then((data) => {
+            setStore({
+              userData: data,
+            });
+          })
+          .catch((error) => {
+            console.error("Error:", error);
+          });
+      },
+      updateUserData: (user_id, updatedData) => {
+        fetch(process.env.BACKEND_URL + "/api/user/" + user_id, {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(updatedData),
+        })
+          .then(() => {
+            actions.getUserData(localStorage.userId);
+          })
+          .catch((error) => {
+            console.error("Error:", error);
+          });
       },
 
       changeColor: (index, color) => {
@@ -354,25 +435,26 @@ const getState = ({ getStore, getActions, setStore }) => {
           demo: demo,
         });
       },
-      obtenerCarrito: () => {
-        let userid = localStorage.getItem("userId");
-        fetch(
-          "https://3001-gabroma-proyectofinal-tf3n1voo1zo.ws-us87.gitpod.io/api/cart/" +
-            userid
-        )
-          .then((response) => response.json())
-          .then((data) => {
-            console.log(data);
-            setStore({
-              carrito: data,
-            });
-          })
-          .catch((error) => {
-            console.error("Error:", error);
-          });
-      },
     },
   };
 };
+
+//---------------------------------------------------------------------------------------------------------------------------------------------
+
+// Function 2 Agregar/generar Orden_detail
+// fetch(
+//   "https://3001-gabroma-proyectofinal-5zn559e2lki.ws-us87.gitpod.io/api/user/<int:user_id>/carrito/orden_detail"
+// );
+
+// Function 3 Actualizar carrito
+// fetch(
+//     "https://3001-gabroma-proyectofinal-5zn559e2lki.ws-us87.gitpod.io/api/user/<int:user_id>/carrito"
+//   // )
+// },
+// ejectuarpago ={
+//     funcion1(),
+//     funcion2(),
+//     funcion3()
+// }
 
 export default getState;

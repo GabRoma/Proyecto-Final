@@ -54,18 +54,24 @@ def login():
 
 # Protect a route with jwt_required, which will kick out requests
 # without a valid JWT present.
-@api.route("/perfil", methods=["GET"])
+@api.route("/valid-token", methods=["GET"])
 @jwt_required()
-def get_perfildatospersonales():
-    # Access the identity of the current user with get_jwt_identity
+def valid_token():
     current_user = get_jwt_identity()
     user = User.query.filter_by(email=current_user).first()
 
-    response_body = {
+    if current_user is None:
+        return jsonify({"User not logged yet"}), 422
+
+    elif user is None:
+        return jsonify({"status": False}), 404
+
+    response = {
         "msg":"ok",
+        "status": True,
         "user":user.serialize()
         }
-    return jsonify(response_body), 200
+    return jsonify(response), 200
 
 
 #JWT TERMINAMOS 
@@ -89,6 +95,28 @@ def handle_singleuser(user_id):
         return jsonify({"msg":"usuario no existente"}), 404
     else:
         return jsonify(one_user.serialize()), 200
+
+#este endpoint permite al usuario editar la información guardada en user
+@api.route('/user/<int:user_id>', methods=['PUT'])
+def update_user(user_id):
+    request_body = request.get_json()
+
+    theUser = User.query.get(user_id)
+    if theUser is None:
+        raise APIException('User not found', status_code=404)
+    if "name" in request_body:
+        theUser.name = request_body["name"]
+    if "email" in request_body:
+        theUser.email = request_body["email"]
+    if "celular" in request_body:
+        theUser.celular = request_body["celular"]
+    if "direccion_de_entrega" in request_body:
+        theUser.direccion_de_entrega = request_body["direccion_de_entrega"]
+    if "password" in request_body:
+        theUser.password = request_body["password"]
+    db.session.commit()
+
+    return jsonify("User data updated"), 200
 
 #terminamos de trabajar aca    
 
