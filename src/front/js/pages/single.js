@@ -43,13 +43,13 @@ export const Single = (item, props) => {
   console.log(store.productos);
   return (
     <>
-      <div className="d-flex container">
+      <div className="d-flex container mt-4">
         {product && (
           <div className="d-flex">
             <img
               src={product.imagenes}
               alt={product.name}
-              style={{ maxWidth: "50%", maxHeight: "100%" }}
+              style={{ maxWidth: "40%", maxHeight: "100%" }}
             />
 
             <h5>{product.name}</h5>
