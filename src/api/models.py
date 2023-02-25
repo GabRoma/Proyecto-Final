@@ -41,7 +41,8 @@ class Favoritos (db.Model):
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'),nullable=False)
     producto_sku = db.Column(db.String(120), db.ForeignKey('producto.sku'), nullable=True )
-    
+    imagenes =  db.Column(db.String(10000), unique=False, nullable=True)
+    name =  db.Column(db.String(10000), unique=False, nullable=False)
 
 
     def __repr__(self):
@@ -52,7 +53,7 @@ class Favoritos (db.Model):
             "id": self.id,
             "user_id": self.user_id,
             "producto_sku": self.producto_sku,
-            
+            "imagenes": self.imagenes,
         }
 
 #Tabla Metodos de Pago

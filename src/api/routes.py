@@ -383,6 +383,12 @@ def get_carrito(user_id):
     mostrar_carrito = Carrito.query.filter_by(user_id=user_id,estado=True).all()
     results = list(map(lambda item: item.serialize(),mostrar_carrito))
     return jsonify(results), 200    
+
+@api.route('/fav/<int:user_id>', methods=['GET'])
+def get_favoritos(user_id):
+    mostrar_favoritos = Favoritos.query.filter_by(user_id=user_id).all()
+    results = list(map(lambda item: item.serialize(),mostrar_favoritos))
+    return jsonify(results), 200        
  
 
 
