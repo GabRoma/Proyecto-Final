@@ -152,7 +152,9 @@ def add_favourite_product(user_id, producto_sku):
                 response_body = {"msg":"el usuario no existe"}
                 return jsonify(response_body),404
             else:
-                favorito = Favoritos(producto_sku=producto_sku, user_id=user_id)
+                product = existe.serialize()
+                print(product["name"])
+                favorito = Favoritos(name=product["name"][:50], price=product["price"], description=product["description"], imagenes=product["imagenes"],producto_sku=producto_sku, user_id=user_id)
                 db.session.add(favorito)
                 db.session.commit()
                 response_body = {"msg":"Se ha agregado el producto a Favoritos"}
