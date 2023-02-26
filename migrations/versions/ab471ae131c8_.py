@@ -1,8 +1,8 @@
 """empty message
 
-Revision ID: 64163dabed34
+Revision ID: ab471ae131c8
 Revises: 
-Create Date: 2023-02-25 19:08:22.059788
+Create Date: 2023-02-26 21:55:46.316884
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = '64163dabed34'
+revision = 'ab471ae131c8'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -59,6 +59,7 @@ def upgrade():
     sa.Column('price', sa.String(length=12000), nullable=False),
     sa.Column('imagenes', sa.String(length=10000), nullable=True),
     sa.Column('cantidad', sa.Integer(), nullable=True),
+    sa.Column('description', sa.String(length=200000), nullable=True),
     sa.ForeignKeyConstraint(['producto_sku'], ['producto.sku'], ),
     sa.ForeignKeyConstraint(['user_id'], ['user.id'], ),
     sa.PrimaryKeyConstraint('id')
@@ -66,12 +67,8 @@ def upgrade():
     op.create_table('favoritos',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('user_id', sa.Integer(), nullable=False),
-    sa.Column('producto_sku', sa.String(length=120), nullable=True),
-    sa.Column('imagenes', sa.String(length=10000), nullable=True),
-    sa.Column('name', sa.String(length=10000), nullable=True),
-    sa.Column('price', sa.String(length=12000), nullable=True),
-    sa.Column('description', sa.String(length=200000), nullable=True),
-    sa.ForeignKeyConstraint(['producto_sku'], ['producto.sku'], ),
+    sa.Column('producto_id', sa.Integer(), nullable=False),
+    sa.ForeignKeyConstraint(['producto_id'], ['producto.id'], ),
     sa.ForeignKeyConstraint(['user_id'], ['user.id'], ),
     sa.PrimaryKeyConstraint('id')
     )

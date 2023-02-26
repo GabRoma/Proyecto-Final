@@ -65,10 +65,7 @@ export const CartItem = (item, props) => {
                 </h5>
               </div>
             ))} */}
-            <p className="card-text">
-              This is a wider card with supporting text below as a natural lead
-              - in to additional content.This content is a little bit longer.{" "}
-            </p>{" "}
+            <p className="card-text">{item.description} </p>{" "}
             <p className="card-text">
               <small className="text-muted">
                 Tiempo de envío estimado:15 a 20 dias{" "}

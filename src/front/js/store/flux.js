@@ -184,8 +184,8 @@ const getState = ({
 
                     .then((data) => {
                         console.log(data);
-                        localStorage.setItem("token", data.access_token);
-                        localStorage.setItem("userId", data.user.id);
+                        // localStorage.setItem("token", data.access_token);
+                        // localStorage.setItem("userId", data.user.id);
                     });
             },
 
@@ -270,16 +270,48 @@ const getState = ({
                         console.error("Error:", error);
                     });
             },
-            // eliminarFavorito: (id) => {
-            //     let arr = [];
+            eliminarFavorito: (sku, userid) => {
+                console.log(sku, userid);
+                fetch(
+                        process.env.BACKEND_URL +
+                        "/api/user/" +
+                        userid +
+                        "/favoritos/products/" +
+                        sku, {
+                            method: "DELETE",
+                            headers: {
+                                "Content-Type": "application/json",
+                                // 'Content-Type': 'application/x-www-form-urlencoded',
+                            },
+                            body: JSON.stringify({}),
+                        }
+                    )
+                    .then((response) => {
+                        if (response === 200) {
+                            getActions().eliminarFav();
+                        }
+                    })
 
-            //     let store = getStore();
-            //     arr = store.favoritos.filter((elemento) => elemento !== id);
-            //     setStore({
-            //         favoritos: arr,
-            //     });
-            // },
-
+                    .then((data) => {
+                        console.log(data);
+                        // localStorage.setItem("token", data.access_token);
+                        // localStorage.setItem("userId", data.user.id);
+                    });
+            },
+            eliminarFav: () => {
+                let userid = localStorage.getItem("userId");
+                fetch(process.env.BACKEND_URL + "/api/fav/" + userid)
+                    .then((response) => response.json())
+                    .then((data) => {
+                        console.log(data);
+                        setStore({
+                            favoritos: data,
+                        });
+                    })
+                    .catch((error) => {
+                        console.error("Error:", error);
+                    });
+            },
             getMessage: async () => {
                 try {
                     // fetching data from the backend

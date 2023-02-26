@@ -7,9 +7,16 @@ import { Context } from "../store/appContext";
 import GooglePayButton from "@google-pay/button-react";
 import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
 
-export const Checkout = (props) => {
+export const Checkout = (props, item) => {
   const { store, actions } = useContext(Context);
   const params = useParams();
+  console.log(store.carrito);
+  const [updateUserData, setUpdateUserData] = useState(store.userData);
+
+  useEffect(() => {
+    actions.obtenerCarrito();
+    actions.getUserData(localStorage.userId);
+  }, []);
 
   return (
     <div className="jumbotron m-2">
@@ -35,7 +42,9 @@ export const Checkout = (props) => {
               </a>{" "}
             </div>{" "}
             <div className="card-body my-2 p-2">
-              <p> Email: </p> <p> Celular: </p> <p> Dirección: </p>{" "}
+              <p> Email: {store.userData.email} </p>{" "}
+              <p> Celular: {store.userData.celular} </p>{" "}
+              <p> Dirección: {store.userData.direccion_de_entrega} </p>{" "}
             </div>{" "}
           </div>{" "}
           <div className="card p-4 mb-3">
@@ -90,7 +99,7 @@ export const Checkout = (props) => {
                     <tr key={item.id}>
                       <td>
                         <img
-                          src={item.url}
+                          src={item.imagenes}
                           className="img-fluid"
                           style={{
                             maxWidth: 70,
@@ -99,13 +108,14 @@ export const Checkout = (props) => {
                         />{" "}
                       </td>{" "}
                       <td> {item.name} </td> <td> $ {item.price} </td>{" "}
-                      <td> {item.quantity} </td> <td> $ {item.subtotal} </td>{" "}
+                      <td> 1 </td> <td> $ {item.subtotal} </td>{" "}
                       <td>
                         {" "}
-                        <i
+                        {/* <i
+                          type="button"
                           className="fa fa-solid fa-trash"
                           onClick={() => actions.quitCarrito(item)}
-                        ></i>{" "}
+                        ></i>{" "} */}
                       </td>{" "}
                     </tr>
                   ))}{" "}
