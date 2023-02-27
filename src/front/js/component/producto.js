@@ -39,8 +39,10 @@ export const Productos = (props) => {
               {props.moneda} {props.price}
             </strong>
             <div>
-              <i className="fas fa-shopping-cart me-3" onClick={() => actions.addCarrito(props)}></i>
-
+              <i
+                className="fas fa-shopping-cart me-3"
+                onClick={() => actions.addCarrito(props)}
+              ></i>
             </div>
           </div>
         </div>

@@ -14,7 +14,7 @@ export const Favoritos = (item, sku) => {
 
   useEffect(() => {
     actions.obtenerFavorito();
-    actions.eliminarFav();
+    // actions.eliminarFav();
   }, []);
 
   return (
@@ -40,7 +40,7 @@ export const Favoritos = (item, sku) => {
                           <i
                             type="button"
                             className="fas fa-trash-alt"
-                            onClick={() => actions.eliminarFavorito()}
+                            onClick={() => actions.eliminarFavorito(item.id)}
                           ></i>{" "}
                         </div>{" "}
                         <p className="card-text">{item.description} </p>{" "}

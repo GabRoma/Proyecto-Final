@@ -164,20 +164,18 @@ def add_favourite_product(user_id, producto_sku):
         return jsonify(response_body), 404        
 
 #Eliminar de favoritos
-@api.route('user/<int:user_id>/favoritos/products/<int:producto_id>', methods=['DELETE'])
-def borrar_producto_fav(user_id, producto_id):
+@api.route('user/<int:user_id>/favoritos/products/<string:producto_sku>', methods=['DELETE'])
+def borrar_producto_fav(user_id, producto_sku):
     usuario = User.query.filter_by(id=user_id).first()
     if usuario is None:
         response_body = {"msg": "El usuario ingresado no existe"}
         return jsonify(response_body), 404
-    productoexiste = Producto.query.filter_by(id=producto_id).first()
+    productoexiste = Producto.query.filter_by(sku=producto_sku).first()
     if productoexiste is None:
         response_body = {"msg": "El producto ingresado no existe dentro de favoritos"}
         return jsonify(response_body), 404
 
-    
-    borrar_producto = Favoritos.query.filter_by(user_id=user_id).filter_by(producto_id=producto_id).first()
-    print(borrar_producto)
+    borrar_producto = Favoritos.query.filter_by(user_id=user_id).filter_by(producto_sku=producto_sku, name=product["name"][:50], price=product["price"], description=product["description"], imagenes=product["imagenes"]).first()
     if borrar_producto is None: 
         response_body = {"msg": "El producto ingresado no existe dentro de favoritos"}
         return jsonify(response_body), 404

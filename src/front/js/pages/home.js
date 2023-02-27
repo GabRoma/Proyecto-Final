@@ -53,7 +53,10 @@ const Carousel = () => {
           </button>
         </div>
         <div className="carousel d-flex justify-content-center container mb-4">
-          <Link to={"/resultado/" + images[currentIndex + 1]} className="wrapRed border-0 mx-3">
+          <Link
+            to={"/resultado/" + images[currentIndex + 1]}
+            className="wrapRed border-0 mx-3"
+          >
             <img src={images[currentIndex]} className="redondo" alt="ERROR" />
             <h4
               className="centered text-light"
@@ -61,11 +64,13 @@ const Carousel = () => {
                 left: 518,
               }}
             >
-
               {images[currentIndex + 1]}
             </h4>
           </Link>
-          <Link to={"/resultado/" + images[currentIndex + 3]} className="wrapRed border-0 mx-3">
+          <Link
+            to={"/resultado/" + images[currentIndex + 3]}
+            className="wrapRed border-0 mx-3"
+          >
             <img
               src={images[currentIndex + 2]}
               className="redondo"
@@ -77,7 +82,6 @@ const Carousel = () => {
                 left: 780,
               }}
             >
-
               {images[currentIndex + 3]}
             </h4>
           </Link>
@@ -136,58 +140,91 @@ export const Home = () => {
         </div>
       </div>
       <div className="container d-flex">
-        <h5 className="fw-bolder ms-3"> Camaras </h5> <Link className="ms-auto" style={{ color: "black" }} to="/resultado/camera">
+        <h5 className="fw-bolder ms-3"> Camaras </h5>{" "}
+        <Link
+          className="ms-auto"
+          style={{ color: "black" }}
+          to="/resultado/camera"
+        >
           <p style={{ fontSize: 14 }}>Ver todos</p>
         </Link>
       </div>
       <div className="d-flex container row m-auto">
-        {store.productos?.filter(item => item.keywords.toLowerCase().split(",").includes("camera")).slice(0, 5).map((item) => (
-          <div className="d-flex container " style={{ width: "20%" }}>
-            <Productos
-              nombre={item.name}
-              imagen={item.imagenes}
-              moneda={item.currency}
-              price={item.price}
-              sku={item.sku}
-            />
-          </div>
-        ))}
+        {store.productos
+          ?.filter((item) =>
+            item.keywords.toLowerCase().split(",").includes("camera")
+          )
+          .slice(0, 5)
+          .map((item) => (
+            <div className="d-flex container " style={{ width: "20%" }}>
+              <Productos
+                nombre={item.name}
+                imagen={item.imagenes}
+                moneda={item.currency}
+                price={item.price}
+                sku={item.sku}
+              />
+            </div>
+          ))}
       </div>
       <div className="container d-flex">
-        <h5 className="fw-bolder ms-3 mt-5"> Celulares & accesorios</h5> <Link className="ms-auto" style={{ color: "black" }} to="/resultado/apple">
+        <h5 className="fw-bolder ms-3 mt-5"> Celulares & accesorios</h5>{" "}
+        <Link
+          className="ms-auto"
+          style={{ color: "black" }}
+          to="/resultado/apple"
+        >
           <p style={{ fontSize: 14 }}>Ver todos</p>
         </Link>
       </div>
       <div className="d-flex container row m-auto">
-        {store.productos?.filter(item => item.keywords.toLowerCase().split(",").includes("phone") || item.keywords.toLowerCase().split(",").includes("apple") || item.keywords.toLowerCase().split(",").includes("tablet")).slice(0, 5).map((item) => (
-          <div className="d-flex container " style={{ width: "20%" }}>
-            <Productos
-              nombre={item.name}
-              imagen={item.imagenes}
-              moneda={item.currency}
-              price={item.price}
-              sku={item.sku}
-            />
-          </div>
-        ))}
+        {store.productos
+          ?.filter(
+            (item) =>
+              item.keywords.toLowerCase().split(",").includes("phone") ||
+              item.keywords.toLowerCase().split(",").includes("apple") ||
+              item.keywords.toLowerCase().split(",").includes("tablet")
+          )
+          .slice(0, 5)
+          .map((item) => (
+            <div className="d-flex container " style={{ width: "20%" }}>
+              <Productos
+                nombre={item.name}
+                imagen={item.imagenes}
+                moneda={item.currency}
+                price={item.price}
+                sku={item.sku}
+              />
+            </div>
+          ))}
       </div>
       <div className="container d-flex">
-        <h5 className="fw-bolder ms-3 mt-5">Libros</h5> <Link className="ms-auto" style={{ color: "black" }} to="/resultado/books">
+        <h5 className="fw-bolder ms-3 mt-5">Libros</h5>{" "}
+        <Link
+          className="ms-auto"
+          style={{ color: "black" }}
+          to="/resultado/books"
+        >
           <p style={{ fontSize: 14 }}>Ver todos</p>
         </Link>
       </div>
       <div className="d-flex container row m-auto">
-        {store.productos?.filter(item => item.category.toLowerCase().split(",").includes("books")).slice(0, 5).map((item) => (
-          <div className="d-flex container " style={{ width: "20%" }}>
-            <Productos
-              nombre={item.name}
-              imagen={item.imagenes}
-              moneda={item.currency}
-              price={item.price}
-              sku={item.sku}
-            />
-          </div>
-        ))}
+        {store.productos
+          ?.filter((item) =>
+            item.category.toLowerCase().split(",").includes("books")
+          )
+          .slice(0, 5)
+          .map((item) => (
+            <div className="d-flex container " style={{ width: "20%" }}>
+              <Productos
+                nombre={item.name}
+                imagen={item.imagenes}
+                moneda={item.currency}
+                price={item.price}
+                sku={item.sku}
+              />
+            </div>
+          ))}
       </div>
       <Contact showPopup={showPopup} handleTogglePopup={handleTogglePopup} />
     </div>
