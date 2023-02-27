@@ -17,7 +17,7 @@ export const Categoria = (props) => {
       <div className="d-flex container row m-auto">
         {store.productos
           ?.filter((item) => {
-            if (cat === "books") {
+            if (item.category.toLowerCase().includes(cat)) {
               return item.category.toLowerCase().includes(cat);
             } else {
               return item.keywords.toLowerCase().split(",").includes(cat);

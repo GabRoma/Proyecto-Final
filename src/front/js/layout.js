@@ -17,9 +17,7 @@ import { Tos } from "./pages/tos";
 import { Brands } from "./pages/brands";
 import { Categoria } from "./pages/categoria";
 import { Espacioproductos } from "./pages/espacioproductos";
-import { Espaciodescuento } from "./pages/espaciodescuento";
 import { Espaciocostoytarif } from "./pages/espaciocostoytarif";
-import { Espaciooferta } from "./pages/espaciooferta";
 import { Perfil } from "./pages/perfil";
 //create your first component
 const Layout = () => {
@@ -45,8 +43,6 @@ const Layout = () => {
             <Route element={<Demo />} path="/demo" />
             <Route element={<Single />} path="/single/:theid" />
             <Route element={<Espacioproductos />} path="/espacioproductos" />
-            <Route element={<Espaciodescuento />} path="/espaciodescuento" />
-            <Route element={<Espaciooferta />} path="/espaciooferta" />
             <Route
               element={<Espaciocostoytarif />}
               path="/espaciocostoytarif"

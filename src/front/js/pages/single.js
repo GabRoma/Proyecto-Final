@@ -32,8 +32,6 @@ export const Single = (item, props) => {
   const product = store.productos?.find((item) =>
     item.sku.includes(params.theid)
   );
-  console.log("XD");
-  console.log(store.productos);
   return (
     <>
       <div className="d-flex container mt-4">
@@ -44,34 +42,38 @@ export const Single = (item, props) => {
               alt={product.name}
               style={{ maxWidth: "40%", maxHeight: "100%" }}
             />
-
-            <h5>{product.name}</h5>
-            <p>{product.description}</p>
-            <p>
-              <strong>USD {product.price}</strong>
-            </p>
-            <button
-              onClick={() => agregarItemFavoritos()}
-              type="button"
-              class="btn btn-outline-danger mx-1"
-            >
-              <i class="fa fa-heart h-100 w-100"></i>
-            </button>
-            <button
-              onClick={() => {
-                toggleClick();
-                agregarItemCarrito();
-              }}
-              className="btn btn-dark w-100 my-1 fw-bold float-start"
-              type="button"
-            >
-              {" "}
-              {added ? (
-                <i className="fas fa-shopping-cart mx-1">Eliminar Carrito</i>
-              ) : (
-                <i className="fas fa-shopping-cart mx-1">Agregar Carrito</i>
-              )}
-            </button>
+            <div className="mt-3 ms-3">
+              <h5 style={{ fontSize: 25 }}>{product.name.slice(0, 69)}...</h5>
+              <p>{product.description.slice(0, 900)}...</p>
+              <strong className="fs-2 d-block">USD {product.price}</strong>
+              <button
+                onClick={() => {
+                  toggleClick();
+                  if (added) {
+                    actions.eliminarDeCarrito(product.sku);
+                    window.location.reload();
+                  } else {
+                    agregarItemCarrito();
+                  }
+                }}
+                className="btn btn-dark w-100 my-1 fw-bold float-start"
+                type="button"
+              >
+                {" "}
+                {added ? (
+                  <i className="fas fa-shopping-cart mx-1">Eliminar Carrito</i>
+                ) : (
+                  <i className="fas fa-shopping-cart mx-1">Agregar Carrito</i>
+                )}
+              </button>
+              <button
+                onClick={() => agregarItemFavoritos()}
+                type="button"
+                class="btn btn-outline-danger mx-1 w-100"
+              >
+                <i class="fa fa-heart h-100 w-100"></i>
+              </button>
+            </div>
           </div>
         )}
       </div>

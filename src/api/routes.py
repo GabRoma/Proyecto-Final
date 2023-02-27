@@ -175,7 +175,7 @@ def borrar_producto_fav(user_id, producto_sku):
         response_body = {"msg": "El producto ingresado no existe dentro de favoritos"}
         return jsonify(response_body), 404
 
-    borrar_producto = Favoritos.query.filter_by(user_id=user_id).filter_by(producto_sku=producto_sku, name=product["name"][:50], price=product["price"], description=product["description"], imagenes=product["imagenes"]).first()
+    borrar_producto = Favoritos.query.filter_by(user_id=user_id).filter_by(producto_sku=producto_sku).first()
     if borrar_producto is None: 
         response_body = {"msg": "El producto ingresado no existe dentro de favoritos"}
         return jsonify(response_body), 404
@@ -323,11 +323,11 @@ def editar_estado_carrito(user_id ):
 
 @api.route('/productos/api', methods=['GET'])
 def handle_productos():
-        api_key = "C30FEE1EDCE14C02909155347C015021"
-        category_id = "281052"
-        api_url_category = f"https://api.rainforestapi.com/request?api_key={api_key}&type=category&amazon_domain=amazon.com&category_id={category_id}"
+        api_key = "18DF63A7B71E4C839C4C0E29147AA185"
+        category_id = "1254762011"
+        api_url_category = f"https://api.rainforestapi.com/request?api_key={api_key}&type=search&amazon_domain=amazon.com&search_term=android"
         response_category = requests.get(api_url_category).json()
-        for item in response_category["category_results"]:
+        for item in response_category["search_results"]:
             asin = item.get("asin")
             api_url_id = f"https://api.rainforestapi.com/request?api_key={api_key}&type=product&amazon_domain=amazon.com&asin={asin}"
             response_id = requests.get(api_url_id).json()
@@ -405,8 +405,7 @@ def get_sumacarrito(user_id):
     results = list(map(lambda item: float(item.price), mostrar_suma))
    
     resultssuma = sum(results)
-    return jsonify({"totalcarrito": resultssuma}), 200            
- 
+    return jsonify({"totalcarrito": resultssuma}), 200          
 
   # busqueda tabla carrito opr user id filterby(estado true, userid=userid) .all 
 #   linea 356

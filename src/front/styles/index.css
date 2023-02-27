@@ -60,7 +60,7 @@ body {
 .redondo {
   background-color: transparent;
   border-radius: 30px;
-  filter: grayscale(100%);
+  filter: brightness(0.9) hue-rotate(270deg) saturate(2);
   object-fit: cover;
   object-position: center center;
   width: 250px;

@@ -3,8 +3,12 @@ import { Link } from "react-router-dom";
 import logo from "../../img/logito.png";
 import { AuthComponent } from "./authcomponent.js";
 import { Context } from "../store/appContext";
-
+import Contact from "../component/contact";
 export const Navbar = () => {
+  const [showPopup, setShowPopup] = useState(false);
+  const handleTogglePopup = (value) => {
+    setShowPopup(value);
+  };
   const { store, actions } = useContext(Context);
   const [searchTerm, setSearchTerm] = useState("");
 
@@ -63,6 +67,8 @@ export const Navbar = () => {
               type="search"
               placeholder="Buscar un producto"
               aria-label="Search"
+              value={searchTerm}
+              onChange={handleChange}
             />
           </form>
           {store.estalogueado === true ? (
@@ -135,10 +141,18 @@ export const Navbar = () => {
                         key={"prod" + item.id}
                       >
                         {item.name}
-                        <i
-                          className="far fa-times-circle"
-                          onClick={() => actions.eliminarDeCarrito(item)}
-                        />
+                        <button className="btn">
+                          <i
+                            className="far fa-times-circle"
+                            onClick={() => {
+                              actions.eliminarDeCarrito(item.producto_sku)
+                              setTimeout(() => {
+                                window.location.reload();
+                              }, 200);
+                            }
+                            }
+                          />
+                        </button>
                       </li>
                     );
                   })}
@@ -193,7 +207,7 @@ export const Navbar = () => {
               <ul className="dropdown-menu">
                 <li>
                   <Link
-                    to={"/resultado/celulares"}
+                    to={"/resultado/iphone"}
                     className="dropdown-item"
                     type="button"
                   >
@@ -202,20 +216,20 @@ export const Navbar = () => {
                 </li>
                 <li>
                   <Link
-                    to={"/resultado/calzados"}
+                    to={"/resultado/books"}
                     className="dropdown-item"
                     type="button"
                   >
-                    Calzados
+                    Libros
                   </Link>
                 </li>
                 <li>
                   <Link
-                    to={"/resultado/consola"}
+                    to={"/resultado/video%20games"}
                     className="dropdown-item"
                     type="button"
                   >
-                    Consolas
+                    Consolas & Juegos
                   </Link>
                 </li>
                 <li>
@@ -229,34 +243,16 @@ export const Navbar = () => {
                 </li>
                 <li>
                   <Link
-                    to={"/resultado/laptop"}
+                    to={"/resultado/hdd"}
                     className="dropdown-item"
                     type="button"
                   >
-                    Laptops
+                    Discos duros
                   </Link>
                 </li>
                 <li>
                   <Link
-                    to={"/resultado/lentes"}
-                    className="dropdown-item"
-                    type="button"
-                  >
-                    Lentes
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    to={"/resultado/ropa"}
-                    className="dropdown-item"
-                    type="button"
-                  >
-                    Ropa
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    to={"/resultado/reloj"}
+                    to={"/resultado/watch"}
                     className="dropdown-item"
                     type="button"
                   >
@@ -266,11 +262,6 @@ export const Navbar = () => {
               </ul>
             </div>
             {/* Termina Dropdown ----------------------------------------------------------- */}
-          </div>
-          <div className="d-flex justify-content-center col">
-            <Link to={"/espaciooferta"}>
-              <h5 className="m-0 p-0 fs-6 "> OFERTAS </h5>
-            </Link>
           </div>
           <div className="d-flex justify-content-center col">
             <Link to="/espaciocostoytarif">
@@ -289,16 +280,16 @@ export const Navbar = () => {
               aria-labelledby="exampleModalLabel"
               aria-hidden="true"
             >
-              <div className="modal-dialog">
+              <div className="modal-dialog" style={{ color: "black" }}>
                 <div className="modal-content">
                   <div className="modal-header">
                     <h1 className="modal-title fs-5" id="exampleModalLabel">
                       Garantía de Entrega
                     </h1>
                   </div>
-                  <div className="modal-body">
+                  <div className="modal-body pt-0 mb-2">
                     <small className="fs-5 fw-bold">
-                      Aseguramos la entrega de tu orden:
+                      Aseguramos la entrega de tu orden.
                     </small>
                     <small className="fs-5 d-block ">
                       Si tu pedido no llega luego de 60 días de realizada la
@@ -330,6 +321,7 @@ export const Navbar = () => {
           </div>
         </div>
       </nav>
+      <Contact showPopup={showPopup} handleTogglePopup={handleTogglePopup} />
     </div>
   );
 };

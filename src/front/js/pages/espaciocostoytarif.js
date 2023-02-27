@@ -20,34 +20,26 @@ export const Espaciocostoytarif = (props) => {
         <p className="fst-italic fw-bold fs-1 text-center ">Tarifas</p>
         <hr />
         <small className=" fs-5 mx-auto d-flex justify-content-center">
-          El envío a Uruguay de tus compras realizadas en Estados Unidos a través
-          de TiendaNuestra se cobra de acuerdo al peso del paquete y otros
-          servicios.
+          El envío a Uruguay de tus compras realizadas en Estados Unidos a
+          través de TiendaNuestra se cobra de acuerdo al peso del paquete y
+          otros servicios.
         </small>
         <hr />
         <div className="container my-2 mx-auto">
           <small className="text-decoration-underline fs-5 fw-bold mx-auto my-4 ">
-            COSTOS DE ENVÍO POR KILO
+            COSTOS DE ENVÍO POR PEDIDO
           </small>
           <div className=" my-2  mx-auto w-50  bg-secondary border-dark border border-3 rounded opacity-75">
             <table class="table my-0">
               <thead>
                 <tr className="bg-secondary opacity-75 text-black ">
-                  <th scope="col">Desde (kilos) </th>
-                  <th scope="col">Hasta (kilos) </th>
-                  <th scope="col">Precio</th>
+                  <th scope="col">Cantidad de pedidos</th>
                 </tr>
               </thead>
               <tbody>
                 <tr>
-                  <td>0.1 </td>
-                  <td>3</td>
-                  <td>U$S 21.99 x kilo</td>
-                </tr>
-                <tr className="border-0">
-                  <td>3.1 </td>
-                  <td>5 </td>
-                  <td>30% de descuento = U$S 15.39 x kilo</td>
+                  <td className="ps-5">1</td>
+                  <td>U$S 22.0</td>
                 </tr>
               </tbody>
             </table>
@@ -65,8 +57,8 @@ export const Espaciocostoytarif = (props) => {
           </small>
           <small className="mx-auto d-flex my-1">
             *Empaque, Manejo y Seguro: Se cobran U$S2.49 por producto, hasta un
-            máximo de 3 productos, por concepto de empaque, manejo y seguro de la
-            mercadería.
+            máximo de 3 productos, por concepto de empaque, manejo y seguro de
+            la mercadería.
           </small>
           <small className="mx-auto d-flex my-1">
             *Envío a Domicilio (Opcional): el envío a domicilio en todo el país
@@ -91,31 +83,28 @@ export const Espaciocostoytarif = (props) => {
                 <tr>
                   <td>Apple MagSafe Charger - Wirele...</td>
                   <td> 34.00 U$S</td>
-
                 </tr>
                 <tr>
-                  <td >Envío a depósito</td>
-                  <td >GRATIS</td>
-
+                  <td>Envío a depósito</td>
+                  <td>GRATIS</td>
                 </tr>
                 <tr>
-                  <td > Factura en USA</td>
-                  <td > 104.69 U$S</td>
-
+                  <td> Factura en USA</td>
+                  <td> 104.69 U$S</td>
                 </tr>
                 <tr>
-                  <td > Tarifa TiendaNuestra (9%)</td>
-                  <td > 9.42 U$S</td>
-
+                  <td> Tarifa TiendaNuestra (9%)</td>
+                  <td> 9.42 U$S</td>
                 </tr>
                 <tr>
-                  <td > Envío (1.497 kg)</td>
-                  <td > 32.92 U$S</td>
-
+                  <td> Envío</td>
+                  <td> 20 U$S</td>
                 </tr>
                 <tr>
-                  <td className="p-2 fw-bold bg-secondary bg-opacity-50">Total a pagar:</td>
-                  <td>147.03</td>
+                  <td className="p-2 fw-bold bg-secondary bg-opacity-50">
+                    Total a pagar:
+                  </td>
+                  <td>134.11</td>
                 </tr>
               </tbody>
             </table>

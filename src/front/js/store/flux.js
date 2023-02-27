@@ -21,64 +21,8 @@ const getState = ({ getStore, getActions, setStore }) => {
           initial: "white",
         },
       ],
-      carrito: [
-        // {
-        //       sku: 1,
-        //       name: "producto",
-        //       url: "https://shoptheoldemercantile.com/image/cache/catalog/placeholderproduct-500x500.png",
-        //       shipping: "3 semanas",
-        //       price: 10,
-        //       quantity: 1,
-        //       subtotal: 10,
-        //   },
-        // {
-        //   sku: 2,
-        //   name: "producto II",
-        //   url: "https://shoptheoldemercantile.com/image/cache/catalog/placeholderproduct-500x500.png",
-        //   shipping: "3 semanas",
-        //   price: 10,
-        //   quantity: 1,
-        //   subtotal: 10,
-        // },
-        // {
-        //   sku: 3,
-        //   name: "producto III",
-        //   url: "https://shoptheoldemercantile.com/image/cache/catalog/placeholderproduct-500x500.png",
-        //   shipping: "3 semanas",
-        //   price: 10,
-        //   quantity: 1,
-        //   subtotal: 10,
-        // },
-      ],
-      favoritos: [
-        // {
-        //       sku: 1,
-        //       name: "producto",
-        //       url: "https://shoptheoldemercantile.com/image/cache/catalog/placeholderproduct-500x500.png",
-        //       shipping: "3 semanas",
-        //       price: 10,
-        //       quantity: 1,
-        //       subtotal: 10,
-        //   },
-        // {
-        //   sku: 2,
-        //   name: "producto II",
-        //   url: "https://shoptheoldemercantile.com/image/cache/catalog/placeholderproduct-500x500.png",
-        //   shipping: "3 semanas",
-        //   price: 10,
-        //   quantity: 1,
-        //   subtotal: 10,
-        // },
-        // {
-        //   sku: 3,
-        //   name: "producto III",
-        //   url: "https://shoptheoldemercantile.com/image/cache/catalog/placeholderproduct-500x500.png",
-        //   shipping: "3 semanas",
-        //   price: 10,
-        //   quantity: 1,
-        //   subtotal: 10,
-        // },
-      ],
+      carrito: [],
+      favoritos: [],
       subtotal: 0,
       total: 0,
     },
@@ -87,7 +31,6 @@ const getState = ({ getStore, getActions, setStore }) => {
         fetch(process.env.BACKEND_URL + "/api/products")
           .then((response) => response.json())
           .then((data) => {
-            console.log(data);
             setStore({
               productos: data,
             });
@@ -120,13 +63,11 @@ const getState = ({ getStore, getActions, setStore }) => {
           .then((response) => {})
 
           .then((data) => {
-            console.log(data);
             localStorage.setItem("token", data.access_token);
             localStorage.setItem("userId", data.user.id);
           });
       },
       agregarACarrito: (sku, userid) => {
-        console.log(sku, userid);
         fetch(
           process.env.BACKEND_URL +
             "/api/user/" +
@@ -148,26 +89,18 @@ const getState = ({ getStore, getActions, setStore }) => {
             }
             return response.json();
           })
-          .then((data) => {
-            console.log(data);
-          });
+          .then((data) => {});
       },
-      eliminarDeCarrito: (sku, userid, id) => {
+      eliminarDeCarrito: (sku) => {
+        let userid = localStorage.getItem("userId");
         fetch(
-          "https://3001-gabroma-proyectofinal-tf3n1voo1zo.ws-us87.gitpod.io/api/user/" +
+          process.env.BACKEND_URL +
+            "/api/user/" +
             userid +
             "/carrito/products/" +
             sku,
           {
             method: "DELETE",
-            headers: {
-              "Content-Type": "application/json",
-              // 'Content-Type': 'application/x-www-form-urlencoded',
-            },
-            body: JSON.stringify({
-              producto_sku: sku,
-              user_id: userid,
-            }),
           }
         )
           .then((response) => {
@@ -181,9 +114,7 @@ const getState = ({ getStore, getActions, setStore }) => {
               });
             }
           })
-
           .then((data) => {
-            console.log(data);
             // localStorage.setItem("token", data.access_token);
             // localStorage.setItem("userId", data.user.id);
           });
@@ -201,7 +132,6 @@ const getState = ({ getStore, getActions, setStore }) => {
             return response.json();
           })
           .then((data) => {
-            console.log(data.totalcarrito);
             setStore({
               subtotal: data.totalcarrito,
               total: data.totalcarrito,
@@ -215,8 +145,6 @@ const getState = ({ getStore, getActions, setStore }) => {
         //   subtotal: totalSum,
         //   total: totalSum,
         // });
-        // console.log(getStore().total);
-        // console.log("funciona");
       },
       actualizarCarrito: (item) => {
         const newArr = getStore().carrito.map((producto) => {
@@ -232,14 +160,12 @@ const getState = ({ getStore, getActions, setStore }) => {
           carrito: newArr,
         });
         getActions().sumCarrito();
-        console.log(getStore().carrito);
       },
       obtenerCarrito: () => {
         let userid = localStorage.getItem("userId");
         fetch(process.env.BACKEND_URL + "/api/cart/" + userid)
           .then((response) => response.json())
           .then((data) => {
-            console.log(data);
             setStore({
               carrito: data,
             });
@@ -249,7 +175,6 @@ const getState = ({ getStore, getActions, setStore }) => {
           });
       },
       agregarFavorito: (sku, userid) => {
-        console.log(sku, userid);
         fetch(
           process.env.BACKEND_URL +
             "/api/user/" +
@@ -271,16 +196,13 @@ const getState = ({ getStore, getActions, setStore }) => {
             }
             return response.json();
           })
-          .then((data) => {
-            console.log(data);
-          });
+          .then((data) => {});
       },
       obtenerFavorito: () => {
         let userid = localStorage.getItem("userId");
         fetch(process.env.BACKEND_URL + "/api/fav/" + userid)
           .then((response) => response.json())
           .then((data) => {
-            console.log(data);
             setStore({
               favoritos: data,
             });
@@ -289,8 +211,8 @@ const getState = ({ getStore, getActions, setStore }) => {
             console.error("Error:", error);
           });
       },
-      eliminarFavorito: (sku, userid) => {
-        console.log(sku, userid);
+      eliminarFavorito: (sku) => {
+        let userid = localStorage.getItem("userId");
         fetch(
           process.env.BACKEND_URL +
             "/api/user/" +
@@ -299,38 +221,18 @@ const getState = ({ getStore, getActions, setStore }) => {
             sku,
           {
             method: "DELETE",
-            headers: {
-              "Content-Type": "application/json",
-              // 'Content-Type': 'application/x-www-form-urlencoded',
-            },
-            body: JSON.stringify({}),
           }
-        )
-          .then((response) => {
-            if (response === 200) {
-              getActions().eliminarFav();
-            }
-          })
+        ).then((response) => {
+          if (response === 200) {
+            let arr = [];
 
-          .then((data) => {
-            console.log(data);
-            // localStorage.setItem("token", data.access_token);
-            // localStorage.setItem("userId", data.user.id);
-          });
-      },
-      eliminarFav: () => {
-        let userid = localStorage.getItem("userId");
-        fetch(process.env.BACKEND_URL + "/api/fav/" + userid)
-          .then((response) => response.json())
-          .then((data) => {
-            console.log(data);
+            let store = getStore();
+            arr = store.favoritos.filter((elemento) => elemento !== id);
             setStore({
-              favoritos: data,
+              favor: arr,
             });
-          })
-          .catch((error) => {
-            console.error("Error:", error);
-          });
+          }
+        });
       },
       getMessage: async () => {
         try {
@@ -386,7 +288,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 
           // nombre de donde se guard ,  el valor access_token se guarda en token
           .then((data) => {
-            console.log(data);
             localStorage.setItem("token", data.access_token);
             localStorage.setItem("userId", data.user.id);
           }) // nos llega un objeto llaamado data y tiene una propiedad access_token
@@ -421,7 +322,6 @@ const getState = ({ getStore, getActions, setStore }) => {
           }), // body data type must match "Content-Type" header
         })
           .then((response) => {
-            console.log(response.status);
             if (response.status === 200) {
               Swal.fire({
                 icon: "success",
@@ -431,7 +331,6 @@ const getState = ({ getStore, getActions, setStore }) => {
             return response.json();
           })
           .then((data) => {
-            console.log(data);
             if (data.msg === "el email ya existe") {
               Swal.fire({
                 icon: "error",
@@ -462,7 +361,6 @@ const getState = ({ getStore, getActions, setStore }) => {
           }
           return;
         } catch (error) {
-          console.log(error);
           if (store.logaux && error.code === "ERR_BAD_REQUEST") {
             setStore({
               estalogueado: false,
