@@ -396,7 +396,16 @@ def get_favoritos(user_id):
 def get_delete_favoritos(user_id):
     borrar_favoritos = Favoritos.query.filter_by(user_id=user_id).all()
     results = list(map(lambda item: item.serialize(),borrar_favoritos))
-    return jsonify(results), 200        
+    return jsonify(results), 200   
+
+
+@api.route('/carrito/total/<int:user_id>', methods=['GET'])
+def get_sumacarrito(user_id):
+    mostrar_suma = Carrito.query.filter_by(user_id=user_id, estado=True).all()
+    results = list(map(lambda item: float(item.price), mostrar_suma))
+   
+    resultssuma = sum(results)
+    return jsonify({"totalcarrito": resultssuma}), 200            
  
 
   # busqueda tabla carrito opr user id filterby(estado true, userid=userid) .all 

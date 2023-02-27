@@ -16,6 +16,7 @@ export const Checkout = (props, item) => {
   useEffect(() => {
     actions.obtenerCarrito();
     actions.getUserData(localStorage.userId);
+    actions.sumCarrito();
   }, []);
 
   return (
@@ -90,7 +91,6 @@ export const Checkout = (props, item) => {
                     <th scope="col"> </th> <th scope="col"> Producto </th>{" "}
                     <th scope="col"> Precio </th>{" "}
                     <th scope="col"> Cantidad </th>{" "}
-                    <th scope="col"> Subtotal </th> <th scope="col"> </th>{" "}
                   </tr>{" "}
                 </thead>{" "}
                 <tbody>
@@ -108,14 +108,14 @@ export const Checkout = (props, item) => {
                         />{" "}
                       </td>{" "}
                       <td> {item.name} </td> <td> $ {item.price} </td>{" "}
-                      <td> 1 </td> <td> $ {item.subtotal} </td>{" "}
+                      <td> 1 </td>{" "}
                       <td>
                         {" "}
                         {/* <i
-                          type="button"
-                          className="fa fa-solid fa-trash"
-                          onClick={() => actions.quitCarrito(item)}
-                        ></i>{" "} */}
+                                              type="button"
+                                              className="fa fa-solid fa-trash"
+                                              onClick={() => actions.quitCarrito(item)}
+                                            ></i>{" "} */}{" "}
                       </td>{" "}
                     </tr>
                   ))}{" "}
@@ -136,10 +136,9 @@ export const Checkout = (props, item) => {
               </div>{" "}
               <div className="d-flex justify-content-between">
                 <p className="card-text"> Envío: </p>{" "}
-                <p className="card-text"> $ </p>{" "}
+                <p className="card-text"> USD 20 </p>{" "}
               </div>{" "}
               <div className="d-flex justify-content-between">
-                <p className="card-text text-muted"> Descuentos: </p>{" "}
                 <p className="card-text text-muted"> $ </p>{" "}
               </div>{" "}
             </div>{" "}
