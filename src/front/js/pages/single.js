@@ -6,7 +6,6 @@ export const Single = (item, props) => {
   const { actions, store } = useContext(Context);
   const [added, setAdded] = useState(false);
   const params = useParams();
-  console.log(params);
 
   const agregarItemCarrito = () => {
     actions.agregarACarrito(params.theid, localStorage.getItem("userId"));
@@ -40,7 +39,7 @@ export const Single = (item, props) => {
             <img
               src={product.imagenes}
               alt={product.name}
-              style={{ maxWidth: "40%", maxHeight: "100%" }}
+              style={{ maxWidth: "40%", maxHeight: "70%" }}
             />
             <div className="mt-3 ms-3">
               <h5 style={{ fontSize: 25 }}>{product.name.slice(0, 69)}...</h5>
@@ -69,9 +68,9 @@ export const Single = (item, props) => {
               <button
                 onClick={() => agregarItemFavoritos()}
                 type="button"
-                class="btn btn-outline-danger mx-1 w-100"
+                className="btn btn-outline-danger mx-1 w-100"
               >
-                <i class="fa fa-heart h-100 w-100"></i>
+                <i className="fa fa-heart h-100 w-100"></i>
               </button>
             </div>
           </div>

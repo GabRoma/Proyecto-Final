@@ -6,7 +6,6 @@ import { Productos } from "../component/producto.js";
 export const Categoria = (props) => {
   const { store, actions } = useContext(Context);
   const { cat } = useParams();
-  console.log(cat);
   return (
     <>
       <small className=" fs-6 d-flex justify-content-center mt-3">
@@ -25,7 +24,7 @@ export const Categoria = (props) => {
           })
           .slice(0, 20)
           .map((item, index) => (
-            <div style={{ width: "20%" }}>
+            <div className="mb-3" style={{ width: "20%" }}>
               <Productos
                 nombre={item.name}
                 imagen={item.imagenes}
@@ -39,94 +38,75 @@ export const Categoria = (props) => {
       <div className="container">
         Más información sobre {cat}s
         <div
-          class="accordion accordion-flush border-secondary border border-3 rounded opacity-75"
+          className="accordion accordion-flush border-secondary border border-3 rounded opacity-75"
           id="accordionFlushExample"
         >
-          <div class="accordion-item">
-            <h2 class="accordion-header" id="flush-headingOne">
+          <div className="accordion-item">
+            <h2 className="accordion-header" id="flush-headingTwo">
               <button
-                class="accordion-button collapsed fw-bold"
-                type="button"
-                data-bs-toggle="collapse"
-                data-bs-target="#flush-collapseOne"
-                aria-expanded="false"
-                aria-controls="flush-collapseOne"
-              >
-                ¿Cuál es el precio promedio de los productos de la categoría
-                {cat} ?
-              </button>
-            </h2>
-            <div
-              id="flush-collapseOne"
-              class="accordion-collapse collapse"
-              aria-labelledby="flush-headingOne"
-              data-bs-parent="#accordionFlushExample"
-            >
-              <div class="accordion-body">
-                El precio promedio de los productos puede variar en base a su
-                calidad, tipo y otras características. El precio promedio de
-                estos productos es de U$S 76.
-              </div>
-            </div>
-          </div>
-          <div class="accordion-item">
-            <h2 class="accordion-header" id="flush-headingTwo">
-              <button
-                class="accordion-button collapsed fw-bold"
+                className="accordion-button collapsed fw-bold"
                 type="button"
                 data-bs-toggle="collapse"
                 data-bs-target="#flush-collapseTwo"
                 aria-expanded="false"
                 aria-controls="flush-collapseTwo"
               >
-                ¿Qué marcas puedo encontrar en {cat} en TiendaNuestra?
+                ¿Qué marcas puedo encontrar en TiendaNuestra?
               </button>
             </h2>
             <div
               id="flush-collapseTwo"
-              class="accordion-collapse collapse"
+              className="accordion-collapse collapse"
               aria-labelledby="flush-headingTwo"
               data-bs-parent="#accordionFlushExample"
             >
-              <div class="accordion-body lh-1">
-                En TiendaNuestra encontrarás ofertas en las mejores marcas de
-                {cat}, tales como: <ul className="my-1">● Sony</ul>{" "}
+              <div className="accordion-body lh-1">
+                En TiendaNuestra encontrarás ofertas en las mejores marcas,
+                tales como: <ul className="my-1">● Sony</ul>{" "}
                 <ul className="my-1">● Kodak</ul>{" "}
-                <ul className="my-1">● Canon</ul>
+                <ul className="my-1">● Apple</ul>
+                <ul className="my-1">● Stanley</ul>
+                <ul className="my-1">● Samsung</ul>
+                <ul className="my-1">● Nintendo</ul>
+                <ul className="my-1">● Y muchísimas más!</ul>
               </div>
             </div>
           </div>
-          <div class="accordion-item">
-            <h2 class="accordion-header" id="flush-headingThree">
+          <div className="accordion-item">
+            <h2 className="accordion-header" id="flush-headingThree">
               <button
-                class="accordion-button collapsed fw-bold"
+                className="accordion-button collapsed fw-bold"
                 type="button"
                 data-bs-toggle="collapse"
                 data-bs-target="#flush-collapseThree"
                 aria-expanded="false"
                 aria-controls="flush-collapseThree"
               >
-                ¿Cómo comprar {cat}s en TiendaNuestra desde Uruguay?
+                ¿Cómo comprar preductos en TiendaNuestra desde Uruguay?
               </button>
             </h2>
             <div
               id="flush-collapseThree"
-              class="accordion-collapse collapse"
+              className="accordion-collapse collapse"
               aria-labelledby="flush-headingThree"
               data-bs-parent="#accordionFlushExample"
             >
-              <div class="accordion-body">
+              <div className="accordion-body">
                 Comprar productos en TiendaNuestra es muy fácil! Solo debes
                 seguir 4 simples pasos:
                 <ul className="my-1">
-                  1- Selecciona la oferta de Calzado que deseas comprar.
+                  1- Selecciona la oferta del producto que deseas comprar.
                 </ul>
                 <ul className="my-1">
-                  2- Agregala al carrito y finaliza la compra.
+                  2- La agregas al carrito, selecciona el método de envío y
+                  pago.
                 </ul>
-                <ul className="my-1">3- Ingresa tus datos.</ul>
                 <ul className="my-1">
-                  4- Selecciona el método de envío y pago.
+                  3- Ingresa tus datos, y finalizas la compra.
+                </ul>
+                <ul className="my-1">
+                  4- Ahora solo queda esperar recibir tu increíble pedido, en
+                  poco tiempo!
                 </ul>
               </div>
             </div>

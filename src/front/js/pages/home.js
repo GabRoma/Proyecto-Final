@@ -9,14 +9,14 @@ import Contact from "../component/contact";
 const Carousel = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const images = [
-    "https://www.apple.com/newsroom/images/product/iphone/standard/apple_iphone-12-spring21_purple_04202021_big.jpg.large.jpg",
-    "iphone",
     "https://static.nationalgeographic.es/files/styles/image_3200/public/mm10052_20221117_399_cropped.jpg?w=1600&h=1600",
     "camera",
-    "https://cdn.vox-cdn.com/thumbor/tSmVQUaJiqACklfq0nlxD7wKYy4=/0x0:3000x2000/1400x933/filters:focal(1260x760:1740x1240):no_upscale()/cdn.vox-cdn.com/uploads/chorus_image/image/71333758/jbareham_201022_ply1040_ps5_lead_0001.0.jpg",
-    "video games",
     "https://www.latercera.com/resizer/u0k2syMXqh0o3eRNplgMUn5oifQ=/900x600/smart/cloudfront-us-east-1.images.arcpublishing.com/copesa/ESJIB4DMQVBTVJUZN5FS2XCT34.jpg",
     "books",
+    "https://cdn.vox-cdn.com/thumbor/tSmVQUaJiqACklfq0nlxD7wKYy4=/0x0:3000x2000/1400x933/filters:focal(1260x760:1740x1240):no_upscale()/cdn.vox-cdn.com/uploads/chorus_image/image/71333758/jbareham_201022_ply1040_ps5_lead_0001.0.jpg",
+    "video games",
+    "https://www.apple.com/newsroom/images/product/iphone/standard/apple_iphone-12-spring21_purple_04202021_big.jpg.large.jpg",
+    "iphone",
   ];
 
   const previousSlide = () => {

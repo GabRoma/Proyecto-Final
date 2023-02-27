@@ -145,12 +145,11 @@ export const Navbar = () => {
                           <i
                             className="far fa-times-circle"
                             onClick={() => {
-                              actions.eliminarDeCarrito(item.producto_sku)
+                              actions.eliminarDeCarrito(item.producto_sku);
                               setTimeout(() => {
                                 window.location.reload();
                               }, 200);
-                            }
-                            }
+                            }}
                           />
                         </button>
                       </li>
@@ -315,9 +314,9 @@ export const Navbar = () => {
             </div>
           </div>
           <div className="d-flex justify-content-center col">
-            <Link to="/" onClick={() => handleTogglePopup(true)}>
+            <a onClick={() => handleTogglePopup(true)}>
               <h5 className="m-0 p-0 fs-6 "> Contáctanos </h5>
-            </Link>
+            </a>
           </div>
         </div>
       </nav>

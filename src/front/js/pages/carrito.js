@@ -10,8 +10,7 @@ import { CartItem } from "../component/cartItem";
 export const Carrito = () => {
   const { store, actions, setStore } = useContext(Context);
   const params = useParams();
-  console.log(store.carrito);
-
+  const total = store.total === 0 ? "0.00" : (store.total + 20).toFixed(2);
   useEffect(() => {
     actions.obtenerCarrito();
     actions.sumCarrito();
@@ -49,12 +48,7 @@ export const Carrito = () => {
               </div>
               <div className="d-flex justify-content-between mt-5">
                 <h5 className="card-text"> Total:</h5>
-                <h5>
-                  {" "}
-                  $ {
-                    (store.total = 0 ? (store.total + 20).toFixed(2) : 0.0)
-                  }{" "}
-                </h5>
+                <h5>${total}</h5>
               </div>
               <p className="card-text">
                 <small className="text-muted">

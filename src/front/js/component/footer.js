@@ -40,11 +40,11 @@ export const Footer = () => {
             </Link>
           </div>
           <div className="m-auto">
-            <h4 className="fw-bolder"> Devoluciones y garantía </h4>
+            <h4 className="fw-bolder"> Nosotros </h4>
             <Link to="/compromiso">
               <p className="ftext5"> Nuestro Compromiso </p>
             </Link>
-            <Link to="/">
+            <Link to="/mision">
               <p className="ftext6"> Misión y Visión</p>
             </Link>
           </div>
@@ -52,7 +52,7 @@ export const Footer = () => {
         </div>
         <Contact showPopup={showPopup} handleTogglePopup={handleTogglePopup} />
         <div className="container mt-5">
-          <p>            Métodos de pago{" "}</p>
+          <p> Métodos de pago </p>
           <p className="text-center mx-3 fw-bold">
             <img
               src="https://www.sacfcu.org/wp-content/uploads/Visa-Logo.png"
@@ -71,25 +71,21 @@ export const Footer = () => {
             ></img>
             <img
               src="https://logolook.net/wp-content/uploads/2022/06/American-Express-Emblem.png"
-
               height="30"
               className="ms-3"
             ></img>
             <img
               src="https://logolook.net/wp-content/uploads/2021/06/Paypal-Logo-2007.png"
-
               height="30"
               className="ms-3"
             ></img>
             <img
               src="https://miestadodecuenta.net/wp-content/uploads/2020/07/Estado-de-Cuenta-Prex-Sobre-la-Tarjeta-Prex-App-y-MÁS.png"
-
               height="30"
               className="ms-3"
             ></img>
             <img
               src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c7/Google_Pay_Logo_%282020%29.svg/1280px-Google_Pay_Logo_%282020%29.svg.png"
-
               height="30"
               className="ms-3"
             ></img>

@@ -11,12 +11,10 @@ export const Checkout = (props, item) => {
   const { store, actions } = useContext(Context);
   const [editing, setEditing] = useState(false);
   const params = useParams();
-  console.log(store.carrito);
   const [updateUserData, setUpdateUserData] = useState(store.userData);
   const handleEditClick = () => {
     setEditing(true);
   };
-
   const handleSaveClick = () => {
     setEditing(false);
     actions.updateUserData(localStorage.userId, updateUserData);
@@ -35,8 +33,6 @@ export const Checkout = (props, item) => {
         icon: "error",
         title: "Debes iniciar sesión para poder acceder a tu perfil",
       });
-    } else {
-      console.log("Bienvenido a tu perfil");
     }
   }, []);
 
@@ -164,7 +160,7 @@ export const Checkout = (props, item) => {
                 type="radio"
                 name="tipoEnvio"
                 id="tipoEnvio1"
-                checked
+                defaultChecked
               />
               <label className="form-check-label" htmlFor="tipoEnvio1">
                 Retiro en local
@@ -240,7 +236,12 @@ export const Checkout = (props, item) => {
             </div>
             <div className="card-footer d-flex justify-content-between">
               <h5 className="card-text"> Total: </h5>{" "}
-              <h5> $ {(store.total + 20).toFixed(2)} </h5>
+              <h5>
+                {" "}
+                ${store.total === 0
+                  ? "0.00"
+                  : (store.total + 20).toFixed(2)}{" "}
+              </h5>
             </div>
           </div>
           <div className="card p-4 mb-3">
@@ -308,10 +309,6 @@ export const Checkout = (props, item) => {
                     },
                   }}
                   onLoadPaymentData={(paymentData) => {
-                    console.log(
-                      "TODO: send order to server",
-                      paymentData.paymentMethodData
-                    );
                     history.push("/confirm");
                   }}
                 />
@@ -329,7 +326,7 @@ export const Checkout = (props, item) => {
                         purchase_units: [
                           {
                             amount: {
-                              value: store.total + 20,
+                              value: (store.total + 20).toFixed(2),
                             },
                           },
                         ],

@@ -4,16 +4,7 @@ import { Link, useParams } from "react-router-dom";
 import { Context } from "../store/appContext";
 import rigoImageUrl from "../../img/rigo-baby.jpg";
 
-export const Espaciocostoytarif = (props) => {
-  const { actions } = useContext(Context);
-  console.log(props);
-  //   const params = useParams();
-  //   console.log(params);
-
-  //   useEffect(() => {
-  //     actions.todosLosProductos(params.theid);
-  //   }, []);
-
+export const Espaciocostoytarif = () => {
   return (
     <>
       <div className="container">
@@ -30,7 +21,7 @@ export const Espaciocostoytarif = (props) => {
             COSTOS DE ENVÍO POR PEDIDO
           </small>
           <div className=" my-2  mx-auto w-50  bg-secondary border-dark border border-3 rounded opacity-75">
-            <table class="table my-0">
+            <table className="table my-0">
               <thead>
                 <tr className="bg-secondary opacity-75 text-black ">
                   <th scope="col">Cantidad de pedidos</th>
@@ -68,7 +59,7 @@ export const Espaciocostoytarif = (props) => {
             EJEMPLO DE COMPRA - CARRITO
           </small>
           <div className="my-2  mx-auto w-50  bg-secondary border-dark border border-3 rounded opacity-75">
-            <table class="table rounded">
+            <table className="table rounded">
               <thead>
                 <tr>
                   <th scope="col">Item</th>
@@ -93,10 +84,6 @@ export const Espaciocostoytarif = (props) => {
                   <td> 104.69 U$S</td>
                 </tr>
                 <tr>
-                  <td> Tarifa TiendaNuestra (9%)</td>
-                  <td> 9.42 U$S</td>
-                </tr>
-                <tr>
                   <td> Envío</td>
                   <td> 20 U$S</td>
                 </tr>
@@ -104,7 +91,7 @@ export const Espaciocostoytarif = (props) => {
                   <td className="p-2 fw-bold bg-secondary bg-opacity-50">
                     Total a pagar:
                   </td>
-                  <td>134.11</td>
+                  <td>124.69</td>
                 </tr>
               </tbody>
             </table>

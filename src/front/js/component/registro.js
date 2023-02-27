@@ -228,7 +228,7 @@ export const Registro = () => {
                     </button>
                     <div className="fs-6 fw-lighter d-flex justify-content-center">
                       Al hacer click en "Crear cuenta" el usuario acepta los
-                      <Link to="/tos">
+                      <Link to="/tos" target="_blank">
                         <p className="ps-1 pe-1"> términos y condiciones </p>
                       </Link>{" "}
                       de uso
