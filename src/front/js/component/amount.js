@@ -3,7 +3,7 @@ import React from "react";
 
 const CartAmountToggle = ({ amount, setDecrease, setIncrease }) => {
   return (
-    <div className="cart-button">
+    <div className="cart-button ">
       <div className="amount-toggle d-flex">
         <button
           className="decrease btn btn-outline-danger"
@@ -12,7 +12,7 @@ const CartAmountToggle = ({ amount, setDecrease, setIncrease }) => {
           <i className="fa fa-minus"> </i>{" "}
         </button>{" "}
         <div
-          className="text-center border border-dark rounded"
+          className="d-flex justify-content-center align-items-center  border border-dark rounded"
           style={{
             width: 40,
           }}

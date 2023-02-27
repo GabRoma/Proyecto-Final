@@ -159,22 +159,10 @@ export const Perfil = (user) => {
             </thead>
             <tbody>
               <tr>
-                <td>0000</td>
-                <td>15/02/23</td>
-                <td>$0000</td>
-                <td>Entregado</td>
-              </tr>
-              <tr>
                 <td>0001</td>
                 <td>16/02/23</td>
-                <td>$0000</td>
-                <td>En camino</td>
-              </tr>
-              <tr>
-                <td>0002</td>
-                <td>17/02/23</td>
-                <td>$0000</td>
-                <td>En depósito</td>
+                <td> USD 60.00</td>
+                <td> Entregado </td>
               </tr>
             </tbody>
           </table>

@@ -10,13 +10,13 @@ const Carousel = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const images = [
     "https://www.apple.com/newsroom/images/product/iphone/standard/apple_iphone-12-spring21_purple_04202021_big.jpg.large.jpg",
-    "phone",
-    "https://static.nike.com/a/images/f_auto,cs_srgb/w_1920,c_limit/e5853518-be79-4fcc-afe4-6d2df175de53/el-mejor-calzado-informal-de-nike-para-usar-todos-los-días.jpg",
-    "Calzados",
-    "https://media.gq.com.mx/photos/61e70ca25def32c5619cef06/4:3/w_712,h_534,c_limit/Lenovo%20Yoga%20Slim%207%20Pro.jpg",
-    "Laptops",
-    "https://www.apple.com/newsroom/images/product/watch/standard/applewatch_series_3_two_loop_full.jpg.og.jpg?202302031731",
-    "Relojes",
+    "iphone",
+    "https://static.nationalgeographic.es/files/styles/image_3200/public/mm10052_20221117_399_cropped.jpg?w=1600&h=1600",
+    "camera",
+    "https://cdn.vox-cdn.com/thumbor/tSmVQUaJiqACklfq0nlxD7wKYy4=/0x0:3000x2000/1400x933/filters:focal(1260x760:1740x1240):no_upscale()/cdn.vox-cdn.com/uploads/chorus_image/image/71333758/jbareham_201022_ply1040_ps5_lead_0001.0.jpg",
+    "video games",
+    "https://www.latercera.com/resizer/u0k2syMXqh0o3eRNplgMUn5oifQ=/900x600/smart/cloudfront-us-east-1.images.arcpublishing.com/copesa/ESJIB4DMQVBTVJUZN5FS2XCT34.jpg",
+    "books",
   ];
 
   const previousSlide = () => {
@@ -38,7 +38,7 @@ const Carousel = () => {
   return (
     <div className="d-flex justify-content-center border-bottom">
       <div className="container">
-        <div className="d-flex justify-content-center border-bottom mb-4 pb-4 ">
+        <div className="d-flex justify-content-center border-bottom mb-2 pb-2 ">
           <button
             className="carousel-button rounded-circle border-0 me-3"
             onClick={previousSlide}
@@ -97,15 +97,11 @@ export const Home = () => {
     setShowPopup(value);
   };
 
-  console.log(store.favoritos);
-  console.log(store.productos);
-  // console.log(store.productos[0]?.title);
-
   return (
     <div>
       <div className="container">
         <div className="p-5 pt-3 rounded-3 d-flex justify-content-center text-center">
-          <div className="container-fluid py-5">
+          <div className="container-fluid pt-5 pb-3">
             <h1 className="display-5 fw-bold"> TiendaNuestra </h1>
             <p
               className="fs-6 m-auto"
@@ -116,20 +112,6 @@ export const Home = () => {
               En TiendaNuestra encontraras los productos que buscas, al mejor
               precio, directo desde USA hasta la puerta de tu casa.
             </p>
-            <Link
-              to={"/espaciodescuento"}
-              className="btn bg-dark bg-opacity-75 text-light fs-6 ps-4 pe-4 pt-2 pb-2"
-              type="button"
-            >
-              DESCUENTOS
-            </Link>
-            <Link
-              to={"/espacioproductos"}
-              className="m-3 btn btn-light border-2 border-dark fw-bolder text-muted fs-6 ps-4 pe-4 pt-2 pb-2"
-              type="button"
-            >
-              PRODUCTOS
-            </Link>
           </div>
         </div>
       </div>
@@ -167,23 +149,22 @@ export const Home = () => {
             </div>
           ))}
       </div>
-      <div className="container d-flex">
-        <h5 className="fw-bolder ms-3 mt-5"> Celulares & accesorios</h5>{" "}
+      <div className="container d-flex mt-4">
+        <h5 className="fw-bolder ms-3 mb-3">Consolas & Videojuegos</h5>{" "}
         <Link
           className="ms-auto"
           style={{ color: "black" }}
-          to="/resultado/apple"
+          to="/resultado/video games"
         >
-          <p style={{ fontSize: 14 }}>Ver todos</p>
+          <p className="mb-3" style={{ fontSize: 14 }}>
+            Ver todos
+          </p>
         </Link>
       </div>
       <div className="d-flex container row m-auto">
         {store.productos
-          ?.filter(
-            (item) =>
-              item.keywords.toLowerCase().split(",").includes("phone") ||
-              item.keywords.toLowerCase().split(",").includes("apple") ||
-              item.keywords.toLowerCase().split(",").includes("tablet")
+          ?.filter((item) =>
+            item.category.toLowerCase().split(",").includes("video games")
           )
           .slice(0, 5)
           .map((item) => (
@@ -198,14 +179,16 @@ export const Home = () => {
             </div>
           ))}
       </div>
-      <div className="container d-flex">
-        <h5 className="fw-bolder ms-3 mt-5">Libros</h5>{" "}
+      <div className="container d-flex mt-5">
+        <h5 className="fw-bolder ms-3 mb-3">Libros</h5>{" "}
         <Link
           className="ms-auto"
           style={{ color: "black" }}
           to="/resultado/books"
         >
-          <p style={{ fontSize: 14 }}>Ver todos</p>
+          <p className="mb-3" style={{ fontSize: 14 }}>
+            Ver todos
+          </p>
         </Link>
       </div>
       <div className="d-flex container row m-auto">

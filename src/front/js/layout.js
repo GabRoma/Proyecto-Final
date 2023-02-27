@@ -17,10 +17,10 @@ import { Tos } from "./pages/tos";
 import { Brands } from "./pages/brands";
 import { Categoria } from "./pages/categoria";
 import { Espacioproductos } from "./pages/espacioproductos";
-import { Espaciodescuento } from "./pages/espaciodescuento";
 import { Espaciocostoytarif } from "./pages/espaciocostoytarif";
-import { Espaciooferta } from "./pages/espaciooferta";
 import { Perfil } from "./pages/perfil";
+import { Compromiso } from "./pages/compromiso";
+import { Mision } from "./pages/mision";
 //create your first component
 const Layout = () => {
   //the basename is used when your project is published in a subdirectory and not in the root of the domain
@@ -45,13 +45,13 @@ const Layout = () => {
             <Route element={<Demo />} path="/demo" />
             <Route element={<Single />} path="/single/:theid" />
             <Route element={<Espacioproductos />} path="/espacioproductos" />
-            <Route element={<Espaciodescuento />} path="/espaciodescuento" />
-            <Route element={<Espaciooferta />} path="/espaciooferta" />
             <Route
               element={<Espaciocostoytarif />}
               path="/espaciocostoytarif"
             />
+            <Route element={<Compromiso />} path="/compromiso" />
             <Route element={<Perfil />} path="/perfil" />
+            <Route element={<Mision />} path="/mision" />
             <Route element={<Categoria />} path="/resultado/:cat" />
             <Route element={<Carrito />} path="/carrito" />
             <Route element={<Checkout />} path="/checkout" />

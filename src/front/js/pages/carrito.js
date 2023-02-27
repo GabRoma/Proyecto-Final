@@ -18,40 +18,44 @@ export const Carrito = () => {
   }, []);
 
   return (
-    <div className="jumbotron m-2">
+    <div className="jumbotron m-2 container m-auto">
       <div className="title text-center">
-        <h1> Carrito </h1>{" "}
-      </div>{" "}
+        <h1> Carrito </h1>
+      </div>
       <div className="d-flex">
         <div className="d-block w-50">
-          <div className="conteiner w-50">
-            <h5> Tu pedido </h5>{" "}
-          </div>{" "}
           <div>
-            {" "}
+            <h5 className="text-center mb-2"> Tu pedido </h5>
+          </div>
+          <div>
             {store.carrito.map((item, index) => {
               return <CartItem key={index} {...item} />;
-            })}{" "}
-          </div>{" "}
-        </div>{" "}
+            })}
+          </div>
+        </div>
         <div className="d-block w-50">
-          <div className="conteiner w-50 ms-2">
-            <h5> Resumen </h5>{" "}
-          </div>{" "}
+          <div>
+            <h5 className="text-center mb-2"> Resumen </h5>
+          </div>
           <div className="card m-2">
             <div className="card-body">
               <div className="d-flex justify-content-between">
-                <p className="card-text">Productos:</p>{" "}
+                <p className="card-text">Productos:</p>
                 <p className="card-text">$ {store.subtotal}</p>
               </div>
               <div className="d-flex justify-content-between">
-                <p className="card-text text-muted">Descuentos:</p>{" "}
-                <p className="card-text text-muted">$ </p>
+                <p className="card-text">Envío:</p>
+                <p className="card-text">$ 20</p>
               </div>
               <div className="d-flex justify-content-between mt-5">
                 <h5 className="card-text"> Total:</h5>
-                <h5> $ {store.total} </h5>{" "}
-              </div>{" "}
+                <h5>
+                  {" "}
+                  $ {
+                    (store.total = 0 ? (store.total + 20).toFixed(2) : 0.0)
+                  }{" "}
+                </h5>
+              </div>
               <p className="card-text">
                 <small className="text-muted">
                   Los cargos extra por envío y los cupones son aplicados al
@@ -59,12 +63,12 @@ export const Carrito = () => {
                 </small>
               </p>
               <a href="/checkout" className="btn btn-dark w-100">
-                Proceder al pago{" "}
-              </a>{" "}
-            </div>{" "}
-          </div>{" "}
-        </div>{" "}
-      </div>{" "}
+                Proceder al pago
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   );
 };

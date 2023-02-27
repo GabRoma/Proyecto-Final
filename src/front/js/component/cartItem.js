@@ -6,11 +6,15 @@ import { Context } from "../store/appContext";
 import { Link, useParams } from "react-router-dom";
 import CartAmountToggle from "../component/amount";
 
-export const CartItem = (item, props) => {
+export const CartItem = (item) => {
   const { store, actions } = useContext(Context);
-  const params = useParams();
   console.log(store.carrito);
+  const [isDeleted, setIsDeleted] = useState(false);
 
+  const handleDelete = async () => {
+    await onDelete(item.producto_sku);
+    setIsDeleted(true);
+  };
   // const eliminarItemCarrito = () => {
   //   actions.eliminarDeCarrito(params.theid, storage.getItem("userId"));
   // };
@@ -44,34 +48,42 @@ export const CartItem = (item, props) => {
   };
 
   return (
-    <div className="card border border-light" key={item.id}>
+    <div className="card border border-light mb-2" key={item.id}>
       <div className="row g-0">
-        <div className="col-md-4">
-          <img src={item.imagenes} className="img-fluid" alt="" />
+        <div className="col-md-4 m-auto">
+          <img
+            src={item.imagenes}
+            className="img-fluid p-1 ps-2 d-flex align-item-center"
+            alt=""
+          />
         </div>{" "}
         <div className="col-md-8">
-          <div className="card-body">
-            {item.name}
-            {/* {store.carrito.map((item, index) => (
-              <div className="row" key={index}>
-                <h5 className="card-title ">
-                  {item.name} {index.id}{" "}
-                  <i
-                    className=" fa fa-solid fa-trash opacity-10"
-                    type="button"
-                    id="eliminar"
-                    onClick={() => actions.eliminarDeCarrito(item)}
-                  ></i>{" "}
-                </h5>
-              </div>
-            ))} */}
-            <p className="card-text">{item.description} </p>{" "}
+          <div className="card-body pb-1">
+            <h4>{item.name}</h4>
+            <p style={{ color: "gray" }} className="card-text">
+              {item.description.slice(0, 150)}{" "}
+            </p>{" "}
             <p className="card-text">
               <small className="text-muted">
-                Tiempo de envío estimado:15 a 20 dias{" "}
+                Tiempo de entrega estimado: 15 a 20 dias{" "}
               </small>{" "}
             </p>{" "}
-            <div className="d-flex justify-content-between">
+            <div className="d-flex justify-content-between ">
+              <button
+                className="border-0"
+                style={{ background: "transparent" }}
+                onClick={() => {
+                  actions.eliminarDeCarrito(item.producto_sku);
+                  setTimeout(() => {
+                    window.location.reload();
+                  }, 1000);
+                }}
+              >
+                <i
+                  class="fas fa-trash-alt"
+                  style={{ color: "red", background: "transparent" }}
+                ></i>
+              </button>
               <CartAmountToggle
                 amount={amount}
                 setDecrease={setDecrease}
@@ -86,8 +98,4 @@ export const CartItem = (item, props) => {
       </div>{" "}
     </div>
   );
-};
-
-CartItem.propTypes = {
-  match: PropTypes.object,
 };

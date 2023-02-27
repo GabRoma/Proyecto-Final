@@ -23,9 +23,6 @@ export const Login = () => {
           inputLogincontrasena: Yup.string().required("Requerido"),
         })}
         onSubmit={(values, { setSubmitting }) => {
-          console.log(values);
-          console.log(values.inputLogincorreo);
-
           actions.inicioLogin(
             values.inputLogincorreo,
             values.inputLogincontrasena
