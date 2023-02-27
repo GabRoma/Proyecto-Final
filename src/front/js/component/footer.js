@@ -41,7 +41,7 @@ export const Footer = () => {
           </div>
           <div className="m-auto">
             <h4 className="fw-bolder"> Devoluciones y garantía </h4>
-            <Link to="/">
+            <Link to="/compromiso">
               <p className="ftext5"> Nuestro Compromiso </p>
             </Link>
             <Link to="/">
