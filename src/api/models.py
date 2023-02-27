@@ -41,7 +41,10 @@ class Favoritos (db.Model):
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'),nullable=False)
     producto_sku = db.Column(db.String(120), db.ForeignKey('producto.sku'), nullable=True )
-    
+    imagenes =  db.Column(db.String(10000), unique=False, nullable=True)
+    name =  db.Column(db.String(10000), unique=False, nullable=True)
+    price = db.Column(db.String(12000), unique=False, nullable=True)
+    description = db.Column(db.String(200000), unique=False, nullable=True)
 
 
     def __repr__(self):
@@ -52,14 +55,18 @@ class Favoritos (db.Model):
             "id": self.id,
             "user_id": self.user_id,
             "producto_sku": self.producto_sku,
-            
+            "imagenes": self.imagenes,
+            "name": self.name,
+            "price": self.price,
+            "description": self.description,
+
         }
 
 #Tabla Metodos de Pago
 class MetodosDePagos (db.Model):
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'),nullable=False)
-
+    
     
 
     def __repr__(self):
@@ -81,6 +88,7 @@ class Carrito(db.Model):
     price = db.Column(db.String(12000), unique=False, nullable=False)
     imagenes =  db.Column(db.String(10000), unique=False, nullable=True)
     cantidad = db.Column(db.Integer, unique=False, nullable=True)
+    description = db.Column(db.String(200000), unique=False, nullable=True)
 
     def __repr__(self):
         return '<Carrito %r>' % self.id
@@ -94,6 +102,7 @@ class Carrito(db.Model):
             "price": self.price,
             "imagenes": self.imagenes,
             "cantidad": self.cantidad,
+            "description": self.description,
         }
         
 

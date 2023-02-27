@@ -14,6 +14,7 @@ export const Carrito = () => {
 
   useEffect(() => {
     actions.obtenerCarrito();
+    actions.sumCarrito();
   }, []);
 
   return (

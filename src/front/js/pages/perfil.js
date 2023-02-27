@@ -183,3 +183,4 @@ export const Perfil = (user) => {
     </>
   );
 };
+// #borrar despues esa tabla de ordenes para no complicarnos y porque ya tenemos una similar en carrito

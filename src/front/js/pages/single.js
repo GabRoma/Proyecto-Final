@@ -12,16 +12,9 @@ export const Single = (item, props) => {
     actions.agregarACarrito(params.theid, localStorage.getItem("userId"));
   };
 
-  // const añadirCarrito = () => {
-  //   // let store = getStore();
-  //   agregarItemCarrito();
-  //   //tenemos que traer el array favoritos
-  //   let contenedordeelemento = {}; //necesitamos recorrer el array favorito guardarlo en  contenedordeelemento
-  //   contenedordeelemento.nombresdecadaproducto = props.nombre;
-  //   contenedordeelemento.id = props.id;
-
-  //   store.carrito = [...store.carrito, contenedordeelemento];
-  // };
+  const agregarItemFavoritos = () => {
+    actions.agregarFavorito(params.theid, localStorage.getItem("userId"));
+  };
 
   useEffect(() => {
     actions.todosLosProductos(params.theid);
@@ -58,7 +51,7 @@ export const Single = (item, props) => {
               <strong>USD {product.price}</strong>
             </p>
             <button
-              onClick={() => actions.addFavorito(item)}
+              onClick={() => agregarItemFavoritos()}
               type="button"
               class="btn btn-outline-danger mx-1"
             >

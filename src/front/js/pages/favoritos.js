@@ -5,11 +5,17 @@ import PropTypes, { number } from "prop-types";
 import { Link, useParams } from "react-router-dom";
 import { Context } from "../store/appContext";
 
-export const Favoritos = (props) => {
+export const Favoritos = (item, sku) => {
   const { store, actions, setStore } = useContext(Context);
   const params = useParams();
+  // console.log(props);
   console.log(store.favoritos);
-  console.log(props);
+  console.log(item.name);
+
+  useEffect(() => {
+    actions.obtenerFavorito();
+    // actions.eliminarFav();
+  }, []);
 
   return (
     <div className="jumbotron m-2">
@@ -25,36 +31,28 @@ export const Favoritos = (props) => {
                 <div className="card w-50 m-auto" key={index}>
                   <div className="row g-0">
                     <div className="col-md-4">
-                      <img src={item.url} className="img-fluid" alt="" />
+                      <img src={item.imagenes} className="img-fluid" alt="" />
                     </div>{" "}
                     <div className="col-md-8">
                       <div className="card-body">
                         <div className="d-flex justify-content-between">
-                          <h5 className="card-title">
-                            {" "}
-                            {item.nombresdecadaproducto} {index.id}{" "}
-                          </h5>{" "}
-                          <button>
-                            <i
-                              className="fa fa-solid fa-trash"
-                              onClick={() => actions.eliminarFavorito(item)}
-                            ></i>{" "}
-                          </button>
+                          <h5 className="card-title">{item.name}</h5>{" "}
+                          <i
+                            type="button"
+                            className="fas fa-trash-alt"
+                            onClick={() => actions.eliminarFavorito(item.id)}
+                          ></i>{" "}
                         </div>{" "}
-                        <p className="card-text">
-                          This is a wider card with supporting text below as a
-                          natural lead - in to additional content.This content
-                          is a little bit longer.{" "}
-                        </p>{" "}
+                        <p className="card-text">{item.description} </p>{" "}
                         <p className="card-text">
                           <small className="text-muted">
-                            Tiempo de envío estimado: {item.shipping}{" "}
+                            Tiempo de envío estimado: 15 a 20 dias{" "}
                           </small>{" "}
                         </p>{" "}
                         <div className="d-flex justify-content-between">
-                          <p>
+                          {/* <p>
                             <u> ver más </u>{" "}
-                          </p>{" "}
+                          </p>{" "} */}
                           <h5>
                             <strong> $ {item.price} </strong>{" "}
                           </h5>{" "}

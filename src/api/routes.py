@@ -152,7 +152,9 @@ def add_favourite_product(user_id, producto_sku):
                 response_body = {"msg":"el usuario no existe"}
                 return jsonify(response_body),404
             else:
-                favorito = Favoritos(producto_sku=producto_sku, user_id=user_id)
+                product = existe.serialize()
+                print(product["name"])
+                favorito = Favoritos(name=product["name"][:50], price=product["price"], description=product["description"], imagenes=product["imagenes"],producto_sku=producto_sku, user_id=user_id)
                 db.session.add(favorito)
                 db.session.commit()
                 response_body = {"msg":"Se ha agregado el producto a Favoritos"}
@@ -173,7 +175,7 @@ def borrar_producto_fav(user_id, producto_sku):
         response_body = {"msg": "El producto ingresado no existe dentro de favoritos"}
         return jsonify(response_body), 404
 
-    borrar_producto = Favoritos.query.filter_by(user_id=user_id).filter_by(producto_sku=producto_sku).first()
+    borrar_producto = Favoritos.query.filter_by(user_id=user_id).filter_by(producto_sku=producto_sku, name=product["name"][:50], price=product["price"], description=product["description"], imagenes=product["imagenes"]).first()
     if borrar_producto is None: 
         response_body = {"msg": "El producto ingresado no existe dentro de favoritos"}
         return jsonify(response_body), 404
@@ -217,7 +219,7 @@ def add_carrito_product(user_id, producto_sku):
             else:
                 product = existe.serialize()
                 print(product["name"])
-                carrito = Carrito(estado=True, name=product["name"][:50], price=product["price"],imagenes=product["imagenes"], cantidad=1, producto_sku=producto_sku, user_id=user_id)
+                carrito = Carrito(estado=True, name=product["name"][:50], price=product["price"],imagenes=product["imagenes"], description=product["description"], cantidad=1, producto_sku=producto_sku, user_id=user_id)
                 db.session.add(carrito)
                 db.session.commit()
                 response_body = {"msg":"Se ha agregado el producto a Carrito"}
@@ -383,8 +385,28 @@ def get_carrito(user_id):
     mostrar_carrito = Carrito.query.filter_by(user_id=user_id,estado=True).all()
     results = list(map(lambda item: item.serialize(),mostrar_carrito))
     return jsonify(results), 200    
- 
 
+@api.route('/fav/<int:user_id>', methods=['GET'])
+def get_favoritos(user_id):
+    mostrar_favoritos = Favoritos.query.filter_by(user_id=user_id).all()
+    results = list(map(lambda item: item.serialize(),mostrar_favoritos))
+    return jsonify(results), 200        
+ 
+@api.route('/fav/<int:user_id>', methods=['DELETE'])
+def get_delete_favoritos(user_id):
+    borrar_favoritos = Favoritos.query.filter_by(user_id=user_id).all()
+    results = list(map(lambda item: item.serialize(),borrar_favoritos))
+    return jsonify(results), 200   
+
+
+@api.route('/carrito/total/<int:user_id>', methods=['GET'])
+def get_sumacarrito(user_id):
+    mostrar_suma = Carrito.query.filter_by(user_id=user_id, estado=True).all()
+    results = list(map(lambda item: float(item.price), mostrar_suma))
+   
+    resultssuma = sum(results)
+    return jsonify({"totalcarrito": resultssuma}), 200            
+ 
 
   # busqueda tabla carrito opr user id filterby(estado true, userid=userid) .all 
 #   linea 356

@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { Link } from "react-router-dom";
 import logo from "../../img/logito.png";
 import { AuthComponent } from "./authcomponent.js";
@@ -24,6 +24,10 @@ export const Navbar = () => {
     setSearchTerm(event.target.value);
   }
 
+  useEffect(() => {
+    actions.obtenerCarrito();
+    actions.obtenerFavorito();
+  }, []);
   return (
     <div>
       <nav className="navbar sticky-top pt-0">

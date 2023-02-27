@@ -22,15 +22,15 @@ const getState = ({ getStore, getActions, setStore }) => {
         },
       ],
       carrito: [
-        {
-          sku: 1,
-          name: "producto",
-          url: "https://shoptheoldemercantile.com/image/cache/catalog/placeholderproduct-500x500.png",
-          shipping: "3 semanas",
-          price: 10,
-          quantity: 1,
-          subtotal: 10,
-        },
+        // {
+        //       sku: 1,
+        //       name: "producto",
+        //       url: "https://shoptheoldemercantile.com/image/cache/catalog/placeholderproduct-500x500.png",
+        //       shipping: "3 semanas",
+        //       price: 10,
+        //       quantity: 1,
+        //       subtotal: 10,
+        //   },
         // {
         //   sku: 2,
         //   name: "producto II",
@@ -51,15 +51,15 @@ const getState = ({ getStore, getActions, setStore }) => {
         // },
       ],
       favoritos: [
-        {
-          sku: 1,
-          name: "producto",
-          url: "https://shoptheoldemercantile.com/image/cache/catalog/placeholderproduct-500x500.png",
-          shipping: "3 semanas",
-          price: 10,
-          quantity: 1,
-          subtotal: 10,
-        },
+        // {
+        //       sku: 1,
+        //       name: "producto",
+        //       url: "https://shoptheoldemercantile.com/image/cache/catalog/placeholderproduct-500x500.png",
+        //       shipping: "3 semanas",
+        //       price: 10,
+        //       quantity: 1,
+        //       subtotal: 10,
+        //   },
         // {
         //   sku: 2,
         //   name: "producto II",
@@ -128,7 +128,8 @@ const getState = ({ getStore, getActions, setStore }) => {
       agregarACarrito: (sku, userid) => {
         console.log(sku, userid);
         fetch(
-          "https://3001-gabroma-proyectofinal-tf3n1voo1zo.ws-us87.gitpod.io/api/user/" +
+          process.env.BACKEND_URL +
+            "/api/user/" +
             userid +
             "/carrito/products/" +
             sku,
@@ -183,21 +184,39 @@ const getState = ({ getStore, getActions, setStore }) => {
 
           .then((data) => {
             console.log(data);
-            localStorage.setItem("token", data.access_token);
-            localStorage.setItem("userId", data.user.id);
+            // localStorage.setItem("token", data.access_token);
+            // localStorage.setItem("userId", data.user.id);
           });
       },
 
       sumCarrito: () => {
-        const totalSum = getStore().carrito.reduce(
-          (accumulator, currentValue) => accumulator + currentValue.subtotal,
-          0
-        );
-        setStore({
-          subtotal: totalSum,
-          total: totalSum,
-        });
-        console.log(getStore().total);
+        let userid = localStorage.getItem("userId");
+        fetch(process.env.BACKEND_URL + "/api/carrito/total/" + userid, {
+          method: "GET",
+        })
+          .then((response) => {
+            // if (response.status === 200) {
+            //   getActions().obtenerCarrito();
+            // }
+            return response.json();
+          })
+          .then((data) => {
+            console.log(data.totalcarrito);
+            setStore({
+              subtotal: data.totalcarrito,
+              total: data.totalcarrito,
+            });
+          });
+        // const totalSum = getStore().carrito.reduce(
+        //   (accumulator, currentValue) => accumulator + currentValue.subtotal,
+        //   0
+        // );
+        // setStore({
+        //   subtotal: totalSum,
+        //   total: totalSum,
+        // });
+        // console.log(getStore().total);
+        // console.log("funciona");
       },
       actualizarCarrito: (item) => {
         const newArr = getStore().carrito.map((producto) => {
@@ -217,10 +236,7 @@ const getState = ({ getStore, getActions, setStore }) => {
       },
       obtenerCarrito: () => {
         let userid = localStorage.getItem("userId");
-        fetch(
-          "https://3001-gabroma-proyectofinal-tf3n1voo1zo.ws-us87.gitpod.io/api/cart/" +
-            userid
-        )
+        fetch(process.env.BACKEND_URL + "/api/cart/" + userid)
           .then((response) => response.json())
           .then((data) => {
             console.log(data);
@@ -232,25 +248,90 @@ const getState = ({ getStore, getActions, setStore }) => {
             console.error("Error:", error);
           });
       },
-      agregarFavorito: (props, nombre, id) => {
-        let store = getStore(); //tenemos que traer el array favoritos
-        let contenedordeelemento = {}; //necesitamos recorrer el array favorito guardarlo en  contenedordeelemento
-        contenedordeelemento.nombresdecadaproducto = props.nombre;
-        contenedordeelemento.id = props.id;
-        setStore({
-          favoritos: [...store.favoritos, contenedordeelemento],
-        });
+      agregarFavorito: (sku, userid) => {
+        console.log(sku, userid);
+        fetch(
+          process.env.BACKEND_URL +
+            "/api/user/" +
+            userid +
+            "/favoritos/products/" +
+            sku,
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              // 'Content-Type': 'application/x-www-form-urlencoded',
+            },
+            body: JSON.stringify({}),
+          }
+        )
+          .then((response) => {
+            if (response.status === 200) {
+              getActions().obtenerFavorito();
+            }
+            return response.json();
+          })
+          .then((data) => {
+            console.log(data);
+          });
       },
-      eliminarFavorito: (id) => {
-        let arr = [];
-
-        let store = getStore();
-        arr = store.favoritos.filter((elemento) => elemento !== id);
-        setStore({
-          favoritos: arr,
-        });
+      obtenerFavorito: () => {
+        let userid = localStorage.getItem("userId");
+        fetch(process.env.BACKEND_URL + "/api/fav/" + userid)
+          .then((response) => response.json())
+          .then((data) => {
+            console.log(data);
+            setStore({
+              favoritos: data,
+            });
+          })
+          .catch((error) => {
+            console.error("Error:", error);
+          });
       },
+      eliminarFavorito: (sku, userid) => {
+        console.log(sku, userid);
+        fetch(
+          process.env.BACKEND_URL +
+            "/api/user/" +
+            userid +
+            "/favoritos/products/" +
+            sku,
+          {
+            method: "DELETE",
+            headers: {
+              "Content-Type": "application/json",
+              // 'Content-Type': 'application/x-www-form-urlencoded',
+            },
+            body: JSON.stringify({}),
+          }
+        )
+          .then((response) => {
+            if (response === 200) {
+              getActions().eliminarFav();
+            }
+          })
 
+          .then((data) => {
+            console.log(data);
+            // localStorage.setItem("token", data.access_token);
+            // localStorage.setItem("userId", data.user.id);
+          });
+      },
+      eliminarFav: () => {
+        let userid = localStorage.getItem("userId");
+        fetch(process.env.BACKEND_URL + "/api/fav/" + userid)
+          .then((response) => response.json())
+          .then((data) => {
+            console.log(data);
+            setStore({
+              favoritos: data,
+            });
+          })
+          .catch((error) => {
+            console.error("Error:", error);
+          });
+      },
       getMessage: async () => {
         try {
           // fetching data from the backend
